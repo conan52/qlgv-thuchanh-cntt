@@ -39,31 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Charts.v13.1.Core, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Data.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Office.v13.1.Core, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.PivotGrid.v13.1.Core, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Printing.v13.1.Core, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.RichEdit.v13.1.Core, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.SpellChecker.v13.1.Core, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Utils.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.ASPxGauges.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.ASPxHtmlEditor.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.ASPxPivotGrid.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.ASPxScheduler.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.ASPxSpellChecker.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.ASPxThemes.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.ASPxTreeList.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.Mvc.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Web.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraCharts.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraCharts.v13.1.Web, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraGauges.v13.1.Core, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraGauges.v13.1.Presets, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraPivotGrid.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraReports.v13.1, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraReports.v13.1.Web, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraScheduler.v13.1.Core, Version=13.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DotNetOpenAuth.AspNet, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\DotNetOpenAuth.AspNet.4.3.4.13329\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
@@ -230,6 +205,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GiangVienController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LichCongTacController.cs" />
     <Compile Include="Controllers\MonHocController.cs" />
     <Compile Include="Controllers\PhongHocController.cs" />
     <Compile Include="Controllers\ThongBaoController.cs" />
@@ -237,25 +213,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403300952024_InitialMigrations.cs" />
+    <Compile Include="Migrations\201403300952024_InitialMigrations.Designer.cs">
+      <DependentUpon>201403300952024_InitialMigrations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\GiangVien.cs" />
     <Compile Include="Models\LichCongTac.cs" />
-    <Compile Include="Models\Lop.cs" />
-    <Compile Include="Models\Mapping\GiangVienMap.cs" />
-    <Compile Include="Models\Mapping\LichCongTacMap.cs" />
-    <Compile Include="Models\Mapping\LopMap.cs" />
-    <Compile Include="Models\Mapping\MonHocMap.cs" />
-    <Compile Include="Models\Mapping\PhanCongThucHanhMap.cs" />
-    <Compile Include="Models\Mapping\PhongMap.cs" />
-    <Compile Include="Models\Mapping\sysdiagramMap.cs" />
-    <Compile Include="Models\Mapping\ThoiKhoaBieuMap.cs" />
-    <Compile Include="Models\Mapping\TuanHocMap.cs" />
     <Compile Include="Models\MonHoc.cs" />
-    <Compile Include="Models\NCKHContext.cs" />
-    <Compile Include="Models\PhanCongThucHanh.cs" />
-    <Compile Include="Models\Phong.cs" />
-    <Compile Include="Models\sysdiagram.cs" />
-    <Compile Include="Models\ThoiKhoaBieu.cs" />
+    <Compile Include="Models\PhanCongGvThucHanh.cs" />
+    <Compile Include="Models\PhongThucHanh.cs" />
+    <Compile Include="Models\ThoiKhoaBieuGiangVien.cs" />
+    <Compile Include="Models\TkbThucHanhContext.cs" />
     <Compile Include="Models\TuanHoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -571,6 +541,7 @@
     <Content Include="Content\less\small-box.less" />
     <Content Include="Content\less\timeline.less" />
     <Content Include="Content\less\vars.less" />
+    <None Include="Properties\PublishProfiles\cloud.pubxml" />
     <None Include="Properties\PublishProfiles\localhost.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Content\img\logo.png" />
@@ -944,12 +915,24 @@
     <Content Include="Views\PhongHoc\Index.cshtml" />
     <Content Include="Views\MonHoc\Index.cshtml" />
     <Content Include="Views\GiangVien\Index.cshtml" />
+    <Content Include="Views\LichCongTac\Create.cshtml" />
+    <Content Include="Views\LichCongTac\Details.cshtml" />
+    <Content Include="Views\LichCongTac\Edit.cshtml" />
+    <Content Include="Views\LichCongTac\Index.cshtml" />
+    <Content Include="Views\MonHoc\Create.cshtml" />
+    <Content Include="Views\MonHoc\Details.cshtml" />
+    <Content Include="Views\MonHoc\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201403300952024_InitialMigrations.resx">
+      <DependentUpon>201403300952024_InitialMigrations.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

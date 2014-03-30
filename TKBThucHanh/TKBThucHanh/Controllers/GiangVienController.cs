@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TkbThucHanh.Models;
+using TKBThucHanh.Models;
+using TKBThucHanh.Models;
 
 namespace TKBThucHanh.Controllers
 {
@@ -14,7 +15,7 @@ namespace TKBThucHanh.Controllers
 
         public ActionResult Index()
         {
-            var db = new NckhContext();
+            var db = new TkbThucHanhContext();
             return View(db.GiangViens);
         }
 

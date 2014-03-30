@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TkbThucHanh.Models;
+using TKBThucHanh.Models;
+using TKBThucHanh.Models;
 
 namespace TKBThucHanh.Controllers
 {
@@ -15,18 +16,18 @@ namespace TKBThucHanh.Controllers
 
         public ActionResult Index()
         {
-            var db = new NckhContext();
+            var db = new TkbThucHanhContext();
 
-            return View(db.Phongs.ToList());
+            return View(db.PhongThucHanhs.ToList());
         }
 
 
         [HttpGet]
         public ActionResult Delete(string id)
         {
-            var db = new NckhContext();
-            var ph = db.Phongs.SingleOrDefault(p => p.TenPhong.Equals(id));
-            db.Phongs.Remove(ph);
+            var db = new TkbThucHanhContext();
+            var ph = db.PhongThucHanhs.SingleOrDefault(p => p.TenPhong.Equals(id));
+            db.PhongThucHanhs.Remove(ph);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

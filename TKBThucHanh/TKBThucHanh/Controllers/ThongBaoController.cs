@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace TkbThucHanh.Controllers
+namespace TKBThucHanh.Controllers
 {
     public class ThongBaoController : Controller
     {

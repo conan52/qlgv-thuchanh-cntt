@@ -7,11 +7,12 @@ using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
+using TKBThucHanh.Filters;
+using TKBThucHanh.Models;
 using WebMatrix.WebData;
-using TkbThucHanh.Filters;
-using TkbThucHanh.Models;
 
-namespace TkbThucHanh.Controllers
+
+namespace TKBThucHanh.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]
@@ -36,7 +37,7 @@ namespace TkbThucHanh.Controllers
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
                 var uId = WebSecurity.GetUserId(model.UserName);
-                var db = new NckhContext();
+                var db = new TkbThucHanhContext();
                 var user = db.UserProfiles.Single(u => u.UserId == uId);
                 Session["username"] = user.UserName;
                 Session["displayname"] = user.DisplayName;
@@ -102,7 +103,7 @@ namespace TkbThucHanh.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Disassociate(string provider, string providerUserId)
         {
-            string ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
+            var ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
             ManageMessageId? message = null;
 
             // Only disassociate the account if the currently logged in user is the owner
@@ -111,7 +112,7 @@ namespace TkbThucHanh.Controllers
                 // Use a transaction to prevent the user from deleting their last login credential
                 using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
                 {
-                    bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+                    var hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
                     if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
                     {
                         OAuthWebSecurity.DeleteAccount(provider, providerUserId);
@@ -146,7 +147,7 @@ namespace TkbThucHanh.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
         {
-            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            var hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("Manage");
             if (hasLocalAccount)
@@ -178,7 +179,7 @@ namespace TkbThucHanh.Controllers
             {
                 // User does not have a local password so remove any validation errors caused by a missing
                 // OldPassword field
-                ModelState state = ModelState["OldPassword"];
+                var state = ModelState["OldPassword"];
                 if (state != null)
                 {
                     state.Errors.Clear();
@@ -219,7 +220,7 @@ namespace TkbThucHanh.Controllers
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
-            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            var result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
             if (!result.IsSuccessful)
             {
                 return RedirectToAction("ExternalLoginFailure");
@@ -239,7 +240,7 @@ namespace TkbThucHanh.Controllers
             else
             {
                 // User is new, ask for their desired membership name
-                string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
+                var loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
                 ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
                 ViewBag.ReturnUrl = returnUrl;
                 return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
@@ -265,7 +266,7 @@ namespace TkbThucHanh.Controllers
             if (ModelState.IsValid)
             {
                 // Insert a new user into the database
-                using (NckhContext db = new NckhContext())
+                using (var db = new TkbThucHanhContext())
                 {
                     UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
@@ -312,11 +313,11 @@ namespace TkbThucHanh.Controllers
         [ChildActionOnly]
         public ActionResult RemoveExternalLogins()
         {
-            ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
-            List<ExternalLogin> externalLogins = new List<ExternalLogin>();
-            foreach (OAuthAccount account in accounts)
+            var accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
+            var externalLogins = new List<ExternalLogin>();
+            foreach (var account in accounts)
             {
-                AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
+                var clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
 
                 externalLogins.Add(new ExternalLogin
                 {

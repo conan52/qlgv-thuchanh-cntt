@@ -3,10 +3,13 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Security;
 using TKBThucHanh;
-using TkbThucHanh.Models;
+using TKBThucHanh.Models;
+using TKBThucHanh.Models;
+using WebMatrix.WebData;
 
-namespace TkbThucHanh
+namespace TKBThucHanh
 {
     public class MvcApplication : HttpApplication
     {
@@ -20,8 +23,18 @@ namespace TkbThucHanh
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
-            var db = new NckhContext();
+            var db = new TkbThucHanhContext();
             db.Database.Initialize(true);
+
+            if (!WebSecurity.Initialized)
+                WebSecurity.InitializeDatabaseConnection("TkbCloud", "UserProfile", "UserId", "UserName", true);
+            if (!Roles.RoleExists("Administrator"))
+                Roles.CreateRole("Administrator");
+            if (!WebSecurity.UserExists("admin"))
+            {
+                WebSecurity.CreateUserAndAccount("admin", "admin");
+                Roles.AddUserToRole("admin", "Administrator");
+            }
         }
     }
 }
