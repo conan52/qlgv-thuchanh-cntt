@@ -10,7 +10,10 @@ namespace TKBThucHanh.Models
             ThoiKhoaBieuGiangViens = new List<ThoiKhoaBieuGiangVien>();
         }
             [Key]
+        [Required]
         public int MaPhong { get; set; }
+
+        [Display(Name = "Tên phòng")]
         public string TenPhong { get; set; }
         public virtual ICollection<ThoiKhoaBieuGiangVien> ThoiKhoaBieuGiangViens { get; set; }
     }

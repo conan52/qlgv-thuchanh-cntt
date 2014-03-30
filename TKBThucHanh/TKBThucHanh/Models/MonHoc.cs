@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TKBThucHanh.Models
 {
@@ -6,7 +6,11 @@ namespace TKBThucHanh.Models
     {
         [Key]
         public string MaMonHoc { get; set; }
+
+        [Display(Name = "Tên môn học")]
         public string TenMonHoc { get; set; }
+
+        [Display(Name = "Chuyên ngành")]
         public string ChuyenNganh { get; set; }
     }
 }
