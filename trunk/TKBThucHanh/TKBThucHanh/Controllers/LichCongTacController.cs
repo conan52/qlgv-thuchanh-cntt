@@ -28,7 +28,7 @@ namespace TKBThucHanh.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            LichCongTac lichcongtac = db.LichCongTacs.Find(id);
+            var lichcongtac = db.LichCongTacs.Find(id);
             if (lichcongtac == null)
             {
                 return HttpNotFound();
@@ -68,7 +68,7 @@ namespace TKBThucHanh.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            LichCongTac lichcongtac = db.LichCongTacs.Find(id);
+            var lichcongtac = db.LichCongTacs.Find(id);
             if (lichcongtac == null)
             {
                 return HttpNotFound();
@@ -98,7 +98,7 @@ namespace TKBThucHanh.Controllers
         // GET: /LichCongTac/Delete/5
         public ActionResult Delete(int id = 0)
         {
-            LichCongTac lichcongtac = db.LichCongTacs.Find(id);
+            var lichcongtac = db.LichCongTacs.Find(id);
             if (lichcongtac == null)
             {
                 return HttpNotFound();
