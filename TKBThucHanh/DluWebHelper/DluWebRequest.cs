@@ -30,7 +30,7 @@ namespace DluWebHelper
             if (teacherCode != null)
                 result.TeacherCodes.AddRange(teacherCode.Where(n => !string.IsNullOrWhiteSpace(n.Attributes["value"].Value)).Select(n => n.Attributes["value"].Value));
 
-            Match m = Regex.Match(s, @"từ ngày (\d{1,2}/\d{1,2}/\d{4})\s*đến\sngày\s*(\d{1,2}/\d{1,2}/\d{4})");
+            var m = Regex.Match(s, @"từ ngày (\d{1,2}/\d{1,2}/\d{4})\s*đến\sngày\s*(\d{1,2}/\d{1,2}/\d{4})");
             result.StartDate = DateTime.ParseExact(m.Groups[1].Value, "d/M/yyyy", null);
             result.EndDate = DateTime.ParseExact(m.Groups[2].Value, "d/M/yyyy", null);
 
@@ -41,7 +41,7 @@ namespace DluWebHelper
 
         List<Lesson> getLessons(string content)
         {
-            List<Lesson>  result = new List<Lesson>();
+            var  result = new List<Lesson>();
             return result;
         } 
     }

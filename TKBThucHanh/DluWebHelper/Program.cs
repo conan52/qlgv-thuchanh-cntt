@@ -9,7 +9,7 @@ namespace DluWebHelper
     {
         static void Main(string[] args)
         {
-            DluWebRequest webRequest  =new DluWebRequest();
+            var webRequest  =new DluWebRequest();
             webRequest.GetCurentTimeTable();
         }
     }

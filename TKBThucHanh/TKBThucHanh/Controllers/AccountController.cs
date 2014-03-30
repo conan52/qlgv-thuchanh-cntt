@@ -271,7 +271,7 @@ namespace TKBThucHanh.Controllers
                 // Insert a new user into the database
                 using (var db = new TkbThucHanhContext())
                 {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    var user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
                     if (user == null)
                     {

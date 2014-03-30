@@ -7,5 +7,9 @@ namespace DluWebHelper
 {
     class ListLessonResult
     {
+        public List<Lesson> Lessons { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+
     }
 }

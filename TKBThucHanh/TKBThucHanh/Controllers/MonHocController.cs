@@ -27,7 +27,7 @@ namespace TKBThucHanh.Controllers
 
         public ActionResult Details(string id = null)
         {
-            MonHoc monhoc = db.MonHocs.Find(id);
+            var monhoc = db.MonHocs.Find(id);
             if (monhoc == null)
             {
                 return HttpNotFound();
@@ -65,7 +65,7 @@ namespace TKBThucHanh.Controllers
 
         public ActionResult Edit(string id = null)
         {
-            MonHoc monhoc = db.MonHocs.FirstOrDefault(x => x.TenMonHoc == id);
+            var monhoc = db.MonHocs.FirstOrDefault(x => x.TenMonHoc == id);
             if (monhoc == null)
             {
                 return HttpNotFound();
@@ -95,7 +95,7 @@ namespace TKBThucHanh.Controllers
         public ActionResult Delete(string id = null)
         {
             //chua hoan thien phan xoa tât cả các modun
-            MonHoc monhoc = db.MonHocs.FirstOrDefault(x => x.TenMonHoc == id);
+            var monhoc = db.MonHocs.FirstOrDefault(x => x.TenMonHoc == id);
             if (monhoc == null)
             {
                 return HttpNotFound();
