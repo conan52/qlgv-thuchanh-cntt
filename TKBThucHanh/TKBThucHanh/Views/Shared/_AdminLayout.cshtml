@@ -1,0 +1,292 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewBag.Title - Khoa CNTT</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- bootstrap 3.0.2 -->
+    @Styles.Render("~/Content/css/bootstrap.min.css")
+    @Styles.Render("~/Content/bootstrap/css/bootstrap.min.css")
+    <!-- font Awesome -->
+    @Styles.Render("~/Content/css/font-awesome.min.css")
+    <!-- Ionicons -->
+    @Styles.Render("~/Content/css/ionicons.min.css")
+    @Styles.Render("~/Content/css/default.css")
+</head>
+<body class="skin-blue">
+    <header class="header">
+        @Html.ActionLink("ITDLU", "Index", "Home", null, new { @class = "logo" })
+        <nav class="navbar navbar-static-top" role="navigation">
+            <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-right">
+                <ul class="nav navbar-nav">
+
+                    <!-- Tasks: style can be found in dropdown.less -->
+
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-comment"></i>
+                            <span class="label label-info">10</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">Bạn có 10 tiết tuần này</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    <li>
+                                        <a href="#" style=" line-height: 35px; padding-left: 5px;">
+                                            <span class="text-green">28/02/2014</span>
+                                            <span class="text-blue">1-4</span>
+                                            <span class="text-red">Lập trình hướng đối tượng</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" style=" line-height: 35px; padding-left: 5px;">
+                                            <span class="text-green">28/02/2014</span>
+                                            <span class="text-blue">1-4</span>
+                                            <span class="text-red">Lập trình hướng đối tượng</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" style=" line-height: 35px; padding-left: 5px;">
+                                            <span class="text-green">28/02/2014</span>
+                                            <span class="text-blue">1-4</span>
+                                            <span class="text-red">Lập trình hướng đối tượng</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" style=" line-height: 35px; padding-left: 5px;">
+                                            <span class="text-green">28/02/2014</span>
+                                            <span class="text-blue">1-4</span>
+                                            <span class="text-red">Lập trình hướng đối tượng</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" style=" line-height: 35px; padding-left: 5px;">
+                                            <span class="text-green">28/02/2014</span>
+                                            <span class="text-blue">1-4</span>
+                                            <span class="text-red">Lập trình hướng đối tượng</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" style=" line-height: 35px; padding-left: 5px;">
+                                            <span class="text-green">28/02/2014</span>
+                                            <span class="text-blue">1-4</span>
+                                            <span class="text-red">Lập trình hướng đối tượng</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" style=" line-height: 35px; padding-left: 5px;">
+                                            <span class="text-green">28/02/2014</span>
+                                            <span class="text-blue">1-4</span>
+                                            <span class="text-red">Lập trình hướng đối tượng</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">Xem chi tiết</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-code"></i>
+                            <span class="label label-success">5</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">Bạn có 5 tiết tuần sau</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    <li>
+                                        <a href="#" style=" line-height: 35px; padding-left: 5px;">
+                                            <span class="text-green">28/02/2014</span>
+                                            <span class="text-blue">1-4</span>
+                                            <span class="text-red">Lập trình hướng đối tượng</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" style=" line-height: 35px; padding-left: 5px;">
+                                            <span class="text-green">28/02/2014</span>
+                                            <span class="text-blue">1-4</span>
+                                            <span class="text-red">Lập trình hướng đối tượng</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" style=" line-height: 35px; padding-left: 5px;">
+                                            <span class="text-green">28/02/2014</span>
+                                            <span class="text-blue">1-4</span>
+                                            <span class="text-red">Lập trình hướng đối tượng</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" style=" line-height: 35px; padding-left: 5px;">
+                                            <span class="text-green">28/02/2014</span>
+                                            <span class="text-blue">1-4</span>
+                                            <span class="text-red">Lập trình hướng đối tượng</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" style=" line-height: 35px; padding-left: 5px;">
+                                            <span class="text-green">28/02/2014</span>
+                                            <span class="text-blue">1-4</span>
+                                            <span class="text-red">Lập trình hướng đối tượng</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" style=" line-height: 35px; padding-left: 5px;">
+                                            <span class="text-green">28/02/2014</span>
+                                            <span class="text-blue">1-4</span>
+                                            <span class="text-red">Lập trình hướng đối tượng</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" style=" line-height: 35px; padding-left: 5px;">
+                                            <span class="text-green">28/02/2014</span>
+                                            <span class="text-blue">1-4</span>
+                                            <span class="text-red">Lập trình hướng đối tượng</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">Xem chi tiết</a></li>
+                        </ul>
+                    </li>
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-user"></i>
+                            <span>@Session["displayname"]</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header bg-light-blue">
+                                <img src="~/Content/img/logo.png" class="img-rounded" alt="User Image" />
+                                <p>
+                                    @Session["username"] - @Session["rolename"]
+                                    <small>Email:  @Session["email"]</small>
+                                </p>
+                            </li>
+                            <!-- Menu Body -->
+                            <li class="user-body">
+                                <div class="col-xs-12 text-center">
+                                    <a href="#">Cập nhật thông tin</a>
+                                </div>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat">Đổi mật khẩu</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="@Url.Action("LogOff", "Account")" class="btn btn-info btn-flat">Thoát</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="left-side sidebar-offcanvas">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="~/Content/img/logo.png" class="img-circle" alt="User Image" />
+                    </div>
+                    <div class="pull-left info">
+                        <p><a href="#">@Session["displayname"]</a></p>
+                        <a href="#"><i class="fa fa-circle text-success"></i>@Session["rolename"]</a>
+                    </div>
+                </div>
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li class="active">
+                        <a href="@Url.Action("Index", "LichThucHanh") ">
+                            <i class="fa fa-flag"></i> <span>Lịch thực hành</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="@Url.Action("Index", "ThoiKhoaBieu") ">
+                            <i class="fa fa-table"></i> <span>Thời khóa biểu</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="@Url.Action("Index", "GiangVien")">
+                            <i class="fa fa-dashboard"></i> <span>Giảng viên</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "PhongHoc") ">
+                            <i class=" fa fa-dashboard">
+                            </i> <span>Phòng học</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "MonHoc") ">
+                            <i class="fa fa-star"></i> <span>Môn học</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "LichCongTac") ">
+                            <i class="fa fa-tasks"></i> <span>Lịch công tác</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "TaiKhoan") ">
+                            <i class="fa fa-coffee"></i> <span>Tài khoản</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Right side column. Contains the navbar and content of the page -->
+        <aside class="right-side">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    @ViewBag.Title
+                    <small>@ViewBag.PageSubTitle</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i>Home</li>
+                    <li class="active">@ViewBag.Title</li>
+                </ol>
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+            </section><!-- /.content -->
+        </aside><!-- /.right-side -->
+    </div><!-- ./wrapper -->
+    <!-- jQuery 2.0.2 -->
+    @Scripts.Render("~/Scripts/jquery-2.1.0.min.js")
+    <!-- Bootstrap -->
+    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    <!-- AdminLTE App -->
+    @Scripts.Render("~/Scripts/Template/app.js")
+</body>
+</html>

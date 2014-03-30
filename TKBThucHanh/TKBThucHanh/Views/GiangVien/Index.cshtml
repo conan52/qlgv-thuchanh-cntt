@@ -1,0 +1,62 @@
+﻿@model IEnumerable<TkbThucHanh.Models.GiangVien>
+
+@{
+    ViewBag.Title = "Giảng viên";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaGV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenDayDu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenHienThi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChuyenNganh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CongTac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Enable)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaGV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenDayDu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenHienThi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChuyenNganh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CongTac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enable)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
