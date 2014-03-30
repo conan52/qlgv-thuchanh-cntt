@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace TKBThucHanh.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        [Authorize]
         public ActionResult Index()
         {
             return View();

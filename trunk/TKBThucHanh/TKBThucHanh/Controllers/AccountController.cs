@@ -24,6 +24,8 @@ namespace TKBThucHanh.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (WebSecurity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -39,6 +41,7 @@ namespace TKBThucHanh.Controllers
                 var uId = WebSecurity.GetUserId(model.UserName);
                 var db = new TkbThucHanhContext();
                 var user = db.UserProfiles.Single(u => u.UserId == uId);
+                Session.Timeout = 999;
                 Session["username"] = user.UserName;
                 Session["displayname"] = user.DisplayName;
                 Session["email"] = user.Email;
@@ -63,7 +66,7 @@ namespace TKBThucHanh.Controllers
         //
         // GET: /Account/Register
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult Register()
         {
             return View();
@@ -73,7 +76,7 @@ namespace TKBThucHanh.Controllers
         // POST: /Account/Register
 
         [HttpPost]
-        [AllowAnonymous]
+        // [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
