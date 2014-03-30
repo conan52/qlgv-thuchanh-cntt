@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace TkbThucHanh
+namespace TKBThucHanh
 {
     public class BundleConfig
     {

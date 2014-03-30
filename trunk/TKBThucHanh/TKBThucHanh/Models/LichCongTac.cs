@@ -1,15 +1,18 @@
 using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TkbThucHanh.Models
+namespace TKBThucHanh.Models
 {
-    public partial class LichCongTac
+    public class LichCongTac
     {
-        public int MaLct { get; set; }
-        public string MaGv { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public string MaGiangVien { get; set; }
         public string LyDo { get; set; }
-        public DateTime? NgayBd { get; set; }
-        public DateTime? NgayKt { get; set; }
+        public DateTime? ThoiGianBd { get; set; }
+        public DateTime? ThoiGianKt { get; set; }
+        [ForeignKey("MaGiangVien")]
         public virtual GiangVien GiangVien { get; set; }
     }
 }

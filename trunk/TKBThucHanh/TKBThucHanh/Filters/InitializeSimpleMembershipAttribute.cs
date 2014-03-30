@@ -3,10 +3,11 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Web.Mvc;
+using TKBThucHanh.Models;
 using WebMatrix.WebData;
-using TkbThucHanh.Models;
+using TKBThucHanh.Models;
 
-namespace TkbThucHanh.Filters
+namespace TKBThucHanh.Filters
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public sealed class InitializeSimpleMembershipAttribute : ActionFilterAttribute
@@ -25,11 +26,11 @@ namespace TkbThucHanh.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer(new CreateDatabaseIfNotExists<NckhContext>());
+                Database.SetInitializer(new CreateDatabaseIfNotExists<TkbThucHanhContext>());
 
                 try
                 {
-                    using (var context = new NckhContext())
+                    using (var context = new TkbThucHanhContext())
                     {
                         if (!context.Database.Exists())
                         {
@@ -38,7 +39,7 @@ namespace TkbThucHanh.Filters
                         }
                     }
                     if (!WebSecurity.Initialized)
-                        WebSecurity.InitializeDatabaseConnection("DbTest", "UserProfile", "UserId", "UserName", true);
+                        WebSecurity.InitializeDatabaseConnection("TkbThucHanh", "UserProfile", "UserId", "UserName", true);
                 }
                 catch (Exception ex)
                 {

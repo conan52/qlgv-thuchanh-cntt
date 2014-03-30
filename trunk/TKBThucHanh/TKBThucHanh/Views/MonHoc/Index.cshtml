@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TkbThucHanh.Models.MonHoc>
+﻿@model IEnumerable<TKBThucHanh.Models.MonHoc>
 
 @{
     ViewBag.Title = "Môn học";
@@ -6,12 +6,10 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm mới môn học", "Create")
 </p>
-<table>
+<table class="table table-bordered table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.TenMonHoc)
@@ -22,20 +20,21 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenMonHoc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChuyenNganh)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenMonHoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChuyenNganh)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.TenMonHoc }) |
+                @Html.ActionLink("Xem", "Details", new { id = item.TenMonHoc }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.TenMonHoc })
+            </td>
+        </tr>
+    }
 
 </table>

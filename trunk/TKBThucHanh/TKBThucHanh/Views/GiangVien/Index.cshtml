@@ -1,31 +1,23 @@
-﻿@model IEnumerable<TkbThucHanh.Models.GiangVien>
+﻿@model IEnumerable<TKBThucHanh.Models.GiangVien>
 
 @{
     ViewBag.Title = "Giảng viên";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Thêm mới")
 </p>
 <table class="table table-bordered table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.MaGV)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TenDayDu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TenHienThi)
+            @Html.DisplayNameFor(model => model.HoVaTen)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ChuyenNganh)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CongTac)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Enable)
+            @Html.DisplayNameFor(model => model.CoThePhanCong)
         </th>
         <th></th>
     </tr>
@@ -34,27 +26,17 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MaGV)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenDayDu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenHienThi)
+                @Html.DisplayFor(modelItem => item.HoVaTen)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ChuyenNganh)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CongTac)
+                @Html.DisplayFor(modelItem => item.CoThePhanCong)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Enable)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Sửa", new { id = item.MaGiangVien }) |
+            @Html.ActionLink("Delete", "Xóa", new { id = item.MaGiangVien })
             </td>
         </tr>
     }

@@ -1,23 +1,39 @@
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace TkbThucHanh.Models
+namespace TKBThucHanh.Models
 {
-    public partial class GiangVien
+    public class GiangVien
     {
         public GiangVien()
         {
-            this.LichCongTacs = new List<LichCongTac>();
-            this.ThoiKhoaBieux = new List<ThoiKhoaBieu>();
+            LichCongTac = new List<LichCongTac>();
+            ThoiKhoaBieuGiangVien = new List<ThoiKhoaBieuGiangVien>();
         }
 
-        public string MaGV { get; set; }
-        public string TenDayDu { get; set; }
-        public string TenHienThi { get; set; }
+        [Key]
+        [Required]
+        [MaxLength(10)]
+        [Display(Name = "Mã giảng viên")]
+        public string MaGv { get; set; }
+
+        [Required]
+        [Display(Name = "Tên giảng viên")]
+        public string HoVaTen { get; set; }
+
+        [Display(Name = "Tài khoản đăng nhập")]
+        public int? MaTaiKhoanDangNhap { get; set; }
+
+        [Display(Name = "Chuyên ngành")]
+        [MaxLength(50)]
         public string ChuyenNganh { get; set; }
-        public bool CongTac { get; set; }
-        public bool Enable { get; set; }
-        public virtual ICollection<LichCongTac> LichCongTacs { get; set; }
-        public virtual ICollection<ThoiKhoaBieu> ThoiKhoaBieux { get; set; }
+
+        [Display(Name = "Nhận phân công")]
+        public bool CoThePhanCong { get; set; }
+
+        //   [ForeignKey("MaTaiKhoanDangNhap")]
+        // public virtual UserProfile UserProfile { get; set; }
+        public virtual ICollection<LichCongTac> LichCongTac { get; set; }
+        public virtual ICollection<ThoiKhoaBieuGiangVien> ThoiKhoaBieuGiangVien { get; set; }
     }
 }

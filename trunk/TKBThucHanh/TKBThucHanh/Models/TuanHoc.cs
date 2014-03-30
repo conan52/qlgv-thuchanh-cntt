@@ -1,14 +1,17 @@
 using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace TkbThucHanh.Models
+namespace TKBThucHanh.Models
 {
-    public partial class TuanHoc
+    public class TuanHoc
     {
-        public int SoTuan { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public int SttTuan { get; set; }
         public string NamHoc { get; set; }
-        public string HocKy { get; set; }
         public DateTime? NgayBatDau { get; set; }
         public DateTime? NgayKetThuc { get; set; }
+        public bool? DaLayThongTin { get; set; }
+        public bool? DaXepLichThucHanh { get; set; }
     }
 }

@@ -1,17 +1,12 @@
-using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace TkbThucHanh.Models
+namespace TKBThucHanh.Models
 {
-    public partial class MonHoc
+    public class MonHoc
     {
-        public MonHoc()
-        {
-            this.ThoiKhoaBieux = new List<ThoiKhoaBieu>();
-        }
-
+        [Key]
+        public string MaMonHoc { get; set; }
         public string TenMonHoc { get; set; }
         public string ChuyenNganh { get; set; }
-        public virtual ICollection<ThoiKhoaBieu> ThoiKhoaBieux { get; set; }
     }
 }

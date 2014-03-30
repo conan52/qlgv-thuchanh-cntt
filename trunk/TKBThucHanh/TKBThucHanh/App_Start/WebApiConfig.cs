@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace TkbThucHanh
+namespace TKBThucHanh
 {
     public static class WebApiConfig
     {
