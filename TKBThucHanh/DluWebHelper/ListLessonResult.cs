@@ -11,5 +11,15 @@ namespace DluWebHelper
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
+        public ListLessonResult()
+        {
+            Lessons=new List<Lesson>();
+        }
+
+        public void AddLesson(Lesson l)
+        {
+            Lessons.Add(l);
+        }
+
     }
 }
