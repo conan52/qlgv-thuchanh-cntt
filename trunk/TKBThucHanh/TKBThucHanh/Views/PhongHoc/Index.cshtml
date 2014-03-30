@@ -1,8 +1,8 @@
-﻿@model IEnumerable<TKBThucHanh.Models.Phong>
+﻿@model IEnumerable<TKBThucHanh.Models.PhongThucHanh>
 
 @{
-    ViewBag.Title = "Phòng học";
-    ViewBag.PageSubTitle = "Danh sách phòng học";
+    ViewBag.Title = "Phòng thực hành";
+    ViewBag.PageSubTitle = "Danh sách phòng thực hành";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <p>
@@ -23,7 +23,9 @@
                 @Html.DisplayFor(modelItem => item.TenPhong)
             </td>
             <td>
-                @Html.ActionLink("Xóa", "Delete", new {  id=item.TenPhong  })
+                @Html.ActionLink("Sửa", "Edit", new { id = item.TenPhong }) |
+                @Html.ActionLink("Xem", "Details", new { id = item.TenPhong }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.TenPhong })
             </td>
         </tr>
     }
