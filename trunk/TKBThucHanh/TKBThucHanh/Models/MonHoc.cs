@@ -25,6 +25,11 @@ namespace TKBThucHanh.Models
 
         [Display(Name = "Chuyên ngành")]
         public ChuyenNganh ChuyenNganh { get; set; }
+        [Display(Name = "Trình độ")]
+        public TrinhDo TrinhDo { get; set; }
+
+        [Display(Name = "Bắt buộc")]
+        public bool BatBuoc { get; set; }
 
         public virtual List<PhanCongGiangDay> PhanCongGiang { get; set; }
 

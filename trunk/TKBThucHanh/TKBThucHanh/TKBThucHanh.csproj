@@ -218,6 +218,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403311058501_InitialCreate.cs" />
+    <Compile Include="Migrations\201403311058501_InitialCreate.Designer.cs">
+      <DependentUpon>201403311058501_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Enums\ChuyenNganh.cs" />
     <Compile Include="Models\Enums\EnumToLocalizedName.cs" />
@@ -942,6 +947,11 @@
       <Project>{97d9b8f9-648f-4122-9e3e-2f7d194e5fbe}</Project>
       <Name>DluWebHelper</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201403311058501_InitialCreate.resx">
+      <DependentUpon>201403311058501_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
