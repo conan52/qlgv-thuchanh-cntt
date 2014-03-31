@@ -8,7 +8,7 @@ using HtmlAgilityPack;
 
 namespace DluWebHelper
 {
-    class DluWebRequest
+    public class DluWebRequest
     {
         public TimeTableWebResult GetCurentTimeTable()
         {

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DluWebHelper
 {
-    class TimeTableWebResult
+    public class TimeTableWebResult
     {
         public List<int> Weeks { get; set; }
         public List<string> Class { get; set; }
