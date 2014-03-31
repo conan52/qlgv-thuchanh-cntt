@@ -208,6 +208,7 @@
     <Compile Include="Controllers\LichCongTacController.cs" />
     <Compile Include="Controllers\MonHocController.cs" />
     <Compile Include="Controllers\PhongHocController.cs" />
+    <Compile Include="Controllers\ThoiKhoaBieuController.cs" />
     <Compile Include="Controllers\ThongBaoController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -933,6 +934,12 @@
     <EmbeddedResource Include="Migrations\201403300952024_InitialMigrations.resx">
       <DependentUpon>201403300952024_InitialMigrations.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">
+      <Project>{97d9b8f9-648f-4122-9e3e-2f7d194e5fbe}</Project>
+      <Name>DluWebHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
