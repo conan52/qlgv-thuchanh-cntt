@@ -12,6 +12,7 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
+        @Html.HiddenFor(model => model.PhongThucHanhId)
         <div class="form-group">
             @Html.LabelFor(model => model.TenPhong, new { @class = "control-label col-sm-2" })
             <div class="col-sm-5">
@@ -22,7 +23,7 @@
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <input class="btn btn-default" type="submit" value="Thêm mới phòng" />
+                <input class="btn btn-default" type="submit" value="Lưu thông tin phòng học" />
             </div>
         </div>
     </fieldset>
