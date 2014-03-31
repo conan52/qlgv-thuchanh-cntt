@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,6 +30,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +39,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DotNetOpenAuth.AspNet, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
@@ -78,6 +81,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO">
@@ -107,8 +111,7 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
@@ -133,9 +136,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -159,6 +160,7 @@
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.30506.0\lib\net40\WebMatrix.Data.dll</HintPath>
@@ -220,9 +222,15 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Enums\ChuyenNganh.cs" />
+    <Compile Include="Models\Enums\EnumToLocalizedName.cs" />
+    <Compile Include="Models\Enums\StaticExtMethod.cs" />
+    <Compile Include="Models\Enums\TrinhDo.cs" />
     <Compile Include="Models\GiangVien.cs" />
     <Compile Include="Models\LichCongTac.cs" />
+    <Compile Include="Models\Lop.cs" />
     <Compile Include="Models\MonHoc.cs" />
+    <Compile Include="Models\PhanCongGiangDay.cs" />
     <Compile Include="Models\PhanCongGvThucHanh.cs" />
     <Compile Include="Models\PhongThucHanh.cs" />
     <Compile Include="Models\ThoiKhoaBieuGiangVien.cs" />
@@ -915,7 +923,6 @@
     <Content Include="Views\ThongBao\Err404.cshtml" />
     <Content Include="Views\PhongHoc\Index.cshtml" />
     <Content Include="Views\MonHoc\Index.cshtml" />
-    <Content Include="Views\GiangVien\Index.cshtml" />
     <Content Include="Views\LichCongTac\Create.cshtml" />
     <Content Include="Views\LichCongTac\Details.cshtml" />
     <Content Include="Views\LichCongTac\Edit.cshtml" />
@@ -924,6 +931,7 @@
     <Content Include="Views\MonHoc\Details.cshtml" />
     <Content Include="Views\MonHoc\Edit.cshtml" />
     <Content Include="Views\Shared\_CheckTkbMoi.cshtml" />
+    <Content Include="Views\GiangVien\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

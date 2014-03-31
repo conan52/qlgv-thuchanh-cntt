@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using TKBThucHanh.Models.Enums;
 
 namespace TKBThucHanh.Models
 {
@@ -14,7 +16,7 @@ namespace TKBThucHanh.Models
         [Key]
         [Required]
         public int GiangVienId { get; set; }
-        
+
         [Required]
         [MaxLength(10)]
         [Display(Name = "Mã giảng viên")]
@@ -27,15 +29,15 @@ namespace TKBThucHanh.Models
         [Display(Name = "Tài khoản đăng nhập")]
         public int? MaTaiKhoanDangNhap { get; set; }
 
-        [Display(Name = "Chuyên ngành")]
-        [MaxLength(50)]
-        public string ChuyenNganh { get; set; }
+       [Display(Name = "Chuyên ngành")]
+     //   [MaxLength(50)]
+        public ChuyenNganh ChuyenNganh { get; set; }
 
         [Display(Name = "Nhận phân công")]
         public bool CoThePhanCong { get; set; }
 
-        //   [ForeignKey("MaTaiKhoanDangNhap")]
-        // public virtual UserProfile UserProfile { get; set; }
+        [ForeignKey("MaTaiKhoanDangNhap")]
+        public virtual UserProfile UserProfile { get; set; }
         public virtual ICollection<LichCongTac> LichCongTac { get; set; }
         public virtual ICollection<ThoiKhoaBieuGiangVien> ThoiKhoaBieuGiangVien { get; set; }
     }

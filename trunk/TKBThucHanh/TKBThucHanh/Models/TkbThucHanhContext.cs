@@ -9,8 +9,8 @@ namespace TKBThucHanh.Models
     {
         static TkbThucHanhContext()
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<TkbThucHanhContext, Configuration>());
-            //Database.SetInitializer(new DropCreateDatabaseAlways<TkbThucHanhContext>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<TkbThucHanhContext, Configuration>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<TkbThucHanhContext>());
         }
 
         public TkbThucHanhContext()
@@ -19,6 +19,7 @@ namespace TKBThucHanh.Models
         }
 
         public DbSet<GiangVien> GiangViens { get; set; }
+        public DbSet<PhanCongGiangDay> PhanCongGiangDay { get; set; }
         public DbSet<LichCongTac> LichCongTacs { get; set; }
         public DbSet<MonHoc> MonHocs { get; set; }
         public DbSet<PhanCongGvThucHanh> PhanCongGvThucHanhs { get; set; }

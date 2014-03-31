@@ -16,8 +16,6 @@ namespace TKBThucHanh.Models
         public string Email { get; set; }
         public string DisplayName { get; set; }
 
-        //public virtual GiangVien GiangVien { get; set; }
-        
     }
 
     public class RegisterExternalLoginModel
