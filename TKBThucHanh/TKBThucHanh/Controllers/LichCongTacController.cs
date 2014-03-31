@@ -1,6 +1,9 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using MvcPaging;
+using TKBThucHanh.Function;
 using TKBThucHanh.Models;
 
 namespace TKBThucHanh.Controllers
@@ -12,11 +15,11 @@ namespace TKBThucHanh.Controllers
         //
         // GET: /LichCongTac/
 
-        public ActionResult Index()
-        {
-            var lichcongtacs = db.LichCongTacs.Include(l => l.GiangVien);
-            return View(lichcongtacs.ToList());
-        }
+//        public ActionResult Index()
+//        {
+//            var lichcongtacs = db.LichCongTacs.Include(l => l.GiangVien);
+//            return View(lichcongtacs.ToList());
+//        }
 
         //
         // GET: /LichCongTac/Details/5
@@ -36,7 +39,7 @@ namespace TKBThucHanh.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.MaGiangVien = new SelectList(db.GiangViens, "MaGV", "TenDayDu");
+            ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "MaGv");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace TKBThucHanh.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaGiangVien = new SelectList(db.GiangViens, "MaGV", "TenDayDu", lichcongtac.GiangVienId);
+            ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "MaGv", lichcongtac.GiangVienId);
             return View(lichcongtac);
         }
 
@@ -68,7 +71,7 @@ namespace TKBThucHanh.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MaGiangVien = new SelectList(db.GiangViens, "MaGV", "TenDayDu", lichcongtac.GiangVienId);
+            ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "MaGv", lichcongtac.GiangVienId);
             return View(lichcongtac);
         }
 
@@ -98,6 +101,8 @@ namespace TKBThucHanh.Controllers
             {
                 return HttpNotFound();
             }
+            db.LichCongTacs.Remove(lichcongtac);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -105,6 +110,58 @@ namespace TKBThucHanh.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        private readonly int _defaultPageSize = ContainValue.PageSize;
+
+        public ActionResult Index(string tengiangvien, int? page)
+        {
+            ViewData["tengiangvien"] = tengiangvien;
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+            IList<LichCongTac> lichCongTacs = db.LichCongTacs.Cast<LichCongTac>().ToList();
+
+            if (string.IsNullOrWhiteSpace(tengiangvien))
+            {
+                lichCongTacs = lichCongTacs.ToPagedList(currentPageIndex, _defaultPageSize);
+            }
+            else
+            {
+                lichCongTacs =
+                    lichCongTacs.Where(
+                        p =>
+                            StringUtility.LocDau(p.GiangVien.HoVaTen.ToLower())
+                                .StartsWith(StringUtility.LocDau(tengiangvien.ToLower())))
+                        .ToPagedList(currentPageIndex, _defaultPageSize);
+            }
+
+
+            //var list = 
+            if (Request.IsAjaxRequest())
+                return PartialView("_AjaxEmployeeList", lichCongTacs);
+            return View(lichCongTacs);
+        }
+
+        public ActionResult Paging(string tengiangvien, int? page)
+        {
+            ViewData["tengiangvien"] = tengiangvien;
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+            IList<LichCongTac> lichCongTacs = db.LichCongTacs.ToList();
+
+            if (string.IsNullOrWhiteSpace(tengiangvien))
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                lichCongTacs =
+                    lichCongTacs.Where(
+                        p =>
+                            StringUtility.LocDau(p.GiangVien.HoVaTen.ToLower())
+                                .StartsWith(StringUtility.LocDau(tengiangvien.ToLower())))
+                        .ToPagedList(currentPageIndex, _defaultPageSize);
+            }
+
+            return View(lichCongTacs);
         }
     }
 }

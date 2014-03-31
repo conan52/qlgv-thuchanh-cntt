@@ -12,18 +12,18 @@
     <legend>LichCongTac</legend>
     
     <div class="form-group">
-        @Html.LabelFor(model => model.Id, new { @class = "control-label col-sm-2" })
+        @Html.LabelFor(model => model.LichCongTacId, new { @class = "control-label col-sm-2" })
         <div class="col-sm-5">
-            @Html.TextBoxFor(model => model.Id, new { @class = "form-control" ,@readonly=true})
-            @Html.ValidationMessageFor(model => model.Id)
+            @Html.TextBoxFor(model => model.LichCongTacId, new { @class = "form-control" ,@readonly=true})
+            @Html.ValidationMessageFor(model => model.LichCongTacId)
         </div>
     </div>
-
+    
     <div class="form-group">
-        @Html.LabelFor(model => model.MaGiangVien, new { @class = "control-label col-sm-2" })
+        @Html.LabelFor(model => model.GiangVienId, new { @class = "control-label col-sm-2" })
         <div class="col-sm-5">
-            @Html.TextBoxFor(model => model.MaGiangVien, new { @class = "form-control", @readonly = true })
-            @Html.ValidationMessageFor(model => model.MaGiangVien)
+            @Html.DropDownList("GiangVienId", (IEnumerable<SelectListItem>)ViewBag.GiangVienId, new { @class = "form-control", @Enabled=false })
+            @Html.ValidationMessageFor(model => model.GiangVienId)
         </div>
     </div>
 
