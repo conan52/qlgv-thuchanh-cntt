@@ -1,58 +1,46 @@
-﻿@model IEnumerable<TKBThucHanh.Models.LichCongTac>
+﻿@model MvcPaging.IPagedList<TKBThucHanh.Models.LichCongTac>
 
 @{
     ViewBag.Title = "Lịch công tác";
     ViewBag.PageSubTitle = "Danh sách lịch công tác";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
 <p>
     @Html.ActionLink("Thêm lịch công tác", "Create")
 </p>
-<table class="table table-bordered table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GiangVien.HoVaTen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LyDo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThoiGianBd)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThoiGianKt)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GiangVien.HoVaTen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LyDo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThoiGianBd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThoiGianKt)
-            </td>
-            <td>
-                @Html.ActionLink("Sửa", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Xem", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Xóa", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+
+
+@using (Ajax.BeginForm("Index", "LichCongTac",
+    new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+    new { id = "frm-search" }))
+{
+    <div class="form-inline col-sm-6 form-group">
+
+        <input class="col-sm-5 form-control " type="text" name="tengiangvien" id="txttimkiem" placeholder="Tên hiển thị" value="@ViewData["tengiangvien"]" />
+        <button class="btn btn-default col-sm-4" type="submit">
+            <i class="icon-search"></i>Tìm giảng viên
+        </button>
+
+    </div>
+    <div id="grid-list">
+        @{ Html.RenderPartial("_AjaxEmployeeList", Model); }
+    </div>
+}
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
     }
 
-</table>
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+</script>

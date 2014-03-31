@@ -1,4 +1,5 @@
-﻿@model TKBThucHanh.Models.LichCongTac
+﻿@using System.Collections
+@model TKBThucHanh.Models.LichCongTac
 
 @{
     ViewBag.Title = "Lịch công tác";
@@ -12,22 +13,15 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Id, new { @class = "control-label col-sm-2" })
-            <div class="col-sm-5">
-                @Html.TextBoxFor(model => model.Id, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Id)
-            </div>
-        </div>
         
         <div class="form-group">
-            @Html.LabelFor(model => model.MaGiangVien, new { @class = "control-label col-sm-2" })
+            @Html.LabelFor(model => model.GiangVienId, new { @class = "control-label col-sm-2" })
             <div class="col-sm-5">
-                @Html.TextBoxFor(model => model.MaGiangVien, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MaGiangVien)
+                @Html.DropDownList("GiangVienId", (IEnumerable<SelectListItem>)ViewBag.GiangVienId, new { @class = "orm-control" })
+                @Html.ValidationMessageFor(model => model.GiangVienId)
             </div>
         </div>
-        
+
         <div class="form-group">
             @Html.LabelFor(model => model.LyDo, new { @class = "control-label col-sm-2" })
             <div class="col-sm-5">
