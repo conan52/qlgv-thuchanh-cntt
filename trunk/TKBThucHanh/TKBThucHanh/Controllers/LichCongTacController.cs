@@ -59,7 +59,7 @@ namespace TKBThucHanh.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaGiangVien = new SelectList(db.GiangViens, "MaGV", "TenDayDu", lichcongtac.MaGiangVien);
+            ViewBag.MaGiangVien = new SelectList(db.GiangViens, "MaGV", "TenDayDu", lichcongtac.GiangVienId);
             return View(lichcongtac);
         }
 
@@ -73,7 +73,7 @@ namespace TKBThucHanh.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MaGiangVien = new SelectList(db.GiangViens, "MaGV", "TenDayDu", lichcongtac.MaGiangVien);
+            ViewBag.MaGiangVien = new SelectList(db.GiangViens, "MaGV", "TenDayDu", lichcongtac.GiangVienId);
             return View(lichcongtac);
         }
 
@@ -90,7 +90,7 @@ namespace TKBThucHanh.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MaGiangVien = new SelectList(db.GiangViens, "MaGV", "TenDayDu", lichcongtac.MaGiangVien);
+            ViewBag.MaGiangVien = new SelectList(db.GiangViens, "MaGV", "TenDayDu", lichcongtac.GiangVienId);
             return View(lichcongtac);
         }
 

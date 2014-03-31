@@ -16,5 +16,7 @@ namespace TKBThucHanh.Models
 
         [Display(Name = "Chuyên ngành")]
         public string ChuyenNganh { get; set; }
+
+
     }
 }
