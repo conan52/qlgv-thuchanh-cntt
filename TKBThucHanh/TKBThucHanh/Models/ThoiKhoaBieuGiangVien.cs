@@ -13,7 +13,6 @@ namespace TKBThucHanh.Models
         }
 
         [Key]
-        [Required]
         public int MaTkb { get; set; }
 
         [Display(Name = "Tên môn học")]
@@ -32,7 +31,7 @@ namespace TKBThucHanh.Models
         public int TietKetThuc { get; set; }
 
         [Display(Name = "Giảng viên phụ trách")]
-        public string GiangVienPhuTrach { get; set; }
+        public int GiangVienPhuTrach { get; set; }
 
         [Display(Name = "Ngày học")]
         public DateTime NgayHoc { get; set; }

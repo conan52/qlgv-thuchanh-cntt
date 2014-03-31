@@ -8,12 +8,9 @@ namespace TKBThucHanh.Models
     {
         [Key]
         [Required]
-        public int Id { get; set; }
+        public int LichCongTacId { get; set; }
 
-        [Required]
-        [MaxLength(10)]
-        [Display(Name = "Mã giảng viên")]
-        public string MaGiangVien { get; set; }
+        public int GiangVienId { get; set; }
 
         [Display(Name = "Lý do")]
         public string LyDo { get; set; }
@@ -24,7 +21,7 @@ namespace TKBThucHanh.Models
         [Display(Name = "Thời gian kết thúc")]
         public DateTime? ThoiGianKt { get; set; }
 
-        [ForeignKey("MaGiangVien")]
+        [ForeignKey("GiangVienId")]
         public virtual GiangVien GiangVien { get; set; }
     }
 }
