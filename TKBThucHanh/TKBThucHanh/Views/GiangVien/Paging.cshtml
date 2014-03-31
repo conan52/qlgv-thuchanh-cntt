@@ -1,31 +1,26 @@
 ﻿@using MvcPaging
-@using TKBThucHanh.Models
-@model MvcPaging.IPagedList<TKBThucHanh.Models.GiangVien>
-
+@model IPagedList<TKBThucHanh.Models.GiangVien>
 @{
-    ViewBag.Title = "Giảng viên";
-    ViewBag.PageTitle = "Quản lý giảng viên";
-    ViewBag.PageSubTitle = "Danh sách giảng viên";
+    ViewBag.Title = "MVC 4 Paging Without Ajax Bootstrap";
 }
-<p>
-    @Html.ActionLink("Thêm giảng viên", "Create")
-</p>
-@using (Html.BeginForm("Paging", "GiangVien", FormMethod.Get, new {@class = "form-horizontal"}))
+<div>
+    @Html.ActionLink("Trở về trang danh sách Lịch công tác", "Index")
+</div>
+<div class="clearfix">
+</div>
+@using (Html.BeginForm("Paging", "GiangVien", FormMethod.Get))
 {
-    <div class="form-group">
-        <div class="col-sm-5">
-            <input class="col-sm-5 form-control" type="text" name="(@Model.First().HoVaTen)" placeholder="Tên hiển thị" value="@ViewData["tengiangvien"]" />
-            <button class="btn btn-default col-sm-4" type="submit">
-                <i class="icon-search"></i>Tìm giảng viên
-            </button>
-        </div>
+    <div class="input-append">
+        <input class="span2" id="appendedInputButton" type="text" name="tengiangvien" placeholder="Name" value="@ViewData["tengiangvien"]" />
+        <button class="btn" type="submit">
+            <i class="icon-search"></i>&nbsp;Search
+        </button>
     </div>
-
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.First().MaGv)
+                    @Html.DisplayNameFor(model =>model.First().MaGv)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.First().HoVaTen)
@@ -42,7 +37,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (GiangVien item in Model)
+            @foreach (var item in Model)
             {
                 <tr>
                     <td>
@@ -71,14 +66,14 @@
                 PageSize = Model.PageSize,
                 TotalItemCount = Model.TotalItemCount,
                 CurrentPage = Model.PageNumber,
-                ItemTexts = new ItemTexts {Next = "Next", Previous = "Previous"},
-                ItemIcon = new ItemIcon {First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward"},
-                TooltipTitles = new TooltipTitles {Next = "Next page {0}", Previous = "Previous page {0}", Page = "Go to page {0}"},
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page {0}", Previous = "Previous page {0}", Page = "Go to page {0}" },
                 Size = Size.normal,
                 Alignment = Alignment.centered,
                 IsShowControls = true,
                 IsShowFirstLast = true,
                 IsShowPages = true
-            }, new {tengiangvien = ViewData["tengiangvien"]}))
+            }, new { tengiangvien = ViewData["tengiangvien"] }))
     </div>
 }
