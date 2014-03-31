@@ -13,6 +13,9 @@ namespace TKBThucHanh.Models
 
         [Key]
         [Required]
+        public int GiangVienId { get; set; }
+        
+        [Required]
         [MaxLength(10)]
         [Display(Name = "Mã giảng viên")]
         public string MaGv { get; set; }
