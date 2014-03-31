@@ -14,6 +14,12 @@ namespace TKBThucHanh
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+              name: "ActionSwitch",
+              url: "{controller}/{action}/{subact}/{id}",
+              defaults: new { controller = "Home", action = "Index", subact = UrlParameter.Optional, id = UrlParameter.Optional }
+          );
         }
     }
 }

@@ -324,12 +324,15 @@
             </div>
             <div class="modal-body">
                 <fieldset>
-                    @RenderSection("modal", false)
+                    <div id="insertOrUpdataModal">
+                        
+                    </div>
                 </fieldset>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                <button type="submit" id="editModalSubmit" class="btn btn-primary" onclick="return false;">Lưu thay đổi</button>
+                <button type="button"  id="editModalReset" class="btn btn-default" data-dismiss="modal">Nhập lại</button>
+                <button type="button" id="editModalSubmit" class="btn btn-primary" onclick="return false;">Lưu thay đổi</button>
             </div>
         </div>
     </div>

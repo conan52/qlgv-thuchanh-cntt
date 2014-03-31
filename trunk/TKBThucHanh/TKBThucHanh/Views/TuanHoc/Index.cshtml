@@ -53,7 +53,7 @@
                 @Html.DisplayFor(modelItem => item.DaXepLichThucHanh)
             </td>
             <td>
-                @Html.ActionLink("Sửa thông tin", "Edit", new { id = item.TuanHocId }) |
+                <a class="" href="#" onclick="Edit(@item.TuanHocId)">Sửa</a>
                 @Html.ActionLink("Xóa", "Delete", new { id = item.TuanHocId })
             </td>
         </tr>
@@ -61,31 +61,55 @@
 
 </table>
 
-@section modal
-{
-    @Html.Partial("_Model", new TKBThucHanh.Models.TuanHoc())
-}
 @section customScript
 {
     <script>
         $(document).ready(function () {
-            $('#btnCreateModel').click(function () {
-                SetModalTile("Thêm tuần học mới");
-                $('#editModalSubmit').click(function () {
-                    $(this).button('loading');
-                    $('#frmAjax').submit();
-                    return false;
-                });
-
-                $('#editModal').modal('toggle');
+            $('#editModalSubmit').click(function () {
+                $(this).button('loading');
+                $('#frmAjax').submit();
+                return false;
             });
+            $('#editModalReset').click(function () {
+                $('#frmAjax').reset();
+            });
+
+            $('#btnCreateModel').click(function () {
+                SetModalTile("Thêm mới");
+                $('#editModal').modal('show');
+                AjaxCreate();
+            });
+
+
         });
+
+        function Edit(id) {
+            SetModalTile("Sửa thông tin");
+            $('#editModal').modal('show');
+            var url = "@Url.Action("Edit")" + '/' + id;
+            $.get(url, function (data) {
+                $('#insertOrUpdataModal').html(data);
+            });
+        
+        }
+
+
+
+
+        function AjaxCreate() {
+            var url = "@Url.Action("Create")";
+            $.get(url, function (data) {
+                $('#insertOrUpdataModal').html(data);
+            });
+        }
+
+
 
         function CheckAjaxResult(obj) {
             $('#editModalSubmit').button('reset');
             if (obj.Result == "OK") {
                 $('#editModal').modal('hide');
-                alert('Thêm thành công');
+                alert('Thành công');
             } else {
                 $('#errMessage').text(obj.Message);
             }
@@ -94,6 +118,7 @@
             $('#errMessage').text('Lỗi kết nối!');
             $('#editModalSubmit').button('reset');
         }
+
     </script>
 
 }
