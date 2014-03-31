@@ -1,14 +1,17 @@
 ﻿@model TKBThucHanh.Models.TuanHoc
+@{
+    Layout = null;
+}
 
 
-@using (Ajax.BeginForm("Create", "TuanHoc", null, new AjaxOptions()
+@using (Ajax.BeginForm("Edit", "TuanHoc", null, new AjaxOptions()
 {
     OnSuccess = "CheckAjaxResult",
     OnFailure = "AjaxRequestFail()",
     UpdateTargetId = null
 }, new { @class = "form-horizontal", @id = "frmAjax" }))
 {
-
+    @Html.HiddenFor(model => model.TuanHocId)
     <div class="form-group">
 
         @Html.LabelFor(model => model.SttTuan, new { @class = "col-sm-4 left-align" })

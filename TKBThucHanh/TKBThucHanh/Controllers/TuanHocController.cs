@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,11 +19,13 @@ namespace TKBThucHanh.Controllers
         }
 
 
-
-        public ActionResult _Model()
+        [HttpGet]
+        [OutputCache]
+        public ActionResult Create()
         {
             return View();
         }
+
 
         [HttpPost]
         public JsonResult Create(TuanHoc tuanHoc)
@@ -42,6 +45,26 @@ namespace TKBThucHanh.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var tuanHoc = _db.TuanHocs.Find(id);
+            return View(tuanHoc);
+        }
 
+        [HttpPost]
+        public ActionResult Edit(TuanHoc tuanHoc)
+        {
+            try
+            {
+                _db.TuanHocs.AddOrUpdate(tuanHoc);
+                _db.SaveChanges();
+                return Json(new { Result = "OK" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { Result = "Fail", e.Message });
+            }
+        }
     }
 }

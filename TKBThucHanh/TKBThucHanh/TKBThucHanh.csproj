@@ -941,8 +941,9 @@
     <Content Include="Views\Shared\_CheckTkbMoi.cshtml" />
     <Content Include="Views\GiangVien\Index.cshtml" />
     <Content Include="Views\TuanHoc\Index.cshtml" />
-    <Content Include="Views\TuanHoc\_Model.cshtml" />
+    <Content Include="Views\TuanHoc\Create.cshtml" />
     <Content Include="Views\TuanHoc\Index2.cshtml" />
+    <Content Include="Views\TuanHoc\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
