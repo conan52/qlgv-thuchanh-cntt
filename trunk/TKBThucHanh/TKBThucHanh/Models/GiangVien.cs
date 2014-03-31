@@ -29,8 +29,7 @@ namespace TKBThucHanh.Models
         [Display(Name = "Tài khoản đăng nhập")]
         public int? MaTaiKhoanDangNhap { get; set; }
 
-       [Display(Name = "Chuyên ngành")]
-     //   [MaxLength(50)]
+        [Display(Name = "Chuyên ngành")]
         public ChuyenNganh ChuyenNganh { get; set; }
 
         [Display(Name = "Nhận phân công")]
@@ -38,7 +37,16 @@ namespace TKBThucHanh.Models
 
         [ForeignKey("MaTaiKhoanDangNhap")]
         public virtual UserProfile UserProfile { get; set; }
+
         public virtual ICollection<LichCongTac> LichCongTac { get; set; }
         public virtual ICollection<ThoiKhoaBieuGiangVien> ThoiKhoaBieuGiangVien { get; set; }
+        public virtual ICollection<PhanCongGiangDay> PhanCongGiangDay { get; set; }
+
+
+        [NotMapped]
+        public string TaiKhoanDangNhap
+        {
+            get { return MaTaiKhoanDangNhap != null ? UserProfile.UserName : ""; }
+        }
     }
 }

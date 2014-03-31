@@ -1,4 +1,6 @@
-﻿@model IEnumerable<TKBThucHanh.Models.GiangVien>
+﻿@using TKBThucHanh.Models.Enums
+@using TKBThucHanh.Views
+@model IEnumerable<TKBThucHanh.Models.GiangVien>
 
 @{
     ViewBag.Title = "Index";
@@ -8,9 +10,9 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm giáo viên", "Create")
 </p>
-<table>
+<table class="table table-bordered table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.MaGv)
@@ -22,7 +24,7 @@
             @Html.DisplayNameFor(model => model.MaTaiKhoanDangNhap)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CoThePhanCong)
+            @Html.DisplayNameFor(model => model.ChuyenNganh)
         </th>
         <th></th>
     </tr>
@@ -36,15 +38,14 @@
             @Html.DisplayFor(modelItem => item.HoVaTen)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MaTaiKhoanDangNhap)
+            @Html.DisplayFor(modelItem => item.TaiKhoanDangNhap)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CoThePhanCong)
+            @Html.DisplayEnumFor(modelItem => item.ChuyenNganh)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.GiangVienId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.GiangVienId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.GiangVienId })
+            @Html.ActionLink("Sửa", "Edit", new { id=item.GiangVienId }) |
+            @Html.ActionLink("Xóa", "Delete", new { id=item.GiangVienId })
         </td>
     </tr>
 }

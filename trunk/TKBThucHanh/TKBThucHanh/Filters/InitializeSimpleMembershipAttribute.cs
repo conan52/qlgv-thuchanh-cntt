@@ -5,7 +5,6 @@ using System.Threading;
 using System.Web.Mvc;
 using TKBThucHanh.Models;
 using WebMatrix.WebData;
-using TKBThucHanh.Models;
 
 namespace TKBThucHanh.Filters
 {

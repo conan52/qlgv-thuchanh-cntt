@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
-using Microsoft.Ajax.Utilities;
 using TkbThucHanh.Models;
 
 namespace TKBThucHanh.Models
@@ -34,8 +29,13 @@ namespace TKBThucHanh.Models
 
         [ForeignKey("IdGiangVienChinh")]
         public virtual GiangVien GiangVienChinh { get; set; }
+
         [ForeignKey("IdGiangVienPhu")]
         public virtual GiangVien GiangVienPhu { get; set; }
+        
+        public int IdMonHoc { get; set; }
 
+        [ForeignKey("IdMonHoc")]
+        public MonHoc MonHoc { get; set; }
     }
 }

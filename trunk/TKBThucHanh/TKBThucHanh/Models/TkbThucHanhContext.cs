@@ -1,7 +1,6 @@
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
-using TKBThucHanh.Migrations;
 
 namespace TKBThucHanh.Models
 {
@@ -10,7 +9,7 @@ namespace TKBThucHanh.Models
         static TkbThucHanhContext()
         {
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<TkbThucHanhContext, Configuration>());
-            Database.SetInitializer(new DropCreateDatabaseAlways<TkbThucHanhContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TkbThucHanhContext>());
         }
 
         public TkbThucHanhContext()
@@ -31,19 +30,6 @@ namespace TKBThucHanh.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-
-            //        modelBuilder.Entity<GiangVien>()
-            //.HasRequired(t => t.UserProfile)
-            //.WithOptional(t => t.GiangVien);
         }
-
-
-        #region funtions and procedures
-
-        public int? KiemTraThoiKhoaBieuMoiNhat()
-        {
-            return Database.SqlQuery<int>("KiemTraThoiKhoaBieuMoiNhat").First();
-        }
-        #endregion
     }
 }

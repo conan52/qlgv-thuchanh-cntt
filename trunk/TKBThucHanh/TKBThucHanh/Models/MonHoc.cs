@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TKBThucHanh.Models.Enums;
 
 namespace TKBThucHanh.Models
 {
@@ -21,14 +23,10 @@ namespace TKBThucHanh.Models
         [Display(Name = "Tín chỉ lý thuyết")]
         public int SoTinChiLyThuyet { get; set; }
 
-        [NotMapped]
-        [Display(Name = "Số tín chỉ")]
-        public int SoTinChi
-        {
-            get { return SoTinChiLyThuyet + SoTinChiThucHanh; }
-        }
-
         [Display(Name = "Chuyên ngành")]
-        public string ChuyenNganh { get; set; }
+        public ChuyenNganh ChuyenNganh { get; set; }
+
+        public virtual List<PhanCongGiangDay> PhanCongGiang { get; set; }
+
     }
 }

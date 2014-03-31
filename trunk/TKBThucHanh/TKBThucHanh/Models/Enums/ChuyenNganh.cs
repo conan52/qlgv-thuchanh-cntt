@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel;
 
 namespace TKBThucHanh.Models.Enums
 {
-    [TypeConverter(typeof(EnumToLocalizedName))]
     public enum ChuyenNganh
     {
-        [Display(Description = "Cơ bản")]
-        CoBan,
-        [Display(Description = "Phần mềm")]
-        CongNghePhanMem,
-        [Display(Description = "Mạng")]
-        MangTruyenThong
+        [Description("Cơ bản")]
+        CoBan = 0,
+        [Description("Phần mềm")]
+        CongNghePhanMem = 1,
+        [Description("Mạng")]
+        MangTruyenThong = 2
     }
 }
