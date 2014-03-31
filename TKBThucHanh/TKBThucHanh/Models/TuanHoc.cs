@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TKBThucHanh.Models
 {
@@ -12,6 +13,7 @@ namespace TKBThucHanh.Models
         public int SttTuan { get; set; }
 
         [Display(Name = "Năm học")]
+        [Range(2000,2099)]
         public string NamHoc { get; set; }
 
         [Display(Name = "Ngày bắt đầu")]
