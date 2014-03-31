@@ -17,18 +17,18 @@ namespace TKBThucHanh.Controllers
             return View(db.PhongThucHanhs.ToList());
         }
 
-        //
-        // GET: /Phong/Details/5
-
-        public ActionResult Details(string id = null)
-        {
-            PhongThucHanh phong = db.PhongThucHanhs.Find(id);
-            if (phong == null)
-            {
-                return HttpNotFound();
-            }
-            return View(phong);
-        }
+//        //
+//        // GET: /Phong/Details/5
+//
+//        public ActionResult Details(string id = null)
+//        {
+//            PhongThucHanh phong = db.PhongThucHanhs.Find(id);
+//            if (phong == null)
+//            {
+//                return HttpNotFound();
+//            }
+//            return View(phong);
+//        }
 
         //
         // GET: /Phong/Create
@@ -57,9 +57,9 @@ namespace TKBThucHanh.Controllers
         //
         // GET: /Phong/Edit/5
 
-        public ActionResult Edit(string id = null)
+        public ActionResult Edit(int id = 0)
         {
-            PhongThucHanh phong = db.PhongThucHanhs.FirstOrDefault(x=>x.TenPhong == id);
+            PhongThucHanh phong = db.PhongThucHanhs.Find(id);
             if (phong == null)
             {
                 return HttpNotFound();
@@ -86,7 +86,7 @@ namespace TKBThucHanh.Controllers
         //
         // GET: /Phong/Delete/5
 
-        public ActionResult Delete(string id = null)
+        public ActionResult Delete(int id = 0)
         {
             PhongThucHanh phong = db.PhongThucHanhs.Find(id);
             if (phong == null)
