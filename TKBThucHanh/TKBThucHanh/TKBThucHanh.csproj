@@ -923,6 +923,7 @@
     <Content Include="Views\MonHoc\Create.cshtml" />
     <Content Include="Views\MonHoc\Details.cshtml" />
     <Content Include="Views\MonHoc\Edit.cshtml" />
+    <Content Include="Views\Shared\_CheckTkbMoi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
