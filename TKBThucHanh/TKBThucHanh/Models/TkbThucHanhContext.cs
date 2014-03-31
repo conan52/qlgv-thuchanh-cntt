@@ -1,6 +1,7 @@
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
+using TKBThucHanh.Migrations;
 
 namespace TKBThucHanh.Models
 {
@@ -8,8 +9,8 @@ namespace TKBThucHanh.Models
     {
         static TkbThucHanhContext()
         {
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<TkbThucHanhContext, Configuration>());
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TkbThucHanhContext>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<TkbThucHanhContext, Configuration>());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TkbThucHanhContext>());
         }
 
         public TkbThucHanhContext()

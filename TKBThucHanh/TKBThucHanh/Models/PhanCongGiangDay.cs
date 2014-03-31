@@ -9,6 +9,8 @@ namespace TKBThucHanh.Models
         [Key]
         public int IdPhanCong { get; set; }
 
+        [ForeignKey("LopId")]
+        public Lop Lop { get; set; }
         [Required]
         [Range(2000, 2050, ErrorMessage = "Năm học không hợp lệ")]
         public int NamHoc { get; set; }
@@ -20,9 +22,6 @@ namespace TKBThucHanh.Models
         [Required(ErrorMessage = "Chưa nhập lớp")]
         public int LopId { get; set; }
 
-        [ForeignKey("LopId")]
-        public Lop Lop { get; set; }
-
         public int? IdGiangVienChinh { get; set; }
 
         public int? IdGiangVienPhu { get; set; }
@@ -32,7 +31,7 @@ namespace TKBThucHanh.Models
 
         [ForeignKey("IdGiangVienPhu")]
         public virtual GiangVien GiangVienPhu { get; set; }
-        
+
         public int IdMonHoc { get; set; }
 
         [ForeignKey("IdMonHoc")]
