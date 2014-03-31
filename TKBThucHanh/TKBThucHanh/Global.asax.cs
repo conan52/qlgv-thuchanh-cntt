@@ -4,8 +4,6 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
-using TKBThucHanh;
-using TKBThucHanh.Models;
 using TKBThucHanh.Models;
 using WebMatrix.WebData;
 

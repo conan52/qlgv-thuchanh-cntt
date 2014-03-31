@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Web.WebPages.OAuth;
-using TKBThucHanh.Models;
-
-namespace TKBThucHanh
+﻿namespace TKBThucHanh
 {
     public static class AuthConfig
     {
