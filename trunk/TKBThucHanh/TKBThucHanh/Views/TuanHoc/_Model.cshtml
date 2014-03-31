@@ -1,0 +1,56 @@
+﻿@model TKBThucHanh.Models.TuanHoc
+
+
+@using (Ajax.BeginForm("Create", "TuanHoc", null, new AjaxOptions()
+{
+    OnSuccess = "CheckAjaxResult",
+    OnFailure = "AjaxRequestFail()",
+    UpdateTargetId = null
+}, new { @class = "form-horizontal", @id = "frmAjax" }))
+{
+
+    <div class="form-group">
+
+        @Html.LabelFor(model => model.SttTuan, new { @class = "col-sm-4 left-align" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(model => model.SttTuan, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SttTuan, null, new { @class = "text-warning" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.NamHoc, new { @class = "col-sm-4" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(model => model.NamHoc, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.NamHoc, null, new { @class = "text-warning" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NgayBatDau, new { @class = "col-sm-4" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(model => model.NgayBatDau, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.NgayBatDau, null, new { @class = "text-warning" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DaLayThongTin, new { @class = "col-sm-4" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(model => model.DaLayThongTin, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DaLayThongTin, null, new { @class = "text-warning" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DaXepLichThucHanh, new { @class = "col-sm-4" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(model => model.DaXepLichThucHanh, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DaXepLichThucHanh, null, new { @class = "text-warning" })
+        </div>
+    </div>
+    <div id="errMessage" class="text-red center-block"></div>
+}

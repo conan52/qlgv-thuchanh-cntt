@@ -754,3 +754,8 @@ tr.pager td {
             margin: 0;
         }
 }
+
+
+.left-align {
+    text-align: left;
+}
