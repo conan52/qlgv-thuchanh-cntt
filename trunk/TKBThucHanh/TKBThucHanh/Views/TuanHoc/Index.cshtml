@@ -54,7 +54,7 @@
             </td>
             <td>
                 <a class="" href="#" onclick="Edit(@item.TuanHocId)">Sửa</a>
-                @Html.ActionLink("Xóa", "Delete", new { id = item.TuanHocId })
+                <a class="text-red" href="#"  onclick="Delete(@item.TuanHocId)">Xóa</a>
             </td>
         </tr>
     }
@@ -64,14 +64,14 @@
 @section customScript
 {
     <script>
-        $(document).ready(function () {
-            $('#editModalSubmit').click(function () {
+        $(document).ready(function() {
+            $('#editModalSubmit').click(function() {
                 $(this).button('loading');
                 $('#frmAjax').submit();
                 return false;
             });
 
-            $('#btnCreateModel').click(function () {
+            $('#btnCreateModel').click(function() {
                 SetModalTile("Thêm mới");
                 $('#editModal').modal('show');
                 AjaxCreate();
@@ -84,22 +84,28 @@
             SetModalTile("Sửa thông tin");
             $('#editModal').modal('show');
             var url = "@Url.Action("Edit")" + '/' + id;
-            $.get(url, function (data) {
-                $('#insertOrUpdataModal').html(data);
+            $.get(url, function(data) {
+                CheckAjaxResult(data);
+
             });
-        
+
         }
 
+        function Delete(id) {
+            var url = "@Url.Action("Delete")" + '/' + id;
+            $.get(url, function(data) {
+            });
+            alert('Thành công');
 
+        }
 
 
         function AjaxCreate() {
             var url = "@Url.Action("Create")";
-            $.get(url, function (data) {
+            $.get(url, function(data) {
                 $('#insertOrUpdataModal').html(data);
             });
         }
-
 
 
         function CheckAjaxResult(obj) {
@@ -111,6 +117,7 @@
                 $('#errMessage').text(obj.Message);
             }
         }
+
         function AjaxRequestFail() {
             $('#errMessage').text('Lỗi kết nối!');
             $('#editModalSubmit').button('reset');

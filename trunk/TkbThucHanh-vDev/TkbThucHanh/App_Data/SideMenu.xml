@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu>
+  <item Text="Thời khóa biểu"   NavigateUrl="#" />
+  <item Text="Lịch thực hành"   NavigateUrl="#" />
+  <item Text="Giảng viên"   NavigateUrl="#" />
+  <item Text="Môn học"   NavigateUrl="#" />
+  <item Text="Phòng học"   NavigateUrl="PhongHoc" />
+  <item Text="Tuần"   NavigateUrl="#" />
+  <item Text="Kế hoạch giảng dạy"   NavigateUrl="#" />
+  <item Text="Lịch công tác"   NavigateUrl="LichCongTac" />
+  
+  
+
+  <!--<group Text="Language">
+    <item Text="C#" />
+    <item Text="Visual Basic" />
+    <item Text="C++" />
+    <item Text="Java" />
+    <item Text="PHP" />
+  </group>-->
+</menu>

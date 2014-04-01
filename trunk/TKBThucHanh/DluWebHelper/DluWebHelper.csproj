@@ -54,6 +54,7 @@
     <Compile Include="Lesson.cs" />
     <Compile Include="StudentTimeTable.cs" />
     <Compile Include="TeacherTimeTable.cs" />
+    <Compile Include="TeacherFullTable.cs" />
     <Compile Include="TimeTableWebResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

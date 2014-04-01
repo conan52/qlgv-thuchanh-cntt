@@ -1,0 +1,91 @@
+﻿@using MvcPaging
+@using TKBThucHanh.Models
+@model IPagedList<TKBThucHanh.Models.TuanHoc>
+@{
+    ViewBag.Title = "Tuần học";
+    ViewBag.PageTitle = "Quản lý tuần học";
+    ViewBag.PageSubTitle = "Danh sách tuần học";
+}
+<p>
+    <button id="btnCreateModel" type="button" class="btn btn-primary" data-loading-text="Xin vui lòng đợi...">Thêm mới</button>
+</p>
+<div class="clearfix">
+</div>
+@using (Html.BeginForm("Paging", "TuanHoc", FormMethod.Get))
+{
+    <div class="input-append">
+        <input class="span2" id="appendedInputButton" type="text" name="employee_name" placeholder="Name" value="@ViewData["employee_name"]" />
+        <button class="btn" type="submit">
+            <i class="icon-search"></i>Search
+        </button>
+    </div>
+    <table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().SttTuan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().NamHoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().NgayBatDau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().NgayKetThuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DaLayThongTin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DaXepLichThucHanh)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (TuanHoc item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SttTuan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamHoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayBatDau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayKetThuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaLayThongTin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaXepLichThucHanh)
+            </td>
+            <td>
+                <a class="" href="#" onclick="Edit(@item.TuanHocId)">Sửa</a>
+                <a class="text-red" href="#"  onclick="Delete(@item.TuanHocId)">Xóa</a>
+            </td>
+        </tr>
+    }
+
+</table>
+    <div class="pager">
+        @Html.Raw(Html.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page {0}", Previous = "Previous page {0}", Page = "Go to page {0}" },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                IsShowPages = true
+            }, new { employee_name = ViewData["employee_name"] }))
+    </div>
+}
