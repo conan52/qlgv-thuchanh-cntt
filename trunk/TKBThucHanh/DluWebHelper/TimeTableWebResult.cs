@@ -6,6 +6,13 @@ namespace DluWebHelper
 {
     public class TimeTableWebResult
     {
+        public TimeTableWebResult()
+        {
+            Weeks = new List<int>();
+            Class = new List<string>();
+            TeacherCodes = new List<string>();
+        }
+
         public List<int> Weeks { get; set; }
         public List<string> Class { get; set; }
         public List<string> TeacherCodes { get; set; }
@@ -14,17 +21,7 @@ namespace DluWebHelper
 
         public int CurrentWeek
         {
-            get
-            {
-         
-                return Weeks.Count > 0 ? Weeks.Max() : -1;
-            }
-        }
-        public TimeTableWebResult()
-        {
-            Weeks = new List<int>();
-            Class = new List<string>();
-            TeacherCodes = new List<string>();
+            get { return Weeks.Count > 0 ? Weeks.Max() : -1; }
         }
     }
 }

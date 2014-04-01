@@ -224,10 +224,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201403311058501_InitialCreate.cs" />
-    <Compile Include="Migrations\201403311058501_InitialCreate.Designer.cs">
-      <DependentUpon>201403311058501_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201404010132216_InitialCreate.cs" />
+    <Compile Include="Migrations\201404010132216_InitialCreate.Designer.cs">
+      <DependentUpon>201404010132216_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201404010133392_InitialMigrations.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Enums\ChuyenNganh.cs" />
@@ -958,8 +959,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201403311058501_InitialCreate.resx">
-      <DependentUpon>201403311058501_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201404010132216_InitialCreate.resx">
+      <DependentUpon>201404010132216_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

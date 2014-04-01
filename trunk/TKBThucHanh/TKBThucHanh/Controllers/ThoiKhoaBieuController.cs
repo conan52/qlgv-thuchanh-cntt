@@ -21,7 +21,7 @@ namespace TKBThucHanh.Controllers
 
             int tkbMoi = 0;
 
-            if (_db.TuanHocs.Count(tuan => tuan.DaLayThongTin != null && tuan.DaLayThongTin.Value) != 0)
+            if (_db.TuanHocs.Count(tuan => tuan.DaLayThongTin) != 0)
             {
                 tkbMoi = _db.TuanHocs.Max(tuan => tuan.SttTuan);
             }

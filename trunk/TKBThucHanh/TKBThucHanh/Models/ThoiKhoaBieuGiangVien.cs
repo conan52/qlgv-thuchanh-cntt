@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TkbThucHanh.Models;
 
 namespace TKBThucHanh.Models
 {
@@ -19,7 +20,7 @@ namespace TKBThucHanh.Models
         public string TenMonHoc { get; set; }
 
         [Display(Name = "Lớp")]
-        public int Lop { get; set; }
+        public int? LopId { get; set; }
 
         [Display(Name = "Phòng")]
         public int Phong { get; set; }
@@ -35,6 +36,10 @@ namespace TKBThucHanh.Models
 
         [Display(Name = "Ngày học")]
         public DateTime NgayHoc { get; set; }
+
+
+        [ForeignKey("LopId")]
+        public virtual Lop Lop { get; set; }
 
         [ForeignKey("GiangVienPhuTrach")]
         public virtual GiangVien GiangVien { get; set; }

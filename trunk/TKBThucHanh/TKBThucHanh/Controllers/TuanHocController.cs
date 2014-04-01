@@ -20,7 +20,7 @@ namespace TKBThucHanh.Controllers
 
 
         [HttpGet]
-        [OutputCache]
+        //[OutputCache]
         public ActionResult Create()
         {
             return View();

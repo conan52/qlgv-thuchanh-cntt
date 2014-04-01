@@ -13,7 +13,7 @@ namespace TKBThucHanh.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201403311058501_InitialCreate"; }
+            get { return "201404010132216_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

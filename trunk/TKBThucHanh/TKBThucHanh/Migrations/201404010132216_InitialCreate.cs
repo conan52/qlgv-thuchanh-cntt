@@ -82,6 +82,8 @@ namespace TKBThucHanh.Migrations
                         SoTinChiThucHanh = c.Int(nullable: false),
                         SoTinChiLyThuyet = c.Int(nullable: false),
                         ChuyenNganh = c.Int(nullable: false),
+                        TrinhDo = c.Int(nullable: false),
+                        BatBuoc = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.MonHocId);
             
@@ -91,7 +93,7 @@ namespace TKBThucHanh.Migrations
                     {
                         MaTkb = c.Int(nullable: false, identity: true),
                         TenMonHoc = c.String(),
-                        Lop = c.Int(nullable: false),
+                        LopId = c.Int(),
                         Phong = c.Int(nullable: false),
                         TietBatDau = c.Int(nullable: false),
                         TietKetThuc = c.Int(nullable: false),
@@ -100,7 +102,9 @@ namespace TKBThucHanh.Migrations
                     })
                 .PrimaryKey(t => t.MaTkb)
                 .ForeignKey("dbo.GiangVien", t => t.GiangVienPhuTrach, cascadeDelete: true)
+                .ForeignKey("dbo.Lop", t => t.LopId)
                 .ForeignKey("dbo.PhongThucHanh", t => t.Phong, cascadeDelete: true)
+                .Index(t => t.LopId)
                 .Index(t => t.Phong)
                 .Index(t => t.GiangVienPhuTrach);
             
@@ -146,10 +150,9 @@ namespace TKBThucHanh.Migrations
                         TuanHocId = c.Int(nullable: false, identity: true),
                         SttTuan = c.Int(nullable: false),
                         NamHoc = c.String(),
-                        NgayBatDau = c.DateTime(),
-                        NgayKetThuc = c.DateTime(),
-                        DaLayThongTin = c.Boolean(),
-                        DaXepLichThucHanh = c.Boolean(),
+                        NgayBatDau = c.DateTime(nullable: false),
+                        DaLayThongTin = c.Boolean(nullable: false),
+                        DaXepLichThucHanh = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.TuanHocId);
             
@@ -160,6 +163,7 @@ namespace TKBThucHanh.Migrations
             DropForeignKey("dbo.GiangVien", "MaTaiKhoanDangNhap", "dbo.UserProfile");
             DropForeignKey("dbo.ThoiKhoaBieuGiangVien", "Phong", "dbo.PhongThucHanh");
             DropForeignKey("dbo.PhanCongGvThucHanh", "MaTkb", "dbo.ThoiKhoaBieuGiangVien");
+            DropForeignKey("dbo.ThoiKhoaBieuGiangVien", "LopId", "dbo.Lop");
             DropForeignKey("dbo.ThoiKhoaBieuGiangVien", "GiangVienPhuTrach", "dbo.GiangVien");
             DropForeignKey("dbo.PhanCongGiangDay", "GiangVien_GiangVienId", "dbo.GiangVien");
             DropForeignKey("dbo.PhanCongGiangDay", "IdMonHoc", "dbo.MonHoc");
@@ -170,6 +174,7 @@ namespace TKBThucHanh.Migrations
             DropIndex("dbo.PhanCongGvThucHanh", new[] { "MaTkb" });
             DropIndex("dbo.ThoiKhoaBieuGiangVien", new[] { "GiangVienPhuTrach" });
             DropIndex("dbo.ThoiKhoaBieuGiangVien", new[] { "Phong" });
+            DropIndex("dbo.ThoiKhoaBieuGiangVien", new[] { "LopId" });
             DropIndex("dbo.PhanCongGiangDay", new[] { "GiangVien_GiangVienId" });
             DropIndex("dbo.PhanCongGiangDay", new[] { "IdMonHoc" });
             DropIndex("dbo.PhanCongGiangDay", new[] { "IdGiangVienPhu" });
