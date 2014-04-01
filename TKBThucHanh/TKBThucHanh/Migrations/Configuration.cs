@@ -12,6 +12,7 @@ namespace TKBThucHanh.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "TKBThucHanh.Models.TkbThucHanhContext";
         }
 
