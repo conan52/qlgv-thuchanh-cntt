@@ -9,6 +9,7 @@ namespace DluWebHelper
     {
         private static void Main(string[] args)
         {
+            /*
             var webRequest = new DluWebRequest();
             var timetable = webRequest.GetCurentTimeTable();
             var week = timetable.CurrentWeek;
@@ -65,7 +66,76 @@ namespace DluWebHelper
                     t.DayOfWeek,
                     t.Start
                 };
+            */
 
+
+            List<ClassA> a = new List<ClassA>()
+            {
+                new ClassA("Thay quy", 1,2),
+                new ClassA("Thay quy", 1,4),
+                new ClassA("Thay phuc", 4,3),
+                new ClassA("Thay phuc", 4,2),
+            };
+
+            List<ClassB> b = new List<ClassB>()
+            {
+                new ClassB(1,2,"CTK34"),
+                new ClassB(1,2,"CTK34"),
+                new ClassB(1,4,"CTK34"),
+                new ClassB(4,3,"CTK32"),
+                new ClassB(6,3,"CTK33")
+            };
+
+            List<ClassC> r = new List<ClassC>();
+            foreach (ClassA classA in a)
+            {
+                ClassC c = new ClassC()
+                {
+                    SCol1 = classA.SCol1,
+                    Col2 = classA.Col2,
+                    Col3 = classA.Col2,
+                };
+                var j = b.Find(cb => cb.Col2 == classA.Col2 && cb.Col3 == classA.Col3);
+                if (j != null)
+                    c.SCol4 = j.SCol4;
+                r.Add(c);
+            }
         }
+    }
+
+    class ClassA
+    {
+        public string SCol1;
+        public int Col2;
+        public int Col3;
+
+        public ClassA(string sCol1, int col2, int col3)
+        {
+            SCol1 = sCol1;
+            Col2 = col2;
+            Col3 = col3;
+        }
+    }
+
+    class ClassB
+    {
+        public int Col2;
+        public int Col3;
+        public string SCol4;
+
+        public ClassB(int col2, int col3, string col4)
+        {
+            Col2 = col2;
+            Col3 = col3;
+            SCol4 = col4;
+        }
+    }
+
+    class ClassC
+    {
+        public string SCol1;
+        public int Col2;
+        public int Col3;
+        public string SCol4;
     }
 }

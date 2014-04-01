@@ -945,6 +945,12 @@
     <Content Include="Views\TuanHoc\Create.cshtml" />
     <Content Include="Views\TuanHoc\Index2.cshtml" />
     <Content Include="Views\TuanHoc\Edit.cshtml" />
+    <Content Include="Views\TuanHoc\Delete.cshtml" />
+    <Content Include="Views\GiangVien\Paging.cshtml" />
+    <Content Include="Views\GiangVien\_AjaxEmployeeList.cshtml" />
+    <Content Include="Views\TuanHoc\_AjaxEmployeeList.cshtml" />
+    <Content Include="Views\TuanHoc\Index4.cshtml" />
+    <Content Include="Views\TuanHoc\Paging.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

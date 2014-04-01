@@ -1,0 +1,85 @@
+﻿@using DevExpress.Data.PLinq.Helpers
+@using TKBThucHanh.Models
+@using TkbThucHanh.Models.Enums
+@using TKBThucHanh.Models.Enums
+@using TkbThucHanh.Models.Provider
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView";
+        settings.CallbackRouteValues = new { Controller = "GiangVien", Action = "GridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "GiangVien", Action = "GridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "GiangVien", Action = "GridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "GiangVien", Action = "GridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+        settings.SettingsBehavior.ConfirmDelete = true;
+      
+        
+        
+        settings.SettingsPopup.EditForm.Width = 600;
+        settings.SettingsPopup.EditForm.HorizontalAlign = PopupHorizontalAlign.Center;
+        settings.SettingsPopup.EditForm.VerticalAlign = PopupVerticalAlign.Middle;
+        
+        
+        
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.NewButton.Visible = false;
+
+        settings.CommandColumn.DeleteButton.Image.Url = "~/Content/Images/delete.png";
+        settings.CommandColumn.DeleteButton.Visible = true;
+        settings.CommandColumn.EditButton.Visible = true;
+        
+        
+        settings.KeyFieldName = "GiangVienId";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.Columns.Add(col =>
+        {
+            col.FieldName = "MaGv";
+            col.Caption = "Mã giảng viên";
+            col.ColumnType = MVCxGridViewColumnType.TextBox;
+        });
+        settings.Columns.Add(col =>
+        {
+            col.FieldName = "HoVaTen";
+            col.Caption = "Họ và tên";
+            col.ColumnType = MVCxGridViewColumnType.TextBox;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ChuyenNganh";
+            column.Caption = "Chuyên ngành";
+
+           column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            if (comboBoxProperties != null)
+            {
+                comboBoxProperties.DataSource =EnumUltils.GetDescriptions_ChuyenNganh();
+
+                comboBoxProperties.TextField = "Description";
+                comboBoxProperties.ValueField = "Value";
+                
+                comboBoxProperties.ValueType = typeof(int);
+            }
+        });
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CoThePhanCong";
+            column.Caption = "Có thể phân công";
+            column.ColumnType = MVCxGridViewColumnType.CheckBox;
+        });
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

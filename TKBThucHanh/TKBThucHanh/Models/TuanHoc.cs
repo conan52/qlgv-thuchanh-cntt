@@ -20,12 +20,12 @@ namespace TKBThucHanh.Models
         [Display(Name = "Ngày bắt đầu")]
         public DateTime NgayBatDau { get; set; }
 
-      //  [NotMapped]
-        [Display(Name = "Ngày kết thúc")]
-        public DateTime NgayKetThuc{ get; set; }
-        //{
-        //    get { return NgayBatDau.AddDays(7); }
-        //}
+        //[Display(Name = "Ngày kết thúc")]
+        [NotMapped]
+        public DateTime NgayKetThuc
+        {
+            get { return NgayBatDau.AddDays(7); }
+        }
 
         [Display(Name = "Đã lấy thông tin")]
         public bool DaLayThongTin { get; set; }

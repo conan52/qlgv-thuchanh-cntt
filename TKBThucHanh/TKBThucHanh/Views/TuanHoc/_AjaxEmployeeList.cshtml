@@ -1,0 +1,73 @@
+﻿@using MvcPaging
+@using TKBThucHanh.Models
+@model IPagedList<TKBThucHanh.Models.TuanHoc>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().SttTuan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().NamHoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().NgayBatDau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().NgayKetThuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DaLayThongTin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DaXepLichThucHanh)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (TuanHoc item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SttTuan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamHoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayBatDau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayKetThuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaLayThongTin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaXepLichThucHanh)
+            </td>
+            <td>
+                <a class="" href="#" onclick="Edit(@item.TuanHocId)">Sửa</a>
+                <a class="text-red" href="#"  onclick="Delete(@item.TuanHocId)">Xóa</a>
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="pager">
+    @Html.Raw(Html.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts { Next = "Next", Previous = "Previous" },
+                ItemIcon = new ItemIcon { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles { Next = "Next page {0}", Previous = "Previous page {0}", Page = "Go to page {0}" },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                IsShowPages = true
+            }, new { tuanhoc = ViewData["tuanhoc"] }))
+</div>
+<script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>

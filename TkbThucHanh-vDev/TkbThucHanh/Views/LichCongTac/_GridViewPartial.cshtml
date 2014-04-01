@@ -1,0 +1,83 @@
+﻿@using System.Web.UI.WebControls
+@using TKBThucHanh.Models
+@using TkbThucHanh.Models.Provider
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+
+        settings.Name = "GridView";
+        settings.CallbackRouteValues = new { Controller = "LichCongTac", Action = "GridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "LichCongTac", Action = "GridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "LichCongTac", Action = "GridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "LichCongTac", Action = "GridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.Width = Unit.Percentage(90);
+        settings.SettingsBehavior.ColumnResizeMode = ColumnResizeMode.NextColumn;
+        settings.SettingsPopup.EditForm.Width = 600;
+        settings.SettingsPopup.EditForm.HorizontalAlign = PopupHorizontalAlign.Center;
+        settings.SettingsPopup.EditForm.VerticalAlign = PopupVerticalAlign.Middle;
+        settings.CommandColumn.DeleteButton.Image.Url = "~/Content/Images/delete.png";
+
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.NewButton.Visible = true;
+        settings.CommandColumn.DeleteButton.Visible = true;
+        settings.CommandColumn.EditButton.Visible = true;
+
+        settings.KeyFieldName = "LichCongTacId";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Tên giảng viên";
+            column.FieldName = "GiangVienId";
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            comboBoxProperties.DataSource = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong);
+            comboBoxProperties.TextField = "HoVaTen";
+            comboBoxProperties.ValueField = "GiangVienId";
+            comboBoxProperties.ValueType = typeof(int);
+        });
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "LyDo";
+            column.Caption = "Lý do";
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ThoiGianBd";
+            column.Caption = "Thời gian bắt đầu";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var editboxprop = column.PropertiesEdit as DateEditProperties;
+            editboxprop.NullText = "dd/MM/yyyy";
+            editboxprop.EditFormat = EditFormat.Custom;
+            editboxprop.EditFormatString = "dd/MM/yyyy";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ThoiGianKt";
+            column.Caption = "Thời gian kết thúc";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var editboxprop = column.PropertiesEdit as DateEditProperties;
+            editboxprop.NullText = "dd/MM/yyyy";
+            editboxprop.EditFormat = EditFormat.Custom;
+            editboxprop.EditFormatString = "dd/MM/yyyy";
+        });
+
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()
