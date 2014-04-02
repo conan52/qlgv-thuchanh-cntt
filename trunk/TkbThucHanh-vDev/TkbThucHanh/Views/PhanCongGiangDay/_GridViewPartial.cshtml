@@ -11,7 +11,6 @@
         settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "PhanCongGiangDay", Action = "GridViewPartialUpdate"};
         settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "PhanCongGiangDay", Action = "GridViewPartialDelete"};
         settings.KeyFieldName = "IdPhanCong";
-        settings.SettingDefaultColumn();
 
         settings.Columns.Add(column =>
         {
@@ -94,6 +93,7 @@
                 comboBoxProperties.ValueType = typeof (int);
             }
         });
+        settings.SettingDefaultColumn();
     });
     if (ViewData["EditError"] != null)
     {

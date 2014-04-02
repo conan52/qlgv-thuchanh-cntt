@@ -16,13 +16,15 @@ namespace TkbThucHanh.ViewSettings
             settings.SettingsPopup.EditForm.Width = 600;
             settings.SettingsPopup.EditForm.HorizontalAlign = PopupHorizontalAlign.Center;
             settings.SettingsPopup.EditForm.VerticalAlign = PopupVerticalAlign.Middle;
-            settings.CommandColumn.DeleteButton.Image.Url = "~/Content/Images/delete.png";
+
+            settings.SettingsText.GroupPanel = " ";
 
 
             settings.CommandColumn.Visible = true;
             //  settings.CommandColumn.NewButton.Visible = true;
             settings.CommandColumn.DeleteButton.Visible = true;
             settings.CommandColumn.EditButton.Visible = true;
+            
 
             settings.SettingsPager.Visible = true;
             settings.Settings.ShowGroupPanel = true;
@@ -38,7 +40,10 @@ namespace TkbThucHanh.ViewSettings
             settings.CommandColumn.ClearFilterButton.Visible = true;
             settings.CommandColumn.Width = 150;
 
-            // settings.CommandColumn.VisibleIndex = settings.Columns.Count - 1;
+             settings.CommandColumn.VisibleIndex = settings.Columns.Count;
+             settings.CommandColumn.ButtonType=ButtonType.Link;
+             settings.CommandColumn.DeleteButton.Image.Url = "~/Content/Images/delete.png";
+//              settings.CommandColumn.DeleteButton.Image.SpriteProperties. = "~/Content/Images/delete.png";
         }
     }
 }

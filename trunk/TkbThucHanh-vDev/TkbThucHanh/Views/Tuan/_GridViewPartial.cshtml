@@ -10,7 +10,7 @@
         settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "Tuan", Action = "GridViewPartialUpdate"};
         settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "Tuan", Action = "GridViewPartialDelete"};
         settings.KeyFieldName = "TuanHocId";
-        settings.SettingDefaultColumn();
+        
         settings.Columns.Add(column =>
         {
             column.FieldName = "SttTuan";
@@ -36,17 +36,7 @@
             editboxprop.EditFormat = EditFormat.Custom;
             editboxprop.EditFormatString = "dd/MM/yyyy";
         });
-        settings.Columns.Add(
-        column =>
-        {
-            column.FieldName = "NgayKetThuc";
-            column.Caption = "Ngày kết thúc";
-            column.ColumnType = MVCxGridViewColumnType.DateEdit;
-            var editboxprop = column.PropertiesEdit as DateEditProperties;
-            editboxprop.NullText = "dd/MM/yyyy";
-            editboxprop.EditFormat = EditFormat.Custom;
-            editboxprop.EditFormatString = "dd/MM/yyyy";
-        });
+
         settings.Columns.Add(
         column =>
         {
@@ -61,6 +51,7 @@
             column.Caption = "Đã lấy xếp lịch thực hành";
             column.ColumnType = MVCxGridViewColumnType.CheckBox;
         });
+        settings.SettingDefaultColumn();
     });
     if (ViewData["EditError"] != null)
     {
