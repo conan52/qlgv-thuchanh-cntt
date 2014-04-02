@@ -1,4 +1,3 @@
-
 @model TkbThucHanh.Models.LoginModel
 <div class="accountHeader">
     <h2>
@@ -7,10 +6,12 @@
         Please enter your username and password. @Html.ActionLink("Register", "Register")
         if you don't have an account.</p>
 </div>
-@using(Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-    
-    @Html.DevExpress().Label(settings => {
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.DevExpress().Label(settings =>
+    {
         settings.Name = "UserNameLabel";
         settings.Text = "User Name";
         settings.AssociatedControlName = "UserName";
@@ -21,7 +22,8 @@
         @Html.ValidationMessageFor(m => m.UserName)
     </div>
 
-    @Html.DevExpress().Label(settings => {
+    @Html.DevExpress().Label(settings =>
+    {
         settings.Name = "PasswordLabel";
         settings.Text = "Password";
         settings.AssociatedControlName = "Password";
@@ -32,13 +34,15 @@
     </div>
 
     <div class="form-field">
-        @Html.DevExpress().CheckBox(settings => {
+        @Html.DevExpress().CheckBox(settings =>
+        {
             settings.Name = "RememberMe";
             settings.Text = "Remember me?";
         }).GetHtml()
     </div>
 
-    @Html.DevExpress().Button(settings => {
+    @Html.DevExpress().Button(settings =>
+    {
         settings.Name = "Button";
         settings.Text = "Log On";
         settings.UseSubmitBehavior = true;

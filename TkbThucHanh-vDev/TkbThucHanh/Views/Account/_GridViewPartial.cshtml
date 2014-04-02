@@ -1,14 +1,14 @@
 ﻿@using TkbThucHanh.Models.Enums
 @using TkbThucHanh.ViewSettings
 @{
-    var grid = Html.DevExpress().GridView(settings =>
+    GridViewExtension grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView";
-        settings.CallbackRouteValues = new { Controller = "Account", Action = "GridViewPartial" };
+        settings.CallbackRouteValues = new {Controller = "Account", Action = "GridViewPartial"};
 
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Account", Action = "GridViewPartialAddNew" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Account", Action = "GridViewPartialUpdate" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Account", Action = "GridViewPartialDelete" };
+        settings.SettingsEditing.AddNewRowRouteValues = new {Controller = "Account", Action = "GridViewPartialAddNew"};
+        settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "Account", Action = "GridViewPartialUpdate"};
+        settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "Account", Action = "GridViewPartialDelete"};
 
         settings.KeyFieldName = "UserId";
         settings.SettingDefaultColumn();
@@ -32,11 +32,10 @@
                 comboBoxProperties.ValueField = "Name";
             }
         });
-
     });
     if (ViewData["EditError"] != null)
     {
-        grid.SetEditErrorText((string)ViewData["EditError"]);
+        grid.SetEditErrorText((string) ViewData["EditError"]);
     }
 }
 @grid.Bind(Model).GetHtml()

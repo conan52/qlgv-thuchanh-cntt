@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TkbThucHanh.Models
 {
@@ -23,17 +18,18 @@ namespace TkbThucHanh.Models
 
 
         public int MonHocId { get; set; }
+
         [ForeignKey("MonHocId")]
         public virtual MonHoc MonHoc { get; set; }
 
         public int? GiangVienId { get; set; }
+
         [ForeignKey("GiangVienId")]
         public virtual GiangVien GiangVien { get; set; }
 
         public int LopId { get; set; }
+
         [ForeignKey("LopId")]
         public virtual Lop Lop { get; set; }
-
-
     }
 }

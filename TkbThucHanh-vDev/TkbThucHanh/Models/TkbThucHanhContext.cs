@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TkbThucHanh.Models
 {
-    public class TkbThucHanhContext:DbContext
+    public class TkbThucHanhContext : DbContext
     {
         static TkbThucHanhContext()
         {
@@ -20,6 +15,7 @@ namespace TkbThucHanh.Models
             : base("Name=TkbCloud")
         {
         }
+
         public DbSet<GiangVien> GiangViens { get; set; }
         public DbSet<LichCongTac> LichCongTacs { get; set; }
         public DbSet<Lop> Lops { get; set; }

@@ -6,10 +6,10 @@ using TkbThucHanh.Models;
 
 namespace TkbThucHanh.Controllers
 {
-    public class GiangVienController : Controller
+    public class TuanController : Controller
     {
         //
-        // GET: /GiangVien/
+        // GET: /Tuan/
 
         private readonly TkbThucHanhContext db = new TkbThucHanhContext();
 
@@ -21,14 +21,14 @@ namespace TkbThucHanh.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial()
         {
-            DbSet<GiangVien> model = db.GiangViens;
+            DbSet<TuanHoc> model = db.TuanHocs;
             return PartialView("_GridViewPartial", model.ToList());
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialAddNew(GiangVien item)
+        public ActionResult GridViewPartialAddNew(TuanHoc item)
         {
-            DbSet<GiangVien> model = db.GiangViens;
+            DbSet<TuanHoc> model = db.TuanHocs;
             if (ModelState.IsValid)
             {
                 try
@@ -47,14 +47,14 @@ namespace TkbThucHanh.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialUpdate(GiangVien item)
+        public ActionResult GridViewPartialUpdate(TuanHoc item)
         {
-            DbSet<GiangVien> model = db.GiangViens;
+            DbSet<TuanHoc> model = db.TuanHocs;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    GiangVien modelItem = model.FirstOrDefault(it => it.GiangVienId == item.GiangVienId);
+                    TuanHoc modelItem = model.FirstOrDefault(it => it.TuanHocId == item.TuanHocId);
                     if (modelItem != null)
                     {
                         UpdateModel(modelItem);
@@ -72,14 +72,14 @@ namespace TkbThucHanh.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialDelete(Int32 GiangVienId)
+        public ActionResult GridViewPartialDelete(Int32 TuanHocId)
         {
-            DbSet<GiangVien> model = db.GiangViens;
-            if (GiangVienId != null)
+            DbSet<TuanHoc> model = db.TuanHocs;
+            if (TuanHocId != null)
             {
                 try
                 {
-                    GiangVien item = model.FirstOrDefault(it => it.GiangVienId == GiangVienId);
+                    TuanHoc item = model.FirstOrDefault(it => it.TuanHocId == TuanHocId);
                     if (item != null)
                         model.Remove(item);
                     db.SaveChanges();

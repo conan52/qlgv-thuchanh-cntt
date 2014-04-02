@@ -6,10 +6,10 @@ using TkbThucHanh.Models;
 
 namespace TkbThucHanh.Controllers
 {
-    public class GiangVienController : Controller
+    public class PhongThucHanhController : Controller
     {
         //
-        // GET: /GiangVien/
+        // GET: /PhongThucHanh/
 
         private readonly TkbThucHanhContext db = new TkbThucHanhContext();
 
@@ -21,14 +21,14 @@ namespace TkbThucHanh.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial()
         {
-            DbSet<GiangVien> model = db.GiangViens;
+            DbSet<PhongThucHanh> model = db.PhongThucHanhs;
             return PartialView("_GridViewPartial", model.ToList());
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialAddNew(GiangVien item)
+        public ActionResult GridViewPartialAddNew(PhongThucHanh item)
         {
-            DbSet<GiangVien> model = db.GiangViens;
+            DbSet<PhongThucHanh> model = db.PhongThucHanhs;
             if (ModelState.IsValid)
             {
                 try
@@ -47,14 +47,14 @@ namespace TkbThucHanh.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialUpdate(GiangVien item)
+        public ActionResult GridViewPartialUpdate(PhongThucHanh item)
         {
-            DbSet<GiangVien> model = db.GiangViens;
+            DbSet<PhongThucHanh> model = db.PhongThucHanhs;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    GiangVien modelItem = model.FirstOrDefault(it => it.GiangVienId == item.GiangVienId);
+                    PhongThucHanh modelItem = model.FirstOrDefault(it => it.PhongThucHanhId == item.PhongThucHanhId);
                     if (modelItem != null)
                     {
                         UpdateModel(modelItem);
@@ -72,14 +72,14 @@ namespace TkbThucHanh.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialDelete(Int32 GiangVienId)
+        public ActionResult GridViewPartialDelete(Int32 PhongThucHanhId)
         {
-            DbSet<GiangVien> model = db.GiangViens;
-            if (GiangVienId != null)
+            DbSet<PhongThucHanh> model = db.PhongThucHanhs;
+            if (PhongThucHanhId != null)
             {
                 try
                 {
-                    GiangVien item = model.FirstOrDefault(it => it.GiangVienId == GiangVienId);
+                    PhongThucHanh item = model.FirstOrDefault(it => it.PhongThucHanhId == PhongThucHanhId);
                     if (item != null)
                         model.Remove(item);
                     db.SaveChanges();

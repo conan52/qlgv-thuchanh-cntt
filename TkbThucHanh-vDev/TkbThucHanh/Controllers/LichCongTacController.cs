@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using DevExpress.Web.Mvc;
+using TkbThucHanh.Models;
 
 namespace TkbThucHanh.Controllers
 {
@@ -12,24 +11,24 @@ namespace TkbThucHanh.Controllers
         //
         // GET: /LichCongTac/
 
+        private readonly TkbThucHanhContext db = new TkbThucHanhContext();
+
         public ActionResult Index()
         {
             return View();
         }
 
-        TkbThucHanh.Models.TkbThucHanhContext db = new TkbThucHanh.Models.TkbThucHanhContext();
-
         [ValidateInput(false)]
         public ActionResult GridViewPartial()
         {
-            var model = db.LichCongTacs;
+            DbSet<LichCongTac> model = db.LichCongTacs;
             return PartialView("_GridViewPartial", model.ToList());
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialAddNew(TkbThucHanh.Models.LichCongTac item)
+        public ActionResult GridViewPartialAddNew(LichCongTac item)
         {
-            var model = db.LichCongTacs;
+            DbSet<LichCongTac> model = db.LichCongTacs;
             if (ModelState.IsValid)
             {
                 try
@@ -46,18 +45,19 @@ namespace TkbThucHanh.Controllers
                 ViewData["EditError"] = "Please, correct all errors.";
             return PartialView("_GridViewPartial", model.ToList());
         }
+
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialUpdate(TkbThucHanh.Models.LichCongTac item)
+        public ActionResult GridViewPartialUpdate(LichCongTac item)
         {
-            var model = db.LichCongTacs;
+            DbSet<LichCongTac> model = db.LichCongTacs;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var modelItem = model.FirstOrDefault(it => it.LichCongTacId == item.LichCongTacId);
+                    LichCongTac modelItem = model.FirstOrDefault(it => it.LichCongTacId == item.LichCongTacId);
                     if (modelItem != null)
                     {
-                        this.UpdateModel(modelItem);
+                        UpdateModel(modelItem);
                         db.SaveChanges();
                     }
                 }
@@ -70,15 +70,16 @@ namespace TkbThucHanh.Controllers
                 ViewData["EditError"] = "Please, correct all errors.";
             return PartialView("_GridViewPartial", model.ToList());
         }
+
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialDelete(System.Int32 LichCongTacId)
+        public ActionResult GridViewPartialDelete(Int32 LichCongTacId)
         {
-            var model = db.LichCongTacs;
+            DbSet<LichCongTac> model = db.LichCongTacs;
             if (LichCongTacId != null)
             {
                 try
                 {
-                    var item = model.FirstOrDefault(it => it.LichCongTacId == LichCongTacId);
+                    LichCongTac item = model.FirstOrDefault(it => it.LichCongTacId == LichCongTacId);
                     if (item != null)
                         model.Remove(item);
                     db.SaveChanges();

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TkbThucHanh.Models
 {
@@ -27,6 +23,7 @@ namespace TkbThucHanh.Models
         [Required(ErrorMessage = "Giảng viên không được để trống")]
 //        [Display(Name = "Giảng viên")]
         public int GiangVienId { get; set; }
+
         [ForeignKey("GiangVienId")]
         public virtual GiangVien GiangVien { get; set; }
     }

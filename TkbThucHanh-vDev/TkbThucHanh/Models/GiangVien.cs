@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DevExpress.Web.ASPxHtmlEditor.Internal;
 using TkbThucHanh.Models.Enums;
 
 namespace TkbThucHanh.Models
@@ -41,8 +36,8 @@ namespace TkbThucHanh.Models
         public virtual List<LichCongTac> LichCongTacs { get; set; }
 
 
-
         public int? UserProfileId { get; set; }
+
         [ForeignKey("UserProfileId")]
         public UserProfile UserProfile { get; set; }
     }

@@ -2,30 +2,36 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Web;
-using TkbThucHanh.Models.Enums;
+using System.Reflection;
 
 namespace TkbThucHanh.Models.Enums
 {
     public class EnumUltils
     {
-
         public static List<EnumInfo> GetDescriptions<T>()
         {
-            var type = typeof(T);
+            Type type = typeof (T);
             var descs = new List<EnumInfo>();
-            var names = Enum.GetNames(type);
+            string[] names = Enum.GetNames(type);
 
             for (int i = 0; i < names.Length; i++)
             {
-                var name = names[i];
-                var field = type.GetField(name);
-                var fds = field.GetCustomAttributes(typeof(DescriptionAttribute), true);
-                descs.Add(new EnumInfo(fds.Cast<DescriptionAttribute>().Select(fd => fd.Description).First(), (int)Enum.Parse(type, name), name));
+                string name = names[i];
+                FieldInfo field = type.GetField(name);
+                object[] fds = field.GetCustomAttributes(typeof (DescriptionAttribute), true);
+                descs.Add(new EnumInfo(fds.Cast<DescriptionAttribute>().Select(fd => fd.Description).First(),
+                    (int) Enum.Parse(type, name), name));
             }
             return descs;
         }
 
+        public static string GetDescriptionAttribute<T>(string s)
+        {
+            Type type = typeof (T);
+            FieldInfo field = type.GetField(s);
+            object[] fds = field.GetCustomAttributes(typeof (DescriptionAttribute), true);
+            return fds.Cast<DescriptionAttribute>().Select(fd => fd.Description).First();
+        }
 
         public static List<EnumInfo> GetDescriptions_ChuyenNganh()
         {
@@ -36,6 +42,7 @@ namespace TkbThucHanh.Models.Enums
         {
             return GetDescriptions<TrinhDo>();
         }
+
         public static List<EnumInfo> GetDescriptions_QuyenHan()
         {
             return GetDescriptions<QuyenHan>();
@@ -44,15 +51,15 @@ namespace TkbThucHanh.Models.Enums
 
     public class EnumInfo
     {
-        public string Description { get; set; }
-        public int Value { get; set; }
-        public string Name { get; set; }
-
         public EnumInfo(string description, int value, string name)
         {
             Description = description;
             Value = value;
             Name = name;
         }
+
+        public string Description { get; set; }
+        public int Value { get; set; }
+        public string Name { get; set; }
     }
 }

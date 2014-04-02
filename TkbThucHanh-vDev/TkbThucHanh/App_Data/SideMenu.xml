@@ -1,17 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <menu>
-  <item Text="Thời khóa biểu"   NavigateUrl="#" />
-  <item Text="Lịch thực hành"   NavigateUrl="#" />
-  <item Text="Giảng viên"   NavigateUrl="GiangVien" />
-  <item Text="Môn học"   NavigateUrl="MonHoc" />
-  <item Text="Lớp học"   NavigateUrl="LopHoc" />
-  <item Text="Phòng học"   NavigateUrl="PhongHoc" />
-  <item Text="Tuần"   NavigateUrl="Tuan" />
-  <item Text="Phân công giảng dạy"   NavigateUrl="PhanCongGiangDay" />
-  <item Text="Lịch công tác"   NavigateUrl="LichCongTac" />
-  
-  
-  
+  <item Text="Thời khóa biểu" NavigateUrl="#" />
+  <item Text="Lịch thực hành" NavigateUrl="#" />
+  <item Text="Giảng viên" NavigateUrl="GiangVien" />
+  <item Text="Môn học" NavigateUrl="MonHoc" />
+  <item Text="Lớp học" NavigateUrl="LopHoc" />
+  <item Text="Phòng học" NavigateUrl="PhongHoc" />
+  <item Text="Tuần" NavigateUrl="Tuan" />
+  <item Text="Phân công giảng dạy" NavigateUrl="PhanCongGiangDay" />
+  <item Text="Lịch công tác" NavigateUrl="LichCongTac" />
+
 
   <!--<group Text="Language">
     <item Text="C#" />

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using DevExpress.Web.Mvc;
+using TkbThucHanh.Models;
 
 namespace TkbThucHanh.Controllers
 {
@@ -12,24 +11,24 @@ namespace TkbThucHanh.Controllers
         //
         // GET: /PhanCongGiangDay/
 
+        private readonly TkbThucHanhContext db = new TkbThucHanhContext();
+
         public ActionResult Index()
         {
             return View();
         }
 
-        TkbThucHanh.Models.TkbThucHanhContext db = new TkbThucHanh.Models.TkbThucHanhContext();
-
         [ValidateInput(false)]
         public ActionResult GridViewPartial()
         {
-            var model = db.PhanCongGiangDays;
+            DbSet<PhanCongGiangDay> model = db.PhanCongGiangDays;
             return PartialView("_GridViewPartial", model.ToList());
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialAddNew(TkbThucHanh.Models.PhanCongGiangDay item)
+        public ActionResult GridViewPartialAddNew(PhanCongGiangDay item)
         {
-            var model = db.PhanCongGiangDays;
+            DbSet<PhanCongGiangDay> model = db.PhanCongGiangDays;
             if (ModelState.IsValid)
             {
                 try
@@ -46,18 +45,19 @@ namespace TkbThucHanh.Controllers
                 ViewData["EditError"] = "Please, correct all errors.";
             return PartialView("_GridViewPartial", model.ToList());
         }
+
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialUpdate(TkbThucHanh.Models.PhanCongGiangDay item)
+        public ActionResult GridViewPartialUpdate(PhanCongGiangDay item)
         {
-            var model = db.PhanCongGiangDays;
+            DbSet<PhanCongGiangDay> model = db.PhanCongGiangDays;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var modelItem = model.FirstOrDefault(it => it.IdPhanCong == item.IdPhanCong);
+                    PhanCongGiangDay modelItem = model.FirstOrDefault(it => it.IdPhanCong == item.IdPhanCong);
                     if (modelItem != null)
                     {
-                        this.UpdateModel(modelItem);
+                        UpdateModel(modelItem);
                         db.SaveChanges();
                     }
                 }
@@ -70,15 +70,16 @@ namespace TkbThucHanh.Controllers
                 ViewData["EditError"] = "Please, correct all errors.";
             return PartialView("_GridViewPartial", model.ToList());
         }
+
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialDelete(System.Int32 IdPhanCong)
+        public ActionResult GridViewPartialDelete(Int32 IdPhanCong)
         {
-            var model = db.PhanCongGiangDays;
+            DbSet<PhanCongGiangDay> model = db.PhanCongGiangDays;
             if (IdPhanCong != null)
             {
                 try
                 {
-                    var item = model.FirstOrDefault(it => it.IdPhanCong == IdPhanCong);
+                    PhanCongGiangDay item = model.FirstOrDefault(it => it.IdPhanCong == IdPhanCong);
                     if (item != null)
                         model.Remove(item);
                     db.SaveChanges();

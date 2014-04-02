@@ -3,17 +3,16 @@
 @using TkbThucHanh.Models.Provider
 @using TkbThucHanh.ViewSettings
 @{
-    var grid = Html.DevExpress().GridView(settings =>
+    GridViewExtension grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView";
-        settings.CallbackRouteValues = new { Controller = "GiangVien", Action = "GridViewPartial" };
+        settings.CallbackRouteValues = new {Controller = "GiangVien", Action = "GridViewPartial"};
 
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "GiangVien", Action = "GridViewPartialAddNew" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "GiangVien", Action = "GridViewPartialUpdate" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "GiangVien", Action = "GridViewPartialDelete" };
+        settings.SettingsEditing.AddNewRowRouteValues = new {Controller = "GiangVien", Action = "GridViewPartialAddNew"};
+        settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "GiangVien", Action = "GridViewPartialUpdate"};
+        settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "GiangVien", Action = "GridViewPartialDelete"};
         settings.KeyFieldName = "GiangVienId";
         settings.SettingDefaultColumn();
-
 
 
         settings.Columns.Add(column =>
@@ -33,7 +32,7 @@
             comboBoxProperties.DataSource = EnumUltils.GetDescriptions_ChuyenNganh();
             comboBoxProperties.TextField = "Description";
             comboBoxProperties.ValueField = "Value";
-            comboBoxProperties.ValueType = typeof(int);
+            comboBoxProperties.ValueType = typeof (int);
         });
 
         settings.Columns.Add(column =>
@@ -51,24 +50,22 @@
             var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
 
 
-            comboBoxProperties.DataSource =  DataProvider<UserProfile>.GetAll();
+            comboBoxProperties.DataSource = DataProvider<UserProfile>.GetAll();
             comboBoxProperties.TextField = "UserName";
             comboBoxProperties.ValueField = "UserID";
         });
-        
-        
+
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "CoThePhanCong";
             column.Caption = "Có thể phân công";
             column.ColumnType = MVCxGridViewColumnType.CheckBox;
         });
-        
-        
     });
     if (ViewData["EditError"] != null)
     {
-        grid.SetEditErrorText((string)ViewData["EditError"]);
+        grid.SetEditErrorText((string) ViewData["EditError"]);
     }
 }
 @grid.Bind(Model).GetHtml()

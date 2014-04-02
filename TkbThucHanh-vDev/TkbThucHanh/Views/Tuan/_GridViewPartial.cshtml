@@ -1,0 +1,34 @@
+﻿@{
+    GridViewExtension grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView";
+        settings.CallbackRouteValues = new {Controller = "Tuan", Action = "GridViewPartial"};
+
+        settings.SettingsEditing.AddNewRowRouteValues = new {Controller = "Tuan", Action = "GridViewPartialAddNew"};
+        settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "Tuan", Action = "GridViewPartialUpdate"};
+        settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "Tuan", Action = "GridViewPartialDelete"};
+        settings.KeyFieldName = "TuanHocId";
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "SttTuan";
+            column.Caption = "Tuần học";
+        });
+//        settings.Columns.Add(column =>
+//        {
+//            column.FieldName = "NamHoc";
+//            column.Caption = "Năm học";
+//            column.ColumnType =
+//        });
+        settings.Columns.Add("");
+        settings.Columns.Add();
+        settings.Columns.Add("NgayKetThuc");
+        settings.Columns.Add("DaLayThongTin");
+        settings.Columns.Add("DaXepLichThucHanh");
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string) ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()
