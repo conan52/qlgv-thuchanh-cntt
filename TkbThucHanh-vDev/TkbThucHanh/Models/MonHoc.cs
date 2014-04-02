@@ -16,11 +16,8 @@ namespace TKBThucHanh.Models
         [Display(Name = "Tên môn học")]
         public string TenMonHoc { get; set; }
 
-        [Display(Name = "Tín chỉ thực hành")]
-        public int SoTinChiThucHanh { get; set; }
-
-        [Display(Name = "Tín chỉ lý thuyết")]
-        public int SoTinChiLyThuyet { get; set; }
+        [Display(Name = "Số tín chỉ")]
+        public int SoTinChi{ get; set; }
 
         [Display(Name = "Chuyên ngành")]
         public ChuyenNganh ChuyenNganh { get; set; }

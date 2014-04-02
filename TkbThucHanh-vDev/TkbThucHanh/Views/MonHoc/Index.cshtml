@@ -1,0 +1,11 @@
+﻿@Html.DevExpress().Button(settings =>
+{
+    settings.Name = "Button";
+    settings.Text = "Thêm mới";
+    settings.UseSubmitBehavior = false;
+    settings.EnableClientSideAPI = true;
+    settings.ClientSideEvents.Click = "function(s, e) {GridView.AddNewRow();}";
+
+}).GetHtml()
+
+@Html.Action("GridViewPartial")

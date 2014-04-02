@@ -35,7 +35,6 @@ namespace TkbThucHanh.Models.Provider
             {
                 IQueryable<T> dbQuery = context.Set<T>();
 
-                //Apply eager loading
                 foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
                     dbQuery = dbQuery.Include(navigationProperty);
 
@@ -54,13 +53,12 @@ namespace TkbThucHanh.Models.Provider
             {
                 IQueryable<T> dbQuery = context.Set<T>();
 
-                //Apply eager loading
                 foreach (var navigationProperty in navigationProperties)
                     dbQuery = dbQuery.Include(navigationProperty);
 
                 item = dbQuery
-                    .AsNoTracking() //Don't track any changes for the selected item
-                    .FirstOrDefault(where); //Apply where clause
+                    .AsNoTracking()
+                    .FirstOrDefault(where);
             }
             return item;
         }
