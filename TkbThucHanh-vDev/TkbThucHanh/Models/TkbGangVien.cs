@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TkbThucHanh.Models
 {
-    public class TkbGangVien
+    public class TkbGiangVien
     {
         [Key]
         public int MaTkb { get; set; }

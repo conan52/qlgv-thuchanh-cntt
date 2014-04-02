@@ -31,7 +31,7 @@ namespace TkbThucHanh.Models
 
         public virtual List<PhanCongThucHanh> PhanCongThucHanhs { get; set; }
 
-        public virtual List<TkbGangVien> TkbGangViens { get; set; }
+        public virtual List<TkbGiangVien> TkbGangViens { get; set; }
 
         public virtual List<LichCongTac> LichCongTacs { get; set; }
 
