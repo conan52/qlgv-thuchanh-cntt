@@ -1,3 +1,4 @@
+@using TkbThucHanh.ViewSettings
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
@@ -22,13 +23,23 @@
         settings.Settings.ShowFilterRow = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
-        settings.Columns.Add("MaTkb");
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NgayHoc";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var editboxprop = column.PropertiesEdit as DateEditProperties;
+            editboxprop.NullText = "dd/MM/yyyy";
+            editboxprop.EditFormat = EditFormat.Custom;
+            editboxprop.EditFormatString = "dd/MM/yyyy";
+        });
+        settings.Columns.Add("LopHoc");
+        settings.Columns.Add("TenGiangVien");
         settings.Columns.Add("TenMonHoc");
         settings.Columns.Add("Phong");
         settings.Columns.Add("TietBatDau");
         settings.Columns.Add("TietKetThuc");
-        settings.Columns.Add("NgayHoc");
-        settings.Columns.Add("GiangVienId");
+
+        settings.SettingDefaultColumn();
     });
     if (ViewData["EditError"] != null)
     {

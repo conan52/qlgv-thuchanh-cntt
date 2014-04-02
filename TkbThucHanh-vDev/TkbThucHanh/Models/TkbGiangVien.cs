@@ -17,6 +17,11 @@ namespace TkbThucHanh.Models
         [Required(ErrorMessage = "Phòng không được để trống!")]
         public string Phong { get; set; }
 
+        [Display(Name = "Lớp")]
+    //    [Required(ErrorMessage = "Lớp không được để trống!")]
+        public string LopHoc { get; set; }
+
+
         [Display(Name = "Tiết bắt đầu")]
         [Required(ErrorMessage = "Tiết bắt đầu không được để trống!")]
         public int TietBatDau { get; set; }
@@ -39,5 +44,9 @@ namespace TkbThucHanh.Models
 
         [ForeignKey("TkbThucHanhId")]
         public virtual TkbThucHanh TkbThucHanh { get; set; }
+
+        [NotMapped]
+        public string TenGiangVien {
+            get { return GiangVien.HoVaTen; }}
     }
 }
