@@ -12,7 +12,7 @@
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "LichCongTac", Action = "GridViewPartialAddNew" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "LichCongTac", Action = "GridViewPartialUpdate" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "LichCongTac", Action = "GridViewPartialDelete" };
-       
+
         settings.SettingDefaultColumn();
 
 
@@ -23,7 +23,7 @@
             column.FieldName = "GiangVienId";
             column.ColumnType = MVCxGridViewColumnType.ComboBox;
             var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
-            comboBoxProperties.DataSource = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong);
+            comboBoxProperties.DataSource = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong != null && gv.CoThePhanCong.Value);
             comboBoxProperties.TextField = "HoVaTen";
             comboBoxProperties.ValueField = "GiangVienId";
             comboBoxProperties.ValueType = typeof(int);

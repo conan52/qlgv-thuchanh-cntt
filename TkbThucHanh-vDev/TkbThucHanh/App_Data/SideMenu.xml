@@ -4,10 +4,10 @@
   <item Text="Lịch thực hành"   NavigateUrl="#" />
   <item Text="Giảng viên"   NavigateUrl="GiangVien" />
   <item Text="Môn học"   NavigateUrl="MonHoc" />
-  <item Text="Lop học"   NavigateUrl="LopHoc" />
+  <item Text="Lớp học"   NavigateUrl="LopHoc" />
   <item Text="Phòng học"   NavigateUrl="PhongHoc" />
   <item Text="Tuần"   NavigateUrl="Tuan" />
-  <item Text="Kế hoạch giảng dạy"   NavigateUrl="#" />
+  <item Text="Phân công giảng dạy"   NavigateUrl="PhanCongGiangDay" />
   <item Text="Lịch công tác"   NavigateUrl="LichCongTac" />
   
   
