@@ -9,23 +9,23 @@
         settings.SettingsEditing.AddNewRowRouteValues = new {Controller = "Tuan", Action = "GridViewPartialAddNew"};
         settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "Tuan", Action = "GridViewPartialUpdate"};
         settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "Tuan", Action = "GridViewPartialDelete"};
-        settings.KeyFieldName = "TuanHocId";
+        settings.KeyFieldName = "SttTuan";
         
         settings.Columns.Add(column =>
         {
             column.FieldName = "SttTuan";
             column.Caption = "Tuần học";
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "NamHoc";
-            column.Caption = "Năm học";
-            column.ColumnType = MVCxGridViewColumnType.SpinEdit;
-            var spinProperties = column.PropertiesEdit as SpinEditProperties;
-            spinProperties.MinValue = DateTime.Now.Year;
-            spinProperties.MaxValue = DateTime.Now.Year+5;
-            spinProperties.SpinButtons.ShowLargeIncrementButtons = false;
-        });
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "NamHoc";
+        //    column.Caption = "Năm học";
+        //    column.ColumnType = MVCxGridViewColumnType.SpinEdit;
+        //    var spinProperties = column.PropertiesEdit as SpinEditProperties;
+        //    spinProperties.MinValue = DateTime.Now.Year;
+        //    spinProperties.MaxValue = DateTime.Now.Year+5;
+        //    spinProperties.SpinButtons.ShowLargeIncrementButtons = false;
+        //});
         settings.Columns.Add(column =>
         {
             column.FieldName = "NgayBatDau";

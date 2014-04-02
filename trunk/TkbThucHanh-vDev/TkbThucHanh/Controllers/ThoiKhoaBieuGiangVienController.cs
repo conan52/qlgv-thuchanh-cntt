@@ -24,7 +24,7 @@ namespace TkbThucHanh.Controllers
 
         public ActionResult GetNewTimeTable()
         {
-            DluWebRequest request = new DluWebRequest();
+            var request = new DluWebRequest();
             var table = request.GetCurentTimeTable();
             if (table.CurrentWeek > ThoiKhoaBieuProvider.GetLastTimeTable())
             {
@@ -37,6 +37,8 @@ namespace TkbThucHanh.Controllers
                 var fullTimeTable = TeacherFullTable.GetFullTimeTable(table.CurrentWeek, listcoursesInTable, listTeachersInTable);
                 var result = ThoiKhoaBieuProvider.GetTeacherTimeTables(fullTimeTable, table.StartDate);
                 DataProvider<TkbGiangVien>.Add(result);
+
+
                 return Json(new { Status = 1 }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { Status = 0 }, JsonRequestBehavior.AllowGet);

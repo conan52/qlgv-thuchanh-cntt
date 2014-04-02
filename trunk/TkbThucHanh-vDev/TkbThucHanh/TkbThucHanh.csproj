@@ -217,6 +217,7 @@
     <Compile Include="Models\Provider\GiangVienProvider.cs" />
     <Compile Include="Models\Provider\LopProvider.cs" />
     <Compile Include="Models\Provider\ThoiKhoaBieuProvider.cs" />
+    <Compile Include="Models\Provider\TuanHocProvider.cs" />
     <Compile Include="Models\TkbGiangVien.cs" />
     <Compile Include="Models\TkbThucHanh.cs" />
     <Compile Include="Models\TkbThucHanhContext.cs" />

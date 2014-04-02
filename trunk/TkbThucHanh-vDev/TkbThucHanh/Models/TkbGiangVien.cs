@@ -20,8 +20,7 @@ namespace TkbThucHanh.Models
         [Display(Name = "Lớp")]
     //    [Required(ErrorMessage = "Lớp không được để trống!")]
         public string LopHoc { get; set; }
-
-
+        
         [Display(Name = "Tiết bắt đầu")]
         [Required(ErrorMessage = "Tiết bắt đầu không được để trống!")]
         public int TietBatDau { get; set; }
