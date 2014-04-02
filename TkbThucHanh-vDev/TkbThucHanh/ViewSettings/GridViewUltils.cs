@@ -9,6 +9,7 @@ namespace TkbThucHanh.ViewSettings
     {
         public static void SettingDefaultColumn(this GridViewSettings settings)
         {
+            settings.SettingsPager.PageSize = 15;
             settings.SettingsBehavior.ConfirmDelete = true;
             settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
             settings.Width = Unit.Percentage(90);
@@ -49,6 +50,7 @@ namespace TkbThucHanh.ViewSettings
         public static void SetCommandColumn(this GridViewSettings settings)
         {
             settings.CommandColumn.VisibleIndex = settings.Columns.Count;
+            settings.CommandColumn.Width = 100;
         }
     }
 }

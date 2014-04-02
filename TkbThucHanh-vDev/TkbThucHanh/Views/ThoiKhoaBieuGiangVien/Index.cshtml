@@ -1,19 +1,9 @@
 ﻿@{
     ViewBag.Title = "Tuần học";
 }
-@Html.DevExpress().Button(settings =>
-{
-    settings.Name = "Button";
-    settings.Text = "Reload";
-    settings.UseSubmitBehavior = false;
-    settings.EnableClientSideAPI = true;
-    settings.ClientSideEvents.Click = "CheckUpdate()";
-}).GetHtml()
 
-
-@Html.Action("GridViewPartial")
 <script>
-    function CheckUpdate() {
+    function CheckWeekUpdate() {
         $.get("@Url.Action("GetNewTimeTable", "ThoiKhoaBieuGiangVien")", function(data) {
             if (data.Status == 1)
                 window.GridView.Refresh();
@@ -21,3 +11,27 @@
         });
     }
 </script>
+
+
+
+
+@Html.DevExpress().Button(settings =>
+{
+    settings.Name = "Add";
+    settings.Text = "Thêm mới";
+    settings.UseSubmitBehavior = false;
+    settings.EnableClientSideAPI = true;
+    settings.ClientSideEvents.Click = "function(s, e) {GridView.AddNewRow();}";
+}).GetHtml()
+
+
+@Html.DevExpress().Button(settings =>
+{
+    settings.Name = "Button";
+    settings.Text = "Reload";
+    settings.UseSubmitBehavior = false;
+    settings.EnableClientSideAPI = true;
+    settings.ClientSideEvents.Click = "function(s, e){CheckWeekUpdate();}";
+}).GetHtml()
+
+@Html.Action("GridViewPartial")
