@@ -31,7 +31,7 @@ namespace TkbThucHanh.Models
         public int TietKetThuc { get; set; }
 
         [Display(Name = "Ngày học")]
-        [Required(ErrorMessage = "NGày học không được để trống!")]
+        [Required(ErrorMessage = "Ngày học không được để trống!")]
         public DateTime NgayHoc { get; set; }
 
         [Required(ErrorMessage = "Giảng viên không được để trống!")]
@@ -44,9 +44,5 @@ namespace TkbThucHanh.Models
 
         [ForeignKey("TkbThucHanhId")]
         public virtual TkbThucHanh TkbThucHanh { get; set; }
-
-        [NotMapped]
-        public string TenGiangVien {
-            get { return GiangVien.HoVaTen; }}
     }
 }

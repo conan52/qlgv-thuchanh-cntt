@@ -1,4 +1,6 @@
-﻿@using TkbThucHanh.ViewSettings
+﻿@using TkbThucHanh.Models
+@using TkbThucHanh.Models.Provider
+@using TkbThucHanh.ViewSettings
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
@@ -34,25 +36,71 @@
             column.Width = 75;
             column.FieldName = "LopHoc";
             column.Caption = "Lớp";
+
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            if (comboBoxProperties != null)
+            {
+                comboBoxProperties.IncrementalFilteringMode = IncrementalFilteringMode.StartsWith;
+                comboBoxProperties.DropDownStyle = DropDownStyle.DropDown;
+
+                comboBoxProperties.DataSource = LopProvider.LayDsLopChuaRaTruong();
+                comboBoxProperties.ValueField = "TenLop";
+                comboBoxProperties.TextField = "TenLop";
+                comboBoxProperties.ValueType = typeof(string);
+            }
         });
 
         settings.Columns.Add(column =>
         {
             column.Width = 140;
-            column.FieldName = "TenGiangVien";
             column.Caption = "Giảng viên";
+            column.FieldName = "MaGv";
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            if (comboBoxProperties != null)
+            {
+                comboBoxProperties.DataSource = DataProvider<GiangVien>.GetAll();
+                comboBoxProperties.ValueField = "MaGv";
+                comboBoxProperties.TextField = "HoVaTen";
+            }
         });
+
+
         settings.Columns.Add(column =>
         {
             column.Width = 260;
             column.FieldName = "TenMonHoc";
             column.Caption = "Môn học";
+
+
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            if (comboBoxProperties != null)
+            {
+                comboBoxProperties.IncrementalFilteringMode = IncrementalFilteringMode.StartsWith;
+                comboBoxProperties.DropDownStyle = DropDownStyle.DropDown;
+
+                comboBoxProperties.DataSource = DataProvider<MonHoc>.GetAll().Select(m => m.TenMonHoc).Distinct();
+                comboBoxProperties.ValueType = typeof(string);
+            }
         });
         settings.Columns.Add(column =>
         {
             column.Width = 90;
             column.FieldName = "Phong";
             column.Caption = "Phòng học";
+
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            if (comboBoxProperties != null)
+            {
+                comboBoxProperties.IncrementalFilteringMode = IncrementalFilteringMode.StartsWith;
+                comboBoxProperties.DropDownStyle = DropDownStyle.DropDown;
+
+                comboBoxProperties.DataSource = DataProvider<PhongThucHanh>.GetAll().Select(l => l.TenPhong).Distinct();
+                comboBoxProperties.ValueType = typeof(string);
+            }
         });
 
         settings.Columns.Add(column =>
@@ -60,12 +108,29 @@
             column.Width = 75;
             column.FieldName = "TietBatDau";
             column.Caption = "Bắt đầu";
+
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            if (comboBoxProperties != null)
+            {
+                comboBoxProperties.DropDownStyle = DropDownStyle.DropDownList;
+                comboBoxProperties.DataSource = Enumerable.Range(1, 13);
+                comboBoxProperties.ValueType = typeof(int);
+            }
         });
         settings.Columns.Add(column =>
         {
             column.Width = 75;
             column.FieldName = "TietKetThuc";
             column.Caption = "Kết thúc";
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            if (comboBoxProperties != null)
+            {
+                comboBoxProperties.DropDownStyle = DropDownStyle.DropDownList;
+                comboBoxProperties.DataSource = Enumerable.Range(1, 13);
+                comboBoxProperties.ValueType = typeof(int);
+            }
         });
         settings.SetCommandColumn();
 
