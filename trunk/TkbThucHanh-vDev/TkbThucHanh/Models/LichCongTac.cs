@@ -24,7 +24,8 @@ namespace TkbThucHanh.Models
         [Display(Name = "Thời gian kết thúc")]
         public DateTime? ThoiGianKt { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Giảng viên không được để trống")]
+//        [Display(Name = "Giảng viên")]
         public int GiangVienId { get; set; }
         [ForeignKey("GiangVienId")]
         public virtual GiangVien GiangVien { get; set; }
