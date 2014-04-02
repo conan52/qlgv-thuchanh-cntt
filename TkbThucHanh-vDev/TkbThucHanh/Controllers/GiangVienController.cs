@@ -54,7 +54,7 @@ namespace TkbThucHanh.Controllers
             {
                 try
                 {
-                    GiangVien modelItem = model.FirstOrDefault(it => it.GiangVienId == item.GiangVienId);
+                    GiangVien modelItem = model.FirstOrDefault(it => it.MaGv == item.MaGv);
                     if (modelItem != null)
                     {
                         UpdateModel(modelItem);
@@ -72,14 +72,14 @@ namespace TkbThucHanh.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialDelete(Int32 GiangVienId)
+        public ActionResult GridViewPartialDelete(string mgv)
         {
             DbSet<GiangVien> model = db.GiangViens;
-            if (GiangVienId != null)
+            if (mgv != null)
             {
                 try
                 {
-                    GiangVien item = model.FirstOrDefault(it => it.GiangVienId == GiangVienId);
+                    GiangVien item = model.FirstOrDefault(it => it.MaGv == mgv);
                     if (item != null)
                         model.Remove(item);
                     db.SaveChanges();

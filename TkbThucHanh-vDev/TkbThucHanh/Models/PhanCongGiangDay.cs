@@ -22,9 +22,9 @@ namespace TkbThucHanh.Models
         [ForeignKey("MonHocId")]
         public virtual MonHoc MonHoc { get; set; }
 
-        public int? GiangVienId { get; set; }
+        public string MaGv { get; set; }
 
-        [ForeignKey("GiangVienId")]
+        [ForeignKey("MaGv")]
         public virtual GiangVien GiangVien { get; set; }
 
         [Required(ErrorMessage = "Lớp không được để trống!")]

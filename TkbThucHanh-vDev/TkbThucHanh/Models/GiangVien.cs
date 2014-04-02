@@ -8,8 +8,6 @@ namespace TkbThucHanh.Models
     public class GiangVien
     {
         [Key]
-        public int GiangVienId { get; set; }
-
         [Required(ErrorMessage = "Mã giảng viên không được để trống!")]
         [MaxLength(10)]
         [Display(Name = "Mã giảng viên")]

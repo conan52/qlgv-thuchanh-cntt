@@ -15,13 +15,12 @@
         settings.Columns.Add(column =>
         {
             column.Caption = "Tên giảng viên";
-            column.FieldName = "GiangVienId";
+            column.FieldName = "MaGv";
             column.ColumnType = MVCxGridViewColumnType.ComboBox;
             var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
             comboBoxProperties.DataSource = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong != null && gv.CoThePhanCong.Value);
             comboBoxProperties.TextField = "HoVaTen";
-            comboBoxProperties.ValueField = "GiangVienId";
-            comboBoxProperties.ValueType = typeof (int);
+            comboBoxProperties.ValueField = "MaGv";
         });
 
 
