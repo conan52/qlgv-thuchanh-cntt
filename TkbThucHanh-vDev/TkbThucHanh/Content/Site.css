@@ -460,3 +460,5 @@
 .dxsplControl_Metropolis .dxsplVSeparator_Metropolis { border-bottom: 0 !important; }
 
 .dxsplControl_Metropolis .footerPane { background: #EDEDED; }
+
+.tablefloatleft{ float: left; margin-right:20px}
