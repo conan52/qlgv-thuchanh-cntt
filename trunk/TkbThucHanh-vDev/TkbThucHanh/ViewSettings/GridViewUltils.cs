@@ -33,7 +33,7 @@ namespace TkbThucHanh.ViewSettings
 
 
             settings.CommandColumn.DeleteButton.Text = "Xóa";
-            settings.CommandColumn.NewButton.Text = "Thêm";
+      //      settings.CommandColumn.NewButton.Text = "Thêm";
             settings.CommandColumn.EditButton.Text = "Sửa";
             settings.CommandColumn.CancelButton.Text = "Hủy bỏ";
             settings.CommandColumn.UpdateButton.Text = "Áp dụng";
@@ -44,6 +44,11 @@ namespace TkbThucHanh.ViewSettings
              settings.CommandColumn.ButtonType=ButtonType.Link;
              settings.CommandColumn.DeleteButton.Image.Url = "~/Content/Images/delete.png";
 //              settings.CommandColumn.DeleteButton.Image.SpriteProperties. = "~/Content/Images/delete.png";
+        }
+
+        public static void SetCommandColumn(this GridViewSettings settings)
+        {
+            settings.CommandColumn.VisibleIndex = settings.Columns.Count;
         }
     }
 }
