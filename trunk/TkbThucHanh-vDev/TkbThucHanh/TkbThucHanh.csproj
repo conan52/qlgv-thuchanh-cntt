@@ -167,6 +167,9 @@
     <Content Include="Views\Account\_GridViewPartial.cshtml" />
     <Content Include="Views\GiangVien\Index.cshtml" />
     <Content Include="Views\GiangVien\_GridViewPartial.cshtml" />
+    <Content Include="Views\PhanCongGiangDay\Index.cshtml" />
+    <Content Include="Views\PhanCongGiangDay\_GridViewPartial.cshtml" />
+    <Content Include="Views\LopHoc\_GridViewPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -199,6 +202,7 @@
     <Compile Include="Models\PhanCongThucHanh.cs" />
     <Compile Include="Models\PhongThucHanh.cs" />
     <Compile Include="Models\Provider\DataProvider.cs" />
+    <Compile Include="Models\Provider\LopProvider.cs" />
     <Compile Include="Models\TkbGangVien.cs" />
     <Compile Include="Models\TkbThucHanh.cs" />
     <Compile Include="Models\TkbThucHanhContext.cs" />

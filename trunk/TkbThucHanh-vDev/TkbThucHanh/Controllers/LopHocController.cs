@@ -16,24 +16,25 @@ namespace TkbThucHanh.Controllers
         {
             return View();
         }
-
+        TkbThucHanh.Models.TkbThucHanhContext db = new TkbThucHanh.Models.TkbThucHanhContext();
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial()
         {
-            var model = new object[0];
-            return PartialView("_GridViewPartial", model);
+            var model = db.Lops;
+            return PartialView("_GridViewPartial", model.ToList());
         }
 
         [HttpPost, ValidateInput(false)]
         public ActionResult GridViewPartialAddNew(TkbThucHanh.Models.Lop item)
         {
-            var model = new object[0];
+            var model = db.Lops;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // Insert here a code to insert the new item in your model
+                    model.Add(item);
+                    db.SaveChanges();
                 }
                 catch (Exception e)
                 {
@@ -42,17 +43,22 @@ namespace TkbThucHanh.Controllers
             }
             else
                 ViewData["EditError"] = "Please, correct all errors.";
-            return PartialView("_GridViewPartial", model);
+            return PartialView("_GridViewPartial", model.ToList());
         }
         [HttpPost, ValidateInput(false)]
         public ActionResult GridViewPartialUpdate(TkbThucHanh.Models.Lop item)
         {
-            var model = new object[0];
+            var model = db.Lops;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // Insert here a code to update the item in your model
+                    var modelItem = model.FirstOrDefault(it => it.LopId == item.LopId);
+                    if (modelItem != null)
+                    {
+                        this.UpdateModel(modelItem);
+                        db.SaveChanges();
+                    }
                 }
                 catch (Exception e)
                 {
@@ -61,24 +67,27 @@ namespace TkbThucHanh.Controllers
             }
             else
                 ViewData["EditError"] = "Please, correct all errors.";
-            return PartialView("_GridViewPartial", model);
+            return PartialView("_GridViewPartial", model.ToList());
         }
         [HttpPost, ValidateInput(false)]
         public ActionResult GridViewPartialDelete(System.Int32 LopId)
         {
-            var model = new object[0];
+            var model = db.Lops;
             if (LopId != null)
             {
                 try
                 {
-                    // Insert here a code to delete the item from your model
+                    var item = model.FirstOrDefault(it => it.LopId == LopId);
+                    if (item != null)
+                        model.Remove(item);
+                    db.SaveChanges();
                 }
                 catch (Exception e)
                 {
                     ViewData["EditError"] = e.Message;
                 }
             }
-            return PartialView("_GridViewPartial", model);
+            return PartialView("_GridViewPartial", model.ToList());
         }
     }
 }

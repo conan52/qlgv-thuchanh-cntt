@@ -26,7 +26,7 @@ namespace TkbThucHanh.Models
         [ForeignKey("MonHocId")]
         public virtual MonHoc MonHoc { get; set; }
 
-        public int GiangVienId { get; set; }
+        public int? GiangVienId { get; set; }
         [ForeignKey("GiangVienId")]
         public virtual GiangVien GiangVien { get; set; }
 

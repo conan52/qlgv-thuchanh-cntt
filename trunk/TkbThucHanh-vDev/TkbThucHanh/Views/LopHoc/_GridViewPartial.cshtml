@@ -1,0 +1,48 @@
+﻿@using TkbThucHanh.Models
+@using TkbThucHanh.Models.Enums
+@using TkbThucHanh.Models.Provider
+@using TkbThucHanh.ViewSettings
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView";
+        settings.CallbackRouteValues = new { Controller = "LopHoc", Action = "GridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "LopHoc", Action = "GridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "LopHoc", Action = "GridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "LopHoc", Action = "GridViewPartialDelete" };
+        
+        settings.SettingDefaultColumn();
+        
+        settings.KeyFieldName = "TenLop";
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Tên lớp";
+            column.FieldName = "TenLop";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Trình độ";
+            column.FieldName = "TrinhDo";
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+
+
+            comboBoxProperties.DataSource = EnumUltils.GetDescriptions_TrinhDo();
+            comboBoxProperties.TextField = "Description";
+            comboBoxProperties.ValueField = "Value";
+            comboBoxProperties.ValueType = typeof(int);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Năm nhập học";
+            column.FieldName = "NamNhapHoc";
+        });
+
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()
