@@ -1,0 +1,26 @@
+@using TkbThucHanh.ViewSettings
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView";
+        settings.CallbackRouteValues = new { Controller = "LopHoc", Action = "GridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "LopHoc", Action = "GridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "LopHoc", Action = "GridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "LopHoc", Action = "GridViewPartialDelete" };
+        settings.KeyFieldName = "LopId";
+        
+        
+        settings.SettingDefaultColumn();
+      
+
+        settings.Columns.Add("TenLop");
+        settings.Columns.Add("TrinhDo");
+        settings.Columns.Add("NamNhapHoc");
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

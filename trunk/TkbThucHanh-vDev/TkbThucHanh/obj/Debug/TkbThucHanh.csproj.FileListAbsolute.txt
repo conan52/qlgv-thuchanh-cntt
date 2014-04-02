@@ -9,3 +9,14 @@ C:\Users\Le Ngoc Linh\Desktop\TkbThucHanh\TkbThucHanh\bin\WebMatrix.WebData.xml
 C:\Users\Le Ngoc Linh\Desktop\TkbThucHanh\TkbThucHanh\obj\Debug\TkbThucHanh.csprojResolveAssemblyReference.cache
 C:\Users\Le Ngoc Linh\Desktop\TkbThucHanh\TkbThucHanh\obj\Debug\TkbThucHanh.dll
 C:\Users\Le Ngoc Linh\Desktop\TkbThucHanh\TkbThucHanh\obj\Debug\TkbThucHanh.pdb
+C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\bin\TkbThucHanh.dll
+C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\bin\TkbThucHanh.pdb
+C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\bin\EntityFramework.dll
+C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\bin\WebMatrix.Data.dll
+C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\bin\WebMatrix.WebData.dll
+C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\bin\EntityFramework.xml
+C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\bin\WebMatrix.Data.xml
+C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\bin\WebMatrix.WebData.xml
+C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\obj\Debug\TkbThucHanh.csprojResolveAssemblyReference.cache
+C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\obj\Debug\TkbThucHanh.dll
+C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\obj\Debug\TkbThucHanh.pdb

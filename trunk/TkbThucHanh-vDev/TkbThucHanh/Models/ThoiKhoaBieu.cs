@@ -23,6 +23,6 @@ namespace TkbThucHanh.Models
         public virtual Lop Lop1 { get; set; }
         public virtual MonHoc MonHoc { get; set; }
         public virtual ICollection<PhanCongThucHanh> PhanCongThucHanhs { get; set; }
-        public virtual Phong Phong1 { get; set; }
+      //  public virtual PhongThucHanh Phong1 { get; set; }
     }
 }
