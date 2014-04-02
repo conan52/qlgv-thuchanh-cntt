@@ -13,7 +13,7 @@ namespace TkbThucHanh.Models.Provider
         {
             using (var context = new TkbThucHanhContext())
             {
-                var tuanHoc = context.TuanHocs.OrderByDescending(t => t.NamHoc).ThenByDescending(t => t.SttTuan).ToList().LastOrDefault();
+                var tuanHoc = context.TuanHocs.OrderByDescending(t => t.SttTuan).ToList().LastOrDefault();
                 if (tuanHoc == null)
                     return 0;
                 return tuanHoc.SttTuan;

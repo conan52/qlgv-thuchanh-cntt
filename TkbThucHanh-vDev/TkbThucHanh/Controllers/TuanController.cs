@@ -54,7 +54,7 @@ namespace TkbThucHanh.Controllers
             {
                 try
                 {
-                    TuanHoc modelItem = model.FirstOrDefault(it => it.TuanHocId == item.TuanHocId);
+                    TuanHoc modelItem = model.FirstOrDefault(it => it.SttTuan == item.SttTuan);
                     if (modelItem != null)
                     {
                         UpdateModel(modelItem);
@@ -72,22 +72,19 @@ namespace TkbThucHanh.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialDelete(Int32 TuanHocId)
+        public ActionResult GridViewPartialDelete(Int32 SttTuan)
         {
             DbSet<TuanHoc> model = db.TuanHocs;
-            if (TuanHocId != null)
+            try
             {
-                try
-                {
-                    TuanHoc item = model.FirstOrDefault(it => it.TuanHocId == TuanHocId);
-                    if (item != null)
-                        model.Remove(item);
-                    db.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    ViewData["EditError"] = e.Message;
-                }
+                TuanHoc item = model.FirstOrDefault(it => it.SttTuan == SttTuan);
+                if (item != null)
+                    model.Remove(item);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                ViewData["EditError"] = e.Message;
             }
             return PartialView("_GridViewPartial", model.ToList());
         }
