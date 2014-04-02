@@ -47,14 +47,17 @@
             var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
             if (comboBoxProperties != null)
             {
+                comboBoxProperties.TextFormatString = "{0}";
                 comboBoxProperties.DropDownStyle = DropDownStyle.DropDownList;
+                comboBoxProperties.DataSource = DataProvider<MonHoc>.GetAll();
                 comboBoxProperties.Columns.Add("MaMonHoc", "Mã môn học", 69);
                 comboBoxProperties.Columns.Add("TenMonHoc", "Tên môn học");
                 comboBoxProperties.Columns.Add("HienThiBatBuoc", "Bắt buộc", 20);
                 comboBoxProperties.Columns.Add("HienThiTrinhDo", "Trình độ");
                 comboBoxProperties.Columns.Add("HienThiChuyenNganh", "Chuyên ngành");
 
-                comboBoxProperties.DataSource = DataProvider<MonHoc>.GetAll();
+
+
                 comboBoxProperties.ValueField = "MonHocId";
                 comboBoxProperties.TextField = "TenMonHoc";
 
@@ -65,16 +68,15 @@
         settings.Columns.Add(column =>
         {
             column.Caption = "Giảng viên";
-            column.FieldName = "GiangVienId";
+            column.FieldName = "MaGv";
             column.ColumnType = MVCxGridViewColumnType.ComboBox;
             var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
             if (comboBoxProperties != null)
             {
                 comboBoxProperties.DataSource = DataProvider<GiangVien>.GetAll();
-                comboBoxProperties.ValueField = "GiangVienId";
+                comboBoxProperties.ValueField = "MaGv";
                 comboBoxProperties.TextField = "HoVaTen";
 
-                comboBoxProperties.ValueType = typeof (int);
             }
         });
 

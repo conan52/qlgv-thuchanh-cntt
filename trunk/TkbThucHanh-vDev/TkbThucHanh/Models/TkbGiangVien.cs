@@ -35,9 +35,9 @@ namespace TkbThucHanh.Models
         public DateTime NgayHoc { get; set; }
 
         [Required(ErrorMessage = "Giảng viên không được để trống!")]
-        public int GiangVienId { get; set; }
+        public string MaGv { get; set; }
 
-        [ForeignKey("GiangVienId")]
+        [ForeignKey("MaGv")]
         public virtual GiangVien GiangVien { get; set; }
 
         public int? TkbThucHanhId { get; set; }

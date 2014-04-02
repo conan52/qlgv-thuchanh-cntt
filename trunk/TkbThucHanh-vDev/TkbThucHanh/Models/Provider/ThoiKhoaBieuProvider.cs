@@ -22,24 +22,17 @@ namespace TkbThucHanh.Models.Provider
 
         public static List<TkbGiangVien> GetTeacherTimeTables(List<TeacherFullTable> tbs, DateTime monDay)
         {
-
-            using (var context = new TkbThucHanhContext())
-            {
-                var tkb = from gvs in context.GiangViens.ToList()
-                          join tb in tbs on gvs.MaGv equals tb.TeacherCode
-                          select new TkbGiangVien()
-                          {
-                              NgayHoc = monDay.AddDays(tb.DayOfWeek),
-                              Phong = tb.Room,
-                              TenMonHoc = tb.Subject,
-                              TietBatDau = tb.Start,
-                              TietKetThuc = tb.End,
-                              GiangVienId = gvs.GiangVienId,
-                              LopHoc = tb.ClassCode
-                          };
-                return tkb.ToList();
-            }
-
+            var tkb = from tb in tbs
+                      select new TkbGiangVien()
+                      {
+                          NgayHoc = monDay.AddDays(tb.DayOfWeek),
+                          Phong = tb.Room,
+                          TenMonHoc = tb.Subject,
+                          TietBatDau = tb.Start,
+                          MaGv = tb.TeacherCode,
+                          LopHoc = tb.ClassCode
+                      };
+            return tkb.ToList();
         }
     }
 }
