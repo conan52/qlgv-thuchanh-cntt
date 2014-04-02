@@ -10,7 +10,10 @@ namespace TkbThucHanh.Models.Provider
         {
             return DataProvider<Lop>.GetList(l => l.NamNhapHoc >= DateTime.Now.Year - 5);
         }
-
+        public static List<Lop> LayDsLop()
+        {
+            return DataProvider<Lop>.GetAll().OrderByDescending(l=>l.NamNhapHoc).ToList();
+        }
         public static List<string> GetListCodes()
         {
             return DataProvider<Lop>.GetAll().Select(l => l.TenLop).ToList();

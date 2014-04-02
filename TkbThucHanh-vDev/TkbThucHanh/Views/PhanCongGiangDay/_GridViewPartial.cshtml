@@ -47,7 +47,7 @@
             var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
             if (comboBoxProperties != null)
             {
-                comboBoxProperties.TextFormatString = "{0}";
+                comboBoxProperties.TextFormatString = "{1}";
                 comboBoxProperties.DropDownStyle = DropDownStyle.DropDownList;
                 comboBoxProperties.DataSource = DataProvider<MonHoc>.GetAll();
                 comboBoxProperties.Columns.Add("MaMonHoc", "Mã môn học", 69);
