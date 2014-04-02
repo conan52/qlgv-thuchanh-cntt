@@ -19,7 +19,7 @@ namespace TkbThucHanh.Models
         [Required(ErrorMessage = "Tên môn học không được để trống!")]
         public string TenMonHoc { get; set; }
 
-        [Required(ErrorMessage = "Số tín chỉ không được để trống")]
+        [Required(ErrorMessage = "Số tín chỉ không được để trống!")]
         [Display(Name = "Số tín chỉ")]
         public int SoTinChi { get; set; }
 
