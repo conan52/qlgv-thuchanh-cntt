@@ -24,7 +24,7 @@ namespace TkbThucHanh.ViewSettings
 
 
             settings.CommandColumn.Visible = true;
-            settings.CommandColumn.NewButton.Visible = true;
+          //  settings.CommandColumn.NewButton.Visible = true;
             settings.CommandColumn.DeleteButton.Visible = true;
             settings.CommandColumn.EditButton.Visible = true;
 
@@ -33,6 +33,16 @@ namespace TkbThucHanh.ViewSettings
             settings.Settings.ShowFilterRow = true;
             settings.SettingsBehavior.AllowSelectByRowClick = true;
 
+
+            settings.CommandColumn.DeleteButton.Text = "Xóa";
+            settings.CommandColumn.NewButton.Text = "Thêm";
+            settings.CommandColumn.EditButton.Text = "Sửa";
+            settings.CommandColumn.CancelButton.Text = "Hủy bỏ";
+            settings.CommandColumn.UpdateButton.Text = "Áp dụng";
+            settings.CommandColumn.ClearFilterButton.Visible = true;
+            settings.CommandColumn.Width = 150;
+
+            // settings.CommandColumn.VisibleIndex = settings.Columns.Count - 1;
         }
     }
 }

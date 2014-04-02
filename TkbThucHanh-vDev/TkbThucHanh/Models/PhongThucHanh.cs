@@ -1,21 +1,23 @@
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TKBThucHanh.Models
+namespace TkbThucHanh.Models
 {
+
     public class PhongThucHanh
     {
-        public PhongThucHanh()
-        {
-            ThoiKhoaBieuGiangViens = new List<ThoiKhoaBieuGiangVien>();
-        }
-
         [Key]
         public int PhongThucHanhId { get; set; }
 
-        [Display(Name = "T�n ph�ng")]
+        [Display(Name = "Tên phòng")]
+        [Required(ErrorMessage = "Tên phòng không được để trống")]
         public string TenPhong { get; set; }
 
-        public virtual ICollection<ThoiKhoaBieuGiangVien> ThoiKhoaBieuGiangViens { get; set; }
+        public virtual List<TkbThucHanh> TkbThucHanhs { get; set; }
+
     }
 }

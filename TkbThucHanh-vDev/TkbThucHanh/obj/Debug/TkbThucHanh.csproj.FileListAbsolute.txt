@@ -17,6 +17,5 @@ C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\bi
 C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\bin\EntityFramework.xml
 C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\bin\WebMatrix.Data.xml
 C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\bin\WebMatrix.WebData.xml
-C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\obj\Debug\TkbThucHanh.csprojResolveAssemblyReference.cache
 C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\obj\Debug\TkbThucHanh.dll
 C:\Users\Le Ngoc Linh\Desktop\qlgv-thuchanh-cntt\TkbThucHanh-vDev\TkbThucHanh\obj\Debug\TkbThucHanh.pdb

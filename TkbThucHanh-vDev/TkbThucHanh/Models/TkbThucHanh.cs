@@ -2,28 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TkbThucHanh.Models;
 
-namespace TKBThucHanh.Models
+namespace TkbThucHanh.Models
 {
-    public class ThoiKhoaBieuGiangVien
+    public class TkbThucHanh
     {
-        public ThoiKhoaBieuGiangVien()
-        {
-            PhanCongGvThucHanhs = new List<PhanCongGvThucHanh>();
-        }
-
         [Key]
-        public int MaTkb { get; set; }
+        public int TkbThucHanhId { get; set; }
 
         [Display(Name = "Tên môn học")]
         public string TenMonHoc { get; set; }
 
-        [Display(Name = "Lớp")]
-        public int? LopId { get; set; }
-
         [Display(Name = "Phòng")]
-        public int Phong { get; set; }
+        public string Phong { get; set; }
 
         [Display(Name = "Tiết bắt đầu")]
         public int TietBatDau { get; set; }
@@ -31,22 +22,24 @@ namespace TKBThucHanh.Models
         [Display(Name = "Tiết kết thúc")]
         public int TietKetThuc { get; set; }
 
-        [Display(Name = "Giảng viên phụ trách")]
-        public int GiangVienPhuTrach { get; set; }
-
         [Display(Name = "Ngày học")]
         public DateTime NgayHoc { get; set; }
 
+        public int LopId { get; set; }
 
         [ForeignKey("LopId")]
         public virtual Lop Lop { get; set; }
 
-        [ForeignKey("GiangVienPhuTrach")]
-        public virtual GiangVien GiangVien { get; set; }
+        public int PhongThucHanhId { get; set; }
 
-        public virtual ICollection<PhanCongGvThucHanh> PhanCongGvThucHanhs { get; set; }
-
-        [ForeignKey("Phong")]
+        [ForeignKey("PhongThucHanhId")]
         public virtual PhongThucHanh PhongThucHanh { get; set; }
+
+        public int PhanCongThucHanhId { get; set; }
+
+        [ForeignKey("PhanCongThucHanhId")]
+        public virtual PhanCongThucHanh PhanCongThucHanh { get; set; }
+
+        public virtual List<TkbGangVien> TkbGangViens { get; set; }
     }
 }

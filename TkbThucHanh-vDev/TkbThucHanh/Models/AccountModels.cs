@@ -1,8 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
+using TkbThucHanh.Models.Enums;
 
-namespace TKBThucHanh.Models
+namespace TkbThucHanh.Models
 {
     [Table("UserProfile")]
     public class UserProfile
@@ -15,6 +19,8 @@ namespace TKBThucHanh.Models
 
         public string Email { get; set; }
         public string DisplayName { get; set; }
+
+        public string Role { get; set; }
     }
 
 

@@ -141,8 +141,6 @@
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\LichCongTac\Index.cshtml" />
     <Content Include="Views\LichCongTac\_GridViewPartial.cshtml" />
-    <Content Include="Views\GiangVien\Index.cshtml" />
-    <Content Include="Views\GiangVien\_GridViewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -165,7 +163,10 @@
     <Content Include="Views\MonHoc\Index.cshtml" />
     <Content Include="Views\MonHoc\_GridViewPartial.cshtml" />
     <Content Include="Views\LopHoc\Index.cshtml" />
-    <Content Include="Views\LopHoc\_GridViewPartial.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\_GridViewPartial.cshtml" />
+    <Content Include="Views\GiangVien\Index.cshtml" />
+    <Content Include="Views\GiangVien\_GridViewPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -188,24 +189,25 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Enums\ChuyenNganh.cs" />
     <Compile Include="Models\Enums\EnumUltils.cs" />
+    <Compile Include="Models\Enums\QuyenHan.cs" />
     <Compile Include="Models\Enums\TrinhDo.cs" />
     <Compile Include="Models\GiangVien.cs" />
     <Compile Include="Models\LichCongTac.cs" />
     <Compile Include="Models\Lop.cs" />
     <Compile Include="Models\MonHoc.cs" />
     <Compile Include="Models\PhanCongGiangDay.cs" />
-    <Compile Include="Models\PhanCongGvThucHanh.cs" />
     <Compile Include="Models\PhanCongThucHanh.cs" />
     <Compile Include="Models\PhongThucHanh.cs" />
     <Compile Include="Models\Provider\DataProvider.cs" />
-    <Compile Include="Models\ThoiKhoaBieu.cs" />
-    <Compile Include="Models\ThoiKhoaBieuGiangVien.cs" />
+    <Compile Include="Models\TkbGangVien.cs" />
+    <Compile Include="Models\TkbThucHanh.cs" />
     <Compile Include="Models\TkbThucHanhContext.cs" />
     <Compile Include="Models\TuanHoc.cs" />
     <Compile Include="Models\_AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewSettings\GridViewUltils.cs" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
