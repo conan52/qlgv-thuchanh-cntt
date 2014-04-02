@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
+
 namespace TkbThucHanh.Models
 {
     public class TkbThucHanhContext : DbContext
