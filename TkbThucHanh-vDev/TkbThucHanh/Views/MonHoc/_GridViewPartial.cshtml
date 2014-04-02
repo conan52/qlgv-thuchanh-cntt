@@ -1,5 +1,6 @@
 ﻿@using System.Web.UI.WebControls
 @using TkbThucHanh.Models.Enums
+@using TkbThucHanh.ViewSettings
 @{
     GridViewExtension grid = Html.DevExpress().GridView(settings =>
     {
@@ -25,6 +26,7 @@
         settings.CommandColumn.EditButton.Visible = true;
 
         settings.KeyFieldName = "MonHocId";
+        settings.SettingDefaultColumn();
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = true;

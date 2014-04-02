@@ -42,7 +42,7 @@ namespace TkbThucHanh.Controllers
                 }
             }
             else
-                ViewData["EditError"] = "Please, correct all errors.";
+                ViewData["EditError"] = "Có lỗi xảy ra. Vui lòng xem chi tiết!";
             return PartialView("_GridViewPartial", model.ToList());
         }
 
@@ -67,7 +67,7 @@ namespace TkbThucHanh.Controllers
                 }
             }
             else
-                ViewData["EditError"] = "Please, correct all errors.";
+                ViewData["EditError"] = "Có lỗi xảy ra. Vui lòng xem chi tiết!";
             return PartialView("_GridViewPartial", model.ToList());
         }
 

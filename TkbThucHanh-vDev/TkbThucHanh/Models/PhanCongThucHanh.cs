@@ -11,6 +11,7 @@ namespace TkbThucHanh.Models
 
         public virtual List<TkbThucHanh> TkbThucHanhs { get; set; }
 
+        [Required(ErrorMessage = "Giảng viên không được để trống!")]
         public int GiangVienId { get; set; }
 
         [ForeignKey("GiangVienId")]
