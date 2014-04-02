@@ -1,19 +1,18 @@
 ﻿@using TkbThucHanh.Models
-@using TkbThucHanh.Models.Enums
 @using TkbThucHanh.Models.Provider
 @using TkbThucHanh.ViewSettings
 @{
-    var grid = Html.DevExpress().GridView(settings =>
+    GridViewExtension grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView";
-        settings.CallbackRouteValues = new { Controller = "PhanCongGiangDay", Action = "GridViewPartial" };
+        settings.CallbackRouteValues = new {Controller = "PhanCongGiangDay", Action = "GridViewPartial"};
 
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "PhanCongGiangDay", Action = "GridViewPartialAddNew" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "PhanCongGiangDay", Action = "GridViewPartialUpdate" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "PhanCongGiangDay", Action = "GridViewPartialDelete" };
+        settings.SettingsEditing.AddNewRowRouteValues = new {Controller = "PhanCongGiangDay", Action = "GridViewPartialAddNew"};
+        settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "PhanCongGiangDay", Action = "GridViewPartialUpdate"};
+        settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "PhanCongGiangDay", Action = "GridViewPartialDelete"};
         settings.KeyFieldName = "IdPhanCong";
         settings.SettingDefaultColumn();
-        
+
         settings.Columns.Add(column =>
         {
             column.Caption = "Năm học";
@@ -35,25 +34,32 @@
             var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
             if (comboBoxProperties != null)
             {
-                comboBoxProperties.DataSource = Enumerable.Range(1,3);
-                
-                comboBoxProperties.ValueType = typeof(int);
+                comboBoxProperties.DataSource = Enumerable.Range(1, 3);
+
+                comboBoxProperties.ValueType = typeof (int);
             }
         });
 
         settings.Columns.Add(column =>
         {
-            column.Caption ="Môn học";
+            column.Caption = "Môn học";
             column.FieldName = "MonHocId";
             column.ColumnType = MVCxGridViewColumnType.ComboBox;
             var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
             if (comboBoxProperties != null)
             {
+                comboBoxProperties.DropDownStyle = DropDownStyle.DropDownList;
+                comboBoxProperties.Columns.Add("MaMonHoc", "Mã môn học", 69);
+                comboBoxProperties.Columns.Add("TenMonHoc", "Tên môn học");
+                comboBoxProperties.Columns.Add("HienThiBatBuoc", "Bắt buộc", 20);
+                comboBoxProperties.Columns.Add("HienThiTrinhDo", "Trình độ");
+                comboBoxProperties.Columns.Add("HienThiChuyenNganh", "Chuyên ngành");
+
                 comboBoxProperties.DataSource = DataProvider<MonHoc>.GetAll();
                 comboBoxProperties.ValueField = "MonHocId";
                 comboBoxProperties.TextField = "TenMonHoc";
 
-                comboBoxProperties.ValueType = typeof(int);
+                comboBoxProperties.ValueType = typeof (int);
             }
         });
 
@@ -69,7 +75,7 @@
                 comboBoxProperties.ValueField = "GiangVienId";
                 comboBoxProperties.TextField = "HoVaTen";
 
-                comboBoxProperties.ValueType = typeof(int);
+                comboBoxProperties.ValueType = typeof (int);
             }
         });
 
@@ -85,13 +91,13 @@
                 comboBoxProperties.ValueField = "LopId";
                 comboBoxProperties.TextField = "TenLop";
 
-                comboBoxProperties.ValueType = typeof(int);
+                comboBoxProperties.ValueType = typeof (int);
             }
         });
     });
     if (ViewData["EditError"] != null)
     {
-        grid.SetEditErrorText((string)ViewData["EditError"]);
+        grid.SetEditErrorText((string) ViewData["EditError"]);
     }
 }
 @grid.Bind(Model).GetHtml()

@@ -1,14 +1,14 @@
 ﻿@using System.Web.UI.WebControls
 @using TkbThucHanh.Models.Enums
 @{
-    var grid = Html.DevExpress().GridView(settings =>
+    GridViewExtension grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView";
-        settings.CallbackRouteValues = new { Controller = "MonHoc", Action = "GridViewPartial" };
+        settings.CallbackRouteValues = new {Controller = "MonHoc", Action = "GridViewPartial"};
 
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "MonHoc", Action = "GridViewPartialAddNew" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "MonHoc", Action = "GridViewPartialUpdate" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "MonHoc", Action = "GridViewPartialDelete" };
+        settings.SettingsEditing.AddNewRowRouteValues = new {Controller = "MonHoc", Action = "GridViewPartialAddNew"};
+        settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "MonHoc", Action = "GridViewPartialUpdate"};
+        settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "MonHoc", Action = "GridViewPartialDelete"};
         settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
         settings.SettingsBehavior.ConfirmDelete = true;
 
@@ -71,8 +71,8 @@
 
                 comboBoxProperties.TextField = "Description";
                 comboBoxProperties.ValueField = "Value";
-                
-                comboBoxProperties.ValueType = typeof(int);
+
+                comboBoxProperties.ValueType = typeof (int);
             }
         });
 
@@ -88,8 +88,8 @@
                 comboBoxProperties.DataSource = EnumUltils.GetDescriptions_TrinhDo();
                 comboBoxProperties.TextField = "Description";
                 comboBoxProperties.ValueField = "Value";
-                
-                comboBoxProperties.ValueType = typeof(int);
+
+                comboBoxProperties.ValueType = typeof (int);
             }
         });
 
@@ -99,11 +99,10 @@
             column.Caption = "Bắt buộc";
             column.ColumnType = MVCxGridViewColumnType.CheckBox;
         });
-
     });
     if (ViewData["EditError"] != null)
     {
-        grid.SetEditErrorText((string)ViewData["EditError"]);
+        grid.SetEditErrorText((string) ViewData["EditError"]);
     }
 }
 @grid.Bind(Model).GetHtml()

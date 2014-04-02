@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel;
 
 namespace TkbThucHanh.Models.Enums
 {
     public enum QuyenHan
     {
-        [Description("Bị khóa")]
-        Blocked = 1,
-        [Description("Giảng viên")]
-        Teacher,
-        [Description("Admin")]
-        Admin,
-        [Description("Giảng viên + Admin")]
-        AdminTeacher,
+        [Description("Bị khóa")] Blocked = 1,
+        [Description("Giảng viên")] Teacher,
+        [Description("Admin")] Admin,
+        [Description("Giảng viên + Admin")] AdminTeacher,
     }
 }

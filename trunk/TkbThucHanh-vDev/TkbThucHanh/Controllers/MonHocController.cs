@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using DevExpress.Web.Mvc;
+using TkbThucHanh.Models;
 
 namespace TkbThucHanh.Controllers
 {
@@ -12,24 +11,24 @@ namespace TkbThucHanh.Controllers
         //
         // GET: /MonHoc/
 
+        private readonly TkbThucHanhContext db = new TkbThucHanhContext();
+
         public ActionResult Index()
         {
             return View();
         }
 
-        TkbThucHanh.Models.TkbThucHanhContext db = new TkbThucHanh.Models.TkbThucHanhContext();
-
         [ValidateInput(false)]
         public ActionResult GridViewPartial()
         {
-            var model = db.MonHocs;
+            DbSet<MonHoc> model = db.MonHocs;
             return PartialView("_GridViewPartial", model.ToList());
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialAddNew(TkbThucHanh.Models.MonHoc item)
+        public ActionResult GridViewPartialAddNew(MonHoc item)
         {
-            var model = db.MonHocs;
+            DbSet<MonHoc> model = db.MonHocs;
             if (ModelState.IsValid)
             {
                 try
@@ -46,18 +45,19 @@ namespace TkbThucHanh.Controllers
                 ViewData["EditError"] = "Please, correct all errors.";
             return PartialView("_GridViewPartial", model.ToList());
         }
+
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialUpdate(TkbThucHanh.Models.MonHoc item)
+        public ActionResult GridViewPartialUpdate(MonHoc item)
         {
-            var model = db.MonHocs;
+            DbSet<MonHoc> model = db.MonHocs;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var modelItem = model.FirstOrDefault(it => it.MonHocId == item.MonHocId);
+                    MonHoc modelItem = model.FirstOrDefault(it => it.MonHocId == item.MonHocId);
                     if (modelItem != null)
                     {
-                        this.UpdateModel(modelItem);
+                        UpdateModel(modelItem);
                         db.SaveChanges();
                     }
                 }
@@ -70,15 +70,16 @@ namespace TkbThucHanh.Controllers
                 ViewData["EditError"] = "Please, correct all errors.";
             return PartialView("_GridViewPartial", model.ToList());
         }
+
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialDelete(System.Int32 MonHocId)
+        public ActionResult GridViewPartialDelete(Int32 MonHocId)
         {
-            var model = db.MonHocs;
+            DbSet<MonHoc> model = db.MonHocs;
             if (MonHocId != null)
             {
                 try
                 {
-                    var item = model.FirstOrDefault(it => it.MonHocId == MonHocId);
+                    MonHoc item = model.FirstOrDefault(it => it.MonHocId == MonHocId);
                     if (item != null)
                         model.Remove(item);
                     db.SaveChanges();

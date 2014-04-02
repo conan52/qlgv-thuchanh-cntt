@@ -1,17 +1,15 @@
-﻿@using System.Web.UI.WebControls
-@using TkbThucHanh.Models
+﻿@using TkbThucHanh.Models
 @using TkbThucHanh.Models.Provider
 @using TkbThucHanh.ViewSettings
 @{
-    var grid = Html.DevExpress().GridView(settings =>
+    GridViewExtension grid = Html.DevExpress().GridView(settings =>
     {
-
         settings.Name = "GridView";
-        settings.CallbackRouteValues = new { Controller = "LichCongTac", Action = "GridViewPartial" };
+        settings.CallbackRouteValues = new {Controller = "LichCongTac", Action = "GridViewPartial"};
 
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "LichCongTac", Action = "GridViewPartialAddNew" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "LichCongTac", Action = "GridViewPartialUpdate" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "LichCongTac", Action = "GridViewPartialDelete" };
+        settings.SettingsEditing.AddNewRowRouteValues = new {Controller = "LichCongTac", Action = "GridViewPartialAddNew"};
+        settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "LichCongTac", Action = "GridViewPartialUpdate"};
+        settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "LichCongTac", Action = "GridViewPartialDelete"};
 
         settings.SettingDefaultColumn();
 
@@ -26,7 +24,7 @@
             comboBoxProperties.DataSource = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong != null && gv.CoThePhanCong.Value);
             comboBoxProperties.TextField = "HoVaTen";
             comboBoxProperties.ValueField = "GiangVienId";
-            comboBoxProperties.ValueType = typeof(int);
+            comboBoxProperties.ValueType = typeof (int);
         });
 
 
@@ -56,11 +54,10 @@
             editboxprop.EditFormat = EditFormat.Custom;
             editboxprop.EditFormatString = "dd/MM/yyyy";
         });
-
     });
     if (ViewData["EditError"] != null)
     {
-        grid.SetEditErrorText((string)ViewData["EditError"]);
+        grid.SetEditErrorText((string) ViewData["EditError"]);
     }
 }
 @grid.Bind(Model).GetHtml()

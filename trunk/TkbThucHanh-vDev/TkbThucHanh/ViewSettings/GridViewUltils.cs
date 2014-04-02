@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI.WebControls;
+﻿using System.Web.UI.WebControls;
 using DevExpress.Web.ASPxClasses;
 using DevExpress.Web.ASPxGridView;
 using DevExpress.Web.Mvc;
@@ -24,7 +20,7 @@ namespace TkbThucHanh.ViewSettings
 
 
             settings.CommandColumn.Visible = true;
-          //  settings.CommandColumn.NewButton.Visible = true;
+            //  settings.CommandColumn.NewButton.Visible = true;
             settings.CommandColumn.DeleteButton.Visible = true;
             settings.CommandColumn.EditButton.Visible = true;
 

@@ -1,10 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Web.Mvc;
-using System.Web.Security;
-using TkbThucHanh.Models.Enums;
 
 namespace TkbThucHanh.Models
 {
@@ -39,12 +35,14 @@ namespace TkbThucHanh.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [System.Web.Mvc.Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
     public class LoginModel
     {
+        private bool? rememberMe;
+
         [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
@@ -54,7 +52,6 @@ namespace TkbThucHanh.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        bool? rememberMe;
         [Display(Name = "Remember me?")]
         public bool? RememberMe
         {
@@ -82,7 +79,7 @@ namespace TkbThucHanh.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [System.Web.Mvc.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 }

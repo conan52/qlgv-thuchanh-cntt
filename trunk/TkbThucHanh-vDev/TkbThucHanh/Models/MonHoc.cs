@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 using TkbThucHanh.Models.Enums;
 
 namespace TkbThucHanh.Models
@@ -24,12 +21,35 @@ namespace TkbThucHanh.Models
         public int SoTinChi { get; set; }
 
         [Display(Name = "Bắt buộc")]
-        public bool BatBuoc { get; set; }
+        public bool? BatBuoc { get; set; }
 
         public TrinhDo TrinhDo { get; set; }
         public ChuyenNganh ChuyenNganh { get; set; }
 
         public virtual List<PhanCongGiangDay> PhanCongGiangDays { get; set; }
 
+
+        [NotMapped]
+        public string HienThiTrinhDo
+        {
+            get { return EnumUltils.GetDescriptionAttribute<TrinhDo>(TrinhDo.ToString()); }
+        }
+
+        [NotMapped]
+        public string HienThiChuyenNganh
+        {
+            get { return EnumUltils.GetDescriptionAttribute<ChuyenNganh>(ChuyenNganh.ToString()); }
+        }
+
+        [NotMapped]
+        public string HienThiBatBuoc
+        {
+            get
+            {
+                if (BatBuoc != null && BatBuoc.Value)
+                    return "BB";
+                return "TC";
+            }
+        }
     }
 }

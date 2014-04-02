@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TkbThucHanh.Models
 {
-
     public class PhongThucHanh
     {
         [Key]
@@ -18,6 +13,5 @@ namespace TkbThucHanh.Models
         public string TenPhong { get; set; }
 
         public virtual List<TkbThucHanh> TkbThucHanhs { get; set; }
-
     }
 }

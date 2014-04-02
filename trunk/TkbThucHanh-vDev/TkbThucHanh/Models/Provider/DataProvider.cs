@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using TkbThucHanh.Models;
 
 namespace TkbThucHanh.Models.Provider
 {
-
     public class DataProvider<T> where T : class
     {
-
         public static IList<T> GetAll(params Expression<Func<T, object>>[] navigationProperties)
         {
             List<T> list;
@@ -18,7 +16,7 @@ namespace TkbThucHanh.Models.Provider
             {
                 IQueryable<T> dbQuery = context.Set<T>();
 
-                foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
+                foreach (var navigationProperty in navigationProperties)
                     dbQuery = dbQuery.Include(navigationProperty);
 
                 list = dbQuery
@@ -35,7 +33,7 @@ namespace TkbThucHanh.Models.Provider
             {
                 IQueryable<T> dbQuery = context.Set<T>();
 
-                foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
+                foreach (var navigationProperty in navigationProperties)
                     dbQuery = dbQuery.Include(navigationProperty);
 
                 list = dbQuery
@@ -69,18 +67,19 @@ namespace TkbThucHanh.Models.Provider
             {
                 foreach (T item in items)
                 {
-                    context.Entry(item).State = System.Data.EntityState.Added;
+                    context.Entry(item).State = EntityState.Added;
                 }
                 context.SaveChanges();
             }
         }
+
         public static void Update(params T[] items)
         {
             using (var context = new TkbThucHanhContext())
             {
                 foreach (T item in items)
                 {
-                    context.Entry(item).State = System.Data.EntityState.Modified;
+                    context.Entry(item).State = EntityState.Modified;
                 }
                 context.SaveChanges();
             }
@@ -92,7 +91,7 @@ namespace TkbThucHanh.Models.Provider
             {
                 foreach (T item in items)
                 {
-                    context.Entry(item).State = System.Data.EntityState.Deleted;
+                    context.Entry(item).State = EntityState.Deleted;
                 }
                 context.SaveChanges();
             }

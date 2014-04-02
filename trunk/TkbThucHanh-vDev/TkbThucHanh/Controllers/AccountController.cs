@@ -1,17 +1,12 @@
 using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 using System.Web.Security;
-
 using TKBThucHanh.Filters;
 using TkbThucHanh.Models;
 using TkbThucHanh.Models.Enums;
 using WebMatrix.WebData;
-using TkbThucHanh.Models;
-using DevExpress.Web.Mvc;
 
 namespace TkbThucHanh.Controllers
 {
@@ -19,9 +14,10 @@ namespace TkbThucHanh.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
-
         //
         // GET: /Account/Login
+        private readonly TkbThucHanhContext db = new TkbThucHanhContext();
+
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -38,7 +34,7 @@ namespace TkbThucHanh.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe.Value))
+                if (WebSecurity.Login(model.UserName, model.Password, model.RememberMe.Value))
                 {
                     return Redirect(returnUrl ?? "/");
                 }
@@ -100,7 +96,8 @@ namespace TkbThucHanh.Controllers
                 bool changePasswordSucceeded;
                 try
                 {
-                    changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+                    changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword,
+                        model.NewPassword);
                 }
                 catch (Exception)
                 {
@@ -129,81 +126,38 @@ namespace TkbThucHanh.Controllers
             return View();
         }
 
-
-
-        #region Status Codes
-        private static string ErrorCodeToString(MembershipCreateStatus createStatus)
+        private void SetRole(string userName, string value)
         {
-            // See http://go.microsoft.com/fwlink/?LinkID=177550 for
-            // a full list of status codes.
-            switch (createStatus)
-            {
-                case MembershipCreateStatus.DuplicateUserName:
-                    return "User name already exists. Please enter a different user name.";
-
-                case MembershipCreateStatus.DuplicateEmail:
-                    return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
-
-                case MembershipCreateStatus.InvalidPassword:
-                    return "The password provided is invalid. Please enter a valid password value.";
-
-                case MembershipCreateStatus.InvalidEmail:
-                    return "The e-mail address provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidAnswer:
-                    return "The password retrieval answer provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidQuestion:
-                    return "The password retrieval question provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidUserName:
-                    return "The user name provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.ProviderError:
-                    return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                case MembershipCreateStatus.UserRejected:
-                    return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                default:
-                    return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-            }
-        }
-        #endregion
-
-        void SetRole(string userName, string value)
-        {
-            foreach (var info in EnumUltils.GetDescriptions_QuyenHan())
+            foreach (EnumInfo info in EnumUltils.GetDescriptions_QuyenHan())
             {
                 if (!Roles.RoleExists(info.Name))
                     Roles.CreateRole(info.Name);
             }
-            foreach (var role in Roles.GetAllRoles())
+            foreach (string role in Roles.GetAllRoles())
             {
                 try
                 {
                     Roles.RemoveUserFromRole(userName, role);
                 }
                 catch (Exception)
-                { }
+                {
+                }
             }
             Roles.AddUserToRole(userName, value);
         }
 
 
-        TkbThucHanhContext db = new TkbThucHanhContext();
-
         [ValidateInput(false)]
         public ActionResult GridViewPartial()
         {
-            var model = db.UserProfiles;
+            DbSet<UserProfile> model = db.UserProfiles;
             return PartialView("_GridViewPartial", model.ToList());
         }
 
         [HttpPost, ValidateInput(false)]
         public ActionResult GridViewPartialAddNew(UserProfile item)
         {
-            var model = db.UserProfiles;
+            DbSet<UserProfile> model = db.UserProfiles;
             if (ModelState.IsValid)
             {
                 try
@@ -221,15 +175,16 @@ namespace TkbThucHanh.Controllers
                 ViewData["EditError"] = "Please, correct all errors.";
             return PartialView("_GridViewPartial", model.ToList());
         }
+
         [HttpPost, ValidateInput(false)]
         public ActionResult GridViewPartialUpdate(UserProfile item)
         {
-            var model = db.UserProfiles;
+            DbSet<UserProfile> model = db.UserProfiles;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var modelItem = model.FirstOrDefault(it => it.UserId == item.UserId);
+                    UserProfile modelItem = model.FirstOrDefault(it => it.UserId == item.UserId);
                     if (modelItem != null)
                     {
                         UpdateModel(modelItem);
@@ -246,15 +201,16 @@ namespace TkbThucHanh.Controllers
                 ViewData["EditError"] = "Please, correct all errors.";
             return PartialView("_GridViewPartial", model.ToList());
         }
+
         [HttpPost, ValidateInput(false)]
         public ActionResult GridViewPartialDelete(Int32 UserId)
         {
-            var model = db.UserProfiles;
+            DbSet<UserProfile> model = db.UserProfiles;
             if (UserId != null)
             {
                 try
                 {
-                    var item = model.FirstOrDefault(it => it.UserId == UserId);
+                    UserProfile item = model.FirstOrDefault(it => it.UserId == UserId);
                     if (item != null)
                         model.Remove(item);
                     db.SaveChanges();
@@ -266,5 +222,51 @@ namespace TkbThucHanh.Controllers
             }
             return PartialView("_GridViewPartial", model.ToList());
         }
+
+        #region Status Codes
+
+        private static string ErrorCodeToString(MembershipCreateStatus createStatus)
+        {
+            // See http://go.microsoft.com/fwlink/?LinkID=177550 for
+            // a full list of status codes.
+            switch (createStatus)
+            {
+                case MembershipCreateStatus.DuplicateUserName:
+                    return "User name already exists. Please enter a different user name.";
+
+                case MembershipCreateStatus.DuplicateEmail:
+                    return
+                        "A user name for that e-mail address already exists. Please enter a different e-mail address.";
+
+                case MembershipCreateStatus.InvalidPassword:
+                    return "The password provided is invalid. Please enter a valid password value.";
+
+                case MembershipCreateStatus.InvalidEmail:
+                    return "The e-mail address provided is invalid. Please check the value and try again.";
+
+                case MembershipCreateStatus.InvalidAnswer:
+                    return "The password retrieval answer provided is invalid. Please check the value and try again.";
+
+                case MembershipCreateStatus.InvalidQuestion:
+                    return "The password retrieval question provided is invalid. Please check the value and try again.";
+
+                case MembershipCreateStatus.InvalidUserName:
+                    return "The user name provided is invalid. Please check the value and try again.";
+
+                case MembershipCreateStatus.ProviderError:
+                    return
+                        "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+
+                case MembershipCreateStatus.UserRejected:
+                    return
+                        "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+
+                default:
+                    return
+                        "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+            }
+        }
+
+        #endregion
     }
 }
