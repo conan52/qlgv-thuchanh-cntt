@@ -24,7 +24,7 @@ namespace TkbThucHanh.ViewSettings
             //  settings.CommandColumn.NewButton.Visible = true;
             settings.CommandColumn.DeleteButton.Visible = true;
             settings.CommandColumn.EditButton.Visible = true;
-            
+
 
             settings.SettingsPager.Visible = true;
             settings.Settings.ShowGroupPanel = true;
@@ -33,17 +33,17 @@ namespace TkbThucHanh.ViewSettings
 
 
             settings.CommandColumn.DeleteButton.Text = "Xóa";
-      //      settings.CommandColumn.NewButton.Text = "Thêm";
+            //      settings.CommandColumn.NewButton.Text = "Thêm";
             settings.CommandColumn.EditButton.Text = "Sửa";
             settings.CommandColumn.CancelButton.Text = "Hủy bỏ";
             settings.CommandColumn.UpdateButton.Text = "Áp dụng";
             settings.CommandColumn.ClearFilterButton.Visible = true;
             settings.CommandColumn.Width = 150;
-
-             settings.CommandColumn.VisibleIndex = settings.Columns.Count;
-             settings.CommandColumn.ButtonType=ButtonType.Link;
-             settings.CommandColumn.DeleteButton.Image.Url = "~/Content/Images/delete.png";
-//              settings.CommandColumn.DeleteButton.Image.SpriteProperties. = "~/Content/Images/delete.png";
+            settings.CommandColumn.VisibleIndex = settings.Columns.Count;//////////////
+            settings.CommandColumn.VisibleIndex = settings.Columns.Count;
+            settings.CommandColumn.ButtonType = ButtonType.Link;
+            settings.CommandColumn.DeleteButton.Image.Url = "~/Content/Images/delete.png";
+            //              settings.CommandColumn.DeleteButton.Image.SpriteProperties. = "~/Content/Images/delete.png";
         }
 
         public static void SetCommandColumn(this GridViewSettings settings)
