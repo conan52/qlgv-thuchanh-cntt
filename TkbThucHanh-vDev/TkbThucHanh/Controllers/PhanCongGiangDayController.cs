@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DevExpress.Web.Mvc;
 
 namespace TkbThucHanh.Controllers
 {
@@ -16,5 +17,78 @@ namespace TkbThucHanh.Controllers
             return View();
         }
 
+        TkbThucHanh.Models.TkbThucHanhContext db = new TkbThucHanh.Models.TkbThucHanhContext();
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial()
+        {
+            var model = db.PhanCongGiangDays;
+            return PartialView("_GridViewPartial", model.ToList());
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewPartialAddNew(TkbThucHanh.Models.PhanCongGiangDay item)
+        {
+            var model = db.PhanCongGiangDays;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.Add(item);
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_GridViewPartial", model.ToList());
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewPartialUpdate(TkbThucHanh.Models.PhanCongGiangDay item)
+        {
+            var model = db.PhanCongGiangDays;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var modelItem = model.FirstOrDefault(it => it.IdPhanCong == item.IdPhanCong);
+                    if (modelItem != null)
+                    {
+                        this.UpdateModel(modelItem);
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_GridViewPartial", model.ToList());
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewPartialDelete(System.Int32 IdPhanCong)
+        {
+            var model = db.PhanCongGiangDays;
+            if (IdPhanCong != null)
+            {
+                try
+                {
+                    var item = model.FirstOrDefault(it => it.IdPhanCong == IdPhanCong);
+                    if (item != null)
+                        model.Remove(item);
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            return PartialView("_GridViewPartial", model.ToList());
+        }
     }
 }

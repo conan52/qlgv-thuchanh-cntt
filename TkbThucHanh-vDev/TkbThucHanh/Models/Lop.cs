@@ -22,6 +22,6 @@ namespace TkbThucHanh.Models
 
         public List<PhanCongGiangDay> PhanCongGiang { get; set; }
 
-        public virtual List<TkbThucHanh> ThoiThucHanhs { get; set; }
+        public virtual List<TkbThucHanh> TkbThucHanhs { get; set; }
     }
 }
