@@ -2,7 +2,7 @@
 
 <menu>
   <item Text="Thời khóa biểu" NavigateUrl="#" />
-  <item Text="Lịch thực hành" NavigateUrl="#" />
+  <item Text="Lịch thực hành" NavigateUrl="ThoiKhoaBieuThucHanh" />
   <item Text="Giảng viên" NavigateUrl="GiangVien" />
   <item Text="Môn học" NavigateUrl="MonHoc" />
   <item Text="Lớp học" NavigateUrl="LopHoc" />
