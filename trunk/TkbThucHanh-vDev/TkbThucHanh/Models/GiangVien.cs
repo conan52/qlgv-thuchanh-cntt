@@ -16,10 +16,10 @@ namespace TkbThucHanh.Models
         public string MaGv { get; set; }
 
         [Required(ErrorMessage = "Chuyên nghành không được để trống!")]
-        [Display(Name = "Chuyên nghành")]
+        [Display(Name = "Chuyên ngành")]
         public ChuyenNganh ChuyenNganh { get; set; }
 
-        [Required(ErrorMessage = "Tển giảng viên không được để trống!")]
+        [Required(ErrorMessage = "Tên giảng viên không được để trống!")]
         [Display(Name = "Tên giảng viên")]
         public string HoVaTen { get; set; }
 

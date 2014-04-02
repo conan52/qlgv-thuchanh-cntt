@@ -34,12 +34,12 @@ namespace TkbThucHanh.Controllers
                 var courses = LopProvider.GetListCodes();
                 var listcoursesInTable = table.TeacherCodes.Intersect(teachers);
 
-                //var fullTimeTable = TeacherFullTable.GetFullTimeTable(table.CurrentWeek,listcoursesInTable,listTeachersInTable)
-                //    .Select(tt=>new TkbGiangVien(){MaTkb = tt.TeacherCode,});
-          
-            
+                var fullTimeTable = TeacherFullTable.GetFullTimeTable(table.CurrentWeek, listcoursesInTable, listTeachersInTable);
+                var result = ThoiKhoaBieuProvider.GetTeacherTimeTables(fullTimeTable, table.StartDate);
+                DataProvider<TkbGiangVien>.Add(result);
+                return Json(new { Status = 1 }, JsonRequestBehavior.AllowGet);
             }
-            return View();
+            return Json(new { Status = 0 }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -49,7 +49,7 @@ namespace TkbThucHanh.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial()
         {
-            var model = db.TkbGangViens.OrderByDescending(tkb => tkb.NgayHoc).ThenByDescending(tkb => tkb.TietBatDau);
+            var model = db.TkbGangViens.Include("GiangVien").OrderByDescending(tkb => tkb.NgayHoc).ThenByDescending(tkb => tkb.TietBatDau);
             return PartialView("_GridViewPartial", model.ToList());
         }
 

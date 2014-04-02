@@ -1,1 +1,23 @@
-﻿@Html.Action("GridViewPartial")
+﻿@{
+    ViewBag.Title = "Tuần học";
+}
+@Html.DevExpress().Button(settings =>
+{
+    settings.Name = "Button";
+    settings.Text = "Reload";
+    settings.UseSubmitBehavior = false;
+    settings.EnableClientSideAPI = true;
+    settings.ClientSideEvents.Click = "CheckUpdate()";
+}).GetHtml()
+
+
+@Html.Action("GridViewPartial")
+<script>
+    function CheckUpdate() {
+        $.get("@Url.Action("GetNewTimeTable", "ThoiKhoaBieuGiangVien")", function(data) {
+            if (data.Status == 1)
+                window.GridView.Refresh();
+            else alert(data);
+        });
+    }
+</script>
