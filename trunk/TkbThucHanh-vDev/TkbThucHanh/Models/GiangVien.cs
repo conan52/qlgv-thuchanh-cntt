@@ -8,7 +8,6 @@ namespace TkbThucHanh.Models
     public class GiangVien
     {
         [Key]
-        [Required(ErrorMessage = "Id giảng viên không được để trống")]
         public int GiangVienId { get; set; }
 
         [Required(ErrorMessage = "Mã giảng viên không được để trống!")]

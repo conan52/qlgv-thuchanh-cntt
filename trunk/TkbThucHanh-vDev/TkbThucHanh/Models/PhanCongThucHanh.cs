@@ -11,6 +11,12 @@ namespace TkbThucHanh.Models
 
         public virtual List<TkbThucHanh> TkbThucHanhs { get; set; }
 
+        [Display(Name = "Vắng")]
+        public bool? Vang { get; set; }
+
+        [Display(Name = "Ghi chú")]
+        public string GhiChu { get; set; }
+
         [Required(ErrorMessage = "Giảng viên không được để trống!")]
         public int GiangVienId { get; set; }
 

@@ -1,13 +1,13 @@
-@if (!Request.IsAuthenticated)
+﻿@if (!Request.IsAuthenticated)
 {
-    @Html.ActionLink("Register", "Register", "Account")
+    @Html.ActionLink("Tạo tài khoản", "Register", "Account")
     @: | 
-    @Html.ActionLink("Login", "Login", "Account")
+    @Html.ActionLink("Đăng nhập", "Login", "Account")
 }
 else
 {
-    @: Xin ch�o <b>@User.Identity.Name</b>!
+    @: Xin chào <b>@User.Identity.Name</b>!
 
     @: |
-    @Html.ActionLink("Tho�t", "LogOff", "Account")
+    @Html.ActionLink("Thoát", "LogOff", "Account")
 }
