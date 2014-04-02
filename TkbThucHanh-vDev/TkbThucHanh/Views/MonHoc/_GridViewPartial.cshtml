@@ -26,7 +26,7 @@
         settings.CommandColumn.EditButton.Visible = true;
 
         settings.KeyFieldName = "MonHocId";
-        settings.SettingDefaultColumn();
+        
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = true;
@@ -51,11 +51,9 @@
         {
             column.FieldName = "SoTinChi";
             column.Caption = "Số tín chỉ";
-            column.ShowInFilterControl = false;
-            column.Settings.AllowAutoFilter = DefaultBoolean.False;
             column.ColumnType = MVCxGridViewColumnType.SpinEdit;
             var spinProperties = column.PropertiesEdit as SpinEditProperties;
-            spinProperties.MinValue = 0;
+            spinProperties.MinValue = 1;
             spinProperties.MaxValue = 10;
             spinProperties.SpinButtons.ShowLargeIncrementButtons = false;
         });
@@ -101,6 +99,7 @@
             column.Caption = "Bắt buộc";
             column.ColumnType = MVCxGridViewColumnType.CheckBox;
         });
+        settings.SettingDefaultColumn();
     });
     if (ViewData["EditError"] != null)
     {

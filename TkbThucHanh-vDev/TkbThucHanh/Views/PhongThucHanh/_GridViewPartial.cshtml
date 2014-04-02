@@ -8,12 +8,12 @@
         settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "PhongThucHanh", Action = "GridViewPartialUpdate"};
         settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "PhongThucHanh", Action = "GridViewPartialDelete"};
         settings.KeyFieldName = "PhongThucHanhId";
-        settings.SettingDefaultColumn();
         settings.Columns.Add(column =>
         {
             column.Caption = "Tên phòng";
             column.FieldName = "TenPhong";
         });
+        settings.SettingDefaultColumn();
     });
     if (ViewData["EditError"] != null)
     {

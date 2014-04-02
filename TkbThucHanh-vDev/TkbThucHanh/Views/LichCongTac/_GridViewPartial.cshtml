@@ -11,9 +11,6 @@
         settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "LichCongTac", Action = "GridViewPartialUpdate"};
         settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "LichCongTac", Action = "GridViewPartialDelete"};
 
-        settings.SettingDefaultColumn();
-
-
         settings.KeyFieldName = "LichCongTacId";
         settings.Columns.Add(column =>
         {
@@ -54,6 +51,7 @@
             editboxprop.EditFormat = EditFormat.Custom;
             editboxprop.EditFormatString = "dd/MM/yyyy";
         });
+        settings.SettingDefaultColumn();
     });
     if (ViewData["EditError"] != null)
     {

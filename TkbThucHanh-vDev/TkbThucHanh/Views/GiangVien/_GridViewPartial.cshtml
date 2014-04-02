@@ -23,6 +23,12 @@
 
         settings.Columns.Add(column =>
         {
+            column.FieldName = "HoVaTen";
+            column.Caption = "Họ và tên";
+        });
+
+        settings.Columns.Add(column =>
+        {
             column.FieldName = "ChuyenNganh";
             column.Caption = "Chuyên ngành";
             column.ColumnType = MVCxGridViewColumnType.ComboBox;
@@ -32,13 +38,7 @@
             comboBoxProperties.DataSource = EnumUltils.GetDescriptions_ChuyenNganh();
             comboBoxProperties.TextField = "Description";
             comboBoxProperties.ValueField = "Value";
-            comboBoxProperties.ValueType = typeof (int);
-        });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "HoVaTen";
-            column.Caption = "Họ và tên";
+            comboBoxProperties.ValueType = typeof(int);
         });
 
 
