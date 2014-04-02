@@ -10,20 +10,26 @@ namespace TkbThucHanh.Models
         public int MaTkb { get; set; }
 
         [Display(Name = "Tên môn học")]
+        [Required(ErrorMessage = "Tên môn học không được để trống!")]
         public string TenMonHoc { get; set; }
 
         [Display(Name = "Phòng")]
+        [Required(ErrorMessage = "Phòng không được để trống!")]
         public string Phong { get; set; }
 
         [Display(Name = "Tiết bắt đầu")]
+        [Required(ErrorMessage = "Tiết bắt đầu không được để trống!")]
         public int TietBatDau { get; set; }
 
         [Display(Name = "Tiết kết thúc")]
+        [Required(ErrorMessage = "Tiết kết th không được để trống!")]
         public int TietKetThuc { get; set; }
 
         [Display(Name = "Ngày học")]
+        [Required(ErrorMessage = "NGày học không được để trống!")]
         public DateTime NgayHoc { get; set; }
 
+        [Required(ErrorMessage = "Giảng viên không được để trống!")]
         public int GiangVienId { get; set; }
 
         [ForeignKey("GiangVienId")]

@@ -1,4 +1,8 @@
-﻿@Html.DevExpress().Button(settings =>
+﻿@{
+    ViewBag.Title = "Giảng viên";
+    ViewBag.PageSubTitle = "Danh sách giảng viên";
+}
+@Html.DevExpress().Button(settings =>
 {
     settings.Name = "Button";
     settings.Text = "Thêm mới";
