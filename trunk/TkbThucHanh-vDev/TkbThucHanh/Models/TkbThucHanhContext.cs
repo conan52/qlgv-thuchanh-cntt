@@ -23,7 +23,7 @@ namespace TkbThucHanh.Models
         public DbSet<PhanCongGiangDay> PhanCongGiangDays { get; set; }
         public DbSet<PhanCongThucHanh> PhanCongThucHanhs { get; set; }
         public DbSet<PhongThucHanh> PhongThucHanhs { get; set; }
-        public DbSet<TkbGangVien> TkbGangViens { get; set; }
+        public DbSet<TkbGiangVien> TkbGangViens { get; set; }
         public DbSet<TkbThucHanh> TkbThucHanhs { get; set; }
         public DbSet<TuanHoc> TuanHocs { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }

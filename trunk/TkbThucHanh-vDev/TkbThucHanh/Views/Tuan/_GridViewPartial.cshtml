@@ -1,4 +1,6 @@
-﻿@{
+﻿@using DevExpress.XtraRichEdit.Layout
+@using TkbThucHanh.ViewSettings
+@{
     GridViewExtension grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView";
@@ -8,23 +10,57 @@
         settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "Tuan", Action = "GridViewPartialUpdate"};
         settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "Tuan", Action = "GridViewPartialDelete"};
         settings.KeyFieldName = "TuanHocId";
-
+        settings.SettingDefaultColumn();
         settings.Columns.Add(column =>
         {
             column.FieldName = "SttTuan";
             column.Caption = "Tuần học";
         });
-//        settings.Columns.Add(column =>
-//        {
-//            column.FieldName = "NamHoc";
-//            column.Caption = "Năm học";
-//            column.ColumnType =
-//        });
-        settings.Columns.Add("");
-        settings.Columns.Add();
-        settings.Columns.Add("NgayKetThuc");
-        settings.Columns.Add("DaLayThongTin");
-        settings.Columns.Add("DaXepLichThucHanh");
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NamHoc";
+            column.Caption = "Năm học";
+            column.ColumnType = MVCxGridViewColumnType.SpinEdit;
+            var spinProperties = column.PropertiesEdit as SpinEditProperties;
+            spinProperties.MinValue = DateTime.Now.Year;
+            spinProperties.MaxValue = DateTime.Now.Year+5;
+            spinProperties.SpinButtons.ShowLargeIncrementButtons = false;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NgayBatDau";
+            column.Caption = "Ngày bắt đầu";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var editboxprop = column.PropertiesEdit as DateEditProperties;
+            editboxprop.NullText = "dd/MM/yyyy";
+            editboxprop.EditFormat = EditFormat.Custom;
+            editboxprop.EditFormatString = "dd/MM/yyyy";
+        });
+        settings.Columns.Add(
+        column =>
+        {
+            column.FieldName = "NgayKetThuc";
+            column.Caption = "Ngày kết thúc";
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var editboxprop = column.PropertiesEdit as DateEditProperties;
+            editboxprop.NullText = "dd/MM/yyyy";
+            editboxprop.EditFormat = EditFormat.Custom;
+            editboxprop.EditFormatString = "dd/MM/yyyy";
+        });
+        settings.Columns.Add(
+        column =>
+        {
+            column.FieldName = "DaLayThongTin";
+            column.Caption = "Đã lấy thông tin";
+            column.ColumnType = MVCxGridViewColumnType.CheckBox;
+        });
+        settings.Columns.Add(
+        column =>
+        {
+            column.FieldName = "DaXepLichThucHanh";
+            column.Caption = "Đã lấy xếp lịch thực hành";
+            column.ColumnType = MVCxGridViewColumnType.CheckBox;
+        });
     });
     if (ViewData["EditError"] != null)
     {

@@ -40,6 +40,6 @@ namespace TkbThucHanh.Models
         [ForeignKey("PhanCongThucHanhId")]
         public virtual PhanCongThucHanh PhanCongThucHanh { get; set; }
 
-        public virtual List<TkbGangVien> TkbGangViens { get; set; }
+        public virtual List<TkbGiangVien> TkbGangViens { get; set; }
     }
 }
