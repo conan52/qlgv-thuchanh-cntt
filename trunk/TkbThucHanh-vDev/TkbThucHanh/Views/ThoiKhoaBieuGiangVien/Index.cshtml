@@ -12,26 +12,23 @@
     }
 </script>
 
+    @Html.DevExpress().Button(settings =>
+    {
+        settings.ControlStyle.CssClass = "tablefloatleft";
+        settings.Name = "Add";
+        settings.Text = "Thêm mới";
+        settings.UseSubmitBehavior = false;
+        settings.EnableClientSideAPI = true;
+        settings.ClientSideEvents.Click = "function(s, e) {GridView.AddNewRow();}";
+    }).GetHtml()
 
-
-
-@Html.DevExpress().Button(settings =>
-{
-    settings.Name = "Add";
-    settings.Text = "Thêm mới";
-    settings.UseSubmitBehavior = false;
-    settings.EnableClientSideAPI = true;
-    settings.ClientSideEvents.Click = "function(s, e) {GridView.AddNewRow();}";
-}).GetHtml()
-
-
-@Html.DevExpress().Button(settings =>
-{
-    settings.Name = "Button";
-    settings.Text = "Reload";
-    settings.UseSubmitBehavior = false;
-    settings.EnableClientSideAPI = true;
-    settings.ClientSideEvents.Click = "function(s, e){CheckWeekUpdate();}";
-}).GetHtml()
+    @Html.DevExpress().Button(settings =>
+    {
+        settings.Name = "Button";
+        settings.Text = "Reload";
+        settings.UseSubmitBehavior = false;
+        settings.EnableClientSideAPI = true;
+        settings.ClientSideEvents.Click = "function(s, e){CheckWeekUpdate();}";
+    }).GetHtml()
 
 @Html.Action("GridViewPartial")
