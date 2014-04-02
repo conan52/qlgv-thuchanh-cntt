@@ -17,7 +17,7 @@ namespace TkbThucHanh.Controllers
             return View();
         }
 
-        TKBThucHanh.Models.TkbThucHanhContext db = new TKBThucHanh.Models.TkbThucHanhContext();
+        TkbThucHanh.Models.TkbThucHanhContext db = new TkbThucHanh.Models.TkbThucHanhContext();
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial()
@@ -27,7 +27,7 @@ namespace TkbThucHanh.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialAddNew(TKBThucHanh.Models.MonHoc item)
+        public ActionResult GridViewPartialAddNew(TkbThucHanh.Models.MonHoc item)
         {
             var model = db.MonHocs;
             if (ModelState.IsValid)
@@ -47,7 +47,7 @@ namespace TkbThucHanh.Controllers
             return PartialView("_GridViewPartial", model.ToList());
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartialUpdate(TKBThucHanh.Models.MonHoc item)
+        public ActionResult GridViewPartialUpdate(TkbThucHanh.Models.MonHoc item)
         {
             var model = db.MonHocs;
             if (ModelState.IsValid)

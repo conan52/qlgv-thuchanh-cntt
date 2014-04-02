@@ -1,9 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TKBThucHanh.Models
+namespace TkbThucHanh.Models
 {
-    public class TkbThucHanhContext : DbContext
+    public class TkbThucHanhContext:DbContext
     {
         static TkbThucHanhContext()
         {
@@ -15,14 +20,15 @@ namespace TKBThucHanh.Models
             : base("Name=TkbCloud")
         {
         }
-
         public DbSet<GiangVien> GiangViens { get; set; }
-        public DbSet<PhanCongGiangDay> PhanCongGiangDay { get; set; }
         public DbSet<LichCongTac> LichCongTacs { get; set; }
+        public DbSet<Lop> Lops { get; set; }
         public DbSet<MonHoc> MonHocs { get; set; }
-        public DbSet<PhanCongGvThucHanh> PhanCongGvThucHanhs { get; set; }
+        public DbSet<PhanCongGiangDay> PhanCongGiangDays { get; set; }
+        public DbSet<PhanCongThucHanh> PhanCongThucHanhs { get; set; }
         public DbSet<PhongThucHanh> PhongThucHanhs { get; set; }
-        public DbSet<ThoiKhoaBieuGiangVien> ThoiKhoaBieuGiangViens { get; set; }
+        public DbSet<TkbGangVien> TkbGangViens { get; set; }
+        public DbSet<TkbThucHanh> TkbThucHanhs { get; set; }
         public DbSet<TuanHoc> TuanHocs { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
 

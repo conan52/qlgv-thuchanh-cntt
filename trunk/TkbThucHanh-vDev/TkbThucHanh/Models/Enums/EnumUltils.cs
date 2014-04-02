@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
-using TKBThucHanh.Models.Enums;
+using TkbThucHanh.Models.Enums;
 
 namespace TkbThucHanh.Models.Enums
 {
@@ -12,7 +12,7 @@ namespace TkbThucHanh.Models.Enums
 
         public static List<EnumInfo> GetDescriptions<T>()
         {
-            var type = typeof (T);
+            var type = typeof(T);
             var descs = new List<EnumInfo>();
             var names = Enum.GetNames(type);
 
@@ -20,8 +20,8 @@ namespace TkbThucHanh.Models.Enums
             {
                 var name = names[i];
                 var field = type.GetField(name);
-                var fds = field.GetCustomAttributes(typeof (DescriptionAttribute), true);
-                descs.Add(new EnumInfo(fds.Cast<DescriptionAttribute>().Select(fd => fd.Description).First(), (int)Enum.Parse(type, name)));
+                var fds = field.GetCustomAttributes(typeof(DescriptionAttribute), true);
+                descs.Add(new EnumInfo(fds.Cast<DescriptionAttribute>().Select(fd => fd.Description).First(), (int)Enum.Parse(type, name), name));
             }
             return descs;
         }
@@ -36,17 +36,23 @@ namespace TkbThucHanh.Models.Enums
         {
             return GetDescriptions<TrinhDo>();
         }
+        public static List<EnumInfo> GetDescriptions_QuyenHan()
+        {
+            return GetDescriptions<QuyenHan>();
+        }
     }
 
     public class EnumInfo
     {
         public string Description { get; set; }
         public int Value { get; set; }
+        public string Name { get; set; }
 
-        public EnumInfo(string description, int value)
+        public EnumInfo(string description, int value, string name)
         {
             Description = description;
-            Value = value;  
+            Value = value;
+            Name = name;
         }
     }
 }

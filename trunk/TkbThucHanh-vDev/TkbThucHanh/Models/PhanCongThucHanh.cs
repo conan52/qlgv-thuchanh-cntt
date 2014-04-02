@@ -1,11 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace TkbThucHanh.Models
 {
     public class PhanCongThucHanh
     {
-        public int MaTkbThucHanh { get; set; }
-        public int MaTkb { get; set; }
-        public string Gvhd { get; set; }
-        public string Gvbs { get; set; }
-        public virtual ThoiKhoaBieu ThoiKhoaBieu { get; set; }
+        [Key]
+        public int PhanCongThucHanhId { get; set; }
+
+        public virtual List<TkbThucHanh> TkbThucHanhs { get; set; }
+
+        public int GiangVienId { get; set; }
+        [ForeignKey("GiangVienId")]
+        public virtual GiangVien GiangVien { get; set; }
     }
 }

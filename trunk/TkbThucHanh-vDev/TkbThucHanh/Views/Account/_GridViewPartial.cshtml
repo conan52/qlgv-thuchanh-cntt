@@ -1,0 +1,42 @@
+﻿@using TkbThucHanh.Models.Enums
+@using TkbThucHanh.ViewSettings
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView";
+        settings.CallbackRouteValues = new { Controller = "Account", Action = "GridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Account", Action = "GridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Account", Action = "GridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Account", Action = "GridViewPartialDelete" };
+
+        settings.KeyFieldName = "UserId";
+        settings.SettingDefaultColumn();
+
+        settings.Columns.Add("UserName");
+        settings.Columns.Add("Email");
+        settings.Columns.Add("DisplayName");
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Quyền hạn";
+            column.FieldName = "Role";
+
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            if (comboBoxProperties != null)
+            {
+                comboBoxProperties.DataSource = EnumUltils.GetDescriptions_QuyenHan();
+
+                comboBoxProperties.TextField = "Description";
+                comboBoxProperties.ValueField = "Name";
+            }
+        });
+
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

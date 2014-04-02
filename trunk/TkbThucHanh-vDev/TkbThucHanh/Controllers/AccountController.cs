@@ -5,20 +5,26 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+
 using TKBThucHanh.Filters;
-using TKBThucHanh.Models;
+using TkbThucHanh.Models;
+using TkbThucHanh.Models.Enums;
 using WebMatrix.WebData;
 using TkbThucHanh.Models;
+using DevExpress.Web.Mvc;
 
-namespace TkbThucHanh.Controllers {
-    [Authorize]
+namespace TkbThucHanh.Controllers
+{
+    // [Authorize]
     [InitializeSimpleMembership]
-    public class AccountController : Controller {
+    public class AccountController : Controller
+    {
 
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login() {
+        public ActionResult Login()
+        {
             return View();
         }
 
@@ -28,31 +34,28 @@ namespace TkbThucHanh.Controllers {
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model, string returnUrl) {
-            if(ModelState.IsValid) {
-                if(WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe.Value)) {
+        public ActionResult Login(LoginModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe.Value))
+                {
                     return Redirect(returnUrl ?? "/");
                 }
                 ModelState.AddModelError("", "The user name or password provided is incorrect.");
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
-        //
-        // GET: /Account/LogOff
-
-        public ActionResult LogOff() {
-			WebSecurity.Logout();
+        public ActionResult LogOff()
+        {
+            WebSecurity.Logout();
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Account/Register
-
         [AllowAnonymous]
-        public ActionResult Register() {
+        public ActionResult Register()
+        {
             return View();
         }
 
@@ -62,51 +65,51 @@ namespace TkbThucHanh.Controllers {
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model) {
-            if(ModelState.IsValid) {
-				// Attempt to register the user
-                            try {
+        public ActionResult Register(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }
-                catch(MembershipCreateUserException e) {
+                catch (MembershipCreateUserException e)
+                {
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                 }
-                        }
+            }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
 
-        //
-        // GET: /Account/ChangePassword
 
-        public ActionResult ChangePassword() {
+        public ActionResult ChangePassword()
+        {
             return View();
         }
 
-        //
-        // POST: /Account/ChangePassword
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangePassword(ChangePasswordModel model) {
-            if(ModelState.IsValid) {
-				bool changePasswordSucceeded;
-                try {
+        public ActionResult ChangePassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                bool changePasswordSucceeded;
+                try
+                {
                     changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
                 }
-                catch(Exception) {
+                catch (Exception)
+                {
                     changePasswordSucceeded = false;
                 }
-                if(changePasswordSucceeded) {
+                if (changePasswordSucceeded)
                     return RedirectToAction("ChangePasswordSuccess");
-                }
-                else {
-                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-                }
-                
+
+                ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
             }
 
             // If we got this far, something failed, redisplay form
@@ -116,15 +119,25 @@ namespace TkbThucHanh.Controllers {
         //
         // GET: /Account/ChangePasswordSuccess
 
-        public ActionResult ChangePasswordSuccess() {
+        public ActionResult ChangePasswordSuccess()
+        {
             return View();
         }
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+
+
         #region Status Codes
-        private static string ErrorCodeToString(MembershipCreateStatus createStatus) {
+        private static string ErrorCodeToString(MembershipCreateStatus createStatus)
+        {
             // See http://go.microsoft.com/fwlink/?LinkID=177550 for
             // a full list of status codes.
-            switch(createStatus) {
+            switch (createStatus)
+            {
                 case MembershipCreateStatus.DuplicateUserName:
                     return "User name already exists. Please enter a different user name.";
 
@@ -157,5 +170,101 @@ namespace TkbThucHanh.Controllers {
             }
         }
         #endregion
+
+        void SetRole(string userName, string value)
+        {
+            foreach (var info in EnumUltils.GetDescriptions_QuyenHan())
+            {
+                if (!Roles.RoleExists(info.Name))
+                    Roles.CreateRole(info.Name);
+            }
+            foreach (var role in Roles.GetAllRoles())
+            {
+                try
+                {
+                    Roles.RemoveUserFromRole(userName, role);
+                }
+                catch (Exception)
+                { }
+            }
+            Roles.AddUserToRole(userName, value);
+        }
+
+
+        TkbThucHanhContext db = new TkbThucHanhContext();
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial()
+        {
+            var model = db.UserProfiles;
+            return PartialView("_GridViewPartial", model.ToList());
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewPartialAddNew(UserProfile item)
+        {
+            var model = db.UserProfiles;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.Add(item);
+                    db.SaveChanges();
+                    SetRole(item.UserName, item.Role);
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_GridViewPartial", model.ToList());
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewPartialUpdate(UserProfile item)
+        {
+            var model = db.UserProfiles;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var modelItem = model.FirstOrDefault(it => it.UserId == item.UserId);
+                    if (modelItem != null)
+                    {
+                        UpdateModel(modelItem);
+                        db.SaveChanges();
+                        SetRole(item.UserName, item.Role);
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_GridViewPartial", model.ToList());
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewPartialDelete(Int32 UserId)
+        {
+            var model = db.UserProfiles;
+            if (UserId != null)
+            {
+                try
+                {
+                    var item = model.FirstOrDefault(it => it.UserId == UserId);
+                    if (item != null)
+                        model.Remove(item);
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            return PartialView("_GridViewPartial", model.ToList());
+        }
     }
 }

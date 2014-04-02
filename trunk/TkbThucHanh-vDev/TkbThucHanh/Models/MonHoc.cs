@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using TKBThucHanh.Models.Enums;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TkbThucHanh.Models.Enums;
 
-namespace TKBThucHanh.Models
+namespace TkbThucHanh.Models
 {
     public class MonHoc
     {
@@ -17,17 +21,15 @@ namespace TKBThucHanh.Models
         public string TenMonHoc { get; set; }
 
         [Display(Name = "Số tín chỉ")]
-        public int SoTinChi{ get; set; }
-
-        [Display(Name = "Chuyên ngành")]
-        public ChuyenNganh ChuyenNganh { get; set; }
-
-        [Display(Name = "Trình độ")]
-        public TrinhDo TrinhDo { get; set; }
+        public int SoTinChi { get; set; }
 
         [Display(Name = "Bắt buộc")]
         public bool BatBuoc { get; set; }
 
-        public virtual List<PhanCongGiangDay> PhanCongGiang { get; set; }
+        public TrinhDo TrinhDo { get; set; }
+        public ChuyenNganh ChuyenNganh { get; set; }
+
+        public virtual List<PhanCongGiangDay> PhanCongGiangDays { get; set; }
+
     }
 }

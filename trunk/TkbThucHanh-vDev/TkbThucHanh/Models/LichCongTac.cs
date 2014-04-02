@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TKBThucHanh.Models
+namespace TkbThucHanh.Models
 {
     public class LichCongTac
     {
@@ -10,7 +14,6 @@ namespace TKBThucHanh.Models
         [Required]
         public int LichCongTacId { get; set; }
 
-        public int GiangVienId { get; set; }
 
         [Display(Name = "Lý do")]
         public string LyDo { get; set; }
@@ -21,6 +24,8 @@ namespace TKBThucHanh.Models
         [Display(Name = "Thời gian kết thúc")]
         public DateTime? ThoiGianKt { get; set; }
 
+        [Required]
+        public int GiangVienId { get; set; }
         [ForeignKey("GiangVienId")]
         public virtual GiangVien GiangVien { get; set; }
     }

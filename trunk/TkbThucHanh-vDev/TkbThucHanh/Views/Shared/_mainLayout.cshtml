@@ -13,9 +13,7 @@
         subpane.ShowCollapseBackwardButton = DefaultBoolean.False;
         subpane.Size = System.Web.UI.WebControls.Unit.Pixel(250);
         subpane.PaneStyle.Paddings.Padding = System.Web.UI.WebControls.Unit.Pixel(1);
-        subpane.SetContent(() => {
-            Html.RenderPartial("ContentLeftPartialView");
-        });
+        subpane.SetContent(() => Html.RenderPartial("ContentLeftPartialView"));
     });
 
     settings.Panes.Add(subpane => {

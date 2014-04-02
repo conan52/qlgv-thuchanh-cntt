@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace TKBThucHanh.Models.Enums
+namespace TkbThucHanh.Models.Enums
 {
     public enum TrinhDo
     {

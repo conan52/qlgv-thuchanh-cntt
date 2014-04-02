@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using TKBThucHanh.Models;
+using TkbThucHanh.Models;
 
 namespace TkbThucHanh.Models.Provider
 {
