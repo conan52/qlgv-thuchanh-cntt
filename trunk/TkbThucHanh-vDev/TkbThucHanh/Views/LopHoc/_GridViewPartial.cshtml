@@ -4,11 +4,11 @@
     GridViewExtension grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView";
-        settings.CallbackRouteValues = new {Controller = "LopHoc", Action = "GridViewPartial"};
+        settings.CallbackRouteValues = new { Controller = "LopHoc", Action = "GridViewPartial" };
 
-        settings.SettingsEditing.AddNewRowRouteValues = new {Controller = "LopHoc", Action = "GridViewPartialAddNew"};
-        settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "LopHoc", Action = "GridViewPartialUpdate"};
-        settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "LopHoc", Action = "GridViewPartialDelete"};
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "LopHoc", Action = "GridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "LopHoc", Action = "GridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "LopHoc", Action = "GridViewPartialDelete" };
 
         settings.KeyFieldName = "TenLop";
         settings.Columns.Add(column =>
@@ -27,7 +27,7 @@
             comboBoxProperties.DataSource = EnumUltils.GetDescriptions_TrinhDo();
             comboBoxProperties.TextField = "Description";
             comboBoxProperties.ValueField = "Value";
-            comboBoxProperties.ValueType = typeof (int);
+            comboBoxProperties.ValueType = typeof(int);
         });
         settings.Columns.Add(column =>
         {
@@ -35,7 +35,7 @@
             column.FieldName = "NamNhapHoc";
             column.ColumnType = MVCxGridViewColumnType.SpinEdit;
             var spinProperties = column.PropertiesEdit as SpinEditProperties;
-            spinProperties.MinValue = DateTime.Now.Year;
+            spinProperties.MinValue = DateTime.Now.Year - 5;
             spinProperties.MaxValue = DateTime.Now.Year + 5;
             spinProperties.SpinButtons.ShowLargeIncrementButtons = false;
         });
@@ -43,7 +43,7 @@
     });
     if (ViewData["EditError"] != null)
     {
-        grid.SetEditErrorText((string) ViewData["EditError"]);
+        grid.SetEditErrorText((string)ViewData["EditError"]);
     }
 }
 @grid.Bind(Model).GetHtml()

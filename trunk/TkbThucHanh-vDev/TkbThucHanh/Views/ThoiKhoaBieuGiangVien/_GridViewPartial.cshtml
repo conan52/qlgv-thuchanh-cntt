@@ -18,6 +18,19 @@
         settings.KeyFieldName = "MaTkb";
 
 
+        settings.Columns.Add(column =>
+        {
+            column.Width = 50;
+            column.Caption = "Tuần";
+            column.FieldName = "TuanHoc";
+            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+            var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
+            if (comboBoxProperties != null)
+            {
+                comboBoxProperties.DataSource = DataProvider<TuanHoc>.GetAll().Select(t => t.SttTuan);
+            }
+        });
+
 
         settings.Columns.Add(column =>
         {
@@ -56,11 +69,13 @@
             column.Width = 140;
             column.Caption = "Giảng viên";
             column.FieldName = "MaGv";
+          
             column.ColumnType = MVCxGridViewColumnType.ComboBox;
             var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
             if (comboBoxProperties != null)
             {
-                comboBoxProperties.DataSource = DataProvider<GiangVien>.GetAll();
+                comboBoxProperties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                comboBoxProperties.DataSource = GiangVienProvider.LayDsGiangVienCoTKB();
                 comboBoxProperties.ValueField = "MaGv";
                 comboBoxProperties.TextField = "HoVaTen";
             }
