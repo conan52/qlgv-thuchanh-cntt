@@ -6,7 +6,8 @@ namespace TkbThucHanh.Models
 {
     public class TuanHoc
     {
-        [Key]
+        [KeyAttribute()]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "STT Tuần")]
         [Required(ErrorMessage = "Tuần học không được để trống!")]
         [Range(1, 52, ErrorMessage = "Tuần học phải là số thuộc khoảng 1 -> 52")]

@@ -20,7 +20,7 @@ namespace TkbThucHanh.Models.Provider
             }
         }
 
-        public static List<TkbGiangVien> GetTeacherTimeTables(List<TeacherFullTable> tbs, DateTime monDay)
+        public static List<TkbGiangVien> GetTeacherTimeTables(List<TeacherFullTable> tbs, DateTime monDay, int week)
         {
             var tkb = from tb in tbs
                       select new TkbGiangVien()
@@ -30,7 +30,8 @@ namespace TkbThucHanh.Models.Provider
                           TenMonHoc = tb.Subject,
                           TietBatDau = tb.Start,
                           MaGv = tb.TeacherCode,
-                          LopHoc = tb.ClassCode
+                          LopHoc = tb.ClassCode,
+                          TuanHoc = week
                       };
             return tkb.ToList();
         }

@@ -32,14 +32,19 @@ namespace TkbThucHanh.Controllers
                 var listTeachersInTable = table.TeacherCodes.Intersect(teachers);
 
                 var courses = LopProvider.GetListCodes();
-                var listcoursesInTable = table.TeacherCodes.Intersect(teachers);
+                // var listcoursesInTable = table.Class.Intersect(courses);
+                var listcoursesInTable = table.Class.Where(c => c.StartsWith("CTK"));
+
 
                 var fullTimeTable = TeacherFullTable.GetFullTimeTable(table.CurrentWeek, listcoursesInTable, listTeachersInTable);
-                var result = ThoiKhoaBieuProvider.GetTeacherTimeTables(fullTimeTable, table.StartDate);
+                TuanHocProvider.DanhDauDaLayDuLieu(table.CurrentWeek, table.StartDate);
+                var result = ThoiKhoaBieuProvider.GetTeacherTimeTables(fullTimeTable, table.StartDate, table.CurrentWeek);
+
+
                 DataProvider<TkbGiangVien>.Add(result);
 
 
-                return Json(new { Status = 1 }, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = 1, Result = result.Count }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { Status = 0 }, JsonRequestBehavior.AllowGet);
         }

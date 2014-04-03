@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TkbThucHanh.Models.Provider;
 
 namespace TkbThucHanh.Models
 {
@@ -43,5 +44,8 @@ namespace TkbThucHanh.Models
 
         [ForeignKey("TkbThucHanhId")]
         public virtual TkbThucHanh TkbThucHanh { get; set; }
+
+
+        public int TuanHoc { get; set; }
     }
 }
