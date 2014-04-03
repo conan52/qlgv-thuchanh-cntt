@@ -9,7 +9,7 @@ namespace TkbThucHanh.Models.Provider
 {
     public class ThoiKhoaBieuProvider
     {
-        public static int GetLastTimeTable()
+        public static int LayTkbCuNhat()
         {
             using (var context = new TkbThucHanhContext())
             {
@@ -20,7 +20,9 @@ namespace TkbThucHanh.Models.Provider
             }
         }
 
-        public static List<TkbGiangVien> GetTeacherTimeTables(List<TeacherFullTable> tbs, DateTime monDay, int week)
+
+
+        public static List<TkbGiangVien> LayTkbGiangVien(List<TeacherFullTable> tbs, DateTime monDay, int week)
         {
             var tkb = from tb in tbs
                       select new TkbGiangVien

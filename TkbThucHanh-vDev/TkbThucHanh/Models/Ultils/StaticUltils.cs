@@ -1,32 +1,38 @@
 ﻿using System;
+using TkbThucHanh.Models.Enums;
 
 namespace TkbThucHanh.Models.Ultils
 {
     public static class StaticUltils
     {
+        public static NgayTrongTuan LayThu(this DayOfWeek dayOfWeek)
+        {
+            return (NgayTrongTuan)dayOfWeek;
+        }
+
         public static string LayThu(this DateTime date)
         {
             switch (date.DayOfWeek)
             {
-                case System.DayOfWeek.Sunday:
+                case DayOfWeek.Sunday:
                     return "Chủ nhật";
 
-                case System.DayOfWeek.Monday:
+                case DayOfWeek.Monday:
                     return "Thứ hai";
 
-                case System.DayOfWeek.Tuesday:
+                case DayOfWeek.Tuesday:
                     return "Thứ ba";
 
-                case System.DayOfWeek.Wednesday:
+                case DayOfWeek.Wednesday:
                     return "Thứ tư";
 
-                case System.DayOfWeek.Thursday:
+                case DayOfWeek.Thursday:
                     return "Thứ năm";
 
-                case System.DayOfWeek.Friday:
+                case DayOfWeek.Friday:
                     return "Thứ sáu";
 
-                case System.DayOfWeek.Saturday:
+                case DayOfWeek.Saturday:
                     return "Thứ bảy";
                 default:
                     return "";

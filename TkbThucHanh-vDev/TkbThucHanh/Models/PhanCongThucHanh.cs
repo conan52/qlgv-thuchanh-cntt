@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TkbThucHanh.Models.Enums;
 
 namespace TkbThucHanh.Models
 {
@@ -11,8 +12,8 @@ namespace TkbThucHanh.Models
 
         public virtual List<TkbThucHanh> TkbThucHanhs { get; set; }
 
-        [Display(Name = "Vắng")]
-        public bool? Vang { get; set; }
+        [Display(Name = "Trạng thái")]
+        public TrangThaiHuongDanTH TrangThai { get; set; }
 
         [Display(Name = "Ghi chú")]
         public string GhiChu { get; set; }
