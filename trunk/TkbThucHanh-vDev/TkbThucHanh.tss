@@ -1,2 +1,59 @@
 <?xml version="1.0"?>
-<ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArrayOfArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Models\Viewer\LichThucHanhTongQuan.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Models\TkbThucHanh.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Models\PhanCongThucHanh.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Models\TkbThucHanhContext.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Controllers\LichThucHanhController.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Models\Provider\LichThucHanhProvider.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Models\MonHoc.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Views\LichThucHanh\_GridViewPartial.cshtml</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Controllers\ThoiKhoaBieuGiangVienController.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Models\Provider\ThoiKhoaBieuProvider.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Models\Provider\DataProvider.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Controllers\PhongThucHanhController.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Models\PhongThucHanh.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Models\Lop.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Views\PhongThucHanh\_GridViewPartial.cshtml</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Controllers\LopHocController.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Models\PhanCongGiangDay.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Views\PhanCongGiangDay\_GridViewPartial.cshtml</string>
+    </ArrayOfString>
+  </ArrayOfArrayOfString>
+</ArrayOfArrayOfArrayOfString>
