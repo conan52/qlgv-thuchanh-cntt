@@ -7,7 +7,7 @@ namespace TkbThucHanh.Models
     public class Lop
     {
         [Key]
-        public int LopId { get; set; }
+       // public int LopId { get; set; }
 
         [Required(ErrorMessage = "Tên lớp không được để trống!")]
         [Display(Name = "Tên lớp")]

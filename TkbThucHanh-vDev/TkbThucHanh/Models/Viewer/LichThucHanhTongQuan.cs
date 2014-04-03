@@ -18,8 +18,7 @@ namespace TkbThucHanh.Models.Viewer
         public int TietBatDau { get; set; }
         public int TietKetThuc { get; set; }
         public DateTime NgayHoc { get; set; }
-        public int LopId { get; set; }
-        public int PhongThucHanhId { get; set; }
+        public string TenLop{ get; set; }
         public int? Gvhd1 { get; set; }
         public int? Gvhd2 { get; set; }
         public int? Gvhd3 { get; set; }
@@ -39,8 +38,7 @@ namespace TkbThucHanh.Models.Viewer
                 MaMonHoc = tkbThucHanh.MonHocId,
                 GhiChu = string.Join(", ", tkbThucHanh.PhanCongThucHanhs.Where(pc => !string.IsNullOrWhiteSpace(pc.GhiChu)).Select(pc => pc.GhiChu)),
                 GvVang = string.Join(", ", tkbThucHanh.PhanCongThucHanhs.Where(pc => pc.TrangThai == TrangThaiHuongDanTH.Vang).Select(pc => pc.GiangVien.HoVaTen)),
-                LopId = tkbThucHanh.LopId,
-                PhongThucHanhId = tkbThucHanh.PhongThucHanhId,
+                TenLop = tkbThucHanh.TenLop,
                 TkbThucHanhId = tkbThucHanh.TkbThucHanhId
             };
             

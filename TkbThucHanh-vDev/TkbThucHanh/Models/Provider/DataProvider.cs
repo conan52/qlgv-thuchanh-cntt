@@ -17,8 +17,7 @@ namespace TkbThucHanh.Models.Provider
             {
                 IQueryable<T> dbQuery = context.Set<T>();
 
-                foreach (var navigationProperty in navigationProperties)
-                    dbQuery = dbQuery.Include(navigationProperty);
+                dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
 
                 list = dbQuery
                     .AsNoTracking()
@@ -34,8 +33,7 @@ namespace TkbThucHanh.Models.Provider
             {
                 IQueryable<T> dbQuery = context.Set<T>();
 
-                foreach (var navigationProperty in navigationProperties)
-                    dbQuery = dbQuery.Include(navigationProperty);
+                dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
 
                 list = dbQuery
                     .AsNoTracking()
@@ -52,8 +50,7 @@ namespace TkbThucHanh.Models.Provider
             {
                 IQueryable<T> dbQuery = context.Set<T>();
 
-                foreach (var navigationProperty in navigationProperties)
-                    dbQuery = dbQuery.Include(navigationProperty);
+                dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
 
                 item = dbQuery
                     .AsNoTracking()

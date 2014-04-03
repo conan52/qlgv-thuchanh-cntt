@@ -83,13 +83,13 @@
         settings.Columns.Add(column =>
         {
             column.Caption = "Lớp";
-            column.FieldName = "LopId";
+            column.FieldName = "TenLop";
             column.ColumnType = MVCxGridViewColumnType.ComboBox;
             var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
             if (comboBoxProperties != null)
             {
                 comboBoxProperties.DataSource = DataProvider<Lop>.GetAll();
-                comboBoxProperties.ValueField = "LopId";
+                comboBoxProperties.ValueField = "TenLop";
                 comboBoxProperties.TextField = "TenLop";
 
                 comboBoxProperties.ValueType = typeof (int);
