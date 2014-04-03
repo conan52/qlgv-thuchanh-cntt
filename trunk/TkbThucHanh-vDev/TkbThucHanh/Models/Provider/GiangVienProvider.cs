@@ -16,9 +16,13 @@ namespace TkbThucHanh.Models.Provider
         {
             var dsTkb = DataProvider<TkbGiangVien>.GetAll().Select(tk => tk.MaGv).Distinct();
 
-            return DataProvider<GiangVien>.GetAll().ToList().Where(g=>dsTkb.Contains(g.MaGv)).ToList();
+            return DataProvider<GiangVien>.GetAll().ToList().Where(g => dsTkb.Contains(g.MaGv)).ToList();
         }
 
+        public static List<GiangVien> LayDsGiangVienCoTheXep()
+        {
 
+            return DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong != null && gv.CoThePhanCong.Value).ToList();
+        }
     }
 }

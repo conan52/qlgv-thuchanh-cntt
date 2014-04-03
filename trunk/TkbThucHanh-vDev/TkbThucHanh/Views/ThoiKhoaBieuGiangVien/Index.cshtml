@@ -5,16 +5,19 @@
 
 <script>
     function CheckWeekUpdate() {
+        LoadingPanel.Show();
+
         //$('#ButtonGetUpdate').text('Xin vui lòng đợi').disable();
         $.get("@Url.Action("GetNewTimeTable", "ThoiKhoaBieuGiangVien")", function (data) {
             if (data.Status == 1) {
                 window.GridView.Refresh();
-                alert('Đã thêm ' + data.Result +' buổi học!')
+                alert('Đã thêm ' + data.Result + ' buổi học!');
                 //$('#ButtonGetUpdate').text('Lấy TKB mới từ web trường').enable();
+            } else {
+                alert('Không có dữ liệu mới!');
             }
-
-            else alert(data);
         });
+        LoadingPanel.Hide();
     }
 </script>
 

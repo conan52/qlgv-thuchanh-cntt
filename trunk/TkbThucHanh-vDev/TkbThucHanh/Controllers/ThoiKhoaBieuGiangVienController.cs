@@ -31,7 +31,7 @@ namespace TkbThucHanh.Controllers
                 var teachers = GiangVienProvider.GetListTeacherCodes();
                 var listTeachersInTable = table.TeacherCodes.Intersect(teachers);
 
-                var courses = LopProvider.GetListCodes();
+                //var courses = LopProvider.GetListCodes();
                 // var listcoursesInTable = table.Class.Intersect(courses);
                 var listcoursesInTable = table.Class.Where(c => c.StartsWith("CTK"));
 
