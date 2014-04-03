@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DevExpress.Web.ASPxHtmlEditor.Internal;
@@ -8,6 +9,14 @@ namespace TkbThucHanh.Models
 {
     public class MonHoc
     {
+        private bool? _batBuoc;
+
+        public MonHoc()
+        {
+            if(BatBuoc==null)
+                BatBuoc = false;
+
+        }
         [Key]
         public int MonHocId { get; set; }
 
@@ -24,7 +33,21 @@ namespace TkbThucHanh.Models
         public int SoTinChi { get; set; }
 
         [Display(Name = "Bắt buộc")]
-        public bool? BatBuoc { get; set; }
+        public bool? BatBuoc
+        {
+            get { return _batBuoc; }
+            set
+            {
+                if (value==null)
+                {
+                    _batBuoc = false;
+                }
+                else
+                {
+                    _batBuoc = value;
+                }
+            }
+        }
 
         [Required(ErrorMessage = "Trình độ không được để trống!")]
         public TrinhDo TrinhDo { get; set; }
@@ -53,6 +76,7 @@ namespace TkbThucHanh.Models
             get
             {
                 if (BatBuoc != null && BatBuoc.Value)
+//                if (BatBuoc)
                     return "BB";
                 return "TC";
             }

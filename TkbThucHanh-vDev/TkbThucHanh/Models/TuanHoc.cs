@@ -6,6 +6,9 @@ namespace TkbThucHanh.Models
 {
     public class TuanHoc
     {
+        private bool? _daLayThongTin;
+        private bool? _daXepLichThucHanh;
+
         [KeyAttribute()]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "STT Tuần")]
@@ -30,9 +33,19 @@ namespace TkbThucHanh.Models
         }
 
         [Display(Name = "Đã lấy thông tin")]
-        public bool? DaLayThongTin { get; set; }
+        public bool? DaLayThongTin
+        {
+            get { return _daLayThongTin; }
+            set {
+                _daLayThongTin = value ?? false;
+            }
+        }
 
         [Display(Name = "Đã xếp lịch thực hành")]
-        public bool? DaXepLichThucHanh { get; set; }
+        public bool? DaXepLichThucHanh
+        {
+            get { return _daXepLichThucHanh; }
+            set { _daXepLichThucHanh = value; }
+        }
     }
 }
