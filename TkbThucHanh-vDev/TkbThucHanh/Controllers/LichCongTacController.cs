@@ -6,6 +6,7 @@ using TkbThucHanh.Models;
 
 namespace TkbThucHanh.Controllers
 {
+    [Authorize(Roles = "Admin, AdminTeacher")]
     public class LichCongTacController : Controller
     {
         //
