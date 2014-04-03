@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using TkbThucHanh.Models.Viewer;
 
 
 namespace TkbThucHanh.Models
@@ -28,6 +29,7 @@ namespace TkbThucHanh.Models
         public DbSet<TkbThucHanh> TkbThucHanhs { get; set; }
         public DbSet<TuanHoc> TuanHocs { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

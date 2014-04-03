@@ -41,11 +41,6 @@ namespace TkbThucHanh.Models
         [ForeignKey("MaGv")]
         public virtual GiangVien GiangVien { get; set; }
 
-        public int? TkbThucHanhId { get; set; }
-
-        [ForeignKey("TkbThucHanhId")]
-        public virtual TkbThucHanh TkbThucHanh { get; set; }
-        
         public int TuanHoc { get; set; }
 
         [NotMapped]

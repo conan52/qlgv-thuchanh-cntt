@@ -26,7 +26,7 @@ namespace TkbThucHanh.Controllers
         {
             var request = new DluWebRequest();
             var table = request.GetCurentTimeTable();
-            if (table.CurrentWeek > ThoiKhoaBieuProvider.GetLastTimeTable())
+            if (table.CurrentWeek > ThoiKhoaBieuProvider.LayTkbCuNhat())
             {
                 var teachers = GiangVienProvider.GetListTeacherCodes();
                 var listTeachersInTable = table.TeacherCodes.Intersect(teachers);
@@ -38,7 +38,7 @@ namespace TkbThucHanh.Controllers
 
                 var fullTimeTable = TeacherFullTable.GetFullTimeTable(table.CurrentWeek, listcoursesInTable, listTeachersInTable);
                 TuanHocProvider.DanhDauDaLayDuLieu(table.CurrentWeek, table.StartDate);
-                var result = ThoiKhoaBieuProvider.GetTeacherTimeTables(fullTimeTable, table.StartDate, table.CurrentWeek);
+                var result = ThoiKhoaBieuProvider.LayTkbGiangVien(fullTimeTable, table.StartDate, table.CurrentWeek);
 
 
                 DataProvider<TkbGiangVien>.Add(result);

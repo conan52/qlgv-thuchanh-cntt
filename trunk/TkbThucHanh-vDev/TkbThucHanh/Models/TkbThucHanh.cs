@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TkbThucHanh.Models.Ultils;
 
 namespace TkbThucHanh.Models
 {
@@ -10,10 +11,12 @@ namespace TkbThucHanh.Models
         [Key]
         public int TkbThucHanhId { get; set; }
 
-        [Display(Name = "Tên môn học")]
-        [Required(ErrorMessage = "Tên môn học không được để trống!")]
-        public string TenMonHoc { get; set; }
-
+        [Display(Name = "Mã môn học")]
+        [Required(ErrorMessage = "Môn học không được để trống!")]
+        public int MonHocId { get; set; }
+        [ForeignKey("MonHocId")]
+        public virtual MonHoc MonHoc { get; set; }
+        
         [Display(Name = "Phòng")]
         [Required(ErrorMessage = "Phòng không được để trống!")]
         public string Phong { get; set; }
@@ -41,13 +44,17 @@ namespace TkbThucHanh.Models
 
         [ForeignKey("PhongThucHanhId")]
         public virtual PhongThucHanh PhongThucHanh { get; set; }
+        
+        public virtual List<PhanCongThucHanh> PhanCongThucHanhs { get; set; }
 
-        [Required(ErrorMessage = "Phân công thực hành không được để trống!")]
-        public int PhanCongThucHanhId { get; set; }
+        public int TuanHoc { get; set; }
 
-        [ForeignKey("PhanCongThucHanhId")]
-        public virtual PhanCongThucHanh PhanCongThucHanh { get; set; }
+        [NotMapped]
+        public string Thu
+        {
+            get { return NgayHoc.LayThu(); }
+        }
 
-        public virtual List<TkbGiangVien> TkbGangViens { get; set; }
+
     }
 }
