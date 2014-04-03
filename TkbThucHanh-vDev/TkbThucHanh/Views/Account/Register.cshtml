@@ -1,19 +1,21 @@
+﻿
 @model TkbThucHanh.Models.RegisterModel
 
 <div class="accountHeader">
     <h2>
-        Create a New Account</h2>
-    <p>Use the form below to create a new account.</p>
+        Đăng ký</h2>
+    <p>Nhập thông tin vào form dưới</p>
 </div>
 
 @using (Html.BeginForm())
 {
+    
     @Html.AntiForgeryToken()
-
+    
     @Html.DevExpress().Label(settings =>
     {
         settings.Name = "UserNameLabel";
-        settings.Text = "User Name";
+        settings.Text = "Tên đăng nhập";
         settings.AssociatedControlName = "UserName";
     }).GetHtml()
     <div class="form-field">
@@ -23,7 +25,7 @@
     @Html.DevExpress().Label(settings =>
     {
         settings.Name = "EmailLabel";
-        settings.Text = "Email";
+        settings.Text = "Địa chỉ Email";
         settings.AssociatedControlName = "Email";
     }).GetHtml()
     <div class="form-field">
@@ -33,7 +35,7 @@
     @Html.DevExpress().Label(settings =>
     {
         settings.Name = "PasswordLabel";
-        settings.Text = "Password";
+        settings.Text = "Mật khẩu";
         settings.AssociatedControlName = "Password";
     }).GetHtml()
     <div class="form-field">
@@ -43,7 +45,7 @@
     @Html.DevExpress().Label(settings =>
     {
         settings.Name = "ConfirmPasswordLabel";
-        settings.Text = "Confirm Password";
+        settings.Text = "Nhập lại mật khẩu";
         settings.AssociatedControlName = "ConfirmPassword";
     }).GetHtml()
     <div class="form-field">
@@ -53,7 +55,7 @@
     @Html.DevExpress().Button(settings =>
     {
         settings.Name = "Button";
-        settings.Text = "Register";
+        settings.Text = "Đăng ký";
         settings.UseSubmitBehavior = true;
     }).GetHtml()
 }

@@ -11,31 +11,35 @@ namespace TkbThucHanh.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
 
+        [Display(Name = "Tên đăng nhập")]
         public string UserName { get; set; }
 
         public string Email { get; set; }
+        [Display(Name = "Tên hiển thị")]
         public string DisplayName { get; set; }
 
+         [Display(Name = "Quyền hạng")]
         public string Role { get; set; }
     }
 
 
     public class ChangePasswordModel
     {
-        [Required]
+        [Required(ErrorMessage = "Mật khẩu cũ không được để trống!")]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "Mật khẩu cũ")]
         public string OldPassword { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Mật khẩu cũ không được để trống!")]
+        [StringLength(100, ErrorMessage = "Mật khẩu chỉ được từ {0} đến {2} ký tự.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Mật khẩu mới")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Required(ErrorMessage = "Nhập lại mật nhẩu mới không được để trống!")]
+        [Display(Name = "Nhập lại mật nhẩu mới")]
+        [Compare("NewPassword", ErrorMessage = "Mật khẩu mới không trùng khớp.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -43,16 +47,16 @@ namespace TkbThucHanh.Models
     {
         private bool? rememberMe;
 
-        [Required]
-        [Display(Name = "User name")]
+        [Required(ErrorMessage = "Tên đăng nhập không được để trống!")]
+        [Display(Name = "Tên đăng nhập")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Mật khẩu không được để trống!")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Ghi nhớ?")]
         public bool? RememberMe
         {
             get { return rememberMe ?? false; }
@@ -62,24 +66,25 @@ namespace TkbThucHanh.Models
 
     public class RegisterModel
     {
-        [Required]
-        [Display(Name = "User name")]
+        [Required(ErrorMessage = "Tên đăng nhập không được để trống!")]
+        [Display(Name = "Tên đăng nhập")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Địa chỉ Email không được để trống!")]
         [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email address")]
+        [Display(Name = "Địa chỉ Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Mật khẩu không được để trống!")]
+        [StringLength(100, ErrorMessage = "Mật khẩu chỉ được từ {0} đến {2} ký tự.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Required(ErrorMessage = "Nhập lại mật khẩu không được để trống!")]
+        [Display(Name = "Nhập lại mật khẩu")]
+        [Compare("Password", ErrorMessage = "Mật khẩu mới không trùng khớp.")]
         public string ConfirmPassword { get; set; }
     }
 }
