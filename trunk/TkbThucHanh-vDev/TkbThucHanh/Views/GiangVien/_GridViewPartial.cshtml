@@ -12,8 +12,6 @@
         settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "GiangVien", Action = "GridViewPartialUpdate"};
         settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "GiangVien", Action = "GridViewPartialDelete"};
         settings.KeyFieldName = "MaGv";
-        settings.SettingDefaultColumn();
-
 
         settings.Columns.Add(column =>
         {
@@ -48,8 +46,6 @@
             column.Caption = "Tài khoản đăng nhập";
             column.ColumnType = MVCxGridViewColumnType.ComboBox;
             var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
-
-
             comboBoxProperties.DataSource = DataProvider<UserProfile>.GetAll();
             comboBoxProperties.TextField = "UserName";
             comboBoxProperties.ValueField = "UserID";
@@ -62,6 +58,7 @@
             column.Caption = "Có thể phân công";
             column.ColumnType = MVCxGridViewColumnType.CheckBox;
         });
+        settings.SettingDefaultColumn();
     });
     if (ViewData["EditError"] != null)
     {

@@ -26,6 +26,7 @@
         //    spinProperties.MaxValue = DateTime.Now.Year+5;
         //    spinProperties.SpinButtons.ShowLargeIncrementButtons = false;
         //});
+        
         settings.Columns.Add(column =>
         {
             column.FieldName = "NgayBatDau";
@@ -37,11 +38,28 @@
             editboxprop.EditFormatString = "dd/MM/yyyy";
         });
 
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Ngày kết thúc";
+
+            column.FieldName = "NgayBatDau";
+            column.ReadOnly = true;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var editboxprop = column.PropertiesEdit as DateEditProperties;
+            editboxprop.NullText = "dd/MM/yyyy";
+            editboxprop.EditFormat = EditFormat.Custom;
+            editboxprop.EditFormatString = "dd/MM/yyyy";
+
+        });
+
         settings.Columns.Add(
         column =>
         {
             column.FieldName = "DaLayThongTin";
             column.Caption = "Đã lấy thông tin";
+            column.ReadOnly = true;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
             column.ColumnType = MVCxGridViewColumnType.CheckBox;
         });
         settings.Columns.Add(
@@ -49,6 +67,8 @@
         {
             column.FieldName = "DaXepLichThucHanh";
             column.Caption = "Đã lấy xếp lịch thực hành";
+            column.ReadOnly = true;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
             column.ColumnType = MVCxGridViewColumnType.CheckBox;
         });
         settings.SettingDefaultColumn();
