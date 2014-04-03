@@ -60,7 +60,7 @@ namespace TkbThucHanh.Models
             return new TkbThucHanh()
             {
                 TenLop = b.LopHoc,
-                MonHocId = 
+              //  MonHocId = b. xxxxxxxxxxxxxxxx
             };
         }
     }
