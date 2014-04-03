@@ -31,7 +31,7 @@ namespace TkbThucHanh.ViewSettings
             settings.Settings.ShowGroupPanel = true;
             settings.Settings.ShowFilterRow = true;
             settings.SettingsBehavior.AllowSelectByRowClick = true;
-
+            
 
             settings.CommandColumn.DeleteButton.Text = "Xóa";
             //      settings.CommandColumn.NewButton.Text = "Thêm";
@@ -40,7 +40,7 @@ namespace TkbThucHanh.ViewSettings
             settings.CommandColumn.UpdateButton.Text = "Áp dụng";
             settings.CommandColumn.ClearFilterButton.Visible = true;
             settings.CommandColumn.Width = 150;
-            settings.CommandColumn.VisibleIndex = settings.Columns.Count;//////////////
+//            settings.CommandColumn.VisibleIndex = settings.Columns.Count;//////////////
             settings.CommandColumn.VisibleIndex = settings.Columns.Count;
             settings.CommandColumn.ButtonType = ButtonType.Link;
             settings.CommandColumn.DeleteButton.Image.Url = "~/Content/Images/delete.png";
