@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DevExpress.Web.Mvc;
+using DevExpress.XtraReports.Data;
 using TkbThucHanh.Models;
 using TkbThucHanh.Models.Provider;
 using TkbThucHanh.Models.Viewer;
@@ -22,9 +23,19 @@ namespace TkbThucHanh.Controllers
 
         public ActionResult CapNhatLichThucHanh()
         {
-            if (true)
+            var tuans = ThoiKhoaBieuProvider.LayTuanChuaXepLichThucHanh();
+
+            if (tuans.Count > 0)
             {
+                var tkbgv = DataProvider<TkbGiangVien>.GetAll();
+                var dsPhongTh = DataProvider<PhongThucHanh>.GetAll();
+
+                var tkb = from t in tkbgv
+                          join phongThucHanh in dsPhongTh on t.Phong equals phongThucHanh.TenPhong
+                          join tuanHoc in tuans on t.TuanHoc equals tuanHoc.SttTuan
+                          select t;
                 
+
                 return Json(new { Status = 1, Result = 0 }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { Status = 0 }, JsonRequestBehavior.AllowGet);

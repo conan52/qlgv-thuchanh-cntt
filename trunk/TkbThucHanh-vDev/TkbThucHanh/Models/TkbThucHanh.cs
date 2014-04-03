@@ -34,15 +34,15 @@ namespace TkbThucHanh.Models
         public DateTime NgayHoc { get; set; }
 
         [Required(ErrorMessage = "Lớp không được để trống!")]
-        public int LopId { get; set; }
+        public string TenLop { get; set; }
 
-        [ForeignKey("LopId")]
+        [ForeignKey("TenLop")]
         public virtual Lop Lop { get; set; }
 
         [Required(ErrorMessage = "Phòng thực hành không được để trống!")]
-        public int PhongThucHanhId { get; set; }
 
-        [ForeignKey("PhongThucHanhId")]
+
+        [ForeignKey("Phong")]
         public virtual PhongThucHanh PhongThucHanh { get; set; }
         
         public virtual List<PhanCongThucHanh> PhanCongThucHanhs { get; set; }
@@ -55,6 +55,13 @@ namespace TkbThucHanh.Models
             get { return NgayHoc.LayThu(); }
         }
 
-
+        public static explicit operator TkbThucHanh(TkbGiangVien b)
+        {
+            return new TkbThucHanh()
+            {
+                TenLop = b.LopHoc,
+                MonHocId = 
+            };
+        }
     }
 }

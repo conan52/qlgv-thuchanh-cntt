@@ -28,9 +28,9 @@ namespace TkbThucHanh.Models
         public virtual GiangVien GiangVien { get; set; }
 
         [Required(ErrorMessage = "Lớp không được để trống!")]
-        public int LopId { get; set; }
+        public string TenLop { get; set; }
 
-        [ForeignKey("LopId")]
+        [ForeignKey("TenLop")]
         public virtual Lop Lop { get; set; }
     }
 }
