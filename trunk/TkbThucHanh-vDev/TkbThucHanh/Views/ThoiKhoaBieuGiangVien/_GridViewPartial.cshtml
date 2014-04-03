@@ -32,6 +32,17 @@
             }
         });
 
+        settings.Columns.Add(column =>
+        {
+            column.Width = 70;
+            column.Caption = "Thứ";
+            
+            column.FieldName = "Thu";
+            column.ReadOnly = true;
+            column.ShowInFilterControl = false;
+            column.ShowInCustomizationForm = false;
+            
+        });
 
         settings.Columns.Add(column =>
         {
@@ -86,12 +97,12 @@
 
         settings.Columns.Add(column =>
         {
-            column.Width = 260;
+           // column.Width = 260;
             column.FieldName = "TenMonHoc";
             column.Caption = "Môn học";
+ 
 
-
-            column.ColumnType = MVCxGridViewColumnType.ComboBox;
+           
             var comboBoxProperties = column.PropertiesEdit as ComboBoxProperties;
             if (comboBoxProperties != null)
             {
