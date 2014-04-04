@@ -11,6 +11,7 @@ using TkbThucHanh.Models.Viewer;
 
 namespace TkbThucHanh.Controllers
 {
+    [Authorize(Roles = "AdminTeacher,Admin")]
     public class LichThucHanhController : Controller
     {
         //
