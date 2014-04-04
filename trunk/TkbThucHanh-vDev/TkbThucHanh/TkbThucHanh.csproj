@@ -195,9 +195,11 @@
     <Content Include="Views\Tuan\_GridViewPartial.cshtml" />
     <Content Include="Views\ThoiKhoaBieuGiangVien\Index.cshtml" />
     <Content Include="Views\ThoiKhoaBieuGiangVien\_GridViewPartial.cshtml" />
-    <Content Include="Views\LichThucHanh\Index.cshtml" />
-    <Content Include="Views\LichThucHanh\_GridViewPartial.cshtml" />
+    <Content Include="Views\LichThucHanh\_Index.cshtml" />
+    <Content Include="Views\LichThucHanh\__GridViewPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\LichPhanCongThucHanh\Index.cshtml" />
+    <Content Include="Views\LichPhanCongThucHanh\_GridViewPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -210,6 +212,7 @@
     <Compile Include="Controllers\GiangVienController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LichCongTacController.cs" />
+    <Compile Include="Controllers\LichPhanCongThucHanhController.cs" />
     <Compile Include="Controllers\LopHocController.cs" />
     <Compile Include="Controllers\MonHocController.cs" />
     <Compile Include="Controllers\PhanCongGiangDayController.cs" />
@@ -230,6 +233,7 @@
     <Compile Include="Models\Enums\TrinhDo.cs" />
     <Compile Include="Models\GiangVien.cs" />
     <Compile Include="Models\LichCongTac.cs" />
+    <Compile Include="Models\LichThucHanh.cs" />
     <Compile Include="Models\Lop.cs" />
     <Compile Include="Models\MonHoc.cs" />
     <Compile Include="Models\PhanCongGiangDay.cs" />

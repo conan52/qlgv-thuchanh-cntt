@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Lịch thực hành";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+
+<script>
+    function CheckWeekUpdate() {
+
+        //$('#ButtonGetUpdate').text('Xin vui lòng đợi').disable();
+        $.get("@Url.Action("CapNhatTuLichGv", "LichPhanCongThucHanh")", function (data) {
+            if (data.Status == 1) {
+                window.GridView.Refresh();
+                alert('Đã thêm ' + data.Result + ' buổi học!');
+                //$('#ButtonGetUpdate').text('Lấy TKB mới từ web trường').enable();
+            } else {
+                alert('Không có dữ liệu mới!');
+            }
+        });
+        LoadingPanel.Hide();
+    }
+</script>
+
+
+@Html.DevExpress().Button(settings =>
+{
+    settings.Name = "Button";
+    settings.Text = "Thêm mới";
+    settings.UseSubmitBehavior = false;
+    settings.EnableClientSideAPI = true;
+    settings.ClientSideEvents.Click = "function(s, e) {GridView.AddNewRow();}";
+}).GetHtml()
+
+@Html.DevExpress().Button(settings =>
+{
+    settings.Name = "btnLoad";
+    settings.Text = "Cập nhật từ lịch GV";
+    settings.UseSubmitBehavior = false;
+    settings.EnableClientSideAPI = true;
+    settings.ClientSideEvents.Click = "function(s, e) {CapNhatLichThucHanh();}";
+}).GetHtml()
+
+
+@Html.Action("GridViewPartial")
