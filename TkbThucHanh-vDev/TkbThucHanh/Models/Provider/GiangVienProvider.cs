@@ -21,8 +21,8 @@ namespace TkbThucHanh.Models.Provider
 
         public static List<GiangVien> LayDsGiangVienCoTheXep()
         {
-
-            return DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong != null && gv.CoThePhanCong.Value).ToList();
+            return DataProvider<GiangVien>.GetAll().ToList();
+          //  return DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong != null && gv.CoThePhanCong.Value).ToList();
         }
     }
 }

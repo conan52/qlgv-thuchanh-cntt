@@ -2,22 +2,10 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Controllers\AccountController.cs</string>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Filters\InitializeSimpleMembershipAttribute.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Models\AccountModels.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Views\Account\Login.cshtml</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Views\Account\_Login.cshtml</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Controllers\LichCongTacController.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Scripts\AjaxLogin.js</string>
+      <string>C:\Users\Le Ngoc Linh\Desktop\NCKH\TkbThucHanh-vDev\TkbThucHanh\Web.config</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
