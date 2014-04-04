@@ -9,10 +9,10 @@ namespace TkbThucHanh.ViewSettings
     {
         public static void SettingDefaultColumn(this GridViewSettings settings)
         {
-            settings.SettingsPager.PageSize = 50;
+            settings.SettingsPager.PageSize = 15;
             settings.SettingsBehavior.ConfirmDelete = true;
             settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
-            settings.Width = Unit.Percentage(90);
+            settings.Width = Unit.Percentage(95);
             settings.SettingsBehavior.ColumnResizeMode = ColumnResizeMode.NextColumn;
             settings.SettingsPopup.EditForm.Width = 600;
             settings.SettingsPopup.EditForm.HorizontalAlign = PopupHorizontalAlign.Center;

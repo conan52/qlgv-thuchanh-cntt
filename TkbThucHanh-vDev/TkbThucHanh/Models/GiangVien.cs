@@ -43,7 +43,7 @@ namespace TkbThucHanh.Models
         [NotMapped]
         public string TenNganGon
         {
-            get { return HoVaTen.LayTen(); }
+            get { return HoVaTen.LayTenVietTat(); }
         }
     }
 }

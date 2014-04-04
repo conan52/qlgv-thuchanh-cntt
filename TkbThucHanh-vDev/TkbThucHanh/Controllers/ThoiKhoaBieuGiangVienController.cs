@@ -11,7 +11,7 @@ using TkbThucHanh.Models.Provider;
 
 namespace TkbThucHanh.Controllers
 {
-  //  [Authorize(Roles = "AdminTeacher,Admin")]
+    //  [Authorize(Roles = "AdminTeacher,Admin")]
     public class ThoiKhoaBieuGiangVienController : Controller
     {
         //
@@ -32,9 +32,9 @@ namespace TkbThucHanh.Controllers
                 var teachers = GiangVienProvider.GetListTeacherCodes();
                 var listTeachersInTable = table.TeacherCodes.Intersect(teachers);
 
-                //var courses = LopProvider.GetListCodes();
-                // var listcoursesInTable = table.Class.Intersect(courses);
-                var listcoursesInTable = table.Class.Where(c => c.StartsWith("CTK"));
+                var courses = LopProvider.GetListCodes();
+                var listcoursesInTable = table.Class.Intersect(courses);
+                //  var listcoursesInTable = table.Class.Where(c => c.StartsWith("CTK"));
 
 
                 var fullTimeTable = TeacherFullTable.GetFullTimeTable(table.CurrentWeek, listcoursesInTable, listTeachersInTable);

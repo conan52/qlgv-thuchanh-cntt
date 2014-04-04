@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DevExpress.Web.Mvc;
+using DevExpress.XtraPrinting.Native;
 using DluWebHelper;
 using TkbThucHanh.Models;
 using TkbThucHanh.Models.Provider;
@@ -46,6 +47,11 @@ namespace TkbThucHanh.Controllers
                                LopHoc = t.LopHoc
                            };
                 DataProvider<LichThucHanh>.Add(data);
+
+                db.TuanHocs.Where(th => th.DaLayThongTin != null && th.DaLayThongTin.Value).ForEach(t => t.DaXepLichThucHanh = true);
+                db.SaveChanges();
+
+
                 return Json(new { Status = 1, Result = result.Count }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { Status = 0 }, JsonRequestBehavior.AllowGet);
