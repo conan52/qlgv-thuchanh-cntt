@@ -29,6 +29,7 @@ namespace TkbThucHanh.Models
         public DbSet<TkbThucHanh> TkbThucHanhs { get; set; }
         public DbSet<TuanHoc> TuanHocs { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<LichThucHanh> LichThucHanhs { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
