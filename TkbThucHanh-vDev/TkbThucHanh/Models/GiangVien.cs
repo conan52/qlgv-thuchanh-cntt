@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TkbThucHanh.Models.Enums;
+using TkbThucHanh.Models.Ultils;
 
 namespace TkbThucHanh.Models
 {
@@ -37,5 +38,12 @@ namespace TkbThucHanh.Models
 
         [ForeignKey("UserProfileId")]
         public UserProfile UserProfile { get; set; }
+
+
+        [NotMapped]
+        public string TenNganGon
+        {
+            get { return HoVaTen.LayTen(); }
+        }
     }
 }

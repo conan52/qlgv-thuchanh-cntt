@@ -43,8 +43,6 @@ namespace TkbThucHanh.Controllers
                                TenMonHoc = t.TenMonHoc,
                                Phong = t.Phong,
                                MaGv1 = t.MaGv,
-                               MaGv2 = "",
-                               MaGv3 = "",
                                LopHoc = t.LopHoc
                            };
                 DataProvider<LichThucHanh>.Add(data);
@@ -60,8 +58,8 @@ namespace TkbThucHanh.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial()
         {
-            var model = db.LichThucHanhs;
-            return PartialView("_GridViewPartial", model.ToList());
+            var model = db.LichThucHanhs.ToList();
+            return PartialView("_GridViewPartial", model);
         }
 
         [HttpPost, ValidateInput(false)]

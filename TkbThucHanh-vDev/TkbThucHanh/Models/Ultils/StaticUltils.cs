@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using TkbThucHanh.Models.Enums;
 
 namespace TkbThucHanh.Models.Ultils
@@ -37,7 +38,12 @@ namespace TkbThucHanh.Models.Ultils
                 default:
                     return "";
             }
+        }
 
+
+        public static string LayTen(this string tenDayDu)
+        {
+            return tenDayDu.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Last();
         }
     }
 }

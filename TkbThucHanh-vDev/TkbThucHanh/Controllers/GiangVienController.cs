@@ -92,5 +92,8 @@ namespace TkbThucHanh.Controllers
             }
             return PartialView("_GridViewPartial", model.ToList());
         }
+
+
+
     }
 }
