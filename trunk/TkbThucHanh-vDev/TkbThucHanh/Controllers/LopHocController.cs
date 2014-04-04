@@ -6,7 +6,7 @@ using TkbThucHanh.Models;
 
 namespace TkbThucHanh.Controllers
 {
-    [Authorize(Roles = "AdminTeacher,Admin")]
+ //   [Authorize(Roles = "AdminTeacher,Admin")]
     public class LopHocController : Controller
     {
         //
