@@ -5,9 +5,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using DevExpress.XtraReports.Data;
 using TKBThucHanh.Filters;
 using TkbThucHanh.Models;
 using TkbThucHanh.Models.Enums;
+using TkbThucHanh.Models.Provider;
 using WebMatrix.WebData;
 
 namespace TkbThucHanh.Controllers
@@ -64,15 +66,18 @@ namespace TkbThucHanh.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(item.UserName, item.UserName);
-                    //model.Add(item);
-                    //db.SaveChanges();
-
                     SetRole(item.UserName, item.Role);
                     WebSecurity.ChangePassword(item.UserName, item.UserName, item.UserName);
+                    model.Add(item);
+                    db.SaveChanges();
                 }
-                catch (Exception e)
+//                catch (Exception e)
+//                {
+//                    ViewData["EditError"] = e.Message;
+//                }
+                catch (MembershipCreateUserException e)
                 {
-                    ViewData["EditError"] = e.Message;
+                     ViewData["EditError"]= ErrorCodeToString(e.StatusCode);
                 }
             }
             else

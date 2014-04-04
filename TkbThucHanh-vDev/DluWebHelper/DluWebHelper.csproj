@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HtmlAgilityPack">
-      <HintPath>D:\Softs\Dev\Plugin\HtmlAgilityPack\Net40\HtmlAgilityPack.dll</HintPath>
+      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,6 +56,9 @@
     <Compile Include="TeacherTimeTable.cs" />
     <Compile Include="TeacherFullTable.cs" />
     <Compile Include="TimeTableWebResult.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

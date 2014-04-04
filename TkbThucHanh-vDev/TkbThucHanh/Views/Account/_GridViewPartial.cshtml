@@ -11,11 +11,22 @@
         settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "Account", Action = "GridViewPartialDelete"};
 
         settings.KeyFieldName = "UserId";
-        settings.SettingDefaultColumn();
 
-        settings.Columns.Add("UserName");
-        settings.Columns.Add("Email");
-        settings.Columns.Add("DisplayName");
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "UserName";
+            column.Caption = "Tên đăng nhập";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Email";
+            column.Caption = "Địa chỉ Email";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "DisplayName";
+            column.Caption = "Tên hiển thị";
+        });
 
         settings.Columns.Add(column =>
         {
@@ -32,6 +43,8 @@
                 comboBoxProperties.ValueField = "Name";
             }
         });
+
+        settings.SettingDefaultColumn();
     });
     if (ViewData["EditError"] != null)
     {
