@@ -11,7 +11,7 @@ using TkbThucHanh.Models.Provider;
 
 namespace TkbThucHanh.Controllers
 {
-    [Authorize(Roles = "AdminTeacher,Admin")]
+  //  [Authorize(Roles = "AdminTeacher,Admin")]
     public class ThoiKhoaBieuGiangVienController : Controller
     {
         //
