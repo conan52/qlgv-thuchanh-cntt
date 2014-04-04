@@ -45,15 +45,15 @@ namespace TkbThucHanh.Models
         [ForeignKey("MaGv1")]
         public virtual GiangVien GiangVien1 { get; set; }
 
-        //public string MaGv2 { get; set; }
+        public string MaGv2 { get; set; }
 
-        //[ForeignKey("MaGv2")]
-        //public virtual GiangVien GiangVien2 { get; set; }
+        [ForeignKey("MaGv2")]
+        public virtual GiangVien GiangVien2 { get; set; }
 
-        //public string MaGv3 { get; set; }
+        public string MaGv3 { get; set; }
 
-        //[ForeignKey("MaGv3")]
-        //public virtual GiangVien GiangVien3 { get; set; }
+        [ForeignKey("MaGv3")]
+        public virtual GiangVien GiangVien3 { get; set; }
 
         public string GvVang { get; set; }
 
