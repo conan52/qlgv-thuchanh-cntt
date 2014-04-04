@@ -66,8 +66,10 @@ namespace TkbThucHanh.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(item.UserName, item.UserName);
-                    SetRole(item.UserName, item.Role);
-                    WebSecurity.ChangePassword(item.UserName, item.UserName, item.UserName);
+                    if (item.Role == null)
+                        item.Role = "Blocked";
+                    SetRole(item.UserName, item.Role);  
+//                    WebSecurity.ChangePassword(item.UserName, item.UserName, item.UserName);
                     model.Add(item);
                     db.SaveChanges();
                 }
@@ -486,10 +488,10 @@ namespace TkbThucHanh.Controllers
             switch (createStatus)
             {
                 case MembershipCreateStatus.DuplicateUserName:
-                    return "User name already exists. Please enter a different user name.";
+                    return "Tên đăng nhập đã tồn tại. Vui lòng nhập tên đăng nhập khác.";
 
                 case MembershipCreateStatus.DuplicateEmail:
-                    return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
+                    return "Tên đăng nhập cho email này đã tồn tại. Vui lòng chọn email khác.";
 
                 case MembershipCreateStatus.InvalidPassword:
                     return "The password provided is invalid. Please enter a valid password value.";
@@ -513,7 +515,7 @@ namespace TkbThucHanh.Controllers
                     return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
 
                 default:
-                    return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+                    return "Có lỗi xảy ra. Vui lòng kiểm tra lại hoặc liên hệ với Quản trị viên.";
             }
         }
         #endregion
