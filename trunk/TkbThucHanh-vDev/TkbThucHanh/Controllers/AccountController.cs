@@ -12,7 +12,7 @@ using WebMatrix.WebData;
 
 namespace TkbThucHanh.Controllers
 {
-    // [Authorize]
+//    [Authorize(Roles = "AdminTeacher,Admin")]
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
