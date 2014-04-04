@@ -21,7 +21,8 @@ namespace DluWebHelper
 
         public int CurrentWeek
         {
-            get { return Weeks.Count > 0 ? Weeks.Max() : -1; }
+          //  get { return Weeks.Count > 0 ? Weeks.Max() : -1; }
+            get { return 33; }
         }
     }
 }
