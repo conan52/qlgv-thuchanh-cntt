@@ -13,9 +13,7 @@ namespace TkbThucHanh.Models
 
         public MonHoc()
         {
-            if(BatBuoc==null)
-                BatBuoc = false;
-
+            
         }
         [Key]
         public int MonHocId { get; set; }
