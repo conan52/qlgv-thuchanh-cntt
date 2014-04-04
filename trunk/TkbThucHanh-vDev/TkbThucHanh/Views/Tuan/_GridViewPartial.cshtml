@@ -35,7 +35,7 @@
             var editboxprop = column.PropertiesEdit as DateEditProperties;
             editboxprop.NullText = "dd/MM/yyyy";
             editboxprop.EditFormat = EditFormat.Custom;
-            editboxprop.EditFormatString = "dd/MM/yyyy";
+            editboxprop.EditFormatString = "dd/MM/yyyy"; editboxprop.DisplayFormatString = "dd/MM/yyyy";
         });
 
         settings.Columns.Add(column =>
@@ -50,6 +50,7 @@
             editboxprop.NullText = "dd/MM/yyyy";
             editboxprop.EditFormat = EditFormat.Custom;
             editboxprop.EditFormatString = "dd/MM/yyyy";
+            editboxprop.DisplayFormatString = "dd/MM";
 
         });
 

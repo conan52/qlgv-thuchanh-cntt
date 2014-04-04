@@ -38,7 +38,7 @@
             var editboxprop = column.PropertiesEdit as DateEditProperties;
             editboxprop.NullText = "dd/MM/yyyy";
             editboxprop.EditFormat = EditFormat.Custom;
-            editboxprop.EditFormatString = "dd/MM/yyyy";
+            editboxprop.EditFormatString = "dd/MM/yyyy"; editboxprop.DisplayFormatString = "dd/MM/yyyy";
         });
         settings.Columns.Add(column =>
         {
@@ -47,7 +47,7 @@
             column.ColumnType = MVCxGridViewColumnType.DateEdit;
             var editboxprop = column.PropertiesEdit as DateEditProperties;
             editboxprop.NullText = "dd/MM/yyyy";
-            editboxprop.EditFormat = EditFormat.Custom;
+            editboxprop.EditFormat = EditFormat.Custom; editboxprop.DisplayFormatString = "dd/MM/yyyy";
             editboxprop.EditFormatString = "dd/MM/yyyy";
         });
         settings.SettingDefaultColumn();

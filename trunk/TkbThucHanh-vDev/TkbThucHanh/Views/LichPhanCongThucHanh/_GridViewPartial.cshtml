@@ -1,10 +1,19 @@
 ﻿@using TkbThucHanh.Models
 @using TkbThucHanh.Models.Provider
 @using TkbThucHanh.ViewSettings
+
+
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
+
+        
+        
+        
+        
         settings.Name = "GridView";
+       
+        
         settings.CallbackRouteValues = new { Controller = "LichPhanCongThucHanh", Action = "GridViewPartial" };
 
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "LichPhanCongThucHanh", Action = "GridViewPartialAddNew" };

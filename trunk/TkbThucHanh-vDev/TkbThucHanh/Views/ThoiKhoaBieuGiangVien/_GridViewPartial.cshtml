@@ -50,11 +50,15 @@
             column.Width = 65;
             column.FieldName = "NgayHoc";
             column.Caption = "Ngày học";
+
+            
+            
             column.ColumnType = MVCxGridViewColumnType.DateEdit;
             var editboxprop = column.PropertiesEdit as DateEditProperties;
             editboxprop.NullText = "dd/MM/yyyy";
             editboxprop.EditFormat = EditFormat.Custom;
             editboxprop.EditFormatString = "dd/MM/yyyy";
+            editboxprop.DisplayFormatString = "dd/MM";
         });
 
         settings.Columns.Add(column =>
