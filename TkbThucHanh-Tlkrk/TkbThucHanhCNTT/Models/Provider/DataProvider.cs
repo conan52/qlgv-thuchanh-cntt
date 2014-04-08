@@ -9,6 +9,17 @@ namespace TkbThucHanhCNTT.Models.Provider
 {
     public class DataProvider<T> where T : class
     {
+
+        public static int RemoveById(object id)
+        {
+            using (var context = new TkbThucHanhContext())
+            {
+                T obj = context.Set<T>().Find(id);
+                context.Entry(obj).State = EntityState.Deleted;
+                return context.SaveChanges();
+            }
+        }
+
         public static IList<T> GetAll(params Expression<Func<T, object>>[] navigationProperties)
         {
             List<T> list;
@@ -63,7 +74,7 @@ namespace TkbThucHanhCNTT.Models.Provider
 
         public static void Add(IEnumerable<T> items)
         {
-          try
+            try
             {
                 using (var context = new TkbThucHanhContext())
                 {

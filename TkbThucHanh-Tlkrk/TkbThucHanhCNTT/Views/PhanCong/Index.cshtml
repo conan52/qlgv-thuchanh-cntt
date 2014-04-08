@@ -1,25 +1,26 @@
-﻿@using TkbThucHanhCNTT.Models.Viewer
+﻿@using TkbThucHanhCNTT.Models
 @{
     ViewBag.Title = "About";
 }
+
+
 <div id="myGridView">
-    @(Html.Kendo().Grid<GiangVienViewModel>()
+    @(Html.Kendo().Grid<PhanCongGiangDay>()
           .Name("GridView")
           .Columns(columns =>
           {
-              columns.Bound(c => c.MaGv).Width(15);
-              columns.Bound(c => c.HoVaTen);
-            //  columns.Bound(c => c.ChuyenNganh).Width(30);
-              columns.ForeignKey(p => p.ChuyenNganh, (System.Collections.IEnumerable)ViewData["ChuyenNganhs"], "Value", "Description");
-              columns.Bound(c => c.TaiKhoan).Width(50);
-              columns.Bound(c => c.CoThePhanCong);
+              columns.Bound(c => c.IdPhanCong).Width(15);
+              columns.ForeignKey(p => p.MaGv, (System.Collections.IEnumerable)ViewData["GiaoViens"], "MaGv", "HoVaTen");
+              columns.ForeignKey(c => c.MonHocId, (System.Collections.IEnumerable)ViewData["MonHocs"], "MonHocId", "TenMonHoc");
+              columns.Bound(c => c.TenLop).Width(50);
               columns.Command(command =>
               {
                   command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
                   command.Destroy().Text("Xóa");
+
               }).Width(172);
           })
-          .ToolBar(toolbar => toolbar.Create().Text("Thêm giảng viên"))
+          .ToolBar(toolbar => toolbar.Create().Text("Thêm"))
           .Editable(e => e.Mode(GridEditMode.PopUp))
           .Sortable()
           .Pageable(pageable =>
@@ -28,16 +29,16 @@
               pageable.PageSizes(true);
           })
           .Selectable()
-            //  .Scrollable()
+          //  .Scrollable()
           .DataSource(dataSource => dataSource
               .Ajax()
               .PageSize(20)
               .Events(events => events.Error("error_handler"))
-              .Read(read => read.Action("AjaxReadData", "GiangVien"))
-              .Create(update => update.Action("AjaxCreate", "GiangVien"))
-              .Update(update => update.Action("Ajax_Update", "GiangVien"))
-              .Destroy(update => update.Action("AjaxDelete", "GiangVien"))
-              .Model(model => model.Id(gv => gv.MaGv))
+              .Read(read => read.Action("AjaxReadData", "PhanCong"))
+                      .Create(update => update.Action("AjaxCreate", "PhanCong"))
+                      .Update(update => update.Action("Ajax_Update", "PhanCong"))
+                      .Destroy(update => update.Action("AjaxDelete", "PhanCong"))
+              .Model(model => model.Id(p => p.IdPhanCong))
           )
           )
 </div>

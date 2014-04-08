@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GiangVienController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PhanCongController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -967,6 +968,8 @@
     <Content Include="Views\GiangVien\_Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ChuyenNganh.cshtml" />
     <Content Include="Views\GiangVien\Index.cshtml" />
+    <Content Include="Views\PhanCong\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\GiangVien.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">

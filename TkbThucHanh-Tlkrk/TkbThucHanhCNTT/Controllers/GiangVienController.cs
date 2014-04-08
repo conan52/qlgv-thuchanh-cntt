@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -17,8 +18,19 @@ namespace TkbThucHanhCNTT.Controllers
 
         public ActionResult Index()
         {
+            ViewData["ChuyenNganhs"] = EnumUltils.GetDescriptions_ChuyenNganh();
             return View();
+
         }
+
+        public JsonResult GetGv()
+        {
+            var result = DataProvider<GiangVien>.GetAll().Select(gv => new { gv.HoVaTen, gv.MaGv });
+
+            return this.Json(result);
+        }
+
+
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, GiangVien gv)

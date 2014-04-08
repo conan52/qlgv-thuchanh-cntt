@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = null;
+}
+
+@(Html.Kendo().DropDownListFor(m => m)
+                  .AutoBind(false)
+                  .OptionLabel("Select a value...")
+                  .DataTextField("HoVaTen")
+                  .DataValueField("MaGv")
+                  .DataSource(d => d.Read(read => read.Action("GetGv", "GiangVien")))
+            )
