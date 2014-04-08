@@ -51,5 +51,10 @@ namespace TkbThucHanhCNTT.Models.Ultils
             }
             return s + " " + split.Last();
         }
+
+        public static DateTime Monday(this DateTime curr)
+        {
+            return curr.AddDays(-(int)curr.DayOfWeek + 1);
+        }
     }
 }

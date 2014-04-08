@@ -8,13 +8,13 @@
           .Columns(columns =>
           {
               columns.Bound(c => c.SttTuan);
-              columns.Bound(c => c.NgayBatDau);
-              columns.Bound(c => c.NgayKetThuc);
-              columns.Bound(c => c.DaLayThongTin);
-              columns.Bound(c => c.DaXepLichThucHanh);
+              columns.Bound(c => c.NgayBatDau).Format("{0:dd/MM/yyyy}");
+              columns.Bound(c => c.NgayKetThuc).Format("{0:dd/MM/yyyy}");
+              columns.Bound(c => c.DaLayThongTin).ClientTemplate("<input type='checkbox' id='DaLayThongTin' name='DaLayThongTin' disable #if(DaLayThongTin){#checked#}# value='#=DaLayThongTin#' />");
+              columns.Bound(c => c.DaXepLichThucHanh).ClientTemplate("<input type='checkbox' id='DaXepLichThucHanh' name='DaXepLichThucHanh' disable #if(DaXepLichThucHanh){#checked#}# value='#=DaLayThongTin#' />");
               columns.Command(command => command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa")).Width(172);
-          }).ToolBar(toolBar => toolBar.Template("<a id='btnCreate' class='k-button k-button-icontext' href='#' ><span class='k-icon k-add'></span>Khởi tạo danh sách tuần</a>" +
-                                                 "<a class='k-button k-button-icontext' href='#' onlick='customxCommand()'><span class='k-icon k-delete'></span>Xóa hết các tuần</a>"))
+          }).ToolBar(toolBar => toolBar.Template("<a id='btnCreate' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'></span>Khởi tạo danh sách tuần</a>" +
+                                                 "<a id='clearAllWeek' class='k-button k-button-icontext' href='#'><span class='k-icon k-delete'></span>Xóa hết các tuần</a>"))
           .Editable(e => e.Mode(GridEditMode.PopUp))
           .Sortable()
           .Pageable(pageable =>
@@ -93,11 +93,10 @@
       .AutoFocus(true)
       .Modal(true)
       )
-<style>
-    
-    
-    
-</style>
+
+@(Html.Kendo().Notification()
+      .Name("popupNotification"))
+
 <script type="text/javascript">
     function error_handler(e) {
         if (e.errors) {
@@ -113,6 +112,11 @@
         }
     }
 
+    function ShowNotification(message, type) {
+        var popupNotification = $("#popupNotification").data("kendoNotification");
+        popupNotification.show(message, type);
+    }
+
     function onClose() {
         $("#btnCreate").fadeIn(300);
 
@@ -123,19 +127,52 @@
         $("#btnCreate").fadeIn(300);
     }
 
+    function refreshData() {
+        $('#GridView').data('kendoGrid').dataSource.read();
+        $('#GridView').data('kendoGrid').refresh();
+    }
+
+//    function OpenDialog() {
+//        $("#window").data("kendoWindow").center().open();
+//        $("#btnCreate").fadeOut(300);
+//    }
+
     $('#btnCreate').bind("click", function() {
         $("#window").data("kendoWindow").center().open();
         $("#btnCreate").fadeOut(300);
     });
+
+    $('#clearAllWeek').bind("click", function() {
+        var r = confirm("Bạn muốn xóa hết dữ liệu của các tuần học?");
+        if (r == true) {
+            $.post("@Url.Action("AjaxClearWeek", "TuanHoc")")
+                .done(function(data) {
+                    if (data.Result == "OK") {
+                        //closeDialog();
+                        ShowNotification("Xóa thành công", "info");
+                        refreshData();
+
+                    } else
+                        ShowNotification(data.Message, "error");
+                });
+        }
+
+    });
+
 
     function AjaxInit() {
         var week = $("#ChonTuan").data('kendoNumericTextBox').value();
         var val = $("#NgayTrongTuan").data('kendoDatePicker').value();
         var date = kendo.toString(val, "dd/MM/yyyy");
 
-        $.get("@Url.Action("AjaxInitWeek", "TuanHoc")", { week: week, dateOfWeek: date })
+        $.post("@Url.Action("AjaxInitWeek", "TuanHoc")", { week: week, dateOfWeek: date })
             .done(function(data) {
-                alert(data);
+                if (data.Result == "OK") {
+                    closeDialog();
+                    ShowNotification("Khởi tạo thành công", "info");
+                    refreshData();
+                } else
+                    ShowNotification(data.Message, "error");
             });
     }
 </script>
