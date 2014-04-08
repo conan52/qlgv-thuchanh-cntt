@@ -171,6 +171,8 @@
     <Compile Include="Controllers\GiangVienController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhanCongController.cs" />
+    <Compile Include="Controllers\ThoiKhoaBieuController.cs" />
+    <Compile Include="Controllers\TuanHocController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -200,6 +202,7 @@
     <Compile Include="Models\TuanHoc.cs" />
     <Compile Include="Models\Ultils\StaticUltils.cs" />
     <Compile Include="Models\Viewer\GiangVienViewModel.cs" />
+    <Compile Include="Models\Viewer\TkbGiangVienViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -902,6 +905,9 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.7.2.js" />
+    <Content Include="Views\TuanHoc\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -970,6 +976,7 @@
     <Content Include="Views\GiangVien\Index.cshtml" />
     <Content Include="Views\PhanCong\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\GiangVien.cshtml" />
+    <Content Include="Views\ThoiKhoaBieu\TkbGiangVien.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">

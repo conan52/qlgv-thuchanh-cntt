@@ -6,14 +6,11 @@ namespace TkbThucHanhCNTT.Models
 {
     public class TuanHoc
     {
-        private bool? _daLayThongTin;
-        private bool? _daXepLichThucHanh;
-
-        [KeyAttribute()]
+        [KeyAttribute]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "STT Tuần")]
         [Required(ErrorMessage = "Tuần học không được để trống!")]
-        [Range(1, 52, ErrorMessage = "Tuần học phải là số thuộc khoảng 1 -> 52")]
+        [Range(1, 53, ErrorMessage = "Tuần học phải là số thuộc khoảng 1 -> 52")]
         public int SttTuan { get; set; }
 
         //[Display(Name = "Năm học")]
@@ -25,7 +22,7 @@ namespace TkbThucHanhCNTT.Models
         [Required(ErrorMessage = "Ngày bắt đầu không được để trống!")]
         public DateTime NgayBatDau { get; set; }
 
-        //[Display(Name = "Ngày kết thúc")]
+        [Display(Name = "Ngày kết thúc")]
         [NotMapped]
         public DateTime NgayKetThuc
         {
@@ -33,19 +30,9 @@ namespace TkbThucHanhCNTT.Models
         }
 
         [Display(Name = "Đã lấy thông tin")]
-        public bool? DaLayThongTin
-        {
-            get { return _daLayThongTin; }
-            set {
-                _daLayThongTin = value ?? false;
-            }
-        }
+        public bool DaLayThongTin { get; set; }
 
         [Display(Name = "Đã xếp lịch thực hành")]
-        public bool? DaXepLichThucHanh
-        {
-            get { return _daXepLichThucHanh; }
-            set { _daXepLichThucHanh = value; }
-        }
+        public bool DaXepLichThucHanh { get; set; }
     }
 }

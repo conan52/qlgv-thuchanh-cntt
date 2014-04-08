@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
 using TkbThucHanhCNTT.Models.Ultils;
 
-namespace TkbThucHanhCNTT.Models
+namespace TkbThucHanhCNTT.Models.Viewer
 {
-    public class TkbGiangVien
+    public class TkbGiangVienViewModel
     {
         [Key]
         public int MaTkb { get; set; }
@@ -26,7 +29,7 @@ namespace TkbThucHanhCNTT.Models
         public int TietBatDau { get; set; }
 
         [Display(Name = "Tiết kết thúc")]
-        [Required(ErrorMessage = "Tiết kết th không được để trống!")]
+        [Required(ErrorMessage = "Tiết kết thúc không được để trống!")]
         public int TietKetThuc { get; set; }
 
         [Display(Name = "Ngày học")]
