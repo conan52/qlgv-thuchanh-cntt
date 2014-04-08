@@ -39,7 +39,7 @@ namespace TkbThucHanhCNTT.Models.Provider
 
         public static List<TuanHoc> LayTuanChuaXepLichThucHanh()
         {
-          return  DataProvider<TuanHoc>.GetList(tuan => tuan.DaXepLichThucHanh == null || !tuan.DaXepLichThucHanh.Value)
+          return  DataProvider<TuanHoc>.GetList(tuan =>  !tuan.DaXepLichThucHanh)
                .ToList();
         }
     }

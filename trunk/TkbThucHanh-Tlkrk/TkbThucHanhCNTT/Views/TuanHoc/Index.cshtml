@@ -1,0 +1,141 @@
+﻿@using TkbThucHanhCNTT.Models
+@{
+    ViewBag.Title = "Index";
+}
+<div id="myGridView">
+    @(Html.Kendo().Grid<TuanHoc>()
+          .Name("GridView")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.SttTuan);
+              columns.Bound(c => c.NgayBatDau);
+              columns.Bound(c => c.NgayKetThuc);
+              columns.Bound(c => c.DaLayThongTin);
+              columns.Bound(c => c.DaXepLichThucHanh);
+              columns.Command(command => command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa")).Width(172);
+          }).ToolBar(toolBar => toolBar.Template("<a id='btnCreate' class='k-button k-button-icontext' href='#' ><span class='k-icon k-add'></span>Khởi tạo danh sách tuần</a>" +
+                                                 "<a class='k-button k-button-icontext' href='#' onlick='customxCommand()'><span class='k-icon k-delete'></span>Xóa hết các tuần</a>"))
+          .Editable(e => e.Mode(GridEditMode.PopUp))
+          .Sortable()
+          .Pageable(pageable =>
+          {
+              pageable.Refresh(true);
+              pageable.PageSizes(true);
+          })
+          .Selectable()
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .PageSize(25)
+              .Events(events => events.Error("error_handler"))
+              .Read(read => read.Action("AjaxReadData", "TuanHoc"))
+              .Create(update => update.Action("AjaxCreate", "TuanHoc"))
+              .Update(update => update.Action("Ajax_Update", "TuanHoc"))
+              .Model(model => model.Id(gv => gv.SttTuan))
+          )
+          )
+</div>
+@{
+    DateTime now = DateTime.Now;
+    int currWeek = (int) (now - (new DateTime(now.Month <= 8 ? now.Year - 1 : now.Year, 8, 1))).TotalDays/7;
+}
+@(Html.Kendo().Window()
+      .Name("window")
+      .Title("Khởi tạo lại danh sách các tuần")
+      .Content(@<text>
+                    <table cellpadding="5">
+                        <tr>
+                            <td>
+                                @(Html.Label("ChonTuan", "Chọn tuần đã biết", new {@class = "float-left"}))
+                            </td>
+                            <td>
+                                @(Html.Kendo().NumericTextBox<decimal>()
+                                      .Name("ChonTuan")
+                                      .Min(1)
+                                      .Max(50)
+                                      .Format("N0")
+                                      .Value(currWeek)
+                                      .HtmlAttributes(new {@class = "float-right"})
+                                      )
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @(Html.Label("NgayTrongTuan", "Chọn ngày trong tuần ấy", new {@class = "float-left"}))
+                            </td>
+                            <td>
+                                @(Html.Kendo().DatePicker().Name("NgayTrongTuan")
+                                      .Format("dd/MM/yyyy")
+                                      .Value(now)
+                                      .HtmlAttributes(new {@class = "float-right"})
+                                      )
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <span style="color: red; font-style: italic; text-align: center;">Lưu ý: các tuần hiện
+                                    có sẽ bị xóa hết khi thực hiện thao tác này</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center">
+                                <a class="k-button k-button-icontext " href="#" onclick=" return AjaxInit() "><span
+                                                                                                                  class="k-icon k-update"></span>Cập nhật</a> <a class="k-button k-button-icontext"
+                                                                                                                                                                 href="#" onclick=" return closeDialog() "><span class="k-icon k-cancel"></span>Hủy
+                                                                                                                                                                  bỏ</a>
+                            </td>
+                        </tr>
+                    </table>
+                </text>)
+      .Draggable()
+      .Actions(actions => actions.Close())
+      .Events(ev => ev.Close("onClose"))
+      .Visible(false)
+      .AutoFocus(true)
+      .Modal(true)
+      )
+<style>
+    
+    
+    
+</style>
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Lỗi:\n";
+            $.each(e.errors, function(key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function() {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+
+    function onClose() {
+        $("#btnCreate").fadeIn(300);
+
+    }
+
+    function closeDialog() {
+        $("#window").data("kendoWindow").close();
+        $("#btnCreate").fadeIn(300);
+    }
+
+    $('#btnCreate').bind("click", function() {
+        $("#window").data("kendoWindow").center().open();
+        $("#btnCreate").fadeOut(300);
+    });
+
+    function AjaxInit() {
+        var week = $("#ChonTuan").data('kendoNumericTextBox').value();
+        var val = $("#NgayTrongTuan").data('kendoDatePicker').value();
+        var date = kendo.toString(val, "dd/MM/yyyy");
+
+        $.get("@Url.Action("AjaxInitWeek", "TuanHoc")", { week: week, dateOfWeek: date })
+            .done(function(data) {
+                alert(data);
+            });
+    }
+</script>
