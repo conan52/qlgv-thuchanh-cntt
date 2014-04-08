@@ -1,0 +1,8 @@
+C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\DluWebHelper\bin\Debug\DluWebHelper.exe
+C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\DluWebHelper\bin\Debug\DluWebHelper.pdb
+C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\DluWebHelper\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\DluWebHelper\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\DluWebHelper\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\DluWebHelper\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\DluWebHelper\obj\Debug\DluWebHelper.exe
+C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\DluWebHelper\obj\Debug\DluWebHelper.pdb
