@@ -125,5 +125,18 @@ namespace TkbThucHanhCNTT.Models.Provider
                 context.SaveChanges();
             }
         }
+
+        public static int RemoveAll()
+        {
+            using (var context = new TkbThucHanhContext())
+            {
+                var items = GetAll();
+                foreach (var item in items)
+                {
+                    context.Entry(item).State = EntityState.Deleted;
+                }
+                return context.SaveChanges();
+            }
+        }
     }
 }

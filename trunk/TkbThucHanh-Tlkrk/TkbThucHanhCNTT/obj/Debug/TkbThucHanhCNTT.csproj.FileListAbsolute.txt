@@ -145,3 +145,4 @@ C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\ru-RU\Ken
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\sv-SE\Kendo.Mvc.resources.dll
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\uk-UA\Kendo.Mvc.resources.dll
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\zh-CN\Kendo.Mvc.resources.dll
+C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\it-IT\Kendo.Mvc.resources.dll
