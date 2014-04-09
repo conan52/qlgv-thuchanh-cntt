@@ -49,16 +49,13 @@ namespace TkbThucHanhCNTT.Models.Viewer
 
         [Display(Name = "Tiết bắt đầu")]
         [Required(ErrorMessage = "Tiết bắt đầu không được để trống!")]
+        [UIHint("Integer")]
         public int TietBatDau { get; set; }
 
         [Display(Name = "Tiết kết thúc")]
+        [UIHint("Integer")]
         [Required(ErrorMessage = "Tiết kết th không được để trống!")]
         public int TietKetThuc { get; set; }
-
-        [Display(Name = "Ngày học")]
-        [Required(ErrorMessage = "Ngày học không được để trống!")]
-        public DateTime NgayHoc { get; set; }
-
 
 
     }

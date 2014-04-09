@@ -30,10 +30,6 @@ namespace TkbThucHanhCNTT.Models
         [Required(ErrorMessage = "Tiết kết th không được để trống!")]
         public int TietKetThuc { get; set; }
 
-        [Display(Name = "Ngày học")]
-        [Required(ErrorMessage = "Ngày học không được để trống!")]
-        public DateTime NgayHoc { get; set; }
-
         [Required(ErrorMessage = "Giảng viên không được để trống!")]
         public string MaGv { get; set; }
 
