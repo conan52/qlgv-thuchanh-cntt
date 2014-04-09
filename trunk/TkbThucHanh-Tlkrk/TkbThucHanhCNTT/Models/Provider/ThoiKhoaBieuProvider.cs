@@ -17,13 +17,13 @@ namespace TkbThucHanhCNTT.Models.Provider
                 return tuanHoc.SttTuan;
             }
         }
-
-
-
+        
         public static List<TuanHoc> LayTuanChuaXepLichThucHanh()
         {
           return  DataProvider<TuanHoc>.GetList(tuan =>  !tuan.DaXepLichThucHanh)
                .ToList();
         }
+
+
     }
 }
