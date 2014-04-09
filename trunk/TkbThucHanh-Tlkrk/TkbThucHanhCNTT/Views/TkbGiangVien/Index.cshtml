@@ -1,5 +1,7 @@
 ﻿@using System.Collections
+@using TkbThucHanhCNTT.Models
 @using TkbThucHanhCNTT.Models.Enums
+@using TkbThucHanhCNTT.Models.Provider
 @using TkbThucHanhCNTT.Models.Viewer
 @{
     //Layout = null;
@@ -23,6 +25,7 @@
       })
       .Editable(e => e.Mode(GridEditMode.PopUp))
       .Sortable()
+      .Groupable(x=>x.Messages(t=>t.Empty("Kéo thả để gom nhóm dữ liệu")))
       .Selectable()
       //  .Scrollable()
       .DataSource(dataSource => dataSource
@@ -32,7 +35,11 @@
                   .Create(update => update.Action("AjaxCreate", "TkbGiangVien"))
                   .Update(update => update.Action("AjaxUpdate", "TkbGiangVien"))
                   .Destroy(update => update.Action("AjaxDelete", "TkbGiangVien"))
-          .Model(model => model.Id(gv => gv.MaGv))
+          .Model(model =>
+          {
+              model.Id(gv => gv.MaGv);
+              model.Field(f => f.SttTuan);
+          })
       ).ToolBar(toolBar =>
       {
           toolBar.Template(@<text>
