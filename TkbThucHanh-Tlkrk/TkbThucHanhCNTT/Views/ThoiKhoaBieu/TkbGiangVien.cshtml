@@ -1,15 +1,16 @@
-﻿@using TkbThucHanhCNTT.Models.Viewer
+﻿@using TkbThucHanhCNTT.Models.Enums
+@using TkbThucHanhCNTT.Models.Viewer
 @{
-    Layout = null;
+    //Layout = null;
 }
-   @(Html.Kendo().Grid<GiangVienViewModel>()
+   @(Html.Kendo().Grid<TkbGiangVienViewModel>()
           .Name("GridView")
           .Columns(columns =>
           {
               columns.Bound(c => c.MaGv).Width(15);
               columns.Bound(c => c.HoVaTen);
-            //  columns.Bound(c => c.ChuyenNganh).Width(30);
-              columns.ForeignKey(p => p.ChuyenNganh, (System.Collections.IEnumerable)ViewData["ChuyenNganhs"], "Value", "Description");
+         
+              columns.ForeignKey(p => p.ChuyenNganh, EnumUltils.GetDescriptions<ChuyenNganh>(), "Value", "Description");
               columns.Bound(c => c.TaiKhoan).Width(50);
               columns.Bound(c => c.CoThePhanCong);
               columns.Command(command =>
