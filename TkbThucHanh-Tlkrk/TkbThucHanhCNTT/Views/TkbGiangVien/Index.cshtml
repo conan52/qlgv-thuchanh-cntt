@@ -14,6 +14,7 @@
           columns.ForeignKey(c => c.MaGv, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv");
           columns.Bound(c => c.TenMonHoc);
           columns.Bound(c => c.LopHoc);
+          columns.Bound(c => c.Phong);
           columns.Command(command =>
           {
               command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
@@ -26,7 +27,6 @@
       //  .Scrollable()
       .DataSource(dataSource => dataSource
           .Ajax()
-          .PageSize(20)
           .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "TkbGiangVien"))
                   .Create(update => update.Action("AjaxCreate", "TkbGiangVien"))
@@ -37,18 +37,16 @@
       {
           toolBar.Template(@<text>
                                 @item.CreateButton("Thêm mới")
-                                <a id='btnCreate' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'></span>Lấy tự động từ TKB trường</a>
+                                <a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'></span>Lấy tự động từ TKB trường</a>
                              
                                 <div class="toolbar">
                                     <label class="category-label" for="category">Xem theo tuần:</label>
                                     @(Html.Kendo().DropDownList()
                                           .Name("DanhSachTuan")
                                           .OptionLabel("Tất cả")
-                                            //   .DataTextField("SttTuan")
-                                            //   .DataValueField("SttTuan")
                                           .AutoBind(false)
                                           .Events(e => e.Change("onSelectedWeekChange"))
-                                                  .DataSource(ds => { ds.Read("LayDsTuan", "ThoiKhoaBieu"); })
+                                                          .DataSource(ds => ds.Read("LayDsTuan", "TkbGiangVien"))
                                           ) 
                                 </div>
                             </text>);
@@ -71,6 +69,26 @@
     }
 </style>
 <script type="text/javascript">
+     function refreshData() {
+        $('#GridView').data('kendoGrid').dataSource.read();
+        $('#GridView').data('kendoGrid').refresh();
+    }
+
+    $("#btnAutoGet").bind("click", function() {
+        showLoadingDialog();
+        $.post("@Url.Action("LayTkbTuDong", "TkbGiangVien")")
+            .done(function(data) {
+                hideLoadingDialog();
+                if (data.Result == "OK") {
+                    ShowNotification("Đã thêm <b>"+data.Message+"</b> buổi học từ website trường!", "info");
+                    refreshData();
+
+                } else
+                    ShowNotification(data.Message, "error");
+                
+            });
+    });
+
     function error_handler(e) {
         if (e.errors) {
             var message = "Lỗi:\n";
@@ -86,13 +104,13 @@
     }
 
     function onSelectedWeekChange() {
-//        var value = this.value(),
-//		 	 grid = $("#GridView").data("kendoGrid");
-//        if (value) {
-//            grid.dataSource.filter({ field: "CategoryID", operator: "eq", value: parseInt(value) });
-//        } else {
-//            grid.dataSource.filter({});
-//        }
+        var value = this.value(),
+		 	 grid = $("#GridView").data("kendoGrid");
+        if (value) {
+            grid.dataSource.filter({ field: "SttTuan", operator: "eq", value: parseInt(value) });
+        } else {
+            grid.dataSource.filter({});
+        }
     }
 
 </script>

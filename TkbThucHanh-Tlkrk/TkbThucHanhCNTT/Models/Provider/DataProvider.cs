@@ -67,12 +67,12 @@ namespace TkbThucHanhCNTT.Models.Provider
             return item;
         }
 
-        public static void Add(params T[] items)
+        public static int Add(params T[] items)
         {
-            Add(items.ToList());
+           return Add(items.ToList());
         }
 
-        public static void Add(IEnumerable<T> items)
+        public static int Add(IEnumerable<T> items)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace TkbThucHanhCNTT.Models.Provider
                     {
                         context.Entry(item).State = EntityState.Added;
                     }
-                    context.SaveChanges();
+                 return   context.SaveChanges();
                 }
 
             }
