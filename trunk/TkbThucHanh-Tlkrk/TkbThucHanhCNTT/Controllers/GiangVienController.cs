@@ -25,9 +25,8 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult GetGv()
         {
-            var result = DataProvider<GiangVien>.GetAll().Select(gv => new { gv.HoVaTen, gv.MaGv });
-
-            return this.Json(result);
+            var result = DataProvider<GiangVien>.GetAll();
+            return this.Json(result,JsonRequestBehavior.AllowGet);
         }
 
 

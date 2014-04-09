@@ -18,7 +18,7 @@ namespace TkbThucHanhCNTT.Models
         [Required(ErrorMessage = "Chuyên ngành không được để trống!")]
         [Display(Name = "Chuyên ngành")]
     //    [UIHint("ChuyenNganh")]
-        public ChuyenNganh ChuyenNganh { get; set; }
+        public virtual ChuyenNganh ChuyenNganh { get; set; }
 
         [Required(ErrorMessage = "Tên giảng viên không được để trống!")]
         [Display(Name = "Tên giảng viên")]

@@ -30,12 +30,12 @@ namespace TkbThucHanhCNTT.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, string maLop)
+        public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, Lop maLop)
         {
             // Test if gv object and modelstate is valid.
             if (maLop != null && ModelState.IsValid)
             {
-                DataProvider<Lop>.RemoveById(maLop);
+                DataProvider<Lop>.Remove(maLop);
             }
             return Json(ModelState.ToDataSourceResult());
         }
