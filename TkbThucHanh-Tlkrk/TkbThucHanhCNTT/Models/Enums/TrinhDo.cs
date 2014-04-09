@@ -5,7 +5,7 @@ namespace TkbThucHanhCNTT.Models.Enums
     public enum TrinhDo
     {
         [Description("")]
-        Khac = 0,
+        Khac =0,
         [Description("Cao đẳng")]
         CaoDang = 1,
         [Description("Đại học")]
