@@ -102,7 +102,7 @@ namespace TkbThucHanhCNTT.Models.Provider
             }
         }
 
-        public static void Update(params T[] items)
+        public static int Update(IEnumerable<T> items)
         {
             using (var context = new TkbThucHanhContext())
             {
@@ -110,8 +110,13 @@ namespace TkbThucHanhCNTT.Models.Provider
                 {
                     context.Entry(item).State = EntityState.Modified;
                 }
-                context.SaveChanges();
+                return context.SaveChanges();
             }
+        }
+
+        public static int Update(params T[] items)
+        {
+            return Update(items.ToList());
         }
 
         public static void Remove(params T[] items)

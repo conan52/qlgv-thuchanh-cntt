@@ -10,8 +10,8 @@
               columns.Bound(c => c.SttTuan);
               columns.Bound(c => c.NgayBatDau).Format("{0:dd/MM/yyyy}");
               columns.Bound(c => c.NgayKetThuc).Format("{0:dd/MM/yyyy}");
-              columns.Bound(c => c.DaLayThongTin).ClientTemplate("<input type='checkbox' id='DaLayThongTin' name='DaLayThongTin' disable #if(DaLayThongTin){#checked#}# value='#=DaLayThongTin#' />");
-              columns.Bound(c => c.DaXepLichThucHanh).ClientTemplate("<input type='checkbox' id='DaXepLichThucHanh' name='DaXepLichThucHanh' disable #if(DaXepLichThucHanh){#checked#}# value='#=DaLayThongTin#' />");
+              columns.Bound(c => c.DaLayThongTin).ClientTemplate("<input type='checkbox' id='DaLayThongTin' name='DaLayThongTin' disabled #if(DaLayThongTin){#checked#}# value='#=DaLayThongTin#' />");
+              columns.Bound(c => c.DaXepLichThucHanh).ClientTemplate("<input type='checkbox' id='DaXepLichThucHanh' name='DaXepLichThucHanh' disabled #if(DaXepLichThucHanh){#checked#}# value='#=DaLayThongTin#' />");
           }).ToolBar(toolBar =>
           {
               toolBar.Template(@<text>
@@ -19,8 +19,6 @@
                                     <a id='clearAllWeek' class='k-button k-button-icontext' href='#'><span class='k-icon k-delete'></span>Xóa hết các tuần</a>
                                     @item.SaveButton()
                                 </text>);
-
-              // toolBar.Save();
           })
           .Editable(e => e.Mode(GridEditMode.InCell))
           .Sortable()
@@ -33,7 +31,7 @@
           .DataSource(dataSource => dataSource
               .Ajax()
               .Batch(true)
-              .PageSize(25)
+              .PageSize(60)
               .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "TuanHoc"))
               .Update(update => update.Action("Ajax_Update", "TuanHoc"))
