@@ -1,23 +1,25 @@
-﻿
+﻿@using System.Collections
 @using TkbThucHanhCNTT.Models
 @{
-    ViewBag.Title = "About";
+    ViewBag.Title = "Môn học";
 }
 <div id="myGridView">
-    @(Html.Kendo().Grid<Lop>()
+    @(Html.Kendo().Grid<MonHoc>()
           .Name("GridView")
           .Columns(columns =>
           {
-              columns.Bound(c => c.TenLop);
-              columns.Bound(c => c.NamNhapHoc);
-              columns.ForeignKey(c => c.TrinhDo, (System.Collections.IEnumerable)ViewData["TrinhDos"], "Name", "Description");
+              columns.Bound(c => c.MaMonHoc);
+              columns.Bound(c => c.TenMonHoc);
+              columns.ForeignKey(c => c.TrinhDo, (IEnumerable) ViewData["TrinhDos"], "Value", "Description");
+              columns.ForeignKey(p => p.ChuyenNganh, (IEnumerable) ViewData["ChuyenNganhs"], "Value", "Description");
+              columns.Bound(c => c.BatBuoc).ClientTemplate(@"<input type='checkbox' id='bacbuoc' name='BacBuoc' disabled #if(BatBuoc){#checked#}# value='#=BatBuoc#' />");
               columns.Command(command =>
               {
                   command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
                   command.Destroy().Text("Xóa");
               }).Width(172);
           })
-          .ToolBar(toolbar => toolbar.Create().Text("Thêm giảng viên"))
+          .ToolBar(toolbar => toolbar.Create().Text("Thêm môn học"))
           .Editable(e => e.Mode(GridEditMode.PopUp))
           .Sortable()
           .Pageable(pageable =>
@@ -26,21 +28,19 @@
               pageable.PageSizes(true);
           })
           .Selectable()
-            //  .Scrollable()
+          //  .Scrollable()
           .DataSource(dataSource => dataSource
               .Ajax()
               .PageSize(20)
               .Events(events => events.Error("error_handler"))
-                      .Read(read => read.Action("AjaxReadData", "Lop"))
-              .Create(update => update.Action("AjaxCreate", "Lop"))
-                      .Update(update => update.Action("Ajax_Update", "Lop"))
-                      .Destroy(update => update.Action("AjaxDelete", "Lop"))
+              .Read(read => read.Action("AjaxReadData", "MonHoc"))
+              .Create(update => update.Action("AjaxCreate", "MonHoc"))
+              .Update(update => update.Action("Ajax_Update", "MonHoc"))
+              .Destroy(update => update.Action("AjaxDelete", "MonHoc"))
               .Model(model =>
               {
-                  model.Id(l => l.TenLop);
-                  model.Field(x => x.TenLop);
+                  model.Id(l => l.MonHocId);
                   model.Field(x => x.TrinhDo).DefaultValue("CaoDang");
-                  model.Field(x => x.NamNhapHoc).DefaultValue(DateTime.Now.Year);
               })
           )
           )
@@ -49,9 +49,9 @@
     function error_handler(e) {
         if (e.errors) {
             var message = "Lỗi:\n";
-            $.each(e.errors, function (key, value) {
+            $.each(e.errors, function(key, value) {
                 if ('errors' in value) {
-                    $.each(value.errors, function () {
+                    $.each(value.errors, function() {
                         message += this + "\n";
                     });
                 }

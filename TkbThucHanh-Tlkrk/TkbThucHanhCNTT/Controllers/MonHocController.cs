@@ -8,34 +8,28 @@ using Kendo.Mvc.UI;
 using TkbThucHanhCNTT.Models;
 using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Provider;
-using TkbThucHanhCNTT.Models.Viewer;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-    public class LopController : Controller
+    public class MonHocController : Controller
     {
         //
-        // GET: /Lop/
-
-        //        public ActionResult Index()
-        //        {
-        //            return View();
-        //        }
+        // GET: /MonHoc/
 
         public ActionResult Index()
         {
             ViewData["TrinhDos"] = EnumUltils.GetDescriptions_TrinhDo();
+            ViewData["ChuyenNganhs"] = EnumUltils.GetDescriptions_ChuyenNganh();
             return View();
-
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, string maLop)
+        public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, string mamh)
         {
             // Test if gv object and modelstate is valid.
-            if (maLop != null && ModelState.IsValid)
+            if (mamh != null && ModelState.IsValid)
             {
-                DataProvider<Lop>.RemoveById(maLop);
+                DataProvider<MonHoc>.RemoveById(mamh);
             }
             return Json(ModelState.ToDataSourceResult());
         }
@@ -43,20 +37,19 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            //            ViewData["TrinhDos"] = EnumUltils.GetDescriptions_TrinhDo();
-            var result = DataProvider<Lop>.GetAll(l => l.PhanCongGiang);
+            var result = DataProvider<MonHoc>.GetAll(l => l.PhanCongGiangDays);
             return Json(result.ToDataSourceResult(request));
         }
 
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, Lop lop)
+        public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, MonHoc mh)
         {
-            if (lop != null && ModelState.IsValid)
+            if (mh != null && ModelState.IsValid)
             {
                 try
                 {
-                    DataProvider<Lop>.Add(lop);
+                    DataProvider<MonHoc>.Add(mh);
                 }
                 catch (Exception)
                 {
@@ -65,16 +58,16 @@ namespace TkbThucHanhCNTT.Controllers
 
             }
 
-            return Json(new[] { lop }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { mh }.ToDataSourceResult(request, ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, Lop lop)
+        public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, MonHoc mh)
         {
             // Test if gv object and modelstate is valid.
-            if (lop != null && ModelState.IsValid)
+            if (mh != null && ModelState.IsValid)
             {
-                DataProvider<Lop>.Update(lop);
+                DataProvider<MonHoc>.Update(mh);
             }
             return Json(ModelState.ToDataSourceResult());
         }

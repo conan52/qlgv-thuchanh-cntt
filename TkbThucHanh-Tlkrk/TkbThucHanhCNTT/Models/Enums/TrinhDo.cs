@@ -4,10 +4,15 @@ namespace TkbThucHanhCNTT.Models.Enums
 {
     public enum TrinhDo
     {
-        [Description("")] Khac,
-        [Description("Cao đẳng")] CaoDang,
-        [Description("Đại học")] DaiHoc,
-        [Description("Liên thông")] LienThong,
-        [Description("Vừa học vừa làm")] VuaHocVuaLam,
+        [Description("")]
+        Khac = 0,
+        [Description("Cao đẳng")]
+        CaoDang = 1,
+        [Description("Đại học")]
+        DaiHoc = 2,
+        [Description("Liên thông")]
+        LienThong = 3,
+        [Description("Vừa học vừa làm")]
+        VuaHocVuaLam = 4,
     }
 }

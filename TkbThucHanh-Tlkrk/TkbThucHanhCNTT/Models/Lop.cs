@@ -10,7 +10,6 @@ namespace TkbThucHanhCNTT.Models
         [Key]
         [Required(ErrorMessage = "Tên lớp không được để trống!")]
         [Display(Name = "Tên lớp")]
-        [Remote("CheckKeyUnique","Lop",ErrorMessage = "Mã lớp này đã tồn tại!.")]
         public string TenLop { get; set; }
 
         [Display(Name = "Trình độ")]
