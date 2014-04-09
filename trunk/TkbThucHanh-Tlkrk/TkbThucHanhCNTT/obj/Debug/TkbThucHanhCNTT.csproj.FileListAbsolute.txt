@@ -69,7 +69,6 @@ C:\Users\Le Ngoc Linh\Desktop\RS\n\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\ru-RU\K
 C:\Users\Le Ngoc Linh\Desktop\RS\n\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\sv-SE\Kendo.Mvc.resources.dll
 C:\Users\Le Ngoc Linh\Desktop\RS\n\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\uk-UA\Kendo.Mvc.resources.dll
 C:\Users\Le Ngoc Linh\Desktop\RS\n\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\zh-CN\Kendo.Mvc.resources.dll
-C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\obj\Debug\TkbThucHanhCNTT.dll
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\obj\Debug\TkbThucHanhCNTT.pdb
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\TkbThucHanhCNTT.dll
@@ -145,3 +144,4 @@ C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\sv-SE\Ken
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\uk-UA\Kendo.Mvc.resources.dll
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\zh-CN\Kendo.Mvc.resources.dll
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\it-IT\Kendo.Mvc.resources.dll
+C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\obj\Debug\TkbThucHanhCNTT.csprojResolveAssemblyReference.cache
