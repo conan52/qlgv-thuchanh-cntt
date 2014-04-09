@@ -1,18 +1,15 @@
-﻿@using TkbThucHanhCNTT.Models.Viewer
+﻿@using TkbThucHanhCNTT.Models
 @{
     ViewBag.Title = "About";
 }
 <div id="myGridView">
-    @(Html.Kendo().Grid<GiangVienViewModel>()
+    @(Html.Kendo().Grid<Lop>()
           .Name("GridView")
           .Columns(columns =>
           {
-              columns.Bound(c => c.MaGv).Width(15);
-              columns.Bound(c => c.HoVaTen);
-            //  columns.Bound(c => c.ChuyenNganh).Width(30);
-              columns.ForeignKey(p => p.ChuyenNganh, (System.Collections.IEnumerable)ViewData["ChuyenNganhs"], "Value", "Description");
-              columns.Bound(c => c.TaiKhoan).Width(50);
-              columns.Bound(c => c.CoThePhanCong);
+              columns.Bound(c => c.TenLop);
+              columns.Bound(c => c.NamNhapHoc);
+              columns.ForeignKey(c => c.TrinhDo, (System.Collections.IEnumerable)ViewData["TrinhDos"], "Name", "Description");
               columns.Command(command =>
               {
                   command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
@@ -33,11 +30,17 @@
               .Ajax()
               .PageSize(20)
               .Events(events => events.Error("error_handler"))
-              .Read(read => read.Action("AjaxReadData", "GiangVien"))
-              .Create(update => update.Action("AjaxCreate", "GiangVien"))
-              .Update(update => update.Action("Ajax_Update", "GiangVien"))
-              .Destroy(update => update.Action("AjaxDelete", "GiangVien"))
-              .Model(model => model.Id(gv => gv.MaGv))
+                      .Read(read => read.Action("AjaxReadData", "Lop"))
+              .Create(update => update.Action("AjaxCreate", "Lop"))
+                      .Update(update => update.Action("Ajax_Update", "Lop"))
+                      .Destroy(update => update.Action("AjaxDelete", "Lop"))
+              .Model(model =>
+              {
+                  model.Id(l => l.TenLop);
+                  model.Field(x => x.TenLop);
+                  model.Field(x => x.TrinhDo).DefaultValue("CaoDang");
+                  model.Field(x => x.NamNhapHoc).DefaultValue(DateTime.Now.Year);
+              })
           )
           )
 </div>

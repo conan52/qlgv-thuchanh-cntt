@@ -84,7 +84,6 @@ C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\DotNetOpe
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\EntityFramework.dll
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\EntityFramework.SqlServer.dll
-C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\Kendo.Mvc.dll
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\Microsoft.Web.WebPages.OAuth.dll
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\Newtonsoft.Json.dll

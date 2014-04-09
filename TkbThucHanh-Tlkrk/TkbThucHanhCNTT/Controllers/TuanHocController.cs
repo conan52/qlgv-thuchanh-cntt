@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -36,7 +37,7 @@ namespace TkbThucHanhCNTT.Controllers
                 List<TuanHoc> thls = new List<TuanHoc>();
 
                 var startDay = DateTime.ParseExact(dateOfWeek, "dd/MM/yyyy", null).AddDays((week - 1) * -7).Monday();
-               
+
                 for (int i = 1; i < 54; i++)
                 {
                     var th = new TuanHoc()
@@ -70,6 +71,23 @@ namespace TkbThucHanhCNTT.Controllers
             {
                 return Json(new { Result = "Fail", ex.Message });
             }
+        }
+
+        public ActionResult tuan_Update([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<TuanHoc> tuan)
+        {
+            // Will keep the updated entitites here. Used to return the result later.
+            var entities = new List<TuanHoc>();
+            if (ModelState.IsValid)
+            {
+
+                foreach (var product in tuan)
+                {
+
+                }
+
+            }
+            // Return the updated entities. Also return any validation errors.
+            return Json(entities.ToDataSourceResult(request, ModelState));
         }
 
     }
