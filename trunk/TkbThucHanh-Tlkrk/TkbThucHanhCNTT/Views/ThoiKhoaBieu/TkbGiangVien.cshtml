@@ -1,53 +1,79 @@
-﻿@using TkbThucHanhCNTT.Models.Enums
-@using TkbThucHanhCNTT.Models.Viewer
+﻿@using TkbThucHanhCNTT.Models.Viewer
 @{
     //Layout = null;
 }
-   @(Html.Kendo().Grid<TkbGiangVienViewModel>()
-          .Name("GridView")
-          .Columns(columns =>
-          {
-              columns.Bound(c => c.MaGv).Width(15);
-              columns.Bound(c => c.HoVaTen);
-         
-              columns.ForeignKey(p => p.ChuyenNganh, EnumUltils.GetDescriptions<ChuyenNganh>(), "Value", "Description");
-              columns.Bound(c => c.TaiKhoan).Width(50);
-              columns.Bound(c => c.CoThePhanCong);
-              columns.Command(command =>
-              {
-                  command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
-                  command.Destroy().Text("Xóa");
-              }).Width(172);
-          })
-          .ToolBar(toolbar => toolbar.Create().Text("Thêm giảng viên"))
-          .Editable(e => e.Mode(GridEditMode.PopUp))
-          .Sortable()
-          .Pageable(pageable =>
-          {
-              pageable.Refresh(true);
-              pageable.PageSizes(true);
-          })
-          .Selectable()
-            //  .Scrollable()
-          .DataSource(dataSource => dataSource
-              .Ajax()
-              .PageSize(20)
-              .Events(events => events.Error("error_handler"))
-              .Read(read => read.Action("AjaxReadData", "GiangVien"))
-              .Create(update => update.Action("AjaxCreate", "GiangVien"))
-              .Update(update => update.Action("Ajax_Update", "GiangVien"))
-              .Destroy(update => update.Action("AjaxDelete", "GiangVien"))
-              .Model(model => model.Id(gv => gv.MaGv))
-          )
-          )
-</div>
+@(Html.Kendo().Grid<TkbGiangVienViewModel>()
+      .Name("GridView")
+      .Columns(columns =>
+      {
+          //columns.Bound(c => c.);
+
+          //columns.ForeignKey(p => p.ChuyenNganh, EnumUltils.GetDescriptions<ChuyenNganh>(), "Value", "Description");
+          //columns.Bound(c => c.TaiKhoan).Width(50);
+          //columns.Bound(c => c.CoThePhanCong);
+          //columns.Command(command =>
+          //{
+          //    command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
+          //    command.Destroy().Text("Xóa");
+          //}).Width(172);
+      }).ToolBar(toolBar =>
+      {
+          toolBar.Template(@<text>
+                                @item.CreateButton("Thêm mới")
+                                <a id='btnCreate' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'></span>Lấy tự động từ TKB trường</a>
+                             
+                                <div class="toolbar">
+                                    <label class="category-label" for="category">Xem theo tuần:</label>
+                                    @(Html.Kendo().DropDownList()
+                                          .Name("DanhSachTuan")
+                                          .OptionLabel("Tất cả")
+                                       //   .DataTextField("SttTuan")
+                                       //   .DataValueField("SttTuan")
+                                          .AutoBind(false)
+                                          .Events(e => e.Change("onSelectedWeekChange"))
+                                                  .DataSource(ds => { ds.Read("LayDsTuan", "ThoiKhoaBieu"); })
+                                          ) 
+                                </div>
+                            </text>);
+      })
+      .Editable(e => e.Mode(GridEditMode.PopUp))
+      .Sortable()
+      .Selectable()
+      //  .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .PageSize(20)
+          .Events(events => events.Error("error_handler"))
+          .Read(read => read.Action("AjaxReadData", "GiangVien"))
+          .Create(update => update.Action("AjaxCreate", "GiangVien"))
+          .Update(update => update.Action("Ajax_Update", "GiangVien"))
+          .Destroy(update => update.Action("AjaxDelete", "GiangVien"))
+          .Model(model => model.Id(gv => gv.MaGv))
+      )
+      )
+      
+<style>
+     .category-label
+    {
+        vertical-align: middle;
+        padding-right: .5em;
+        
+    }
+    #category
+    {
+        vertical-align: middle;
+    }
+    .toolbar {
+        float: right;
+    }
+</style>
 <script type="text/javascript">
     function error_handler(e) {
         if (e.errors) {
             var message = "Lỗi:\n";
-            $.each(e.errors, function (key, value) {
+            $.each(e.errors, function(key, value) {
                 if ('errors' in value) {
-                    $.each(value.errors, function () {
+                    $.each(value.errors, function() {
                         message += this + "\n";
                     });
                 }
@@ -55,4 +81,15 @@
             alert(message);
         }
     }
+
+    function onSelectedWeekChange() {
+//        var value = this.value(),
+//		 	 grid = $("#GridView").data("kendoGrid");
+//        if (value) {
+//            grid.dataSource.filter({ field: "CategoryID", operator: "eq", value: parseInt(value) });
+//        } else {
+//            grid.dataSource.filter({});
+//        }
+    }
+
 </script>
