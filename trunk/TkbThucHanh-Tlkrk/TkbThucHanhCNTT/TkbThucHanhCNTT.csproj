@@ -43,8 +43,7 @@
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Kendo.Mvc">
-      <HintPath>..\lib\KENDOUIMVC\2013.2.918.340\Kendo.Mvc.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\lib\KENDOUIMVC\2014.1.318.440\Kendo.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -171,6 +170,7 @@
     <Compile Include="Controllers\GiangVienController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LopController.cs" />
+    <Compile Include="Controllers\MonHocController.cs" />
     <Compile Include="Controllers\PhanCongController.cs" />
     <Compile Include="Controllers\ThoiKhoaBieuController.cs" />
     <Compile Include="Controllers\TuanHocController.cs" />
@@ -980,6 +980,8 @@
     <Content Include="Views\ThoiKhoaBieu\TkbGiangVien.cshtml" />
     <Content Include="Views\Lop\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TrinhDo.cshtml" />
+    <Content Include="Views\MonHoc\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TrinhDoInt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">

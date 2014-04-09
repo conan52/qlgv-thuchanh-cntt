@@ -15,6 +15,7 @@ namespace TkbThucHanhCNTT.Models
             
         }
         [Key]
+        [ScaffoldColumn(false)]
         public int MonHocId { get; set; }
 
         [Required(ErrorMessage = "Mã môn học không được để trống!")]
@@ -30,53 +31,34 @@ namespace TkbThucHanhCNTT.Models
         public int SoTinChi { get; set; }
 
         [Display(Name = "Bắt buộc")]
-        public bool? BatBuoc
-        {
-            get { return _batBuoc; }
-            set
-            {
-                if (value==null)
-                {
-                    _batBuoc = false;
-                }
-                else
-                {
-                    _batBuoc = value;
-                }
-            }
-        }
+        public bool BatBuoc { get; set; }
+        
+//        public bool? BatBuoc
+//        {
+//            get { return _batBuoc; }
+//            set
+//            {
+//                if (value==null)
+//                {
+//                    _batBuoc = false;
+//                }
+//                else
+//                {
+//                    _batBuoc = value;
+//                }
+//            }
+//        }
 
         [Required(ErrorMessage = "Trình độ không được để trống!")]
+        [Display(Name = "Trình độ")]
+        [UIHint("TrinhDoInt")]
         public TrinhDo TrinhDo { get; set; }
 
         [Required(ErrorMessage = "Chuyên ngành không được để trống!")]
+        [Display(Name = "Chuyên ngành")]
+        [UIHint("ChuyenNganh")]
         public ChuyenNganh ChuyenNganh { get; set; }
 
         public virtual List<PhanCongGiangDay> PhanCongGiangDays { get; set; }
-
-
-        [NotMapped]
-        public string HienThiTrinhDo
-        {
-            get { return TrinhDo.GetDescriptionAttribute(); }
-        }
-
-        [NotMapped]
-        public string HienThiChuyenNganh
-        {
-            get { return ChuyenNganh.GetDescriptionAttribute(); }
-        }
-
-        [NotMapped]
-        public string HienThiBatBuoc
-        {
-            get
-            {
-                if (BatBuoc != null && BatBuoc.Value)
-//                if (BatBuoc)
-                    return "BB";
-                return "TC";
-            }
-        }
     }
 }
