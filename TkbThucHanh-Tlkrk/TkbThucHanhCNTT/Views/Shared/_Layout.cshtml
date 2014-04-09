@@ -13,8 +13,8 @@
     <link href="@Url.Content("~/Content/kendo.compatibility.css")" rel="stylesheet" type="text/css" />
     	<link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.common.min.css")" rel="stylesheet" type="text/css" />
 	<link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.silver.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.dataviz.silver.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
 	<script src="@Url.Content("~/Scripts/kendo/2014.1.318/jquery.min.js")"></script>
 	<script src="@Url.Content("~/Scripts/kendo/2014.1.318/kendo.all.min.js")"></script>
 	<script src="@Url.Content("~/Scripts/kendo/2014.1.318/kendo.aspnetmvc.min.js")"></script>
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </footer>
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", false)
     @Html.Partial("_LoadingDialog")
     @Html.Partial("_Notifications")
 </body>
