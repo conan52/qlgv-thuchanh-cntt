@@ -173,10 +173,9 @@
     <Compile Include="Controllers\LopController.cs" />
     <Compile Include="Controllers\MonHocController.cs" />
     <Compile Include="Controllers\PhanCongController.cs" />
-<<<<<<< .mine    <Compile Include="Controllers\TkbGiangVienController.cs" />
-=======    <Compile Include="Controllers\PhongThucHanhController.cs" />
-    <Compile Include="Controllers\ThoiKhoaBieuController.cs" />
->>>>>>> .theirs    <Compile Include="Controllers\TuanHocController.cs" />
+    <Compile Include="Controllers\TkbGiangVienController.cs" />
+    <Compile Include="Controllers\PhongThucHanhController.cs" />
+    <Compile Include="Controllers\TuanHocController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -987,10 +986,10 @@
     <Content Include="Views\Shared\EditorTemplates\TrinhDo.cshtml" />
     <Content Include="Views\MonHoc\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TrinhDoInt.cshtml" />
-<<<<<<< .mine    <Content Include="Views\Shared\_LoadingDialog.cshtml" />
-=======    <Content Include="Views\LichCongTac\Index.cshtml" />
+    <Content Include="Views\Shared\_LoadingDialog.cshtml" />
+    <Content Include="Views\LichCongTac\Index.cshtml" />
     <Content Include="Views\PhongThucHanh\Index.cshtml" />
->>>>>>> .theirs  </ItemGroup>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">
       <Project>{97D9B8F9-648F-4122-9E3E-2F7D194E5FBE}</Project>
