@@ -48,16 +48,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DluWebRequest.cs" />
-    <Compile Include="ListLessonResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Lesson.cs" />
-    <Compile Include="StudentTimeTable.cs" />
-    <Compile Include="TeacherTimeTable.cs" />
-    <Compile Include="TeacherFullTable.cs" />
+    <Compile Include="TimeTableManager.cs" />
+    <Compile Include="TimeTableProcessStatus.cs" />
     <Compile Include="TimeTableWebResult.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

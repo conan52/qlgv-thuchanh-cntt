@@ -1,6 +1,6 @@
 ﻿namespace DluWebHelper
 {
-    public class Lesson
+    public  class Lesson
     {
         public int Group { get; set; }
         public int Start { get; set; }
@@ -8,7 +8,10 @@
         public string Subject { get; set; }
         public string Room { get; set; }
         public int DayOfWeek { get; set; }
+        public int Week { get; set; }
 
+        public string TeacherCode { get; set; }
+        public string ClassCode { get; set; }
 
         public override string ToString()
         {
