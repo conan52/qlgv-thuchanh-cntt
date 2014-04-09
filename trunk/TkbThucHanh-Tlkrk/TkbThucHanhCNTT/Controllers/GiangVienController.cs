@@ -33,12 +33,30 @@ namespace TkbThucHanhCNTT.Controllers
 
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, GiangVien gv)
+        public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, string magv)
         {
             // Test if gv object and modelstate is valid.
-            if (gv != null && ModelState.IsValid)
+            if (magv != null && ModelState.IsValid)
             {
-                DataProvider<GiangVien>.Remove(gv);
+                DataProvider<GiangVien>.RemoveById(magv);
+            }
+            return Json(ModelState.ToDataSourceResult());
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, GiangVienViewModel gvmd)
+        {
+            // Test if gv object and modelstate is valid.
+            if (gvmd != null && ModelState.IsValid)
+            {
+                GiangVien gv = new GiangVien()
+                {
+                    MaGv = gvmd.MaGv,
+                    ChuyenNganh = gvmd.ChuyenNganh,
+                    CoThePhanCong = gvmd.CoThePhanCong,
+                    HoVaTen = gvmd.HoVaTen,
+                    //chua co tai khoan
+                };
+                DataProvider<GiangVien>.Update(gv);
             }
             return Json(ModelState.ToDataSourceResult());
         }
