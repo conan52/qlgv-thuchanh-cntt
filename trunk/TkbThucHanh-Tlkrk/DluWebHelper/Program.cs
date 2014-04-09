@@ -9,47 +9,12 @@ namespace DluWebHelper
     {
         private static void Main(string[] args)
         {
-
-            var webRequest = new DluWebRequest();
-            var timetable = webRequest.GetCurentTimeTable();
-            var week = timetable.CurrentWeek;
-            // var week = 35;
-            var classNames = timetable.Class
-                .Where(c => c.StartsWith("CT"))
-                .ToList();
-            var teacherCodes = timetable.TeacherCodes
-                .Where(c => c.StartsWith("CT"))
-                .ToList();
-
-
-
-
-            var studenttb = new List<StudentTimeTable>();
-            var cThread = new Thread(() =>
-            {
-                foreach (var className in classNames)
-                {
-                    studenttb.Add(webRequest.GetClassTimeTable(className, week));
-                    Console.WriteLine(className);
-                }
-            });
-
-
-            var teachertb = new List<TeacherTimeTable>();
-            var tThread = new Thread(() =>
-            {
-                foreach (var teacherCode in teacherCodes)
-                {
-                    teachertb.Add(webRequest.GetTeacherTimeTable(teacherCode, week));
-                    Console.WriteLine(teacherCode);
-                }
-            });
-            cThread.Start();
-            tThread.Start();
-            cThread.Join();
-            tThread.Join();
-
-            var r = TeacherFullTable.GetFullTimeTable(studenttb, teachertb);
+            TimeTableManager tm = new TimeTableManager();
+            tm.GetTimeFullTable(
+                new List<string>() { "CT46", "CT02", "CT13", "CT28", "CT65", "TN15" },
+                new List<string>() { "CTK34A", "CTK34B", "CTK35", "CTK36", "CTK37", },
+                new List<int>(){34,35,36,37}
+                );
         }
     }
 }

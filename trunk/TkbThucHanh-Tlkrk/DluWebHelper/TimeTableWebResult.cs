@@ -19,10 +19,6 @@ namespace DluWebHelper
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public int CurrentWeek
-        {
-            get { return Weeks.Count > 0 ? Weeks.Max() : -1; }
-          //  get { return 35; }
-        }
+        public int CurrentWeek { get; set; }
     }
 }
