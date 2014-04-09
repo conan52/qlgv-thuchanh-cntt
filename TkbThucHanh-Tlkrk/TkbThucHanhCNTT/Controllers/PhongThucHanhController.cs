@@ -59,6 +59,7 @@ namespace TkbThucHanhCNTT.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, PhongThucHanh phongth)
         {
+            //ko sua phong thuc hanh
             // Test if gv object and modelstate is valid.
             if (phongth != null && ModelState.IsValid)
             {
