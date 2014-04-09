@@ -155,14 +155,17 @@
     $('#btnSync').bind("click", function() {
          var r = confirm("Việc đồng bộ có thể sẽ xóa hết các tuần hiện có, bạn có muốn tiếp tục");
          if (r == true) {
+             showLoadingDialog();
               $.post("@Url.Action("AjaxSyncWeek", "TuanHoc")")
                 .done(function(data) {
+                   hideLoadingDialog();
                     if (data.Result == "OK") {
                         ShowNotification("Đồng bộ thành công!", "info");
                         refreshData();
 
                     } else
                         ShowNotification(data.Message, "error");
+                
                 });
          }
     });
@@ -171,8 +174,10 @@
     $('#clearAllWeek').bind("click", function() {
         var r = confirm("Bạn muốn xóa hết dữ liệu của các tuần học?");
         if (r == true) {
+                      showLoadingDialog();
             $.post("@Url.Action("AjaxClearWeek", "TuanHoc")")
                 .done(function(data) {
+                  hideLoadingDialog();
                     if (data.Result == "OK") {
                         //closeDialog();
                         ShowNotification("Xóa thành công", "info");

@@ -173,9 +173,10 @@
     <Compile Include="Controllers\LopController.cs" />
     <Compile Include="Controllers\MonHocController.cs" />
     <Compile Include="Controllers\PhanCongController.cs" />
-    <Compile Include="Controllers\PhongThucHanhController.cs" />
+<<<<<<< .mine    <Compile Include="Controllers\TkbGiangVienController.cs" />
+=======    <Compile Include="Controllers\PhongThucHanhController.cs" />
     <Compile Include="Controllers\ThoiKhoaBieuController.cs" />
-    <Compile Include="Controllers\TuanHocController.cs" />
+>>>>>>> .theirs    <Compile Include="Controllers\TuanHocController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -442,6 +443,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\ajax-loader.gif" />
     <Content Include="Scripts\jquery-2.1.0-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
@@ -980,14 +982,15 @@
     <Content Include="Views\GiangVien\Index.cshtml" />
     <Content Include="Views\PhanCong\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\GiangVien.cshtml" />
-    <Content Include="Views\ThoiKhoaBieu\TkbGiangVien.cshtml" />
+    <Content Include="Views\TkbGiangVien\Index.cshtml" />
     <Content Include="Views\Lop\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TrinhDo.cshtml" />
     <Content Include="Views\MonHoc\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TrinhDoInt.cshtml" />
-    <Content Include="Views\LichCongTac\Index.cshtml" />
+<<<<<<< .mine    <Content Include="Views\Shared\_LoadingDialog.cshtml" />
+=======    <Content Include="Views\LichCongTac\Index.cshtml" />
     <Content Include="Views\PhongThucHanh\Index.cshtml" />
-  </ItemGroup>
+>>>>>>> .theirs  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">
       <Project>{97D9B8F9-648F-4122-9E3E-2F7D194E5FBE}</Project>
