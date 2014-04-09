@@ -30,5 +30,34 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(result.ToDataSourceResult(request, pc => new { pc.MaGv, pc.MonHocId, pc.TenLop, pc.IdPhanCong }));
         }
 
+
+
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, GiangVien gv)
+        {
+            // Test if gv object and modelstate is valid.
+            if (gv != null && ModelState.IsValid)
+            {
+                DataProvider<GiangVien>.Remove(gv);
+            }
+            return Json(ModelState.ToDataSourceResult());
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, PhanCongGiangDay pc)
+        {
+            if (pc != null && ModelState.IsValid)
+            {
+                ///
+                var p = new PhanCongGiangDay()
+                {
+                    
+                };
+                DataProvider<PhanCongGiangDay>.Add(p);
+            }
+
+            return Json(new[] { pc }.ToDataSourceResult(request, ModelState));
+        }
     }
 }

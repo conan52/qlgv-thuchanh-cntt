@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 
 namespace TkbThucHanhCNTT.Models
@@ -9,10 +10,12 @@ namespace TkbThucHanhCNTT.Models
         [Key]
         [Required(ErrorMessage = "Tên lớp không được để trống!")]
         [Display(Name = "Tên lớp")]
+        [Remote("CheckKeyUnique","Lop",ErrorMessage = "Mã lớp này đã tồn tại!.")]
         public string TenLop { get; set; }
 
         [Display(Name = "Trình độ")]
         [Required(ErrorMessage = "Trình độ không được để trống!")]
+        [UIHint("TrinhDo")]
         public string TrinhDo { get; set; }
 
         [Display(Name = "Năm nhập học")]
