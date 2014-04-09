@@ -28,7 +28,7 @@ namespace TkbThucHanhCNTT.Models.Viewer
         [UIHint("ChuyenNganh")]
         public ChuyenNganh ChuyenNganh { get; set; }
 
-        [Required(ErrorMessage = "Tài khoản đăng nhập")]
+//        [Required(ErrorMessage = "Tài khoản đăng nhập")]
         [Display(Name = "Tài khoản đăng nhập")]
         public string TaiKhoan { get; set; }
     }
