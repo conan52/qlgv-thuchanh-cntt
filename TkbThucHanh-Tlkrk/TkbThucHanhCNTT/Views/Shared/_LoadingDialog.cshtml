@@ -1,0 +1,24 @@
+﻿@(Html.Kendo().Window()
+      .Name("loadingDialog")
+      // .Title("Khởi tạo lại danh sách các tuần")
+      .Content(@<text>
+                    <div id="Dialog" style="text-align: center">
+                        <img src="@Url.Content("~/Images/ajax-loader.gif")" />
+                        <br />
+                        <span>Vui lòng đợi...</span>
+                    </div>
+                </text>)
+      .Title(false)
+      .Visible(false)
+      .AutoFocus(true)
+      .Modal(true)
+      )
+<script type="text/javascript">
+    function showLoadingDialog() {
+        $("#loadingDialog").data("kendoWindow").center().open();
+    }
+
+    function hideLoadingDialog() {
+        $("#loadingDialog").data("kendoWindow").close();
+    }
+</script>
