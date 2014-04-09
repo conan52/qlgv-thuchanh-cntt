@@ -36,7 +36,6 @@ namespace TkbThucHanhCNTT.Models
         [Display(Name = "Đã xếp lịch thực hành")]
         public bool DaXepLichThucHanh { get; set; }
 
-
         public virtual List<TkbGiangVien> TkbGiangViens { get; set; }
     }
 }

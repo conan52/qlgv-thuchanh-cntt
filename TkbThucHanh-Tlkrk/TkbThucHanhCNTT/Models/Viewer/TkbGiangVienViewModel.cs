@@ -12,8 +12,30 @@ namespace TkbThucHanhCNTT.Models.Viewer
     public class TkbGiangVienViewModel
     {
         [Key]
+        [ScaffoldColumn(false)]
         public int MaTkb { get; set; }
 
+        [UIHint("GridForeignKey")]
+        [Display(Name = "Tuần")]
+        public int SttTuan { get; set; }
+
+        [ForeignKey("SttTuan")]
+        public TuanHoc TuanHoc { get; set; }
+
+        [UIHint("GridForeignKey")]
+        public NgayTrongTuan NgayTrongTuan { get; set; }
+
+        [Display(Name = "Giảng viên")]
+        [UIHint("GridForeignKey")]
+        [Required(ErrorMessage = "Giảng viên không được để trống!")]
+        public string MaGv { get; set; }
+
+        [ForeignKey("MaGv")]
+        public virtual GiangVien GiangVien { get; set; }
+
+
+
+        
         [Display(Name = "Tên môn học")]
         [Required(ErrorMessage = "Tên môn học không được để trống!")]
         public string TenMonHoc { get; set; }
@@ -37,20 +59,7 @@ namespace TkbThucHanhCNTT.Models.Viewer
         [Required(ErrorMessage = "Ngày học không được để trống!")]
         public DateTime NgayHoc { get; set; }
 
-        [Required(ErrorMessage = "Giảng viên không được để trống!")]
-        public string MaGv { get; set; }
 
-        [ForeignKey("MaGv")]
-        public virtual GiangVien GiangVien { get; set; }
-
-
-        public int SttTuan { get; set; }
-
-        [ForeignKey("SttTuan")]
-        public TuanHoc TuanHoc { get; set; }
-
-
-        public NgayTrongTuan NgayTrongTuan { get; set; }
 
     }
 }

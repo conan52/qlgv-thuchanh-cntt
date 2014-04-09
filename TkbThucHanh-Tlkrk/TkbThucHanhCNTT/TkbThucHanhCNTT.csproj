@@ -204,6 +204,7 @@
     <Compile Include="Models\Ultils\StaticUltils.cs" />
     <Compile Include="Models\Viewer\GiangVienViewModel.cs" />
     <Compile Include="Models\Viewer\TkbGiangVienViewModel.cs" />
+    <Compile Include="Models\Viewer\TuanHocViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

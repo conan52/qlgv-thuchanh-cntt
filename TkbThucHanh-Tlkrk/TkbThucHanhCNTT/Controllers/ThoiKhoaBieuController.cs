@@ -8,6 +8,7 @@ using Kendo.Mvc.UI;
 using TkbThucHanhCNTT.Models;
 using TkbThucHanhCNTT.Models.Provider;
 using TkbThucHanhCNTT.Models.Ultils;
+using TkbThucHanhCNTT.Models.Viewer;
 
 namespace TkbThucHanhCNTT.Controllers
 {
@@ -23,15 +24,30 @@ namespace TkbThucHanhCNTT.Controllers
 
         public ActionResult TkbGiangVien()
         {
+            ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
+            ViewData["Tuans"] = DataProvider<TuanHoc>.GetAll().Select(t =>new{ t.SttTuan});
             return View();
+
         }
 
         public ActionResult LayDsTuan([DataSourceRequest] DataSourceRequest request)
         {
-            var dsTuan = DataProvider<TuanHoc>.GetList(t=>t.NgayBatDau<=DateTime.Now.AddDays(14).Monday()).Select(t => t.SttTuan).OrderByDescending(t=>t);
-          //  return Json(dsTuan.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            var dsTuan = DataProvider<TuanHoc>.GetList(t => t.NgayBatDau <= DateTime.Now.AddDays(14).Monday()).Select(t => t.SttTuan).OrderByDescending(t => t);
+            //  return Json(dsTuan.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
             return Json(dsTuan, JsonRequestBehavior.AllowGet);
         }
 
+
+
+        public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
+        {
+            var result = DataProvider<TkbGiangVien>.GetAll();
+            return Json(result.ToDataSourceResult(request, tk => new TkbGiangVienViewModel()
+            {
+                MaGv = tk.MaGv,
+                LopHoc = tk.LopHoc,
+                TenMonHoc = tk.TenMonHoc
+            }));
+        }
     }
 }
