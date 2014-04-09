@@ -36,7 +36,7 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            var result = DataProvider<LichCongTac>.GetAll();
+            var result = DataProvider<LichCongTac>.GetAll().Select(ct=>new {ct.MaGv,ct.ThoiGianBd, ct.ThoiGianKt, ct.LyDo, ct.LichCongTacId});
             return Json(result.ToDataSourceResult(request));
         }
 
