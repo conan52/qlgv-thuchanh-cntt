@@ -1,0 +1,11 @@
+﻿
+@(Html.Kendo().Notification()
+      .Name("popupNotification"))
+<script type="text/javascript">
+
+    function ShowNotification(message, type) {
+        var popupNotification = $("#popupNotification").data("kendoNotification");
+        popupNotification.show(message, type);
+    }
+
+</script>
