@@ -12,7 +12,7 @@
             //  columns.Bound(c => c.ChuyenNganh).Width(30);
               columns.ForeignKey(p => p.ChuyenNganh, (System.Collections.IEnumerable)ViewData["ChuyenNganhs"], "Value", "Description");
               columns.Bound(c => c.TaiKhoan).Width(50);
-              columns.Bound(c => c.CoThePhanCong);
+              columns.Bound(c => c.CoThePhanCong).ClientTemplate("<input type='checkbox' id='CoThePhanCong' name='CoThePhanCong' disabled #if(CoThePhanCong){#checked#}# value='#=CoThePhanCong#' />");
               columns.Command(command =>
               {
                   command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
