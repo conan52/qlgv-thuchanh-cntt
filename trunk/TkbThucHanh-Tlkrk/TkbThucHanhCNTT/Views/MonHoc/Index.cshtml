@@ -10,8 +10,8 @@
           {
               columns.Bound(c => c.MaMonHoc);
               columns.Bound(c => c.TenMonHoc);
-              columns.ForeignKey(c => c.TrinhDo, (IEnumerable) ViewData["TrinhDos"], "Value", "Description");
-              columns.ForeignKey(p => p.ChuyenNganh, (IEnumerable) ViewData["ChuyenNganhs"], "Value", "Description");
+              columns.ForeignKey(c => c.TrinhDo, (IEnumerable)ViewData["TrinhDos"], "Value", "Description");
+              columns.ForeignKey(c => c.ChuyenNganh, (IEnumerable) ViewData["ChuyenNganhs"], "Value", "Description");
               columns.Bound(c => c.BatBuoc).ClientTemplate(@"<input type='checkbox' id='bacbuoc' name='BacBuoc' disabled #if(BatBuoc){#checked#}# value='#=BatBuoc#' />");
               columns.Command(command =>
               {
@@ -40,7 +40,6 @@
               .Model(model =>
               {
                   model.Id(l => l.MonHocId);
-                  model.Field(x => x.TrinhDo).DefaultValue("CaoDang");
               })
           )
           )

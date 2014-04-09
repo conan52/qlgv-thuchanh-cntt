@@ -32,23 +32,7 @@ namespace TkbThucHanhCNTT.Models
 
         [Display(Name = "Bắt buộc")]
         public bool BatBuoc { get; set; }
-        
-//        public bool? BatBuoc
-//        {
-//            get { return _batBuoc; }
-//            set
-//            {
-//                if (value==null)
-//                {
-//                    _batBuoc = false;
-//                }
-//                else
-//                {
-//                    _batBuoc = value;
-//                }
-//            }
-//        }
-
+       
         [Required(ErrorMessage = "Trình độ không được để trống!")]
         [Display(Name = "Trình độ")]
         [UIHint("TrinhDoInt")]
