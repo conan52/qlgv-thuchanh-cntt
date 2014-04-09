@@ -37,6 +37,26 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(dsTuan, JsonRequestBehavior.AllowGet);
         }
 
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult AjaxUpdate([DataSourceRequest] DataSourceRequest request, TkbGiangVien t)
+        {
+            // Test if gv object and modelstate is valid.
+            if (t != null && ModelState.IsValid)
+            {
+                DataProvider<TkbGiangVien>.Update(t);
+            }
+            return Json(ModelState.ToDataSourceResult());
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, TkbGiangVien t)
+        {
+            // Test if gv object and modelstate is valid.
+            if (t != null && ModelState.IsValid)
+            {
+                DataProvider<TkbGiangVien>.Add(t);
+            }
+            return Json(ModelState.ToDataSourceResult());
+        }
 
 
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
@@ -46,7 +66,12 @@ namespace TkbThucHanhCNTT.Controllers
             {
                 MaGv = tk.MaGv,
                 LopHoc = tk.LopHoc,
-                TenMonHoc = tk.TenMonHoc
+                TenMonHoc = tk.TenMonHoc,
+                SttTuan = tk.SttTuan,
+                NgayTrongTuan = tk.NgayTrongTuan,
+                Phong = tk.Phong,
+                TietBatDau = tk.TietBatDau,
+                TietKetThuc = tk.TietKetThuc
             }));
         }
     }

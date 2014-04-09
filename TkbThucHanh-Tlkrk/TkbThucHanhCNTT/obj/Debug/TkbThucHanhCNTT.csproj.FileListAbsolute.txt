@@ -145,3 +145,4 @@ C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\uk-UA\Ken
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\zh-CN\Kendo.Mvc.resources.dll
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\it-IT\Kendo.Mvc.resources.dll
 C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\obj\Debug\TkbThucHanhCNTT.csprojResolveAssemblyReference.cache
+C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\bin\Kendo.Mvc.dll
