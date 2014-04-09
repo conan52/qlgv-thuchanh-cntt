@@ -1,7 +1,7 @@
 ﻿
 @using TkbThucHanhCNTT.Models
 @{
-    ViewBag.Title = "About";
+    ViewBag.Title = "Lớp học";
 }
 <div id="myGridView">
     @(Html.Kendo().Grid<Lop>()
@@ -17,7 +17,7 @@
                   command.Destroy().Text("Xóa");
               }).Width(172);
           })
-          .ToolBar(toolbar => toolbar.Create().Text("Thêm giảng viên"))
+          .ToolBar(toolbar => toolbar.Create().Text("Thêm lớp học"))
           .Editable(e => e.Mode(GridEditMode.PopUp))
           .Sortable()
           .Pageable(pageable =>
