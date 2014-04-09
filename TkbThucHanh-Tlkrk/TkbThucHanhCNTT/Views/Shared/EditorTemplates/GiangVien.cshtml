@@ -1,11 +1,9 @@
-﻿@{
-    ViewBag.Title = null;
-}
+﻿@using System.Collections
+@model TkbThucHanhCNTT.Models.GiangVien
 
-@(Html.Kendo().DropDownListFor(m => m)
-                  .AutoBind(false)
-                  .OptionLabel("Select a value...")
-                  .DataTextField("HoVaTen")
-                  .DataValueField("MaGv")
-                  .DataSource(d => d.Read(read => read.Action("GetGv", "GiangVien")))
-            )
+@(Html.Kendo().DropDownListFor(m=>m)
+.Name("dropdownlist")
+.DataTextField("HoVaTen")
+.DataValueField("MaGv")
+    .BindTo((IEnumerable)ViewData["GiangViens"])
+)

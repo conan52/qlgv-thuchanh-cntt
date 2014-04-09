@@ -1,0 +1,61 @@
+﻿@using System.Collections
+@using TkbThucHanhCNTT.Models
+@{
+    ViewBag.Title = "Lịch công tác";
+}
+<div id="myGridView">
+    @(Html.Kendo().Grid<LichCongTac>()
+          .Name("GridView")
+          .Columns(columns =>
+          {
+              columns.ForeignKey(c => c.MaGv, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv");              
+              columns.Bound(c => c.ThoiGianBd).Format("{0:dd/MM/yyyy}");
+              columns.Bound(c => c.ThoiGianKt).Format("{0:dd/MM/yyyy}");
+              columns.Bound(c => c.LyDo);
+              columns.Command(command =>
+              {
+                  command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
+                  command.Destroy().Text("Xóa");
+              }).Width(172);
+          })
+          .ToolBar(toolbar => toolbar.Create().Text("Thêm lịch công tác"))
+          .Editable(e => e.Mode(GridEditMode.PopUp))
+          .Sortable()
+          .Pageable(pageable =>
+          {
+              pageable.Refresh(true);
+              pageable.PageSizes(true);
+          })
+          .Selectable()
+          //  .Scrollable()
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .PageSize(20)
+              .Events(events => events.Error("error_handler"))
+              .Read(read => read.Action("AjaxReadData", "LichCongTac"))
+              .Create(update => update.Action("AjaxCreate", "LichCongTac"))
+              .Update(update => update.Action("Ajax_Update", "LichCongTac"))
+              .Destroy(update => update.Action("AjaxDelete", "LichCongTac"))
+              .Model(model =>
+              {
+                  model.Id(l => l.LichCongTacId);
+                  model.Field(x => x.MaGv).DefaultValue("CT02");
+              })
+          )
+          )
+</div>
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Lỗi:\n";
+            $.each(e.errors, function(key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function() {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>
