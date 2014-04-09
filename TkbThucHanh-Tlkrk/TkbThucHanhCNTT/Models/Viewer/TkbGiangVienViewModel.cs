@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Ultils;
 
 namespace TkbThucHanhCNTT.Models.Viewer
@@ -29,7 +30,7 @@ namespace TkbThucHanhCNTT.Models.Viewer
         public int TietBatDau { get; set; }
 
         [Display(Name = "Tiết kết thúc")]
-        [Required(ErrorMessage = "Tiết kết thúc không được để trống!")]
+        [Required(ErrorMessage = "Tiết kết th không được để trống!")]
         public int TietKetThuc { get; set; }
 
         [Display(Name = "Ngày học")]
@@ -42,12 +43,14 @@ namespace TkbThucHanhCNTT.Models.Viewer
         [ForeignKey("MaGv")]
         public virtual GiangVien GiangVien { get; set; }
 
-        public int TuanHoc { get; set; }
 
-        [NotMapped]
-        public string Thu
-        {
-            get { return NgayHoc.LayThu(); }
-        }
+        public int SttTuan { get; set; }
+
+        [ForeignKey("SttTuan")]
+        public TuanHoc TuanHoc { get; set; }
+
+
+        public NgayTrongTuan NgayTrongTuan { get; set; }
+
     }
 }

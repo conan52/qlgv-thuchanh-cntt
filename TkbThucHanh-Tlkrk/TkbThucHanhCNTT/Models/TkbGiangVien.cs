@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Ultils;
 
 namespace TkbThucHanhCNTT.Models
@@ -39,12 +40,14 @@ namespace TkbThucHanhCNTT.Models
         [ForeignKey("MaGv")]
         public virtual GiangVien GiangVien { get; set; }
 
-        public int TuanHoc { get; set; }
 
-        [NotMapped]
-        public string Thu
-        {
-            get { return NgayHoc.LayThu(); }
-        }
+        public int SttTuan { get; set; }
+
+        [ForeignKey("SttTuan")]
+        public TuanHoc TuanHoc { get; set; }
+
+        
+        public NgayTrongTuan NgayTrongTuan { get; set; }
+
     }
 }

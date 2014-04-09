@@ -17,7 +17,7 @@
               toolBar.Template(@<text>
                                     <a id='btnCreate' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'></span>Khởi tạo danh sách tuần</a>
                                     <a id='clearAllWeek' class='k-button k-button-icontext' href='#'><span class='k-icon k-delete'></span>Xóa hết các tuần</a>
-                                    @item.SaveButton()
+                                    @item.SaveButton("Lưu lại","Hủy bỏ")
                                 </text>);
           })
           .Editable(e => e.Mode(GridEditMode.InCell))

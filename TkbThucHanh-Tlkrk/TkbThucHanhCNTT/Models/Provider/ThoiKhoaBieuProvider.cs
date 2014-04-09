@@ -32,7 +32,7 @@ namespace TkbThucHanhCNTT.Models.Provider
                           TietKetThuc = tb.End,
                           MaGv = tb.TeacherCode,
                           LopHoc = tb.ClassCode,
-                          TuanHoc = week
+                          SttTuan = week
                       };
             return tkb.ToList();
         }

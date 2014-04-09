@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -34,5 +35,8 @@ namespace TkbThucHanhCNTT.Models
 
         [Display(Name = "Đã xếp lịch thực hành")]
         public bool DaXepLichThucHanh { get; set; }
+
+
+        public virtual List<TkbGiangVien> TkbGiangViens { get; set; }
     }
 }
