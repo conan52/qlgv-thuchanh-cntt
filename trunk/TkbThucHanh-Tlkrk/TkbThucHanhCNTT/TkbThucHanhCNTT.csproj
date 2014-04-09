@@ -989,6 +989,7 @@
     <Content Include="Views\Shared\_LoadingDialog.cshtml" />
     <Content Include="Views\LichCongTac\Index.cshtml" />
     <Content Include="Views\PhongThucHanh\Index.cshtml" />
+    <Content Include="Views\Shared\_Notifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">

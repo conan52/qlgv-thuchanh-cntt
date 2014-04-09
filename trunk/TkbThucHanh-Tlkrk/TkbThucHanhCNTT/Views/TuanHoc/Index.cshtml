@@ -105,8 +105,6 @@
       .Modal(true)
       )
 
-@(Html.Kendo().Notification()
-      .Name("popupNotification"))
 
 <script type="text/javascript">
     function error_handler(e) {
@@ -121,11 +119,6 @@
             });
             alert(message);
         }
-    }
-
-    function ShowNotification(message, type) {
-        var popupNotification = $("#popupNotification").data("kendoNotification");
-        popupNotification.show(message, type);
     }
 
     function onClose() {
