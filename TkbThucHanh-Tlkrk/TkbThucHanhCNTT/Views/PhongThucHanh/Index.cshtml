@@ -17,7 +17,11 @@
               }).Width(172);
           })
           .ToolBar(toolbar => toolbar.Create().Text("Thêm phòng thực hành"))
-          .Editable(e => e.Mode(GridEditMode.PopUp))
+                  .Editable(e =>
+                  {
+                      e.Mode(GridEditMode.PopUp);
+                      e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
+                  })
           .Sortable()
           .Pageable(pageable =>
           {
