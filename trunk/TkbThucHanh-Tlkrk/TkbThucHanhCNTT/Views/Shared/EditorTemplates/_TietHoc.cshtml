@@ -1,0 +1,15 @@
+@model TkbThucHanhCNTT.Models.Viewer.TietHoc
+@(Html.Kendo().IntegerTextBox()
+      .Name("TietBatDau")
+      .HtmlAttributes(new {style = "width:40%; float:left;margin: 2px 5px;"})
+      .Min(1)
+      .Max(13)
+   
+      )
+
+@*@(Html.Kendo().IntegerTextBoxFor(m => m.TietKetThuc)
+      .Name("TietKetThuc")
+      .HtmlAttributes(new {style = "width:40%; float:left;margin: 2px 5px;"})
+      .Min(1)
+      .Max(13)
+      )*@
