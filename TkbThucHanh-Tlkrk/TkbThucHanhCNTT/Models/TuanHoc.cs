@@ -37,5 +37,6 @@ namespace TkbThucHanhCNTT.Models
         public bool DaXepLichThucHanh { get; set; }
 
         public virtual List<TkbGiangVien> TkbGiangViens { get; set; }
+        public virtual List<LichThucHanh> LichThucHanhs { get; set; }
     }
 }

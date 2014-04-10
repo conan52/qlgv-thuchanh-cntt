@@ -206,8 +206,9 @@
     <Compile Include="Models\TuanHoc.cs" />
     <Compile Include="Models\Ultils\StaticUltils.cs" />
     <Compile Include="Models\Viewer\GiangVienViewModel.cs" />
+    <Compile Include="Models\Viewer\TietHoc.cs" />
     <Compile Include="Models\Viewer\TkbGiangVienViewModel.cs" />
-    <Compile Include="Models\Viewer\TkbThucHanhViewModel.cs" />
+    <Compile Include="Models\Viewer\LichThucHanhViewModel.cs" />
     <Compile Include="Models\Viewer\TuanHocViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1143,6 +1144,8 @@
     <None Include="Scripts\kendo\2014.1.318\kendo.web.min.js.map" />
     <None Include="Scripts\kendo\2014.1.318\kendo.window.min.js.map" />
     <Content Include="Views\LichThucHanh\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\_TietHoc.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TietHoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">
