@@ -20,7 +20,11 @@
               }).Width(172);
           })
           .ToolBar(toolbar => toolbar.Create().Text("Thêm phân công giảng dạy"))
-          .Editable(e => e.Mode(GridEditMode.PopUp))
+                  .Editable(e =>
+                  {
+                      e.Mode(GridEditMode.PopUp);
+                      e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
+                  })
           .Sortable()
           .Pageable(pageable =>
           {

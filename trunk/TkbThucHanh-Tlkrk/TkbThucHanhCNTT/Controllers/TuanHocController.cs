@@ -116,22 +116,7 @@ namespace TkbThucHanhCNTT.Controllers
             }
         }
 
-        public ActionResult tuan_Update([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<TuanHoc> tuan)
-        {
-            // Will keep the updated entitites here. Used to return the result later.
-            var entities = new List<TuanHoc>();
-            if (ModelState.IsValid)
-            {
-
-                foreach (var product in tuan)
-                {
-
-                }
-
-            }
-            // Return the updated entities. Also return any validation errors.
-            return Json(entities.ToDataSourceResult(request, ModelState));
-        }
+       
 
     }
 }

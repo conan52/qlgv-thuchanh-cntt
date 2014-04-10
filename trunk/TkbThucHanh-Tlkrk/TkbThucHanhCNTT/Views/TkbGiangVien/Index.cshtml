@@ -3,6 +3,19 @@
 @using TkbThucHanhCNTT.Models.Enums
 @using TkbThucHanhCNTT.Models.Provider
 @using TkbThucHanhCNTT.Models.Viewer
+@functions {
+
+    private string GetMaGiangVienDauTien()
+{
+    return DataProvider<GiangVien>.GetAll().FirstOrDefault().MaGv;
+    }
+
+    private int TuanHocHienTai()
+{
+    return DataProvider<TuanHoc>.GetAll().FirstOrDefault(x => (x.NgayBatDau - DateTime.Now).Days < 7 && (x.NgayBatDau - DateTime.Now).Days > 0).SttTuan - 1;
+    }
+
+}
 @{
     //Layout = null;
 }
@@ -10,73 +23,101 @@
       .Name("GridView")
       .Columns(columns =>
       {
-          columns.ForeignKey(c => c.SttTuan, (IEnumerable)ViewData["Tuans"], dataFieldText: "SttTuan", dataFieldValue: "SttTuan");
-          columns.ForeignKey(c => c.NgayTrongTuan, EnumUltils.GetDescriptions<NgayTrongTuan>(), dataFieldText: "Description", dataFieldValue: "Value");
-          columns.Bound(c => c.TietBatDau).Title("Tiết").ClientTemplate("#=TietBatDau# - #=TietKetThuc#");
-          columns.ForeignKey(c => c.MaGv, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv");
-          columns.Bound(c => c.TenMonHoc);
+          columns.ForeignKey(c => c.SttTuan, (IEnumerable) ViewData["Tuans"], dataFieldText: "SttTuan", dataFieldValue: "SttTuan").Filterable(false);
+          columns.ForeignKey(c => c.NgayTrongTuan, EnumUltils.GetDescriptions<NgayTrongTuan>(), dataFieldText: "Description", dataFieldValue: "Value").Filterable(false);
+          columns.Bound(c => c.TietBatDau).Title("Tiết").ClientTemplate("#=TietBatDau# - #=TietKetThuc#").Groupable(false).Filterable(false);
+          columns.ForeignKey(c => c.MaGv, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Filterable(true);
+          columns.Bound(c => c.TenMonHoc).Groupable(false).Filterable(false);
           columns.Bound(c => c.LopHoc);
-          columns.Bound(c => c.Phong);
+          columns.Bound(c => c.Phong).Filterable(false);
           columns.Command(command =>
           {
               command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
               command.Destroy().Text("Xóa");
           });
       })
-      .Editable(e => e.Mode(GridEditMode.PopUp))
+      .Editable(e =>
+      {
+          e.Mode(GridEditMode.PopUp);
+          e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
+      })
       .Sortable()
-      .Groupable(x=>x.Messages(t=>t.Empty("Kéo thả để gom nhóm dữ liệu")))
+      .Filterable(filterable => filterable
+          .Extra(false)
+          .Operators(operators => operators
+              .ForString(str => str.Clear()
+                  .StartsWith("Bắt đầu với")
+                  .IsEqualTo(("So sánh với"))
+                  .Contains("Trong nội dung")
+              ))
+          .Messages(t =>
+          {
+              t.Filter("Lọc");
+              t.Clear("Hủy");
+              t.Info("Lọc kết quả theo!");
+          }
+
+    )
+        ) 
+//      .Filterable(f=>f.Enabled(true))
+      .Groupable(x => x.Messages(t => t.Empty("Kéo thả để gom nhóm dữ liệu")))
       .Selectable()
       //  .Scrollable()
       .DataSource(dataSource => dataSource
           .Ajax()
           .Events(events => events.Error("error_handler"))
-              .Read(read => read.Action("AjaxReadData", "TkbGiangVien"))
-                  .Create(update => update.Action("AjaxCreate", "TkbGiangVien"))
-                  .Update(update => update.Action("AjaxUpdate", "TkbGiangVien"))
-                  .Destroy(update => update.Action("AjaxDelete", "TkbGiangVien"))
+          .Read(read => read.Action("AjaxReadData", "TkbGiangVien"))
+          .Create(update => update.Action("AjaxCreate", "TkbGiangVien"))
+          .Update(update => update.Action("AjaxUpdate", "TkbGiangVien"))
+          .Destroy(update => update.Action("AjaxDelete", "TkbGiangVien"))
           .Model(model =>
           {
               model.Id(gv => gv.MaGv);
-              model.Field(f => f.SttTuan);
+              model.Field(f => f.SttTuan).DefaultValue(TuanHocHienTai());
+              model.Field(f => f.MaGv).DefaultValue(GetMaGiangVienDauTien());
+              if (DateTime.Now.TimeOfDay.Hours < 12)
+              {
+                  model.Field(x => x.TietBatDau).DefaultValue(1);
+                  model.Field(x => x.TietKetThuc).DefaultValue(4);
+              }
+              else
+              {
+                  model.Field(x => x.TietBatDau).DefaultValue(7);
+                  model.Field(x => x.TietKetThuc).DefaultValue(10);
+              }
           })
       ).ToolBar(toolBar =>
       {
           toolBar.Template(@<text>
                                 @item.CreateButton("Thêm mới")
-                                <a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'></span>Lấy tự động từ TKB trường</a>
-                             
+                                <a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'>
+                                                                                               </span>Lấy tự động từ TKB trường</a>
                                 <div class="toolbar">
-                                    <label class="category-label" for="category">Xem theo tuần:</label>
+                                    <label class="category-label" for="category">
+                                        Xem theo tuần:</label>
                                     @(Html.Kendo().DropDownList()
                                           .Name("DanhSachTuan")
                                           .OptionLabel("Tất cả")
                                           .AutoBind(false)
                                           .Events(e => e.Change("onSelectedWeekChange"))
-                                                          .DataSource(ds => ds.Read("LayDsTuan", "TkbGiangVien"))
-                                          ) 
+                                          .DataSource(ds => ds.Read("LayDsTuan", "TkbGiangVien"))
+                                          )
                                 </div>
                             </text>);
       })
       )
-      
 <style>
-     .category-label
-    {
-        vertical-align: middle;
+    .category-label {
         padding-right: .5em;
-        
-    }
-    #category
-    {
         vertical-align: middle;
     }
-    .toolbar {
-        float: right;
-    }
+
+    #category { vertical-align: middle; }
+
+    .toolbar { float: right; }
 </style>
 <script type="text/javascript">
-     function refreshData() {
+    function refreshData() {
         $('#GridView').data('kendoGrid').dataSource.read();
         $('#GridView').data('kendoGrid').refresh();
     }
@@ -87,12 +128,12 @@
             .done(function(data) {
                 hideLoadingDialog();
                 if (data.Result == "OK") {
-                    ShowNotification("Đã thêm <b>"+data.Message+"</b> buổi học từ website trường!", "info");
+                    ShowNotification("Đã thêm <b>" + data.Message + "</b> buổi học từ website trường!", "info");
                     refreshData();
 
                 } else
                     ShowNotification(data.Message, "error");
-                
+
             });
     });
 
@@ -112,8 +153,8 @@
 
     function onSelectedWeekChange() {
         var value = this.value(),
-		 	 grid = $("#GridView").data("kendoGrid");
-        if (value&& !isNaN( parseInt(value))) {
+            grid = $("#GridView").data("kendoGrid");
+        if (value && !isNaN(parseInt(value))) {
             grid.dataSource.filter({ field: "SttTuan", operator: "eq", value: parseInt(value) });
         } else {
             grid.dataSource.filter({});
