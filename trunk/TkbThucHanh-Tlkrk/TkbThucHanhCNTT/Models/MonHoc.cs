@@ -12,7 +12,7 @@ namespace TkbThucHanhCNTT.Models
 
         public MonHoc()
         {
-            
+
         }
         [Key]
         [ScaffoldColumn(false)]
@@ -32,7 +32,7 @@ namespace TkbThucHanhCNTT.Models
 
         [Display(Name = "Bắt buộc")]
         public bool BatBuoc { get; set; }
-       
+
         [Required(ErrorMessage = "Trình độ không được để trống!")]
         [Display(Name = "Trình độ")]
         [UIHint("TrinhDoInt")]
@@ -42,6 +42,12 @@ namespace TkbThucHanhCNTT.Models
         [Display(Name = "Chuyên ngành")]
         [UIHint("ChuyenNganh")]
         public ChuyenNganh ChuyenNganh { get; set; }
+
+        [NotMapped]
+        public string TenThucHanh
+        {
+            get { return "TH. " + TenMonHoc; }
+        }
 
         public virtual List<PhanCongGiangDay> PhanCongGiangDays { get; set; }
     }

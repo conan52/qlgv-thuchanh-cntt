@@ -1,0 +1,114 @@
+﻿@using System.Collections
+@using TkbThucHanhCNTT.Models.Enums
+@using TkbThucHanhCNTT.Models.Viewer
+@{
+    ViewBag.Title = "Index";
+}
+@(Html.Kendo().Grid<TkbThucHanhViewModel>()
+      .Name("GridView")
+      .Columns(columns =>
+      {
+
+          columns.Command(command =>
+          {
+              command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
+              command.Destroy().Text("Xóa");
+          });
+      })
+      .Editable(e => e.Mode(GridEditMode.PopUp))
+      .Sortable()
+      .Groupable(x=>x.Messages(t=>t.Empty("Kéo thả để gom nhóm dữ liệu")))
+      .Selectable()
+      //  .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Events(events => events.Error("error_handler"))
+              .Read(read => read.Action("AjaxReadData", "TkbGiangVien"))
+                  .Create(update => update.Action("AjaxCreate", "TkbGiangVien"))
+                  .Update(update => update.Action("AjaxUpdate", "TkbGiangVien"))
+                  .Destroy(update => update.Action("AjaxDelete", "TkbGiangVien"))
+          .Model(model =>
+          {
+              model.Id(gv => gv.MaLichTh);
+          })
+      ).ToolBar(toolBar =>
+      {
+          toolBar.Template(@<text>
+                                @item.CreateButton("Thêm mới")
+                                <a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'></span>Lấy tự động từ TKB trường</a>
+                             
+                                <div class="toolbar">
+                                    <label class="category-label" for="category">Xem theo tuần:</label>
+                                    @(Html.Kendo().DropDownList()
+                                          .Name("DanhSachTuan")
+                                          .OptionLabel("Tất cả")
+                                          .AutoBind(false)
+                                          .Events(e => e.Change("onSelectedWeekChange"))
+                                                          .DataSource(ds => ds.Read("LayDsTuan", "TkbGiangVien"))
+                                          ) 
+                                </div>
+                            </text>);
+      })
+      )
+      
+<style>
+     .category-label
+    {
+        vertical-align: middle;
+        padding-right: .5em;
+        
+    }
+    #category
+    {
+        vertical-align: middle;
+    }
+    .toolbar {
+        float: right;
+    }
+</style>
+<script type="text/javascript">
+     function refreshData() {
+        $('#GridView').data('kendoGrid').dataSource.read();
+        $('#GridView').data('kendoGrid').refresh();
+    }
+
+    $("#btnAutoGet").bind("click", function() {
+        showLoadingDialog();
+        $.post("@Url.Action("LayTkbTuDong", "TkbGiangVien")")
+            .done(function(data) {
+                hideLoadingDialog();
+                if (data.Result == "OK") {
+                    ShowNotification("Đã thêm <b>"+data.Message+"</b> buổi học từ website trường!", "info");
+                    refreshData();
+
+                } else
+                    ShowNotification(data.Message, "error");
+                
+            });
+    });
+
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Lỗi:\n";
+            $.each(e.errors, function(key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function() {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+
+    function onSelectedWeekChange() {
+        var value = this.value(),
+		 	 grid = $("#GridView").data("kendoGrid");
+        if (value&& !isNaN( parseInt(value))) {
+            grid.dataSource.filter({ field: "SttTuan", operator: "eq", value: parseInt(value) });
+        } else {
+            grid.dataSource.filter({});
+        }
+    }
+
+</script>
