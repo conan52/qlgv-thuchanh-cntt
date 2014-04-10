@@ -113,7 +113,7 @@
     function onSelectedWeekChange() {
         var value = this.value(),
 		 	 grid = $("#GridView").data("kendoGrid");
-        if (value) {
+        if (value&& !isNaN( parseInt(value))) {
             grid.dataSource.filter({ field: "SttTuan", operator: "eq", value: parseInt(value) });
         } else {
             grid.dataSource.filter({});
