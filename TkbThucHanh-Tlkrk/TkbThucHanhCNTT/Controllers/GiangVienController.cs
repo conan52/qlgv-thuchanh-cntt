@@ -63,7 +63,7 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            var result = DataProvider<GiangVien>.GetAll(gv => gv.UserProfile);
+            var result = DataProvider<GiangVien>.GetAll();
             return Json(result.ToDataSourceResult(request, gv => new GiangVienViewModel()
             {
                 ChuyenNganh = gv.ChuyenNganh,

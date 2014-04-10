@@ -8,8 +8,6 @@ namespace TkbThucHanhCNTT.Models
 {
     public class MonHoc
     {
-        private bool? _batBuoc;
-
         public MonHoc()
         {
 

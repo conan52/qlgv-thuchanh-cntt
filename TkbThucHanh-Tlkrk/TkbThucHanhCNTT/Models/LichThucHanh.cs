@@ -29,7 +29,7 @@ namespace TkbThucHanhCNTT.Models
         [Required(ErrorMessage = "Phòng không được để trống!")]
         public string TenPhong { get; set; }
 
-        [ForeignKey("MonHocId")]
+        [ForeignKey("TenPhong")]
         [Required]
         public PhongThucHanh PhongThucHanh { get; set; }
 
