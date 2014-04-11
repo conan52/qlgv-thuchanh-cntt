@@ -1,0 +1,87 @@
+﻿@using System.Collections
+@using TkbThucHanhCNTT.Models
+@using TkbThucHanhCNTT.Models.Provider
+@{
+    ViewBag.Title = "Phân công giảng dạy";
+}
+@functions {
+
+    private string GetMaGiangVienDauTien()
+    {
+        return DataProvider<GiangVien>.GetAll().FirstOrDefault().MaGv;
+    }
+    private int GetMonHocDauTien()
+    {
+        return DataProvider<MonHoc>.GetAll().FirstOrDefault().MonHocId;
+    }
+    private string GetLopDauTien()
+    {
+        return DataProvider<Lop>.GetAll().FirstOrDefault().TenLop;
+    }
+}
+<div id="myGridView">
+    @(Html.Kendo().Grid<PhanCongGiangDay>()
+          .Name("GridView")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.IdPhanCong);
+              columns.Bound(c => c.NamHoc);
+              columns.Bound(c => c.HocKy);
+              columns.ForeignKey(c => c.MonHocId, (IEnumerable)ViewData["MonHocs"], dataFieldText: "TenMonHoc", dataFieldValue: "MonHocId");
+              columns.ForeignKey(c => c.MaGv, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv");
+              columns.ForeignKey(c => c.TenLop, (IEnumerable)ViewData["Lops"], dataFieldText: "TenLop", dataFieldValue: "TenLop");
+              columns.Command(command =>
+              {
+                  command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
+                  command.Destroy().Text("Xóa");
+              }).Width(172);
+          })
+          .ToolBar(toolbar => toolbar.Create().Text("Thêm lớp học"))
+                  .Editable(e =>
+                  {
+                      e.Mode(GridEditMode.PopUp);
+                      e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
+                  })
+          .Sortable()
+          .Pageable(pageable =>
+          {
+              pageable.Refresh(true);
+              pageable.PageSizes(true);
+          })
+          .Selectable()
+            //  .Scrollable()
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .PageSize(20)
+              .Events(events => events.Error("error_handler"))
+            .Read(read => read.Action("AjaxReadData", "PhanCongGiangDay"))
+             .Create(update => update.Action("AjaxCreate", "PhanCongGiangDay"))
+             .Update(update => update.Action("AjaxUpdate", "PhanCongGiangDay"))
+            .Destroy(update => update.Action("AjaxDelete", "PhanCongGiangDay"))
+              .Model(model =>
+              {
+                  model.Id(x=>x.IdPhanCong);
+                  model.Field(x => x.NamHoc).DefaultValue(DateTime.Now.Year);
+                  model.Field(x => x.HocKy).DefaultValue(1);
+                  model.Field(x => x.MaGv).DefaultValue(GetMaGiangVienDauTien());
+                  model.Field(x => x.MonHocId).DefaultValue(GetMonHocDauTien());
+                  model.Field(x => x.TenLop).DefaultValue(GetLopDauTien());
+              })
+          )
+          )
+</div>
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Lỗi:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>
