@@ -69,7 +69,7 @@ namespace TkbThucHanhCNTT.Controllers
         {
             var result =
                 DataProvider<PhanCongGiangDay>.GetAll()
-                    .Select(x => new {x.NamHoc, x.HocKy, x.MonHocId, x.MaGv, x.TenLop});
+                    .Select(x => new {x.NamHoc, x.HocKy, x.MonHocId, x.MaGv, x.TenLop, x.IdPhanCong});
             return Json(result.ToDataSourceResult(request));
         }
     }

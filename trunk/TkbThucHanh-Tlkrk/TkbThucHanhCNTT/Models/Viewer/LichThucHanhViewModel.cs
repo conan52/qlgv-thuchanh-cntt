@@ -22,6 +22,7 @@ namespace TkbThucHanhCNTT.Models.Viewer
         public MonHoc MonHoc { get; set; }
 
         [Display(Name = "Phòng")]
+        [UIHint("GridForeignKey")]
         [Required(ErrorMessage = "Phòng không được để trống!")]
         public string TenPhong { get; set; }
 

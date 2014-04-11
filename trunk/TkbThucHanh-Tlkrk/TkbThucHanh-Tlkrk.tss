@@ -16,5 +16,11 @@
     <ArrayOfString>
       <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\FilterController.cs</string>
     </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Models\Viewer\LichThucHanhViewModel.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\Shared\EditorTemplates\TietHoc.cshtml</string>
+    </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

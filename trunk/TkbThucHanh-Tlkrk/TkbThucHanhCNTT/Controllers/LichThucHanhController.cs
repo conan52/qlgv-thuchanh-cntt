@@ -22,6 +22,7 @@ namespace TkbThucHanhCNTT.Controllers
             ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
             ViewData["MonHocs"] = DataProvider<MonHoc>.GetAll().Select(t => new { t.TenMonHoc, t.MaMonHoc, t.TenThucHanh, t.MonHocId });
             ViewData["Lops"] = DataProvider<Lop>.GetAll().Select(l => new { l.TenLop });
+            ViewData["Phongs"] = DataProvider<PhongThucHanh>.GetAll().Select(p => new { p.TenPhong});
 
             var dsTuan = DataProvider<TuanHoc>.GetAll();
             ViewData["Tuans"] = dsTuan.Select(t => new { t.SttTuan });

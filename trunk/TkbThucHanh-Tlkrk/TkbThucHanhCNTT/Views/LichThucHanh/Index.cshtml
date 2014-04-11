@@ -5,7 +5,7 @@
     ViewBag.Title = "Index";
    
 }
- @model ForeignKeyValues
+@model ForeignKeyValues
 @(Html.Kendo().Grid<LichThucHanhViewModel>()
       .Name("GridView")
       .Columns(columns =>
@@ -15,8 +15,9 @@
           columns.Bound(e => e.TietBatDau).HeaderHtmlAttributes(new { colspan = 2 }).Title("Tiết học").Width(15);
           columns.Bound(e => e.TietKetThuc).HeaderHtmlAttributes(new { style = "display:none;" }).Width(15);
           columns.ForeignKey(c => c.TenLop, (IEnumerable)ViewData["Lops"], dataFieldText: "TenLop", dataFieldValue: "TenLop").Filterable(false);
+          columns.ForeignKey(c => c.TenPhong, (IEnumerable)ViewData["Phongs"], dataFieldText: "TenPhong", dataFieldValue: "TenPhong").Filterable(false);
 
-         // columns.ForeignKey(p => p.MonHocId, Model.MonHocs, "MonHocId", "TenThucHanh").EditorTemplateName("MonHocId");
+          // columns.ForeignKey(p => p.MonHocId, Model.MonHocs, "MonHocId", "TenThucHanh").EditorTemplateName("MonHocId");
           columns.ForeignKey(c => c.MonHocId, (IEnumerable)ViewData["MonHocs"], dataFieldText: "TenThucHanh", dataFieldValue: "MonHocId").EditorTemplateName("MonHocId");
           columns.ForeignKey(c => c.Gvhd1, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Filterable(false);
           columns.ForeignKey(c => c.Gvhd2, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Filterable(false);
@@ -48,38 +49,48 @@
           {
               model.Id(t => t.MaLichTh);
               model.Field(t => t.SttTuan).DefaultValue((int)ViewData["TuanMoiNhat"]);
-              //  model.Field(t => t.TietHoc).DefaultValue(new TietHoc());
+              model.Field(t => t.SttTuan).DefaultValue((int)ViewData["TuanMoiNhat"]);
+              model.Field(t => t.SttTuan).DefaultValue((int)ViewData["TuanMoiNhat"]);
+              model.Field(t => t.TietBatDau).DefaultValue(1);
+              model.Field(t => t.TietKetThuc).DefaultValue(1);
           })
       ).ToolBar(toolBar =>
       {
           toolBar.Template(@<text>
-                                @item.CreateButton("Thêm mới")
-                                @item.SaveButton("Lưu lại", "Hủy bỏ")
-                                <a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'>
-                                                                                               </span>Lấy tự động từ TKB trường</a>
-                                <div class="toolbar">
-                                    <label class="category-label" for="category">
-                                        Xem theo tuần:</label>
-                                    @(Html.Kendo().DropDownList()
+@item.CreateButton("Thêm mới")
+@item.SaveButton("Lưu lại", "Hủy bỏ")
+<a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'>
+</span>Lấy tự động từ TKB trường</a>
+<div class="toolbar">
+    <label class="category-label" for="category">
+        Xem theo tuần:</label>
+    @(Html.Kendo().DropDownList()
                                           .Name("DanhSachTuan")
                                           .OptionLabel("Tất cả")
                                           .AutoBind(false)
                                           .Events(e => e.Change("onSelectedWeekChange"))
                                           .DataSource(ds => ds.Read("LayDsTuan", "TkbGiangVien"))
                                           )
-                                </div>
-                            </text>);
+</div>
+</text>);
       })
       )
 <style>
-    .category-label {
+    .category-label
+    {
         padding-right: .5em;
         vertical-align: middle;
     }
-
-    #category { vertical-align: middle; }
-
-    .toolbar { float: right; }
+    
+    #category
+    {
+        vertical-align: middle;
+    }
+    
+    .toolbar
+    {
+        float: right;
+    }
 </style>
 <script type="text/javascript">
     function onChange(e) {
