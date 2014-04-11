@@ -16,9 +16,11 @@ namespace TkbThucHanhCNTT.Models
         public string LyDo { get; set; }
 
         [Required(ErrorMessage = "Thời gian bắt đầu không được để trống!")]
+        [UIHint("Date")]
         [Display(Name = "Thời gian bắt đầu")]
         public DateTime ThoiGianBd { get; set; }
 
+        [UIHint("Date")]
         [Required(ErrorMessage = "Thời gian kết thúc không được để trống!")]
         [Display(Name = "Thời gian kết thúc")]
         public DateTime ThoiGianKt { get; set; }

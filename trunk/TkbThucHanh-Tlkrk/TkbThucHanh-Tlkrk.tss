@@ -1,20 +1,2 @@
 <?xml version="1.0"?>
-<ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ArrayOfArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\T\Desktop\NCKH2\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\PhanCongGiangDay\Index.cshtml</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\T\Desktop\NCKH2\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\PhanCongGiangDayController.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\T\Desktop\NCKH2\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\LichCongTacController.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\T\Desktop\NCKH2\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Models\PhanCongGiangDay.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\T\Desktop\NCKH2\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Models\Provider\DataProvider.cs</string>
-    </ArrayOfString>
-  </ArrayOfArrayOfString>
-</ArrayOfArrayOfArrayOfString>
+<ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
