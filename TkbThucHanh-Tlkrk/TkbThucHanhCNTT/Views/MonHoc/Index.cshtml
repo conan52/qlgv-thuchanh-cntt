@@ -8,11 +8,13 @@
           .Name("GridView")
           .Columns(columns =>
           {
-              columns.Bound(c => c.MaMonHoc);
+              columns.Bound(c => c.MaMonHoc).Width(12);
               columns.Bound(c => c.TenMonHoc);
-              columns.ForeignKey(c => c.TrinhDo, (IEnumerable)ViewData["TrinhDos"], "Value", "Description");
-              columns.ForeignKey(c => c.ChuyenNganh, (IEnumerable) ViewData["ChuyenNganhs"], "Value", "Description");
-              columns.Bound(c => c.BatBuoc).ClientTemplate(@"<input type='checkbox' id='bacbuoc' name='BacBuoc' disabled #if(BatBuoc){#checked#}# value='#=BatBuoc#' />");
+              columns.Bound(c => c.SoTinChi).Width(12);
+              columns.ForeignKey(c => c.TrinhDo, (IEnumerable) ViewData["TrinhDos"], "Value", "Description").Width(160);
+              columns.ForeignKey(c => c.ChuyenNganh, (IEnumerable)ViewData["ChuyenNganhs"], "Value", "Description").Width(12);
+              
+              columns.Bound(c => c.BatBuoc).Width(9).ClientTemplate(@"<input type='checkbox' id='bacbuoc' name='BacBuoc' disabled #if(BatBuoc){#checked#}# value='#=BatBuoc#' />");
               columns.Command(command =>
               {
                   command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
