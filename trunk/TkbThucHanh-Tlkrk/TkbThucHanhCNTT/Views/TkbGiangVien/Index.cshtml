@@ -11,8 +11,10 @@
     }
 
     private int TuanHocHienTai()
-{
-    return DataProvider<TuanHoc>.GetAll().FirstOrDefault(x => (x.NgayBatDau - DateTime.Now).Days < 7 && (x.NgayBatDau - DateTime.Now).Days > 0).SttTuan - 1;
+    {
+        var firstOrDefault = DataProvider<TuanHoc>.GetAll().FirstOrDefault(x => (x.NgayBatDau - DateTime.Now).Days < 7 && (x.NgayBatDau - DateTime.Now).Days > 0);
+        if (firstOrDefault != null) return firstOrDefault.SttTuan - 1;
+        return 0;
     }
 
 }
