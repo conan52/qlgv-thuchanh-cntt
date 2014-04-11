@@ -3,25 +3,24 @@
 @using TkbThucHanhCNTT.Models.Viewer
 @{
     ViewBag.Title = "Index";
-   
 }
 
 @(Html.Kendo().Grid<LichThucHanhViewModel>()
       .Name("GridView")
       .Columns(columns =>
       {
-          columns.ForeignKey(c => c.SttTuan, (IEnumerable)ViewData["Tuans"], dataFieldText: "SttTuan", dataFieldValue: "SttTuan").Filterable(false).Width(25);
+          columns.ForeignKey(c => c.SttTuan, (IEnumerable) ViewData["Tuans"], dataFieldText: "SttTuan", dataFieldValue: "SttTuan").Filterable(false).Width(25);
           columns.ForeignKey(c => c.NgayTrongTuan, EnumUltils.GetDescriptions<NgayTrongTuan>(), dataFieldText: "Description", dataFieldValue: "Value").Filterable(false).Width(85);
-          columns.Bound(e => e.TietBatDau).HeaderHtmlAttributes(new { colspan = 2 }).Title("Tiết học").Width(15);
-          columns.Bound(e => e.TietKetThuc).HeaderHtmlAttributes(new { style = "display:none;" }).Width(15);
-          columns.ForeignKey(c => c.TenLop, (IEnumerable)ViewData["Lops"], dataFieldText: "TenLop", dataFieldValue: "TenLop").Filterable(false);
-          columns.ForeignKey(c => c.TenPhong, (IEnumerable)ViewData["Phongs"], dataFieldText: "TenPhong", dataFieldValue: "TenPhong").Filterable(false);
+          columns.Bound(e => e.TietBatDau).HeaderHtmlAttributes(new {colspan = 2}).Title("Tiết học").Width(15);
+          columns.Bound(e => e.TietKetThuc).HeaderHtmlAttributes(new {style = "display:none;"}).Width(15);
+          columns.ForeignKey(c => c.TenLop, (IEnumerable) ViewData["Lops"], dataFieldText: "TenLop", dataFieldValue: "TenLop").Filterable(false);
+          columns.ForeignKey(c => c.TenPhong, (IEnumerable) ViewData["Phongs"], dataFieldText: "TenPhong", dataFieldValue: "TenPhong").Filterable(false);
 
           // columns.ForeignKey(p => p.MonHocId, Model.MonHocs, "MonHocId", "TenThucHanh").EditorTemplateName("MonHocId");
-          columns.ForeignKey(c => c.MonHocId, (IEnumerable)ViewData["MonHocs"], dataFieldText: "TenThucHanh", dataFieldValue: "MonHocId").EditorTemplateName("MonHocId");
-          columns.ForeignKey(c => c.Gvhd1, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Filterable(false);
-          columns.ForeignKey(c => c.Gvhd2, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Filterable(false);
-          columns.ForeignKey(c => c.Gvhd3, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Filterable(false);
+          columns.ForeignKey(c => c.MonHocId, (IEnumerable) ViewData["MonHocs"], dataFieldText: "TenThucHanh", dataFieldValue: "MonHocId").EditorTemplateName("MonHocId");
+          columns.ForeignKey(c => c.Gvhd1, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Filterable(false);
+          columns.ForeignKey(c => c.Gvhd2, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Filterable(false);
+          columns.ForeignKey(c => c.Gvhd3, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Filterable(false);
 
           columns.Bound(e => e.Vang);
           columns.Bound(e => e.GhiChu);
@@ -30,10 +29,10 @@
       })
       .Editable(e => e.Mode(GridEditMode.InCell))
       .Sortable()
-        // .Selectable()
+      // .Selectable()
       .Groupable(x => x.Messages(t => t.Empty("Kéo thả để gom nhóm dữ liệu")))
-        //  .Selectable()
-        //  .Scrollable()
+      //  .Selectable()
+      //  .Scrollable()
       .DataSource(dataSource => dataSource
           .Ajax()
           .Events(events =>
@@ -48,57 +47,44 @@
           .Model(model =>
           {
               model.Id(t => t.MaLichTh);
-              model.Field(t => t.SttTuan).DefaultValue((int)ViewData["TuanMoiNhat"]);
-              model.Field(t => t.SttTuan).DefaultValue((int)ViewData["TuanMoiNhat"]);
-              model.Field(t => t.SttTuan).DefaultValue((int)ViewData["TuanMoiNhat"]);
+              model.Field(t => t.SttTuan).DefaultValue((int) ViewData["TuanMoiNhat"]);
+              model.Field(t => t.SttTuan).DefaultValue((int) ViewData["TuanMoiNhat"]);
+              model.Field(t => t.SttTuan).DefaultValue((int) ViewData["TuanMoiNhat"]);
               model.Field(t => t.TietBatDau).DefaultValue(1);
               model.Field(t => t.TietKetThuc).DefaultValue(1);
           })
       ).ToolBar(toolBar =>
       {
           toolBar.Template(@<text>
-@item.CreateButton("Thêm mới")
-@item.SaveButton("Lưu lại", "Hủy bỏ")
-<a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'>
-</span>Lấy tự động từ TKB trường</a>
-<div class="toolbar">
-    <label class="category-label" for="category">
-        Xem theo tuần:</label>
-    @(Html.Kendo().DropDownList()
+                                @item.CreateButton("Thêm mới")
+                                @item.SaveButton("Lưu lại", "Hủy bỏ")
+                                <a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'>
+                                                                                               </span>Lấy tự động từ TKB trường</a>
+                                <div class="toolbar">
+                                    <label class="category-label" for="category">
+                                        Xem theo tuần:</label>
+                                    @(Html.Kendo().DropDownList()
                                           .Name("DanhSachTuan")
                                           .OptionLabel("Tất cả")
                                           .AutoBind(false)
                                           .Events(e => e.Change("onSelectedWeekChange"))
                                           .DataSource(ds => ds.Read("LayDsTuan", "TkbGiangVien"))
                                           )
-</div>
-</text>);
+                                </div>
+                            </text>);
       })
       )
 <style>
-    .category-label
-    {
-        padding-right: .5em;
-        vertical-align: middle;
-    }
-    
-    #category
-    {
-        vertical-align: middle;
-    }
-    
-    .toolbar
-    {
-        float: right;
-    }
+
+    .toolbar { float: right; }
 </style>
 <script type="text/javascript">
     function onChange(e) {
         if (e.action == "itemchange") {
-           // alert(e.field);
+            // alert(e.field);
             if (e.field == "TenLop") {
                 var model = e.items[0];
-                 model.set("MonHocId", 0);
+                model.set("MonHocId", 0);
             }
 
             if (e.field == "MonHocId") {
@@ -122,7 +108,7 @@
     function locTheoLop() {
         var model = getCurrentEditedModel();
         return {
-            TenLop:model.TenLop
+            TenLop: model.TenLop
         };
     }
 
