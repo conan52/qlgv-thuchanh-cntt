@@ -206,9 +206,7 @@
     <Compile Include="Models\TkbThucHanhContext.cs" />
     <Compile Include="Models\TuanHoc.cs" />
     <Compile Include="Models\Ultils\StaticUltils.cs" />
-    <Compile Include="Models\Viewer\ForeignKeyValues.cs" />
     <Compile Include="Models\Viewer\GiangVienViewModel.cs" />
-    <Compile Include="Models\Viewer\PhanCongGiangDayViewModel.cs" />
     <Compile Include="Models\Viewer\TietHoc.cs" />
     <Compile Include="Models\Viewer\TkbGiangVienViewModel.cs" />
     <Compile Include="Models\Viewer\LichThucHanhViewModel.cs" />
@@ -1148,8 +1146,8 @@
     <Content Include="Views\LichThucHanh\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_TietHoc.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TietHoc.cshtml" />
-    <Content Include="Views\PhanCongGiangDay\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\MonHocId.cshtml" />
+    <Content Include="Views\PhanCongGiangDay\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">
