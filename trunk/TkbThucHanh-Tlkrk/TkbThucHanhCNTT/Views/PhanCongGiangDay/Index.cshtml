@@ -4,30 +4,11 @@
 @{
     ViewBag.Title = "Phân công giảng dạy";
 }
-@functions {
-
-    private string GetMaGiangVienDauTien()
-    {
-        return DataProvider<GiangVien>.GetAll().FirstOrDefault().MaGv;
-    }
-
-    private int GetMonHocDauTien()
-    {
-        return DataProvider<MonHoc>.GetAll().FirstOrDefault().MonHocId;
-    }
-
-    private string GetLopDauTien()
-    {
-        return DataProvider<Lop>.GetAll().FirstOrDefault().TenLop;
-    }
-
-}
 <div id="myGridView">
     @(Html.Kendo().Grid<PhanCongGiangDay>()
           .Name("GridView")
           .Columns(columns =>
           {
-              columns.Bound(c => c.IdPhanCong);
               columns.Bound(c => c.NamHoc);
               columns.Bound(c => c.HocKy);
               columns.ForeignKey(c => c.MonHocId, (IEnumerable) ViewData["MonHocs"], dataFieldText: "TenMonHoc", dataFieldValue: "MonHocId");
@@ -39,7 +20,7 @@
                   command.Destroy().Text("Xóa");
               }).Width(172);
           })
-          .ToolBar(toolbar => toolbar.Create().Text("Thêm lớp học"))
+          .ToolBar(toolbar => toolbar.Create().Text("Thêm phân công giảng dạy"))
           .Editable(e =>
           {
               e.Mode(GridEditMode.PopUp);
@@ -66,9 +47,9 @@
                   model.Id(x => x.IdPhanCong);
                   model.Field(x => x.NamHoc).DefaultValue(DateTime.Now.Year);
                   model.Field(x => x.HocKy).DefaultValue(1);
-                  model.Field(x => x.MaGv).DefaultValue(GetMaGiangVienDauTien());
-                  model.Field(x => x.MonHocId).DefaultValue(GetMonHocDauTien());
-                  model.Field(x => x.TenLop).DefaultValue(GetLopDauTien());
+                  model.Field(x => x.MaGv).DefaultValue(DataProvider<GiangVien>.GetAll().FirstOrDefault()!=null?DataProvider<GiangVien>.GetAll().FirstOrDefault().MaGv:null);
+                  model.Field(x => x.MonHocId).DefaultValue(DataProvider<MonHoc>.GetAll().FirstOrDefault()!=null?DataProvider<MonHoc>.GetAll().FirstOrDefault().MonHocId:0);
+                  model.Field(x => x.TenLop).DefaultValue(DataProvider<Lop>.GetAll().FirstOrDefault()!=null?DataProvider<Lop>.GetAll().FirstOrDefault().TenLop:null);
               })
           )
           )

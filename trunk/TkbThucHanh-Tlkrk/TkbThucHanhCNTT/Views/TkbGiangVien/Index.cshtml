@@ -3,21 +3,6 @@
 @using TkbThucHanhCNTT.Models.Enums
 @using TkbThucHanhCNTT.Models.Provider
 @using TkbThucHanhCNTT.Models.Viewer
-@functions {
-
-    private string GetMaGiangVienDauTien()
-{
-    return DataProvider<GiangVien>.GetAll().FirstOrDefault().MaGv;
-    }
-
-    private int TuanHocHienTai()
-    {
-        var firstOrDefault = DataProvider<TuanHoc>.GetAll().FirstOrDefault(x => (x.NgayBatDau - DateTime.Now).Days < 7 && (x.NgayBatDau - DateTime.Now).Days > 0);
-        if (firstOrDefault != null) return firstOrDefault.SttTuan - 1;
-        return 0;
-    }
-
-}
 @{
     //Layout = null;
 }
@@ -75,8 +60,8 @@
           .Model(model =>
           {
               model.Id(gv => gv.MaGv);
-              model.Field(f => f.SttTuan).DefaultValue(TuanHocHienTai());
-              model.Field(f => f.MaGv).DefaultValue(GetMaGiangVienDauTien());
+              model.Field(f => f.SttTuan).DefaultValue(DataProvider<TuanHoc>.GetAll().FirstOrDefault(x => (x.NgayBatDau - DateTime.Now).Days < 7 && (x.NgayBatDau - DateTime.Now).Days > 0)!=null?DataProvider<TuanHoc>.GetAll().FirstOrDefault(x => (x.NgayBatDau - DateTime.Now).Days < 7 && (x.NgayBatDau - DateTime.Now).Days > 0).SttTuan:0);
+              model.Field(x => x.MaGv).DefaultValue(DataProvider<GiangVien>.GetAll().FirstOrDefault() != null ? DataProvider<GiangVien>.GetAll().FirstOrDefault().MaGv : null);
               if (DateTime.Now.TimeOfDay.Hours < 12)
               {
                   model.Field(x => x.TietBatDau).DefaultValue(1);
