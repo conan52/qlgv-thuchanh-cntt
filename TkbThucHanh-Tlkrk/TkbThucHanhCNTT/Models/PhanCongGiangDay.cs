@@ -25,7 +25,7 @@ namespace TkbThucHanhCNTT.Models
         public string MaGv { get; set; }
 
         [ForeignKey("MaGv")]
-        [UIHint("GiangVien")]
+//        [UIHint("GiangVien")]
         public virtual GiangVien GiangVien { get; set; }
 
         [Required(ErrorMessage = "Lớp không được để trống!")]
