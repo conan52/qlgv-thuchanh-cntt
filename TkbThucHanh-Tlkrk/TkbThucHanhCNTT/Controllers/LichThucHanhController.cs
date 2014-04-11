@@ -31,6 +31,12 @@ namespace TkbThucHanhCNTT.Controllers
                 ViewData["TuanMoiNhat"] = 0;
 
 
+            //ForeignKeyValues values = new ForeignKeyValues()
+            //{
+            //  MonHocs = DataProvider<MonHoc>.GetAll().Select(t => new { t.TenMonHoc, t.MaMonHoc, t.TenThucHanh, t.MonHocId })
+            //};
+           // return View(values);
+
             return View();
         }
 
