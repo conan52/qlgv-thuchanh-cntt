@@ -18,7 +18,7 @@ namespace TkbThucHanhCNTT.Models.Viewer
         public int MonHocId { get; set; }
 
         [ForeignKey("MonHocId")]
-        [Required]
+        //[Required]
         public MonHoc MonHoc { get; set; }
 
         [Display(Name = "Phòng")]
@@ -27,7 +27,7 @@ namespace TkbThucHanhCNTT.Models.Viewer
         public string TenPhong { get; set; }
 
         [ForeignKey("TenPhong")]
-        [Required]
+        //[Required]
         public PhongThucHanh PhongThucHanh { get; set; }
 
         [Display(Name = "Lớp")]

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TkbThucHanhCNTT.Models.Enums;
@@ -6,7 +7,7 @@ using TkbThucHanhCNTT.Models.Ultils;
 
 namespace TkbThucHanhCNTT.Models
 {
-    public class LichThucHanh
+    public sealed class LichThucHanh
     {
         [Key]
         public int MaLichTh { get; set; }
@@ -22,7 +23,7 @@ namespace TkbThucHanhCNTT.Models
         public int MonHocId { get; set; }
 
         [ForeignKey("MonHocId")]
-        [Required]
+      //  [Required]
         public MonHoc MonHoc { get; set; }
 
         [Display(Name = "Phòng")]
@@ -30,7 +31,7 @@ namespace TkbThucHanhCNTT.Models
         public string TenPhong { get; set; }
 
         [ForeignKey("TenPhong")]
-        [Required]
+      //  [Required]
         public PhongThucHanh PhongThucHanh { get; set; }
 
 
@@ -40,7 +41,7 @@ namespace TkbThucHanhCNTT.Models
 
         [ForeignKey("TenLop")]
         public Lop Lop { get; set; }
-        
+
 
         [Display(Name = "Tiết bắt đầu")]
         [Required(ErrorMessage = "Tiết bắt đầu không được để trống!")]
@@ -49,6 +50,17 @@ namespace TkbThucHanhCNTT.Models
         [Display(Name = "Tiết kết thúc")]
         [Required(ErrorMessage = "Tiết kết thúc không được để trống!")]
         public int TietKetThuc { get; set; }
+
+
+        public string GhiChu { get; set; }
+
+        public List<PhanCongThucHanh> PhanCongThucHanhs { get; set; }
+
+
+        public LichThucHanh()
+        {
+            PhanCongThucHanhs = new List<PhanCongThucHanh>();
+        }
 
     }
 }
