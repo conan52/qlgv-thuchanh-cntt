@@ -174,7 +174,7 @@
     <Compile Include="Controllers\LichThucHanhController.cs" />
     <Compile Include="Controllers\LopController.cs" />
     <Compile Include="Controllers\MonHocController.cs" />
-    <Compile Include="Controllers\PhanCongController.cs" />
+    <Compile Include="Controllers\PhanCongGiangDayController.cs" />
     <Compile Include="Controllers\TkbGiangVienController.cs" />
     <Compile Include="Controllers\PhongThucHanhController.cs" />
     <Compile Include="Controllers\TuanHocController.cs" />
@@ -208,6 +208,7 @@
     <Compile Include="Models\Ultils\StaticUltils.cs" />
     <Compile Include="Models\Viewer\ForeignKeyValues.cs" />
     <Compile Include="Models\Viewer\GiangVienViewModel.cs" />
+    <Compile Include="Models\Viewer\PhanCongGiangDayViewModel.cs" />
     <Compile Include="Models\Viewer\TietHoc.cs" />
     <Compile Include="Models\Viewer\TkbGiangVienViewModel.cs" />
     <Compile Include="Models\Viewer\LichThucHanhViewModel.cs" />
@@ -1038,7 +1039,6 @@
     <Content Include="Views\GiangVien\_Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ChuyenNganh.cshtml" />
     <Content Include="Views\GiangVien\Index.cshtml" />
-    <Content Include="Views\PhanCong\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\GiangVien.cshtml" />
     <Content Include="Views\TkbGiangVien\Index.cshtml" />
     <Content Include="Views\Lop\Index.cshtml" />
@@ -1148,7 +1148,11 @@
     <Content Include="Views\LichThucHanh\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_TietHoc.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TietHoc.cshtml" />
+<<<<<<< .mine
+    <Content Include="Views\PhanCongGiangDay\Index.cshtml" />
+=======
     <Content Include="Views\Shared\EditorTemplates\MonHocId.cshtml" />
+>>>>>>> .r120
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">
