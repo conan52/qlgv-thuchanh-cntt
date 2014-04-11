@@ -1148,11 +1148,8 @@
     <Content Include="Views\LichThucHanh\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_TietHoc.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TietHoc.cshtml" />
-<<<<<<< .mine
     <Content Include="Views\PhanCongGiangDay\Index.cshtml" />
-=======
     <Content Include="Views\Shared\EditorTemplates\MonHocId.cshtml" />
->>>>>>> .r120
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">
