@@ -1162,6 +1162,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\DoiMatKhau.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MaGvHd1.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MaGvHd2.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MaGvHdTest.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MaGvHd3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">

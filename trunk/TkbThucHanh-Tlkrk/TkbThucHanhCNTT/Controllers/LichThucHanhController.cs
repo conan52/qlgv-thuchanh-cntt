@@ -52,7 +52,6 @@ namespace TkbThucHanhCNTT.Controllers
             else
                 ViewData["TuanMoiNhat"] = 0;
 
-
             return View();
         }
 
