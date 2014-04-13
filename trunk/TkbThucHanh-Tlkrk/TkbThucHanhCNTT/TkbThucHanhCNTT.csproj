@@ -195,7 +195,6 @@
     <Compile Include="Models\Lop.cs" />
     <Compile Include="Models\MonHoc.cs" />
     <Compile Include="Models\PhanCongGiangDay.cs" />
-    <Compile Include="Models\PhanCongThucHanh.cs" />
     <Compile Include="Models\PhongThucHanh.cs" />
     <Compile Include="Models\Provider\DataProvider.cs" />
     <Compile Include="Models\Provider\GiangVienProvider.cs" />
@@ -209,7 +208,6 @@
     <Compile Include="Models\Viewer\GiangVienViewModel.cs" />
     <Compile Include="Models\Viewer\TietHoc.cs" />
     <Compile Include="Models\Viewer\TkbGiangVienViewModel.cs" />
-    <Compile Include="Models\Viewer\LichThucHanhViewModel.cs" />
     <Compile Include="Models\Viewer\TuanHocViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

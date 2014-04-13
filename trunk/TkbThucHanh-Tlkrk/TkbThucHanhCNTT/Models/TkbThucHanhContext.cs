@@ -22,7 +22,6 @@ namespace TkbThucHanhCNTT.Models
         public DbSet<Lop> Lops { get; set; }
         public DbSet<MonHoc> MonHocs { get; set; }
         public DbSet<PhanCongGiangDay> PhanCongGiangDays { get; set; }
-        public DbSet<PhanCongThucHanh> PhanCongThucHanhs { get; set; }
         public DbSet<PhongThucHanh> PhongThucHanhs { get; set; }
         public DbSet<TkbGiangVien> TkbGangViens { get; set; }
         public DbSet<TuanHoc> TuanHocs { get; set; }
