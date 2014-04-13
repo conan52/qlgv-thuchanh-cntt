@@ -209,9 +209,11 @@
     <Compile Include="Models\Viewer\TietHoc.cs" />
     <Compile Include="Models\Viewer\TkbGiangVienViewModel.cs" />
     <Compile Include="Models\Viewer\TuanHocViewModel.cs" />
+    <Compile Include="Models\Viewer\UserProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\kendo.compatibility.css" />
     <Content Include="Content\kendo\2014.1.318\Black\editor.png" />
     <Content Include="Content\kendo\2014.1.318\Black\imagebrowser.png" />
@@ -492,6 +494,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.0-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
@@ -1146,6 +1149,10 @@
     <Content Include="Views\Shared\EditorTemplates\TietHoc.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\MonHocId.cshtml" />
     <Content Include="Views\PhanCongGiangDay\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\QuyenHan.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\HocKy.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\NamHoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">
