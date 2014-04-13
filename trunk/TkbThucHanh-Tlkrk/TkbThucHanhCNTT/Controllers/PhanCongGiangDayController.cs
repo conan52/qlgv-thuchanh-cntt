@@ -19,7 +19,7 @@ namespace TkbThucHanhCNTT.Controllers
         {
             ViewData["GiangViens"] =
                 DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
-            ViewData["MonHocs"] = DataProvider<MonHoc>.GetAll().Select(m => new { m.MonHocId, m.TenMonHoc });
+            ViewData["MonHocs"] = DataProvider<MonHoc>.GetAll().Select(m => new { m.MonHocId, m.TenMonHoc,m.MaMonHoc });
             ViewData["Lops"] = DataProvider<Lop>.GetAll().Select(m => new { m.TenLop });
             return View();
         }

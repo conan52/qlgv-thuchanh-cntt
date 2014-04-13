@@ -1,0 +1,43 @@
+﻿@model TkbThucHanhCNTT.Models.LocalPasswordModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Manage", "Account", FormMethod.Post, new {@class = "form-horizontal"}))
+{
+    @Html.ValidationSummary(null, new {@class = "text-danger"})
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+
+        <legend>Registration</legend>
+
+        <div class="group-control">
+            <label class="control-label">Name</label>
+            <div class="controls">
+                <input type="text" class="input-xlarge" id="user_name" name="user_name" rel="popover" data-content="Enter your first and last name." data-original-title="Full Name">
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <label class="control-label">Email</label>
+            <div class="controls">
+                <input type="text" class="input-xlarge" id="user_email" name="user_email" rel="popover" data-content="What’s your email address?" data-original-title="Email">
+            </div>
+        </div>
+
+        .............
+        .............
+
+        <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <button type="submit" class="btn btn-success" >Create My Account</button>
+            </div>
+        </div>
+
+    </fieldset>
+}

@@ -20,6 +20,7 @@ namespace TkbThucHanhCNTT.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Index()
         {
             ViewData["GiangViens"] =
@@ -362,6 +363,16 @@ namespace TkbThucHanhCNTT.Controllers
 
             ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
+        }
+
+        [AllowAnonymous]
+        public ActionResult DoiMatKhau()
+        {
+            var hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            ViewBag.HasLocalPassword = hasLocalAccount;
+            if (hasLocalAccount)
+                return PartialView("DoiMatKhau");
+            return RedirectToAction("Index", "Home");
         }
 
         #region Helpers

@@ -19,6 +19,7 @@ namespace TkbThucHanhCNTT.Models.Viewer
 
         [UIHint("GiangVien")]
         [Required(ErrorMessage = "Giáo viên không được để trống!")]
+        [Display(Name = "Mã giảng viên")]
         public string MaGv { get; set; }
 
         [Required(ErrorMessage = "Tên đăng nhập không được để trống!")]
