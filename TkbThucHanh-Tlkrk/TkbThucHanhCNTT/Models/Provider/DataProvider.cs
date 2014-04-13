@@ -119,7 +119,7 @@ namespace TkbThucHanhCNTT.Models.Provider
             return Update(items.ToList());
         }
 
-        public static void Remove(params T[] items)
+        public static int Remove(IEnumerable<T> items)
         {
             using (var context = new TkbThucHanhContext())
             {
@@ -127,8 +127,13 @@ namespace TkbThucHanhCNTT.Models.Provider
                 {
                     context.Entry(item).State = EntityState.Deleted;
                 }
-                context.SaveChanges();
+             return   context.SaveChanges();
             }
+        }
+
+        public static int Remove(params T[] items)
+        {
+            return Remove(items.ToList());
         }
 
         public static int RemoveAll()

@@ -1,11 +1,12 @@
 ﻿@using System.Collections
+@using TkbThucHanhCNTT.Models
 @using TkbThucHanhCNTT.Models.Enums
 @using TkbThucHanhCNTT.Models.Viewer
 @{
     ViewBag.Title = "Index";
 }
 
-@(Html.Kendo().Grid<LichThucHanhViewModel>()
+@(Html.Kendo().Grid<LichThucHanh>()
       .Name("GridView")
       .Columns(columns =>
       {
@@ -35,6 +36,7 @@
       //  .Scrollable()
       .DataSource(dataSource => dataSource
           .Ajax()
+          .Batch(true)
           .Events(events =>
           {
               events.Error("error_handler");
@@ -115,11 +117,11 @@
 
     $("#btnAutoGet").bind("click", function() {
         showLoadingDialog();
-        $.post("@Url.Action("LayTkbTuDong", "TkbGiangVien")")
+        $.post("@Url.Action("DongBoLichThucHanh", "LichThucHanh")")
             .done(function(data) {
                 hideLoadingDialog();
                 if (data.Result == "OK") {
-                    ShowNotification("Đã thêm <b>" + data.Message + "</b> buổi học từ website trường!", "info");
+                    ShowNotification("Đã thêm <b>" + data.Message + "</b> buổi thực hành!", "info");
                     refreshData();
 
                 } else

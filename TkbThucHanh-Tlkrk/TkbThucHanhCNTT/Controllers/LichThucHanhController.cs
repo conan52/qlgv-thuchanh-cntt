@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DluWebHelper;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using TkbThucHanhCNTT.Models;
@@ -47,54 +48,103 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            var result = DataProvider<LichThucHanh>.GetAll(l => l.PhanCongThucHanhs)
+            var result = DataProvider<LichThucHanh>.GetAll()
                 .OrderByDescending(t => t.SttTuan)
                 .ThenBy(t => t.NgayTrongTuan)
                 .ThenBy(t => t.TietBatDau)
                 .ThenBy(t => t.TietKetThuc);
 
-            return Json(result.ToDataSourceResult(request, tk => new LichThucHanhViewModel
-            {
-                GhiChu = "",
-                SttTuan = tk.SttTuan,
-                MonHocId = tk.MonHocId,
-                NgayTrongTuan = tk.NgayTrongTuan,
-                TenLop = tk.TenLop,
-                MaLichTh = tk.MaLichTh,
-                TenPhong = tk.TenPhong,
-                Gvhd1 = tk.PhanCongThucHanhs.First().MaGv,
-                TietBatDau=tk.TietBatDau,
-                TietKetThuc = tk.TietKetThuc,
-            }));
+            return Json(result.ToDataSourceResult(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, LichThucHanhViewModel l)
+        public ActionResult AjaxUpdate([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<LichThucHanh> ls)
         {
-            if (l != null && ModelState.IsValid)
+            var results = new List<LichThucHanh>();
+
+            if (ls != null && ModelState.IsValid)
             {
-                var th = new LichThucHanh
+                foreach (var l in ls)
                 {
-                    MonHocId = l.MonHocId,
-                    SttTuan = l.SttTuan,
-                    TietBatDau = l.TietBatDau,
-                    TietKetThuc = l.TietKetThuc,
-                    NgayTrongTuan = l.NgayTrongTuan,
-                    TenLop = l.TenLop,
-                    TenPhong = l.TenPhong,
-                    GhiChu = l.GhiChu
-                };
-                if (l.Gvhd1 != null)
-                    th.PhanCongThucHanhs.Add(new PhanCongThucHanh { MaGv = l.Gvhd1, TrangThai = TrangThaiHuongDanTh.CoMat });
-                if (l.Gvhd2 != null)
-                    th.PhanCongThucHanhs.Add(new PhanCongThucHanh { MaGv = l.Gvhd2, TrangThai = TrangThaiHuongDanTh.CoMat });
-                if (l.Gvhd3 != null)
-                    th.PhanCongThucHanhs.Add(new PhanCongThucHanh { MaGv = l.Gvhd3, TrangThai = TrangThaiHuongDanTh.CoMat });
-
-                DataProvider<LichThucHanh>.Add(th);
+                    if (l != null && ModelState.IsValid)
+                    {
+                        results.Add(l);
+                    }
+                }
             }
+            DataProvider<LichThucHanh>.Update(results);
+            return Json(results.ToDataSourceResult(request, ModelState));
+        }
 
-            return Json(new[] { l }.ToDataSourceResult(request, ModelState));
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<LichThucHanh> ls)
+        {
+            var results = new List<LichThucHanh>();
+
+            if (ls != null && ModelState.IsValid)
+            {
+                foreach (var l in ls)
+                {
+                    if (l != null && ModelState.IsValid)
+                    {
+                        results.Add(l);
+                    }
+                }
+            }
+            DataProvider<LichThucHanh>.Add(results);
+            return Json(results.ToDataSourceResult(request, ModelState));
+        }
+
+
+        public JsonResult DongBoLichThucHanh()
+        {
+            try
+            {
+                var tkbgv = DataProvider<TkbGiangVien>.GetAll(t => t.TuanHoc);
+                var phongTH = DataProvider<PhongThucHanh>.GetAll();
+                var tkbth = (from tkb in tkbgv
+                             join p in phongTH on tkb.Phong equals p.TenPhong
+                             select new LichThucHanh()
+                             {
+                                 SttTuan = tkb.SttTuan,
+                                 NgayTrongTuan = tkb.NgayTrongTuan,
+                                 TenLop = tkb.LopHoc,
+                                 TietBatDau = tkb.TietBatDau,
+                                 TietKetThuc = tkb.TietKetThuc,
+                                 Gvhd1 = tkb.MaGv,
+                                 GhiChu = tkb.TenMonHoc,
+                                 TenPhong = tkb.Phong
+                             }).ToList();
+
+                var phancong = DataProvider<PhanCongGiangDay>.GetAll(p => p.MonHoc);
+                foreach (var tkb in tkbth)
+                {
+                    try
+                    {
+                        var pc = phancong.SingleOrDefault(p => p.MonHoc.TenThucHanh.StartsWith(tkb.GhiChu) && p.TenLop == tkb.TenLop);
+                        if (tkb.GhiChu.Contains("Web"))
+                            tkb.GhiChu = "";
+                        if (pc != null)
+                            tkb.MonHocId = pc.MonHocId;
+                        else
+                            throw new Exception();
+                        tkb.GhiChu = "";
+                        DataProvider<LichThucHanh>.Add(tkb);
+                    }
+                    catch (Exception)
+                    {
+                        Console.Beep();
+                    }
+                }
+
+
+                return Json(new { Result = "OK", Message = tkbth.Count });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "Fail", ex.Message });
+            }
         }
     }
 }

@@ -37,7 +37,7 @@
           .DataSource(dataSource => dataSource
               .Ajax()
               .PageSize(20)
-              .Batch(true)
+            //  .Batch(true)
               .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "PhanCongGiangDay"))
               .Create(update => update.Action("AjaxCreate", "PhanCongGiangDay"))
