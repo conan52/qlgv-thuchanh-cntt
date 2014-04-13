@@ -37,7 +37,10 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            var result = DataProvider<MonHoc>.GetAll(l => l.PhanCongGiangDays);
+            var result =
+                DataProvider<MonHoc>.GetAll(l => l.PhanCongGiangDays)
+                    .Select(
+                        x => new {x.MaMonHoc, x.MonHocId, x.TenMonHoc, x.SoTinChi, x.TrinhDo, x.ChuyenNganh, x.BatBuoc});
             return Json(result.ToDataSourceResult(request));
         }
 

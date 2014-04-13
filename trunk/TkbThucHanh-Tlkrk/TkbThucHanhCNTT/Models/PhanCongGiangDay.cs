@@ -9,11 +9,13 @@ namespace TkbThucHanhCNTT.Models
         [ScaffoldColumn(false)]
         public int IdPhanCong { get; set; }
 
+        [UIHint("NamHoc")]
         [Display(Name = "Năm học")]
         [Required(ErrorMessage = "Năm học không được để trống!")]
         [Range(2000, 2050, ErrorMessage = "Năm học không hợp lệ")]
         public int NamHoc { get; set; }
 
+        [UIHint("HocKy")]
         [Display(Name = "Học kỳ")]
         [Required(ErrorMessage = "Học kỳ không được để trống!")]
         [Range(1, 3, ErrorMessage = "Học kỳ phải là 1, 2 hoặc 3")]

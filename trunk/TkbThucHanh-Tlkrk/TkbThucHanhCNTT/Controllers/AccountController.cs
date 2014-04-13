@@ -4,7 +4,12 @@ using System.Linq;
 using System.Transactions;
 using System.Web.Mvc;
 using System.Web.Security;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 using Microsoft.Web.WebPages.OAuth;
+using TkbThucHanhCNTT.Models.Enums;
+using TkbThucHanhCNTT.Models.Provider;
+using TkbThucHanhCNTT.Models.Viewer;
 using WebMatrix.WebData;
 using TkbThucHanhCNTT.Filters;
 using TkbThucHanhCNTT.Models;
@@ -15,6 +20,39 @@ namespace TkbThucHanhCNTT.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        public ActionResult Index()
+        {
+            ViewData["GiangViens"] =
+                DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
+            ViewData["Roles"] = EnumUltils.GetDescriptions_QuyenHan();
+            return View();
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult AjaxUpdate([DataSourceRequest] DataSourceRequest request, UserProfile up)
+        {
+            // Test if gv object and modelstate is valid.
+            if (up != null && ModelState.IsValid)
+            {
+                DataProvider<UserProfile>.Update(up);
+            }
+            return Json(ModelState.ToDataSourceResult());
+        }
+
+
+        public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
+        {
+            var result = DataProvider<UserProfile>.GetAll();
+            return Json(result.ToDataSourceResult(request, gv => new UserProfileViewModel()
+            {
+                Email = gv.Email,
+                MaGv = gv.MaGv, 
+                UserId = gv.UserId,
+                UserName = gv.UserName,
+                Role = (QuyenHan)Enum.Parse(typeof(QuyenHan), gv.Role)
+            }));
+        }
+
+
         //
         // GET: /Account/Login
 
@@ -77,7 +115,7 @@ namespace TkbThucHanhCNTT.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { MaGv = "CT01", Role = "Blocked" });
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }

@@ -1,0 +1,51 @@
+﻿@using System.Collections
+@using TkbThucHanhCNTT.Models
+@using TkbThucHanhCNTT.Models.Viewer
+@{
+    ViewBag.Title = "Tài khoản";
+}
+<div id="myGridView">
+    @(Html.Kendo().Grid<UserProfileViewModel>()
+          .Name("GridView")
+          .Columns(columns =>
+          {
+              columns.ForeignKey(c => c.MaGv, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv");              
+              columns.Bound(c => c.UserName);
+              columns.Bound(c => c.Email);
+              columns.ForeignKey(c => c.Role, (IEnumerable)ViewData["Roles"], "Value", "Description");
+              columns.Command(command => command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa")).Width(172);
+          })
+          .Editable(e => e.Mode(GridEditMode.PopUp))
+          .Sortable()
+          .Pageable(pageable =>
+          {
+              pageable.Refresh(true);
+              pageable.PageSizes(true);
+          })
+          .Selectable()
+          //  .Scrollable()
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .PageSize(20)
+              .Events(events => events.Error("error_handler"))
+                      .Read(read => read.Action("AjaxReadData", "Account"))
+                              .Update(update => update.Action("AjaxUpdate", "Account"))
+              .Model(model => model.Id(l => l.UserId))
+          )
+          )
+</div>
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Lỗi:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>
