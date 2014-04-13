@@ -17,7 +17,7 @@ namespace TkbThucHanhCNTT.Models
 
         [Required(ErrorMessage = "Chuyên ngành không được để trống!")]
         [Display(Name = "Chuyên ngành")]
-    //    [UIHint("ChuyenNganh")]
+        //    [UIHint("ChuyenNganh")]
         public virtual ChuyenNganh ChuyenNganh { get; set; }
 
         [Required(ErrorMessage = "Tên giảng viên không được để trống!")]
@@ -42,16 +42,14 @@ namespace TkbThucHanhCNTT.Models
             get { return HoVaTen.LayTenVietTat(); }
         }
 
-        //[NotMapped]
-        //[Display(Name = "Tên chuyên ngành")]
-        //public string TenChuyenNganh
-        //{
-        //    get { return ChuyenNganh.GetDescriptionAttribute(); }
-        //    set
-        //    {
-        //        if(value!=null)
-        //        ChuyenNganh = (ChuyenNganh)Enum.Parse(typeof(ChuyenNganh), value);
-        //    }
-        //}
+        public virtual List<LichThucHanh> LichThucHanhs { get; set; }
+        public virtual List<TkbGiangVien> TkbGiangViens { get; set; }
+
+
+        public GiangVien()
+        {
+            LichThucHanhs = new List<LichThucHanh>();
+            TkbGiangViens = new List<TkbGiangVien>();
+        }
     }
 }

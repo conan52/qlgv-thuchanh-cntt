@@ -1,7 +1,6 @@
 ﻿@using System.Collections
 @using TkbThucHanhCNTT.Models
 @using TkbThucHanhCNTT.Models.Enums
-@using TkbThucHanhCNTT.Models.Viewer
 @{
     ViewBag.Title = "Index";
 }
@@ -19,9 +18,9 @@
 
           // columns.ForeignKey(p => p.MonHocId, Model.MonHocs, "MonHocId", "TenThucHanh").EditorTemplateName("MonHocId");
           columns.ForeignKey(c => c.MonHocId, (IEnumerable) ViewData["MonHocs"], dataFieldText: "TenThucHanh", dataFieldValue: "MonHocId").EditorTemplateName("MonHocId");
-          columns.ForeignKey(c => c.Gvhd1, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Filterable(false);
-          columns.ForeignKey(c => c.Gvhd2, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Filterable(false);
-          columns.ForeignKey(c => c.Gvhd3, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Filterable(false);
+          columns.ForeignKey(c => c.Gvhd1, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd1");
+          columns.ForeignKey(c => c.Gvhd2, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd2");
+          columns.ForeignKey(c => c.Gvhd3, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGv");
 
           columns.Bound(e => e.Vang);
           columns.Bound(e => e.GhiChu);
@@ -53,6 +52,7 @@
               model.Field(t => t.SttTuan).DefaultValue((int) ViewData["TuanMoiNhat"]);
               model.Field(t => t.SttTuan).DefaultValue((int) ViewData["TuanMoiNhat"]);
               model.Field(t => t.TietBatDau).DefaultValue(1);
+              model.Field(t => t.MonHocId).DefaultValue(1);
               model.Field(t => t.TietKetThuc).DefaultValue(1);
           })
       ).ToolBar(toolBar =>
@@ -70,7 +70,7 @@
                                           .OptionLabel("Tất cả")
                                           .AutoBind(false)
                                           .Events(e => e.Change("onSelectedWeekChange"))
-                                          .DataSource(ds => ds.Read("LayDsTuan", "TkbGiangVien"))
+                                          .DataSource(ds => ds.Read("LayDsTuan", "LichThucHanh"))
                                           )
                                 </div>
                             </text>);
@@ -80,40 +80,13 @@
 
     .toolbar { float: right; }
 </style>
+<script src="@Url.Content("~/Scripts/itdlu/lichthcascade.js")"></script>
 <script type="text/javascript">
-    function onChange(e) {
-        if (e.action == "itemchange") {
-            // alert(e.field);
-            if (e.field == "TenLop") {
-                var model = e.items[0];
-                model.set("MonHocId", 0);
-            }
-
-            if (e.field == "MonHocId") {
-                var model = e.items[0];
-                //  model.set("ProductId", 0);
-            }
-        }
-    }
 
     function refreshData() {
         $('#GridView').data('kendoGrid').dataSource.read();
         $('#GridView').data('kendoGrid').refresh();
     }
-
-    function getCurrentEditedModel() {
-        var grid = $("#GridView").data("kendoGrid");
-        var editRow = grid.tbody.find("tr:has(.k-edit-cell)");
-        return grid.dataItem(editRow);
-    }
-
-    function locTheoLop() {
-        var model = getCurrentEditedModel();
-        return {
-            TenLop: model.TenLop
-        };
-    }
-
 
     $("#btnAutoGet").bind("click", function() {
         showLoadingDialog();
@@ -123,7 +96,6 @@
                 if (data.Result == "OK") {
                     ShowNotification("Đã thêm <b>" + data.Message + "</b> buổi thực hành!", "info");
                     refreshData();
-
                 } else
                     ShowNotification(data.Message, "error");
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using TkbThucHanhCNTT.Models.Enums;
 
 namespace TkbThucHanhCNTT.Models.Provider
 {
@@ -17,5 +18,10 @@ namespace TkbThucHanhCNTT.Models.Provider
             }
         }
 
+        public static DateTime LayNgayHoc(int tuan, NgayTrongTuan ngay)
+        {
+            var t2 = DataProvider<TuanHoc>.GetSingle(t => t.SttTuan == tuan).NgayBatDau;
+            return t2.AddDays((int) ngay);
+        }
     }
 }
