@@ -2,22 +2,10 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\LichThucHanh\Index.cshtml</string>
+      <string>C:\Users\user1\Desktop\NCKH2\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\Account\Index.cshtml</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\LichThucHanhController.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\TkbGiangVien\Index.cshtml</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\PhanCongGiangDay\Index.cshtml</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\PhanCongGiangDayController.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Models\Provider\DataProvider.cs</string>
+      <string>C:\Users\user1\Desktop\NCKH2\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\AccountController.cs</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
