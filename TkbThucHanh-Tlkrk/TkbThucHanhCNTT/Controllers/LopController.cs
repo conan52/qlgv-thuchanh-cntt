@@ -44,7 +44,8 @@ namespace TkbThucHanhCNTT.Controllers
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
             //            ViewData["TrinhDos"] = EnumUltils.GetDescriptions_TrinhDo();
-            var result = DataProvider<Lop>.GetAll(l => l.PhanCongGiang);
+            var result =
+                DataProvider<Lop>.GetAll(l => l.PhanCongGiang).Select(x => new {x.NamNhapHoc, x.TenLop, x.TrinhDo});
             return Json(result.ToDataSourceResult(request));
         }
 
