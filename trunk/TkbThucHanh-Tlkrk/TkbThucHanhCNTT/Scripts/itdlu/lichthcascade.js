@@ -17,28 +17,28 @@
 
             if (e.field == "MonHocId") {
                 var model = e.items[0];
-                model.set("GvHd1", 0);
-                model.set("GvHd2", 0);
-                model.set("GvHd3", 0);
+                model.set("Gvhd1", "xxx");
+                model.set("Gvhd2", 0);
+                model.set("Gvhd3", 0);
             }
 
-            if (e.field == "GvHd1") {
+            if (e.field == "Gvhd1") {
                 var model = e.items[0];
-              // model.set("GvHd1", 0);
-               model.set("GvHd2", 0);
-               model.set("GvHd3", 0);
+              // model.set("Gvhd1", 0);
+              // model.set("Gvhd2", 0);
+              // model.set("Gvhd3", 0);
             } 
-            if (e.field == "GvHd2") {
+            if (e.field == "Gvhd2") {
                 var model = e.items[0];
-                model.set("GvHd1", 0);
-             //   model.set("GvHd2", 0);
-                model.set("GvHd3", 0);
+                model.set("Gvhd1", 0);
+             //   model.set("Gvhd2", 0);
+                model.set("Gvhd3", 0);
             } 
-            if (e.field == "GvHd3") {
+            if (e.field == "Gvhd3") {
                 var model = e.items[0];
-                model.set("GvHd1", 0);
-                model.set("GvHd2", 0);
-            //    model.set("GvHd3", 0);
+                model.set("Gvhd1", 0);
+                model.set("Gvhd2", 0);
+            //    model.set("Gvhd3", 0);
             }
         }
     }
@@ -59,7 +59,7 @@
             TietBatDau: model.TietBatDau,
             TietKetThuc: model.TietKetThuc,
             GvA : model.Gvhd1,
-            GvB : model.Gvhd3,
+            GvB : model.Gvhd3
         };
 
     }
@@ -72,8 +72,8 @@
             NgayTrongTuan: model.NgayTrongTuan,
             TietBatDau: model.TietBatDau,
             TietKetThuc: model.TietKetThuc,
-            GvA : model.GvHd1,
-            GvB : model.GvHd2,
+            GvA : model.Gvhd1,
+            GvB : model.Gvhd2,
         };
 
     }

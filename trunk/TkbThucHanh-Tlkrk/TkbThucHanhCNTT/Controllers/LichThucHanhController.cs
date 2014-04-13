@@ -15,6 +15,25 @@ namespace TkbThucHanhCNTT.Controllers
 {
     public class LichThucHanhController : Controller
     {
+        public ActionResult Test()
+        {
+
+            ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
+            ViewData["MonHocs"] = DataProvider<MonHoc>.GetAll().Select(t => new { t.TenMonHoc, t.MaMonHoc, t.TenThucHanh, t.MonHocId });
+            ViewData["Lops"] = DataProvider<Lop>.GetAll().Select(l => new { l.TenLop });
+            ViewData["Phongs"] = DataProvider<PhongThucHanh>.GetAll().Select(p => new { p.TenPhong });
+
+            var dsTuan = DataProvider<TuanHoc>.GetAll();
+            ViewData["Tuans"] = dsTuan.Select(t => new { t.SttTuan });
+            if (dsTuan.Any(t => t.NgayBatDau > DateTime.Now))
+                ViewData["TuanMoiNhat"] = dsTuan.First(t => t.NgayBatDau > DateTime.Now).SttTuan;
+            else
+                ViewData["TuanMoiNhat"] = 0;
+
+
+            return View();
+        }
+
         //
         // GET: /LichThucHanh/
 
@@ -68,6 +87,10 @@ namespace TkbThucHanhCNTT.Controllers
                 {
                     if (l != null && ModelState.IsValid)
                     {
+                        if (l.Gvhd2 != null && l.Gvhd2.Length <= 2)
+                            l.Gvhd2 = null;
+                        if (l.Gvhd3 != null && l.Gvhd3.Length <= 2)
+                            l.Gvhd3 = null;
                         results.Add(l);
                     }
                 }
@@ -88,6 +111,10 @@ namespace TkbThucHanhCNTT.Controllers
                 {
                     if (l != null && ModelState.IsValid)
                     {
+                        if (l.Gvhd2 != null && l.Gvhd2.Length <= 2)
+                            l.Gvhd2 = null;
+                        if (l.Gvhd3 != null && l.Gvhd3.Length <= 2)
+                            l.Gvhd3 = null;
                         results.Add(l);
                     }
                 }
@@ -122,7 +149,7 @@ namespace TkbThucHanhCNTT.Controllers
                 {
                     try
                     {
-                        var pc = phancong.SingleOrDefault(p => p.MonHoc.TenThucHanh.StartsWith(tkb.GhiChu) && p.TenLop == tkb.TenLop);
+                        var pc = phancong.SingleOrDefault(p => p.MonHoc.TenThucHanh.StartsWith(tkb.GhiChu, StringComparison.OrdinalIgnoreCase) && p.TenLop == tkb.TenLop);
                         if (tkb.GhiChu.Contains("Web"))
                             tkb.GhiChu = "";
                         if (pc != null)
@@ -146,5 +173,7 @@ namespace TkbThucHanhCNTT.Controllers
                 return Json(new { Result = "Fail", ex.Message });
             }
         }
+
+
     }
 }
