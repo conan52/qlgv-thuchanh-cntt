@@ -12,6 +12,7 @@
               columns.Bound(c => c.NamHoc);
               columns.Bound(c => c.HocKy);
               columns.ForeignKey(c => c.MonHocId, (IEnumerable) ViewData["MonHocs"], dataFieldText: "TenMonHoc", dataFieldValue: "MonHocId");
+              columns.ForeignKey(c => c.MonHocId, (IEnumerable) ViewData["MonHocs"], dataFieldText: "MaMonHoc", dataFieldValue: "MonHocId");
               columns.ForeignKey(c => c.MaGv, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv");
               columns.ForeignKey(c => c.TenLop, (IEnumerable) ViewData["Lops"], dataFieldText: "TenLop", dataFieldValue: "TenLop");
               columns.Command(command =>
@@ -36,7 +37,7 @@
           //  .Scrollable()
           .DataSource(dataSource => dataSource
               .Ajax()
-              .PageSize(20)
+              .PageSize(200)
             //  .Batch(true)
               .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "PhanCongGiangDay"))
