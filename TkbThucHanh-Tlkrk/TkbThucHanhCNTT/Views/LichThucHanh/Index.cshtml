@@ -20,7 +20,7 @@
           columns.ForeignKey(c => c.MonHocId, (IEnumerable) ViewData["MonHocs"], dataFieldText: "TenThucHanh", dataFieldValue: "MonHocId").EditorTemplateName("MonHocId");
           columns.ForeignKey(c => c.Gvhd1, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd1");
           columns.ForeignKey(c => c.Gvhd2, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd2");
-          columns.ForeignKey(c => c.Gvhd3, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGv");
+          columns.ForeignKey(c => c.Gvhd3, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd3");
 
           columns.Bound(e => e.Vang);
           columns.Bound(e => e.GhiChu);
