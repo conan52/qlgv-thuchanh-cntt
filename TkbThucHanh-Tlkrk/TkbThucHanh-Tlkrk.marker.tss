@@ -4,18 +4,12 @@
     <extensions>
       <string>TkbThucHanhCNTT\Views\LichThucHanh\Index.cshtml</string>
     </extensions>
-    <highlightIndex>4</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>TkbThucHanhCNTT\Controllers\FilterController.cs</string>
-    </extensions>
     <highlightIndex>1</highlightIndex>
   </TabHighlightState>
   <TabHighlightState>
     <extensions>
       <string>TkbThucHanhCNTT\Controllers\LichThucHanhController.cs</string>
     </extensions>
-    <highlightIndex>2</highlightIndex>
+    <highlightIndex>1</highlightIndex>
   </TabHighlightState>
 </ArrayOfTabHighlightState>
