@@ -20,12 +20,16 @@
           columns.ForeignKey(c => c.MonHocId, (IEnumerable) ViewData["MonHocs"], dataFieldText: "TenThucHanh", dataFieldValue: "MonHocId").EditorTemplateName("MonHocId");
           columns.ForeignKey(c => c.Gvhd1, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd1");
           columns.ForeignKey(c => c.Gvhd2, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd2");
-          columns.ForeignKey(c => c.Gvhd3, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd3");
+          columns.ForeignKey(c => c.Gvhd3, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd3");
 
           columns.Bound(e => e.Vang);
           columns.Bound(e => e.GhiChu);
 
-          columns.Command(command => { command.Destroy().Text("Xóa"); });
+          columns.Command(command =>
+          {
+              command.Destroy().Text("Xóa");
+              command.Custom("Điểm danh").Click("hienThiBangDiemDanh");
+          });
       })
       .Editable(e => e.Mode(GridEditMode.InCell))
       .Sortable()
@@ -48,8 +52,6 @@
           .Model(model =>
           {
               model.Id(t => t.MaLichTh);
-              model.Field(t => t.SttTuan).DefaultValue((int) ViewData["TuanMoiNhat"]);
-              model.Field(t => t.SttTuan).DefaultValue((int) ViewData["TuanMoiNhat"]);
               model.Field(t => t.SttTuan).DefaultValue((int) ViewData["TuanMoiNhat"]);
               model.Field(t => t.TietBatDau).DefaultValue(1);
               model.Field(t => t.MonHocId).DefaultValue(1);
@@ -80,6 +82,48 @@
 
     .toolbar { float: right; }
 </style>
+
+
+@(Html.Kendo().Window().Name("ThongTinDiemDanh")
+      .Title("Điểm danh")
+      .Visible(false)
+      .Modal(true)
+      .Draggable(false)
+      .Width(300)       
+      )
+
+<script type="text/x-kendo-template" id="template">
+       <table class="table"  id="details-container" >
+       <tr>
+       <th>&nbsp;</th>
+        <th>Giảng viên</th>
+        <th>Có mặt</th>
+       </tr>
+       
+       <tr>
+       <th>&nbsp;</th>
+        <th>Giảng viên</th>
+        <th>Có mặt</th>
+       </tr>
+       </table>
+</script>
+
+<script type="text/javascript">
+    var detailsTemplate = kendo.template($("#template").html());
+
+    function hienThiBangDiemDanh(e) {
+        e.preventDefault();
+
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var wnd = $("#ThongTinDiemDanh").data("kendoWindow");
+
+        wnd.content(detailsTemplate(dataItem));
+        wnd.center().open();
+    }
+</script>
+
+
+
 <script src="@Url.Content("~/Scripts/itdlu/lichthcascade.js")"></script>
 <script type="text/javascript">
 

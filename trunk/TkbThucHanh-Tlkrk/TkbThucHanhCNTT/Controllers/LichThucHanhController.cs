@@ -123,6 +123,17 @@ namespace TkbThucHanhCNTT.Controllers
         }
 
 
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<LichThucHanh> ls)
+        {
+            var results = ls.ToList();
+            DataProvider<LichThucHanh>.Remove(results);
+            return Json(results.ToDataSourceResult(request, ModelState));
+        }
+
+
+
         public JsonResult DongBoLichThucHanh()
         {
             try
