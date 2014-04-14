@@ -79,8 +79,8 @@
       })
       )
 <style>
-
-    .toolbar { float: right; }
+    
+    .toolbar { float: right;  }
 </style>
 
 
@@ -92,21 +92,49 @@
       .Width(300)       
       )
 
-<script type="text/x-kendo-template" id="template">
-       <table class="table"  id="details-container" >
-       <tr>
-       <th>&nbsp;</th>
+<script type="text/x-kendo-template"  id="template">
+    <input type="hidden" id="MaLichTh" value="#=MaLichTh#" />
+    <h4 style="text-align: center;">#=TenThucHanh#</h4>
+<table class="table table-bordered table-hover table-striped"  id="details-container" >
+    <tr>
+        <th>&nbsp;</th>
         <th>Giảng viên</th>
         <th>Có mặt</th>
-       </tr>
+    </tr>
        
-       <tr>
-       <th>&nbsp;</th>
-        <th>Giảng viên</th>
-        <th>Có mặt</th>
-       </tr>
-       </table>
+    <tr>
+        <td>GVHD1</td>
+        <td>#:TenGv1#</td>
+        <td><input type="checkbox"   id="Gv1CoMat"   name="Gv1CoMat" #if(Gv1CoMat){#checked#}# /></td>
+    </tr>
+    #if(TenGv2!=null){#
+    <tr>
+        <td>GVHD2</td>
+        <td>#:TenGv2#</td>
+        <td><input type="checkbox"  id="Gv2CoMat"  name="Gv2CoMat" #if(Gv2CoMat){#checked#}# /></td>
+    </tr>
+    #}#
+        #if(TenGv3!=null){#
+    <tr>
+        <td>GVHD3</td>
+        <td>#:TenGv3#</td>
+        <td><input type="checkbox" id="Gv3CoMat"  name="Gv3CoMat" #if(Gv3CoMat){#checked#}# /></td>
+    </tr>
+    #}#
+    <tr>
+         <td colspan="3" style="text-align: center">
+             <a  class="k-button k-button-icontext " onclick="return capNhatTinhTrangDiemDanh();">
+                 <span class="k-icon k-update"></span>Cập nhật</a>    
+             <a class="k-button k-button-icontext"  onclick=" return closeDialog(); ">
+                <span class="k-icon k-cancel"></span>Hủy bỏ</a>    
+                                                 
+         </td>
+    </tr>
+</table>
+    
 </script>
+ 
+
 
 <script type="text/javascript">
     var detailsTemplate = kendo.template($("#template").html());
@@ -120,12 +148,40 @@
         wnd.content(detailsTemplate(dataItem));
         wnd.center().open();
     }
+
+    function closeDialog() {
+        $("#ThongTinDiemDanh").data("kendoWindow").close();
+    }
+
+
 </script>
 
 
 
 <script src="@Url.Content("~/Scripts/itdlu/lichthcascade.js")"></script>
 <script type="text/javascript">
+    function capNhatTinhTrangDiemDanh() {
+        showLoadingDialog();
+        closeDialog();
+        var lichHocId = $("#MaLichTh").val();
+        var gv1 = $('#Gv1CoMat').is(':checked');
+        var gv2 = $('#Gv2CoMat').is(':checked');
+        var gv3 = $('#Gv3CoMat').is(':checked');
+
+          $.post("@Url.Action("DiemDanhGv", "LichThucHanh")", { lichHocId: lichHocId, gv1: gv1, gv2: gv2, gv3: gv3 })
+            .done(function(data) {
+                    hideLoadingDialog();
+                if (data.Result == "OK") {
+                    ShowNotification("Thành công", "info");
+                    refreshData();
+                } else
+                    ShowNotification(data.Message, "error");
+            });
+
+
+        return false;
+    }
+
 
     function refreshData() {
         $('#GridView').data('kendoGrid').dataSource.read();
