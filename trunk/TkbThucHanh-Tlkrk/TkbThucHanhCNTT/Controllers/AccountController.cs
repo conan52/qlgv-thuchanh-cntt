@@ -46,7 +46,7 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(result.ToDataSourceResult(request, gv => new UserProfileViewModel()
             {
                 Email = gv.Email,
-                MaGv = gv.MaGv, 
+                MaGv = gv.MaGv,
                 UserId = gv.UserId,
                 UserName = gv.UserName,
                 Role = (QuyenHan)Enum.Parse(typeof(QuyenHan), gv.Role)
@@ -85,8 +85,8 @@ namespace TkbThucHanhCNTT.Controllers
         //
         // POST: /Account/LogOff
 
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
+        //        [HttpPost]
+        //        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
@@ -366,13 +366,58 @@ namespace TkbThucHanhCNTT.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult DoiMatKhau()
+        public ActionResult DoiMatKhau(ManageMessageId? message)
         {
+            ViewBag.email = DataProvider<UserProfile>.GetSingle(x => x.UserId == WebSecurity.CurrentUserId).Email;
+            ViewBag.StatusMessage =
+                message == ManageMessageId.ChangePasswordSuccess ? "Đổi mật khẩu thành công."
+                : message == ManageMessageId.SetPasswordSuccess ? "Mật khẩu này đang được đặt."
+                : message == ManageMessageId.SetEmailSuccess ? "Đổi email và mật khẩu thành công!"
+                : message == ManageMessageId.ErrorPassword ? "Mật khẩu cũ không đúng!"
+                : "";
             var hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            ViewBag.HasLocalPassword = hasLocalAccount;
             if (hasLocalAccount)
                 return PartialView("DoiMatKhau");
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DoiMatKhau(LocalPasswordModel model)
+        {
+            var profile = DataProvider<UserProfile>.GetSingle(x => x.UserId == WebSecurity.CurrentUserId);
+            ViewBag.email = profile.Email;
+            if (ModelState.IsValid)
+            {
+               if (!WebSecurity.Login(User.Identity.Name, model.OldPassword))
+                    return RedirectToAction("DoiMatKhau", new { Message = ManageMessageId.ErrorPassword });
+                if (WebSecurity.Login(User.Identity.Name, model.NewPassword))
+                    return RedirectToAction("DoiMatKhau", new { Message = ManageMessageId.SetPasswordSuccess });
+                bool changePasswordSucceeded;
+                try
+                {
+                    changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+                }
+                catch (Exception)
+                {
+                    changePasswordSucceeded = false;
+                }
+
+                if (changePasswordSucceeded)
+                {
+                    if (profile.Email != model.Email&&!string.IsNullOrEmpty(model.Email.Trim()))
+                    {
+                        profile.Email = model.Email.Trim();
+                        DataProvider<UserProfile>.Update(profile);
+                        return RedirectToAction("DoiMatKhau", new { Message = ManageMessageId.SetEmailSuccess });
+                    }
+                    return RedirectToAction("DoiMatKhau", new { Message = ManageMessageId.ChangePasswordSuccess });
+                }
+                ModelState.AddModelError("", "Mật khẩu hiện tại không đúng.");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
 
         #region Helpers
@@ -393,6 +438,8 @@ namespace TkbThucHanhCNTT.Controllers
             ChangePasswordSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
+            SetEmailSuccess,
+            ErrorPassword
         }
 
         internal class ExternalLoginResult : ActionResult
