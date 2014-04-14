@@ -8,18 +8,18 @@
       .Name("GridView")
       .Columns(columns =>
       {
-          columns.ForeignKey(c => c.SttTuan, (IEnumerable)ViewData["Tuans"], dataFieldText: "SttTuan", dataFieldValue: "SttTuan").Filterable(false).Width(25);
+          columns.ForeignKey(c => c.SttTuan, (IEnumerable) ViewData["Tuans"], dataFieldText: "SttTuan", dataFieldValue: "SttTuan").Filterable(false).Width(25);
           columns.ForeignKey(c => c.NgayTrongTuan, EnumUltils.GetDescriptions<NgayTrongTuan>(), dataFieldText: "Description", dataFieldValue: "Value").Filterable(false).Width(85);
-          columns.Bound(e => e.TietBatDau).HeaderHtmlAttributes(new { colspan = 2 }).Title("Tiết học").Width(15);
-          columns.Bound(e => e.TietKetThuc).HeaderHtmlAttributes(new { style = "display:none;" }).Width(15);
-          columns.ForeignKey(c => c.TenLop, (IEnumerable)ViewData["Lops"], dataFieldText: "TenLop", dataFieldValue: "TenLop").Filterable(false);
-          columns.ForeignKey(c => c.TenPhong, (IEnumerable)ViewData["Phongs"], dataFieldText: "TenPhong", dataFieldValue: "TenPhong").Filterable(false);
+          columns.Bound(e => e.TietBatDau).HeaderHtmlAttributes(new {colspan = 2}).Title("Tiết học").Width(15);
+          columns.Bound(e => e.TietKetThuc).HeaderHtmlAttributes(new {style = "display:none;"}).Width(15);
+          columns.ForeignKey(c => c.TenLop, (IEnumerable) ViewData["Lops"], dataFieldText: "TenLop", dataFieldValue: "TenLop").Filterable(false);
+          columns.ForeignKey(c => c.TenPhong, (IEnumerable) ViewData["Phongs"], dataFieldText: "TenPhong", dataFieldValue: "TenPhong").Filterable(false);
 
           // columns.ForeignKey(p => p.MonHocId, Model.MonHocs, "MonHocId", "TenThucHanh").EditorTemplateName("MonHocId");
-          columns.ForeignKey(c => c.MonHocId, (IEnumerable)ViewData["MonHocs"], dataFieldText: "TenThucHanh", dataFieldValue: "MonHocId").EditorTemplateName("MonHocId");
-          columns.ForeignKey(c => c.Gvhd1, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd1");
-          columns.ForeignKey(c => c.Gvhd2, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd2");
-          columns.ForeignKey(c => c.Gvhd3, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd3");
+          columns.ForeignKey(c => c.MonHocId, (IEnumerable) ViewData["MonHocs"], dataFieldText: "TenThucHanh", dataFieldValue: "MonHocId").EditorTemplateName("MonHocId");
+          columns.ForeignKey(c => c.Gvhd1, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd1");
+          columns.ForeignKey(c => c.Gvhd2, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd2");
+          columns.ForeignKey(c => c.Gvhd3, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd3");
 
           columns.Bound(e => e.Vang);
           columns.Bound(e => e.GhiChu);
@@ -27,15 +27,15 @@
           columns.Command(command =>
           {
               command.Destroy().Text(" ");
-              command.Custom("DiemDanh").Text("Điểm danh").Click("hienThiBangDiemDanh").HtmlAttributes(new { @class = "k-icon k-add" });
+              command.Custom("DiemDanh").Text("Điểm danh").Click("hienThiBangDiemDanh").HtmlAttributes(new {@class = "k-icon k-add"});
           });
       })
       .Editable(e => e.Mode(GridEditMode.InCell))
       .Sortable()
-        // .Selectable()
+      // .Selectable()
       .Groupable(x => x.Messages(t => t.Empty("Kéo thả để gom nhóm dữ liệu")))
-        //  .Selectable()
-        //  .Scrollable()
+      //  .Selectable()
+      //  .Scrollable()
       .DataSource(dataSource => dataSource
           .Ajax()
           .Batch(true)
@@ -51,7 +51,7 @@
           .Model(model =>
           {
               model.Id(t => t.MaLichTh);
-              model.Field(t => t.SttTuan).DefaultValue((int)ViewData["TuanMoiNhat"]);
+              model.Field(t => t.SttTuan).DefaultValue((int) ViewData["TuanMoiNhat"]);
               model.Field(t => t.TietBatDau).DefaultValue(1);
               model.Field(t => t.MonHocId).DefaultValue(1);
               model.Field(t => t.TietKetThuc).DefaultValue(1);
@@ -59,31 +59,28 @@
       ).ToolBar(toolBar =>
       {
           toolBar.Template(@<text>
-@item.CreateButton("Thêm")
-@item.SaveButton("Lưu", "Hủy")
-<a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-scheduler'>
-</span>Đồng bộ từ lịch giảng viên</a> <a id='btnCopy' class='k-button k-button-increase'
-    href='#'><span class='k-icon k-add'></span>Sao chép tuần</a> <a id='btnAuto' class='k-button k-button-increase'
-        href='#'><span class='k-icon k-add'></span>Tự phân công</a>
-<div class="toolbar">
-    <label class="category-label" for="category">
-        Tuần:</label>
-    @(Html.Kendo().DropDownList()
+                                @item.CreateButton("Thêm")
+                                @item.SaveButton("Lưu", "Hủy")
+                                <a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-scheduler'>
+                                                                                               </span>Đồng bộ từ lịch giảng viên</a> <a id='btnCopy' class='k-button k-button-increase' href='#'><span class='k-icon k-add'></span>Sao chép tuần</a> 
+                                 <a id='btnAuto' class='k-button k-button-increase'
+                                                                                                                                                                                                        href='#'><span class='k-icon k-add'></span>Tự phân công</a>
+                                <div class="toolbar">
+                                    <label class="category-label" for="category">
+                                        Tuần:</label>
+                                    @(Html.Kendo().DropDownList()
                                           .Name("DanhSachTuan")
                                           .OptionLabel("Tất cả")
                                           .AutoBind(false)
                                           .Events(e => e.Change("onSelectedWeekChange"))
                                           .DataSource(ds => ds.Read("LayDsTuan", "LichThucHanh"))
                                           )
-</div>
-</text>);
+                                </div>
+                            </text>);
       })
       )
 <style>
-    .toolbar
-    {
-        float: right;
-    }
+    .toolbar { float: right; }
 </style>
 @(Html.Kendo().Window().Name("ThongTinDiemDanh")
       .Title("Điểm danh")
@@ -99,41 +96,76 @@
       .Draggable(true)
       .Width(300)
       .Content(@<text>
-<table class="table table-hover">
-    <tr>
-        <td>
-            Sao chép từ tuần
-        </td>
-        <td>
-            @(Html.Kendo().DropDownList()
+                    <table class="table table-hover">
+                        <tr>
+                            <td>
+                                Sao chép từ tuần
+                            </td>
+                            <td>
+                                @(Html.Kendo().DropDownList()
                                       .Name("tuTuan")
-                                      .BindTo((IEnumerable)ViewData["TuanCoTkb"]));
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Đến tuần
-        </td>
-        <td>
-            @(Html.Kendo().DropDownList()
+                                      .BindTo((IEnumerable) ViewData["TuanCoTkb"]));
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Đến tuần
+                            </td>
+                            <td>
+                                @(Html.Kendo().DropDownList()
                                       .Name("denTuan")
-                                      .BindTo((IEnumerable)ViewData["TuanChuaCoTkb"]));
-        </td>
-    </tr>
-    <tr>
-        <td>
-            &nbsp;
-        </td>
-        <td style="text-align: center">
-            <a class="k-button k-button-icontext " onclick=" return SaoChepLichThucHanh(); "><span
-                class="k-icon k-update"></span>Sao chép</a> <a class="k-button k-button-icontext"
-                    onclick=" $('#SaoChepTuan').data('kendoWindow').close();"><span class="k-icon k-cancel">
-                    </span>Hủy bỏ</a>
-        </td>
-    </tr>
-</table>
-</text>)
+                                      .BindTo((IEnumerable) ViewData["TuanChuaCoTkb"]));
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td style="text-align: center">
+                                <a class="k-button k-button-icontext " onclick=" return SaoChepLichThucHanh(); "><span
+                                                                                                                     class="k-icon k-update"></span>Sao chép</a> <a class="k-button k-button-icontext"
+                                                                                                                                                                    onclick=" $('#SaoChepTuan').data('kendoWindow').close(); "><span class="k-icon k-cancel">
+                                                                                                                                                                                                                               </span>Hủy bỏ</a>
+                            </td>
+                        </tr>
+                    </table>
+                </text>)
       )
+      
+      
+      @(Html.Kendo().Window().Name("TuPhanCong")
+      .Title("Tự phân công GVHD")
+      .Visible(false)
+      .Modal(true)
+      .Draggable(true)
+      .Width(300)
+      .Content(@<text>
+                    <table class="table">
+                        <tr>
+                            <td>
+                               Chọn tuần
+                            </td>
+                            <td>
+                                @(Html.Kendo().DropDownList()
+                                      .Name("chonTuan")
+                                      .BindTo((IEnumerable) ViewData["TuanCoTkb"]));
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td style="text-align: center">
+                                <a class="k-button k-button-icontext " onclick=" return TuPhanCong(); "><span class="k-icon k-update"></span>Phân công</a> 
+                                <a class="k-button k-button-icontext" onclick=" $('#TuPhanCong').data('kendoWindow').close(); "><span class="k-icon k-cancel">
+                                                                                                                                                                                                                               </span>Hủy bỏ</a>
+                            </td>
+                        </tr>
+                    </table>
+                </text>)
+      )
+      
+
 <script type="text/x-kendo-template" id="template">
     <input type="hidden" id="MaLichTh" value="#=MaLichTh#" />
     <h4 style="text-align: center;">#=TenThucHanh#</h4>
@@ -175,30 +207,44 @@
 </table>
     
 </script>
+
+<script src="@Url.Content("~/Scripts/itdlu/lichthcascade.js")"></script>
 <script type="text/javascript">
     function SaoChepLichThucHanh() {
-                var tuTuan = $("#tuTuan").data('kendoDropDownList').value();
-                var denTuan = $("#denTuan").data('kendoDropDownList').value();
+        var tuTuan = $("#tuTuan").data('kendoDropDownList').value();
+        var denTuan = $("#denTuan").data('kendoDropDownList').value();
         showLoadingDialog();
         $.post("@Url.Action("SaoChepLich", "LichThucHanh")", { tuTuan: tuTuan, denTuan: denTuan })
             .done(function(data) {
-                    hideLoadingDialog();
-                     $('#SaoChepTuan').data('kendoWindow').close();
+                hideLoadingDialog();
+                $('#SaoChepTuan').data('kendoWindow').close();
                 if (data.Result == "OK") {
-                    ShowNotification("Sao chép thành công "+data.Message+" buổi học!", "info");
+                    ShowNotification("Sao chép thành công " + data.Message + " buổi học!", "info");
                     refreshData();
                 } else
                     ShowNotification(data.Message, "error");
             });
-
-
     }
 
 
+    function TuPhanCong() {
+        var chonTuan = $("#chonTuan").data('kendoDropDownList').value();
+        showLoadingDialog();
+        $.post("@Url.Action("TuPhanCong", "LichThucHanh")", { chonTuan: chonTuan})
+            .done(function(data) {
+                hideLoadingDialog();
+                $('#TuPhanCong').data('kendoWindow').close();
+                if (data.Result == "OK") {
+                    ShowNotification("Phân công thành công!", "info");
+                    refreshData();
+                } else
+                    ShowNotification(data.Message, "error");
+            });
+    }
 
     function hienThiBangDiemDanh(e) {
         e.preventDefault();
-      var detailsTemplate = kendo.template($("#template").html());
+        var detailsTemplate = kendo.template($("#template").html());
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
         var wnd = $("#ThongTinDiemDanh").data("kendoWindow");
 
@@ -211,9 +257,6 @@
     }
 
 
-</script>
-<script src="@Url.Content("~/Scripts/itdlu/lichthcascade.js")"></script>
-<script type="text/javascript">
     function capNhatTinhTrangDiemDanh() {
         showLoadingDialog();
         closeDialog();
@@ -258,6 +301,9 @@
 
     $("#btnCopy").bind("click", function() {
         $("#SaoChepTuan").data("kendoWindow").center().open();
+    });
+    $("#btnAuto").bind("click", function() {
+        $("#TuPhanCong").data("kendoWindow").center().open();
     });
 
     function error_handler(e) {
