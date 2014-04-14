@@ -7,8 +7,8 @@
         .DataValueField("MaGv")
         .DataSource(dataSource =>
         {
-            dataSource.Read(read => read.Action("LayDsGvRanh", "Filter").Data("locMaGv2"))
-                    .ServerFiltering(true);
+            dataSource.Read(read => read.Action("LayDsGvRanh", "Filter").Data("locMaGv2"));
+            // .ServerFiltering(true);
         })
         .CascadeFrom("MonHocId")
 )

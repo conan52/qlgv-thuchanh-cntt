@@ -2,13 +2,19 @@
 <ArrayOfTabHighlightState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <TabHighlightState>
     <extensions>
+      <string>TkbThucHanhCNTT\Controllers\LichThucHanhController.cs</string>
+    </extensions>
+    <highlightIndex>1</highlightIndex>
+  </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
       <string>TkbThucHanhCNTT\Views\LichThucHanh\Index.cshtml</string>
     </extensions>
     <highlightIndex>1</highlightIndex>
   </TabHighlightState>
   <TabHighlightState>
     <extensions>
-      <string>TkbThucHanhCNTT\Controllers\LichThucHanhController.cs</string>
+      <string>TkbThucHanhCNTT\Scripts\itdlu\lichthcascade.js</string>
     </extensions>
     <highlightIndex>1</highlightIndex>
   </TabHighlightState>
