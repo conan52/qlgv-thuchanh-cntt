@@ -257,5 +257,39 @@ namespace TkbThucHanhCNTT.Controllers
                 return Json(new { Result = "Fail", ex.Message });
             }
         }
+        public JsonResult TuPhanCong(int chonTuan)
+        {
+            try
+            {
+                var all = DataProvider<LichThucHanh>.GetAll();
+                var dsLichCanChep = all.Where(l => l.SttTuan == chonTuan).ToList();
+                foreach (var lth in dsLichCanChep)
+                {
+                    if (lth.Gvhd1 == null)
+                    {
+                        var lt = all.FirstOrDefault(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd1 != null);
+                        if (lt != null) lth.Gvhd1 = lt.Gvhd1;
+                    }
+                    if (lth.Gvhd2 == null)
+                    {
+                        var lt = all.FirstOrDefault(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd2 != null);
+                        if (lt != null) lth.Gvhd2 = lt.Gvhd2;
+                    }
+                    if (lth.Gvhd3 == null)
+                    {
+                        var lt = all.FirstOrDefault(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd3 != null);
+                        if (lt != null) lth.Gvhd3 = lt.Gvhd3;
+                    }
+                }
+                DataProvider<LichThucHanh>.Update(dsLichCanChep);
+
+
+                return Json(new { Result = "OK", Message = dsLichCanChep.Count });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "Fail", ex.Message });
+            }
+        }
     }
 }
