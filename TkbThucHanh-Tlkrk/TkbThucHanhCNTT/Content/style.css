@@ -22,6 +22,21 @@ h1, .h1, h2, .h2, h3, .h3 {
   background-size: 72px 72px;
     height: 72px;
 }
+/*s hien thi icon*/
+.fa {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-bars:before {
+  content: "\f0c9";
+}
+
 #logo a 
 {
     padding-left: 72px;
@@ -2352,5 +2367,9 @@ td.beauty-hover {
   }
   #dashboard_links .nav-pills > li.active > a:before {
     display: none;
+  }
+  .dropdown a {
+      color: #284;
+      font-size: 13px;
   }
 }

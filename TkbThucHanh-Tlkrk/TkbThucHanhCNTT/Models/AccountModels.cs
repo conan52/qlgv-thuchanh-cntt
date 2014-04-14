@@ -21,11 +21,9 @@ namespace TkbThucHanhCNTT.Models
         public string UserName { get; set; }
 
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Địa chỉ email không hợp lệ")]
-        public string Email { get; set; }
-        //[Display(Name = "Tên hiển thị")]
-        //public string DisplayName { get; set; }
 
-        //        [Required(ErrorMessage = "Phải chọn quyền cho tài khoản!")]
+        public string Email { get; set; }
+
         [Display(Name = "Quyền hạn")]
         public string Role
         {
@@ -51,12 +49,15 @@ namespace TkbThucHanhCNTT.Models
 
     public class LocalPasswordModel
     {
-        [Required]
+         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Địa chỉ email không hợp lệ")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Mật khẩu cũ không được để trống!")]
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu cũ")]
         public string OldPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Mật khẩu mới không được để trống!")]
         [StringLength(100, ErrorMessage = "Mật khẩu phải từ {0} đến {2} ký tự.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu mới")]
