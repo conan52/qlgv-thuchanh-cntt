@@ -37,7 +37,7 @@ namespace TkbThucHanhCNTT.Models
         public Lop Lop { get; set; }
 
 
-        [Range(1, 13)]
+        [Range(1, 14)]
         [UIHint("TietHoc")]
         [Display(Name = "Tiết bắt đầu")]
         [Required(ErrorMessage = "Tiết bắt đầu không được để trống!")]
@@ -45,7 +45,7 @@ namespace TkbThucHanhCNTT.Models
 
 
 
-        [Range(1, 13)]
+        [Range(1, 14)]
         [UIHint("TietHoc")]
         [Display(Name = "Tiết kết thúc")]
         [Required(ErrorMessage = "Tiết kết thúc không được để trống!")]
@@ -79,7 +79,23 @@ namespace TkbThucHanhCNTT.Models
         [Display(Name = "Ghi chú")]
         public string GhiChu { get; set; }
         [Display(Name = "Vắng")]
-        public string Vang { get; set; }
+
+        [NotMapped]
+        public string Vang
+        {
+            get
+            {
+                List<string> dsGvVang = new List<string>();
+                if (Gvhd1 != null && !Gv1CoMat)
+                    dsGvVang.Add(GiangVien1.TenNganGon);
+                if (Gvhd2 != null && !Gv2CoMat)
+                    dsGvVang.Add(GiangVien2.TenNganGon);
+                if (Gvhd3 != null && !Gv3CoMat)
+                    dsGvVang.Add(GiangVien3.TenNganGon);
+
+                return string.Join(", ", dsGvVang);
+            }
+        }
 
 
         public bool Gv1CoMat { get; set; }

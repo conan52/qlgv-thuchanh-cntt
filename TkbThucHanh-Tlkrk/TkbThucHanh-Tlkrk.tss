@@ -22,5 +22,20 @@
     <ArrayOfString>
       <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Models\Provider\DataProvider.cs</string>
     </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\TuanHoc\Index.cshtml</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\TuanHocController.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\Shared\EditorTemplates\TietHoc.cshtml</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Models\TkbGiangVien.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\Shared\EditorTemplates\MaGvHd3.cshtml</string>
+    </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
