@@ -30,13 +30,13 @@ namespace TkbThucHanhCNTT.Controllers
 
 
 
-        public JsonResult LayDsGvRanh(int sttTuan, NgayTrongTuan ngayTrongTuan, int tietBatDau, int tietKetThuc, string gvA, string gvB)
+        public JsonResult LayDsGvRanh(int sttTuan, NgayTrongTuan ngayTrongTuan, int tietBatDau, int tietKetThuc, string gvA, string gvB, int chuyenNganh)
         {
-            var dsgv = LayDsGvRanh(sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc);
+            var dsgv = LayDsGvRanh(sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc, chuyenNganh);
             var result = from gv in DataProvider<GiangVien>.GetAll()
-                join ds in dsgv on gv.MaGv equals ds
-                where gv.MaGv != gvA && gv.MaGv != gvB
-                select new {gv.MaGv, gv.HoVaTen, gv.TenNganGon};
+                         join ds in dsgv on gv.MaGv equals ds
+                         where gv.MaGv != gvA && gv.MaGv != gvB
+                         select new { gv.MaGv, gv.HoVaTen, gv.TenNganGon };
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -48,16 +48,10 @@ namespace TkbThucHanhCNTT.Controllers
 
 
 
-
-
-
-
-
-
-        List<string> LayDsGvRanh(int sttTuan, NgayTrongTuan ngayTrongTuan, int tietBatDau, int tietKetThuc)
+        List<string> LayDsGvRanh(int sttTuan, NgayTrongTuan ngayTrongTuan, int tietBatDau, int tietKetThuc, int chuyenNganh)
         {
 
-            var dsgv = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(g => g.MaGv);
+            var dsgv = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong && (chuyenNganh == 0 || chuyenNganh == (int)gv.ChuyenNganh)).Select(g => g.MaGv);
             var kq = from gv in dsgv
                      where GiangVienKhongCoTkbThucHanh(gv, sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc)
                            && GiangVienKhongCoTkbTruong(gv, sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc)

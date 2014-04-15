@@ -7,6 +7,7 @@ using Kendo.Mvc.UI;
 using TkbThucHanhCNTT.Models;
 using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Provider;
+using TkbThucHanhCNTT.Models.Ultils;
 
 namespace TkbThucHanhCNTT.Controllers
 {
@@ -74,7 +75,8 @@ namespace TkbThucHanhCNTT.Controllers
                 l.MonHoc.TenThucHanh,
                 TenGv1 = l.Gvhd1 != null ? l.GiangVien1.HoVaTen : null,
                 TenGv2 = l.Gvhd2 != null ? l.GiangVien2.HoVaTen : null,
-                TenGv3 = l.Gvhd3 != null ? l.GiangVien3.HoVaTen : null
+                TenGv3 = l.Gvhd3 != null ? l.GiangVien3.HoVaTen : null,
+                ChuyenNganh = l.MonHoc.ChuyenNganh
             }));
         }
 

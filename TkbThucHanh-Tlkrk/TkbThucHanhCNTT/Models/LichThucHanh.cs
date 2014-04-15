@@ -87,11 +87,11 @@ namespace TkbThucHanhCNTT.Models
             {
                 List<string> dsGvVang = new List<string>();
                 if (Gvhd1 != null && !Gv1CoMat)
-                    dsGvVang.Add(GiangVien1.TenNganGon);
+                    dsGvVang.Add(GiangVien1.HoVaTen.LayTen());
                 if (Gvhd2 != null && !Gv2CoMat)
-                    dsGvVang.Add(GiangVien2.TenNganGon);
+                    dsGvVang.Add(GiangVien2.HoVaTen.LayTen());
                 if (Gvhd3 != null && !Gv3CoMat)
-                    dsGvVang.Add(GiangVien3.TenNganGon);
+                    dsGvVang.Add(GiangVien3.HoVaTen.LayTen());
 
                 return string.Join(", ", dsGvVang);
             }
