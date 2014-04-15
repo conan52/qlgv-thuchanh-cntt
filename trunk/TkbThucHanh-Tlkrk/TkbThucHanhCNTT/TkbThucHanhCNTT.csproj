@@ -167,6 +167,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChamCongController.cs" />
     <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\GiangVienController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="Models\MonHoc.cs" />
     <Compile Include="Models\PhanCongGiangDay.cs" />
     <Compile Include="Models\PhongThucHanh.cs" />
+    <Compile Include="Models\Provider\ChamCongProvider.cs" />
     <Compile Include="Models\Provider\DataProvider.cs" />
     <Compile Include="Models\Provider\GiangVienProvider.cs" />
     <Compile Include="Models\Provider\LopProvider.cs" />
@@ -205,6 +207,8 @@
     <Compile Include="Models\TkbThucHanhContext.cs" />
     <Compile Include="Models\TuanHoc.cs" />
     <Compile Include="Models\Ultils\StaticUltils.cs" />
+    <Compile Include="Models\Viewer\ChamCongGrouped.cs" />
+    <Compile Include="Models\Viewer\ChamCongViewModel.cs" />
     <Compile Include="Models\Viewer\GiangVienViewModel.cs" />
     <Compile Include="Models\Viewer\TietHoc.cs" />
     <Compile Include="Models\Viewer\TkbGiangVienViewModel.cs" />
@@ -1166,6 +1170,7 @@
     <Content Include="Views\Shared\EditorTemplates\MaGvHd2.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\MaGvHdTest.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\MaGvHd3.cshtml" />
+    <Content Include="Views\ChamCong\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">

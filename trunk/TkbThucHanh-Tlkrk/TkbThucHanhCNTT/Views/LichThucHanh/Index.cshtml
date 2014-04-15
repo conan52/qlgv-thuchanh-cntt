@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Index";
 }
+
 @(Html.Kendo().Grid<LichThucHanh>()
       .Name("GridView")
       .Columns(columns =>
@@ -15,7 +16,6 @@
           columns.ForeignKey(c => c.TenLop, (IEnumerable) ViewData["Lops"], dataFieldText: "TenLop", dataFieldValue: "TenLop").Filterable(false);
           columns.ForeignKey(c => c.TenPhong, (IEnumerable) ViewData["Phongs"], dataFieldText: "TenPhong", dataFieldValue: "TenPhong").Filterable(false);
 
-          // columns.ForeignKey(p => p.MonHocId, Model.MonHocs, "MonHocId", "TenThucHanh").EditorTemplateName("MonHocId");
           columns.ForeignKey(c => c.MonHocId, (IEnumerable) ViewData["MonHocs"], dataFieldText: "TenThucHanh", dataFieldValue: "MonHocId").EditorTemplateName("MonHocId");
           columns.ForeignKey(c => c.Gvhd1, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd1");
           columns.ForeignKey(c => c.Gvhd2, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd2");
@@ -34,7 +34,11 @@
       .Sortable()
       // .Selectable()
       .Groupable(x => x.Messages(t => t.Empty("Kéo thả để gom nhóm dữ liệu")))
-      //  .Selectable()
+          .ColumnMenu(builder =>
+          {
+              builder.Filterable(false);
+              builder.Sortable(false);
+          })
       //  .Scrollable()
       .DataSource(dataSource => dataSource
           .Ajax()
@@ -63,8 +67,8 @@
                                 @item.SaveButton("Lưu", "Hủy")
                                 <a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-scheduler'>
                                                                                                </span>Đồng bộ từ lịch giảng viên</a> <a id='btnCopy' class='k-button k-button-increase' href='#'><span class='k-icon k-add'></span>Sao chép tuần</a> 
-                                 <a id='btnAuto' class='k-button k-button-increase'
-                                                                                                                                                                                                        href='#'><span class='k-icon k-add'></span>Tự phân công</a>
+                                <a id='btnAuto' class='k-button k-button-increase'
+                                   href='#'><span class='k-icon k-add'></span>Tự phân công</a>
                                 <div class="toolbar">
                                     <label class="category-label" for="category">
                                         Tuần:</label>
@@ -73,12 +77,10 @@
                                           .OptionLabel("Tất cả")
                                           .AutoBind(false)
                                           .Events(e => e.Change("onSelectedWeekChange"))
-                                          .DataSource(ds => ds.Read("LayDsTuan", "LichThucHanh"))
-                                          )
+                                          .DataSource(ds => ds.Read("LayDsTuan", "LichThucHanh")))
                                 </div>
                             </text>);
-      })
-      )
+      }))
 <style>
     .toolbar { float: right; }
 </style>

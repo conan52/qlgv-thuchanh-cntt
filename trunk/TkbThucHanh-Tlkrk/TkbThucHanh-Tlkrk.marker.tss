@@ -10,12 +10,6 @@
     <extensions>
       <string>TkbThucHanhCNTT\Views\LichThucHanh\Index.cshtml</string>
     </extensions>
-    <highlightIndex>1</highlightIndex>
-  </TabHighlightState>
-  <TabHighlightState>
-    <extensions>
-      <string>TkbThucHanhCNTT\Scripts\itdlu\lichthcascade.js</string>
-    </extensions>
-    <highlightIndex>1</highlightIndex>
+    <highlightIndex>2</highlightIndex>
   </TabHighlightState>
 </ArrayOfTabHighlightState>

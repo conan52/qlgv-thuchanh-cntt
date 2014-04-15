@@ -2,40 +2,22 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Scripts\itdlu\lichthcascade.js</string>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\LichThucHanhController.cs</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\LichThucHanh\Index.cshtml</string>
     </ArrayOfString>
     <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Scripts\itdlu\lichthcascade.js</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\FilterController.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Models\Ultils\StaticUltils.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
       <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Models\LichThucHanh.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\LichThucHanhController.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\Shared\EditorTemplates\MaGvHd1.cshtml</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\Shared\EditorTemplates\MaGvHd2.cshtml</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Models\Provider\DataProvider.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\TuanHoc\Index.cshtml</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\TuanHocController.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\Shared\EditorTemplates\TietHoc.cshtml</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Models\TkbGiangVien.cs</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\Shared\EditorTemplates\MaGvHd3.cshtml</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
