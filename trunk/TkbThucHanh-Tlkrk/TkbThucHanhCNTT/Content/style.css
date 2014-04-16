@@ -36,7 +36,7 @@ h1, .h1, h2, .h2, h3, .h3 { margin: 0; }
 .banner 
 {
     background: url(../Images/cntt.png) no-repeat;
-    background-size: 900px 72px;
+    background-size: 200px 72px;
 }
 
 .fa-bars:before {
@@ -2403,7 +2403,12 @@ td.beauty-hover { background-color: rgba(219, 219, 219, 0.3) !important; }
 
 #event_delete { margin-left: 20px; }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) 
+{
+    .banner {
+    background: url(../Images/cntt.png) no-repeat;
+    background-size: 550px 72px;}
+    
     #sidebar-left.col-sm-2 {
         opacity: 1;
         padding: 0 15px;
@@ -2424,7 +2429,11 @@ td.beauty-hover { background-color: rgba(219, 219, 219, 0.3) !important; }
     .page-404 .form-inline { width: 60%; }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 992px) 
+{
+    .banner {
+    background: url(../Images/cntt.png) no-repeat;
+    background-size: 800px 72px;}
     .nav.main-menu > li > a, .nav.msg-menu > li > a { text-align: left; }
 
     .nav.main-menu > li > a > i, .nav.msg-menu > li > a > i {
@@ -2454,7 +2463,11 @@ td.beauty-hover { background-color: rgba(219, 219, 219, 0.3) !important; }
     .page-404 .form-inline { width: 40%; }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767px) 
+{
+    .banner {
+    background: url(../Images/cntt.png) no-repeat;
+    background-size: 500px 72px;}
     #main { margin-top: 100px; }
 
     #messages-menu { top: 140px; }
@@ -2478,7 +2491,11 @@ td.beauty-hover { background-color: rgba(219, 219, 219, 0.3) !important; }
     }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 620px) 
+{
+    .banner {
+    background: url(../Images/cntt.png) no-repeat;
+    background-size: 400px 72px;}
     .user-mini { display: none; }
 }
 
