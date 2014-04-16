@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Web.Mvc;
+using TkbThucHanhCNTT.Models.Provider;
 
 namespace TkbThucHanhCNTT.Models
 {
@@ -49,7 +51,7 @@ namespace TkbThucHanhCNTT.Models
 
     public class LocalPasswordModel
     {
-         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Địa chỉ email không hợp lệ")]
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Địa chỉ email không hợp lệ")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Mật khẩu cũ không được để trống!")]
@@ -87,8 +89,12 @@ namespace TkbThucHanhCNTT.Models
     public class RegisterModel
     {
         [Required]
+        [CustomValidation(typeof(RegisterModel), "ValidateDuplicate")]
         [Display(Name = "Tên đăng nhập")]
         public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Giáo viên không được để trống!")]
+        public string MaGv { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "Mật khẩu phải từ {0} đến {2} ký tự.", MinimumLength = 6)]
@@ -96,10 +102,15 @@ namespace TkbThucHanhCNTT.Models
         [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Nhập lại mật khẩu mới")]
-        [Compare("Password", ErrorMessage = "Nhập lại mật khẩu mới không khớp.")]
-        public string ConfirmPassword { get; set; }
+
+        public static ValidationResult ValidateDuplicate(string username)
+        {
+            if (DataProvider<UserProfile>.GetAll().All(x => x.UserName != username))
+            {
+                return ValidationResult.Success;
+            }
+            return new ValidationResult("Tên đăng nhập đã tồn tại");
+        }
     }
 
     public class ExternalLogin

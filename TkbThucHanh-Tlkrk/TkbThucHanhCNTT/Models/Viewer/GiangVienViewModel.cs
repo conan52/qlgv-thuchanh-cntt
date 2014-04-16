@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using TkbThucHanhCNTT.Models.Enums;
+using TkbThucHanhCNTT.Models.Provider;
 
 namespace TkbThucHanhCNTT.Models.Viewer
 {

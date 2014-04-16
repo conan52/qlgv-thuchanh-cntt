@@ -4,15 +4,16 @@ using System.Linq;
 using System.Transactions;
 using System.Web.Mvc;
 using System.Web.Security;
+using DotNetOpenAuth.AspNet;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.Web.WebPages.OAuth;
+using TkbThucHanhCNTT.Filters;
+using TkbThucHanhCNTT.Models;
 using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Provider;
 using TkbThucHanhCNTT.Models.Viewer;
 using WebMatrix.WebData;
-using TkbThucHanhCNTT.Filters;
-using TkbThucHanhCNTT.Models;
 
 namespace TkbThucHanhCNTT.Controllers
 {
@@ -24,11 +25,13 @@ namespace TkbThucHanhCNTT.Controllers
         public ActionResult Index()
         {
             ViewData["GiangViens"] =
-                DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
+                DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new {gv.HoVaTen, gv.MaGv});
             ViewData["Roles"] = EnumUltils.GetDescriptions_QuyenHan();
             return View();
         }
+
         [AcceptVerbs(HttpVerbs.Post)]
+        [AllowAnonymous]
         public ActionResult AjaxUpdate([DataSourceRequest] DataSourceRequest request, UserProfile up)
         {
             // Test if gv object and modelstate is valid.
@@ -39,17 +42,18 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(ModelState.ToDataSourceResult());
         }
 
-
+        [AcceptVerbs(HttpVerbs.Post)]
+        [AllowAnonymous]
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            var result = DataProvider<UserProfile>.GetAll();
-            return Json(result.ToDataSourceResult(request, gv => new UserProfileViewModel()
+            IList<UserProfile> result = DataProvider<UserProfile>.GetAll();
+            return Json(result.ToDataSourceResult(request, gv => new UserProfileViewModel
             {
                 Email = gv.Email,
                 MaGv = gv.MaGv,
                 UserId = gv.UserId,
                 UserName = gv.UserName,
-                Role = (QuyenHan)Enum.Parse(typeof(QuyenHan), gv.Role)
+                Role = (QuyenHan) Enum.Parse(typeof (QuyenHan), gv.Role)
             }));
         }
 
@@ -116,7 +120,7 @@ namespace TkbThucHanhCNTT.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { MaGv = "CT01", Role = "Blocked" });
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new {MaGv = "CT01", Role = "Blocked"});
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }
@@ -137,16 +141,16 @@ namespace TkbThucHanhCNTT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Disassociate(string provider, string providerUserId)
         {
-            var ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
+            string ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
             ManageMessageId? message = null;
 
             // Only disassociate the account if the currently logged in user is the owner
             if (ownerAccount == User.Identity.Name)
             {
                 // Use a transaction to prevent the user from deleting their last login credential
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions {IsolationLevel = IsolationLevel.Serializable}))
                 {
-                    var hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+                    bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
                     if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
                     {
                         OAuthWebSecurity.DeleteAccount(provider, providerUserId);
@@ -156,7 +160,7 @@ namespace TkbThucHanhCNTT.Controllers
                 }
             }
 
-            return RedirectToAction("Manage", new { Message = message });
+            return RedirectToAction("Manage", new {Message = message});
         }
 
         //
@@ -166,9 +170,9 @@ namespace TkbThucHanhCNTT.Controllers
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : "";
+                    : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                        : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
+                            : "";
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Manage");
             return View();
@@ -181,7 +185,7 @@ namespace TkbThucHanhCNTT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
         {
-            var hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("Manage");
             if (hasLocalAccount)
@@ -201,19 +205,16 @@ namespace TkbThucHanhCNTT.Controllers
 
                     if (changePasswordSucceeded)
                     {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        return RedirectToAction("Manage", new {Message = ManageMessageId.ChangePasswordSuccess});
                     }
-                    else
-                    {
-                        ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-                    }
+                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
                 }
             }
             else
             {
                 // User does not have a local password so remove any validation errors caused by a missing
                 // OldPassword field
-                var state = ModelState["OldPassword"];
+                ModelState state = ModelState["OldPassword"];
                 if (state != null)
                 {
                     state.Errors.Clear();
@@ -224,7 +225,7 @@ namespace TkbThucHanhCNTT.Controllers
                     try
                     {
                         WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
+                        return RedirectToAction("Manage", new {Message = ManageMessageId.SetPasswordSuccess});
                     }
                     catch (Exception e)
                     {
@@ -245,7 +246,7 @@ namespace TkbThucHanhCNTT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
-            return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new {ReturnUrl = returnUrl}));
         }
 
         //
@@ -254,7 +255,7 @@ namespace TkbThucHanhCNTT.Controllers
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
-            var result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new {ReturnUrl = returnUrl}));
             if (!result.IsSuccessful)
             {
                 return RedirectToAction("ExternalLoginFailure");
@@ -271,14 +272,11 @@ namespace TkbThucHanhCNTT.Controllers
                 OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
                 return RedirectToLocal(returnUrl);
             }
-            else
-            {
-                // User is new, ask for their desired membership name
-                var loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
-                ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
-                ViewBag.ReturnUrl = returnUrl;
-                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
-            }
+            // User is new, ask for their desired membership name
+            string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
+            ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
+            ViewBag.ReturnUrl = returnUrl;
+            return View("ExternalLoginConfirmation", new RegisterExternalLoginModel {UserName = result.UserName, ExternalLoginData = loginData});
         }
 
         //
@@ -302,12 +300,12 @@ namespace TkbThucHanhCNTT.Controllers
                 // Insert a new user into the database
                 using (var db = new TkbThucHanhContext())
                 {
-                    var user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
                     if (user == null)
                     {
                         // Insert name into the profile table
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        db.UserProfiles.Add(new UserProfile {UserName = model.UserName});
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
@@ -315,10 +313,7 @@ namespace TkbThucHanhCNTT.Controllers
 
                         return RedirectToLocal(returnUrl);
                     }
-                    else
-                    {
-                        ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
-                    }
+                    ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
                 }
             }
 
@@ -347,11 +342,11 @@ namespace TkbThucHanhCNTT.Controllers
         [ChildActionOnly]
         public ActionResult RemoveExternalLogins()
         {
-            var accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
+            ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
             var externalLogins = new List<ExternalLogin>();
-            foreach (var account in accounts)
+            foreach (OAuthAccount account in accounts)
             {
-                var clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
+                AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
 
                 externalLogins.Add(new ExternalLogin
                 {
@@ -371,11 +366,11 @@ namespace TkbThucHanhCNTT.Controllers
             ViewBag.email = DataProvider<UserProfile>.GetSingle(x => x.UserId == WebSecurity.CurrentUserId).Email;
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Đổi mật khẩu thành công."
-                : message == ManageMessageId.SetPasswordSuccess ? "Mật khẩu này đang được đặt."
-                : message == ManageMessageId.SetEmailSuccess ? "Đổi email và mật khẩu thành công!"
-                : message == ManageMessageId.ErrorPassword ? "Mật khẩu cũ không đúng!"
-                : "";
-            var hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+                    : message == ManageMessageId.SetPasswordSuccess ? "Mật khẩu này đang được đặt."
+                        : message == ManageMessageId.SetEmailSuccess ? "Đổi email và mật khẩu thành công!"
+                            : message == ManageMessageId.ErrorPassword ? "Mật khẩu cũ không đúng!"
+                                : "";
+            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             if (hasLocalAccount)
                 return PartialView("DoiMatKhau");
             return RedirectToAction("Index", "Home");
@@ -385,14 +380,14 @@ namespace TkbThucHanhCNTT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DoiMatKhau(LocalPasswordModel model)
         {
-            var profile = DataProvider<UserProfile>.GetSingle(x => x.UserId == WebSecurity.CurrentUserId);
+            UserProfile profile = DataProvider<UserProfile>.GetSingle(x => x.UserId == WebSecurity.CurrentUserId);
             ViewBag.email = profile.Email;
             if (ModelState.IsValid)
             {
-               if (!WebSecurity.Login(User.Identity.Name, model.OldPassword))
-                    return RedirectToAction("DoiMatKhau", new { Message = ManageMessageId.ErrorPassword });
+                if (!WebSecurity.Login(User.Identity.Name, model.OldPassword))
+                    return RedirectToAction("DoiMatKhau", new {Message = ManageMessageId.ErrorPassword});
                 if (WebSecurity.Login(User.Identity.Name, model.NewPassword))
-                    return RedirectToAction("DoiMatKhau", new { Message = ManageMessageId.SetPasswordSuccess });
+                    return RedirectToAction("DoiMatKhau", new {Message = ManageMessageId.SetPasswordSuccess});
                 bool changePasswordSucceeded;
                 try
                 {
@@ -405,13 +400,13 @@ namespace TkbThucHanhCNTT.Controllers
 
                 if (changePasswordSucceeded)
                 {
-                    if (profile.Email != model.Email&&!string.IsNullOrEmpty(model.Email.Trim()))
+                    if (profile.Email != model.Email && !string.IsNullOrEmpty(model.Email.Trim()))
                     {
                         profile.Email = model.Email.Trim();
                         DataProvider<UserProfile>.Update(profile);
-                        return RedirectToAction("DoiMatKhau", new { Message = ManageMessageId.SetEmailSuccess });
+                        return RedirectToAction("DoiMatKhau", new {Message = ManageMessageId.SetEmailSuccess});
                     }
-                    return RedirectToAction("DoiMatKhau", new { Message = ManageMessageId.ChangePasswordSuccess });
+                    return RedirectToAction("DoiMatKhau", new {Message = ManageMessageId.ChangePasswordSuccess});
                 }
                 ModelState.AddModelError("", "Mật khẩu hiện tại không đúng.");
             }
@@ -421,17 +416,6 @@ namespace TkbThucHanhCNTT.Controllers
         }
 
         #region Helpers
-        private ActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-        }
 
         public enum ManageMessageId
         {
@@ -442,21 +426,13 @@ namespace TkbThucHanhCNTT.Controllers
             ErrorPassword
         }
 
-        internal class ExternalLoginResult : ActionResult
+        private ActionResult RedirectToLocal(string returnUrl)
         {
-            public ExternalLoginResult(string provider, string returnUrl)
+            if (Url.IsLocalUrl(returnUrl))
             {
-                Provider = provider;
-                ReturnUrl = returnUrl;
+                return Redirect(returnUrl);
             }
-
-            public string Provider { get; private set; }
-            public string ReturnUrl { get; private set; }
-
-            public override void ExecuteResult(ControllerContext context)
-            {
-                OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
-            }
+            return RedirectToAction("Index", "Home");
         }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
@@ -496,6 +472,40 @@ namespace TkbThucHanhCNTT.Controllers
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
         }
+
+        internal class ExternalLoginResult : ActionResult
+        {
+            public ExternalLoginResult(string provider, string returnUrl)
+            {
+                Provider = provider;
+                ReturnUrl = returnUrl;
+            }
+
+            public string Provider { get; private set; }
+            public string ReturnUrl { get; private set; }
+
+            public override void ExecuteResult(ControllerContext context)
+            {
+                OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
+            }
+        }
+
+        public static bool TaoTaiKhoan(RegisterModel model)
+        {
+            try
+            {
+                WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { MaGv = model.MaGv, Role = "Teacher" });
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+
+
         #endregion
     }
 }

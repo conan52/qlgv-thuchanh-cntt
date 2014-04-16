@@ -10,8 +10,6 @@ namespace TkbThucHanhCNTT.Models.Viewer
 {
     public class UserProfileViewModel
     {
-        private string _role;
-
         [ScaffoldColumn(false)]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
