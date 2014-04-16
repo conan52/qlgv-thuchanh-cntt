@@ -9,8 +9,6 @@ namespace TkbThucHanhCNTT.Models
     [Table("UserProfile")]
     public class UserProfile
     {
-        private string _role;
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
@@ -27,17 +25,7 @@ namespace TkbThucHanhCNTT.Models
         public string Email { get; set; }
 
         [Display(Name = "Quyền hạn")]
-        public string Role
-        {
-            get { return _role; }
-            set
-            {
-                if (value == null)
-                    value = "Blocked";
-                else
-                    _role = value;
-            }
-        }
+        public string Role { get; set; }
     }
 
     public class RegisterExternalLoginModel

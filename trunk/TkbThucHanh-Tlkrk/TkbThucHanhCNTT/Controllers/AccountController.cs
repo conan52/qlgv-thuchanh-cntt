@@ -32,12 +32,20 @@ namespace TkbThucHanhCNTT.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [AllowAnonymous]
-        public ActionResult AjaxUpdate([DataSourceRequest] DataSourceRequest request, UserProfile up)
+        public ActionResult AjaxUpdate([DataSourceRequest] DataSourceRequest request, UserProfileViewModel up)
         {
             // Test if gv object and modelstate is valid.
             if (up != null && ModelState.IsValid)
             {
-                DataProvider<UserProfile>.Update(up);
+                var uf = new UserProfile()
+                {
+                    Email = up.Email,
+                    MaGv = up.MaGv,
+                    Role = up.Role.ToString(),
+                    UserId = up.UserId,
+                    UserName = up.UserName
+                };
+                DataProvider<UserProfile>.Update();
             }
             return Json(ModelState.ToDataSourceResult());
         }
@@ -120,7 +128,7 @@ namespace TkbThucHanhCNTT.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new {MaGv = "CT01", Role = "Blocked"});
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }
