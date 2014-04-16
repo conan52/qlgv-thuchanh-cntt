@@ -8,6 +8,7 @@ using Microsoft.Ajax.Utilities;
 using TkbThucHanhCNTT.Models;
 using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Provider;
+using TkbThucHanhCNTT.Models.Ultils;
 using TkbThucHanhCNTT.Models.Viewer;
 
 namespace TkbThucHanhCNTT.Controllers
@@ -28,7 +29,6 @@ namespace TkbThucHanhCNTT.Controllers
             var result = DataProvider<GiangVien>.GetAll();
             return this.Json(result,JsonRequestBehavior.AllowGet);
         }
-
 
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -80,7 +80,6 @@ namespace TkbThucHanhCNTT.Controllers
         {
             if (gv != null && ModelState.IsValid)
             {
-                ///
                 var g = new GiangVien()
                 {
                     ChuyenNganh = gv.ChuyenNganh,
@@ -89,6 +88,12 @@ namespace TkbThucHanhCNTT.Controllers
                     HoVaTen = gv.HoVaTen
                 };
                 DataProvider<GiangVien>.Add(g);
+                AccountController.TaoTaiKhoan(new RegisterModel()
+                {
+                    UserName = StaticUltils.GetUsername(g.HoVaTen),
+                    MaGv = g.MaGv,
+                    Password = "123456"
+                });
             }
 
             return Json(new[] { gv }.ToDataSourceResult(request, ModelState));

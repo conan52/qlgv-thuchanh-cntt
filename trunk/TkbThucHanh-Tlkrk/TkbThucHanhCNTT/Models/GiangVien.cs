@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using TkbThucHanhCNTT.Models.Enums;
+using TkbThucHanhCNTT.Models.Provider;
 using TkbThucHanhCNTT.Models.Ultils;
 
 namespace TkbThucHanhCNTT.Models
@@ -51,5 +53,6 @@ namespace TkbThucHanhCNTT.Models
             LichThucHanhs = new List<LichThucHanh>();
             TkbGiangViens = new List<TkbGiangVien>();
         }
+        
     }
 }
