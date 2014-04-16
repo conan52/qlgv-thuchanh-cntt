@@ -437,6 +437,8 @@
     <Content Include="Content\kendo\2014.1.318\Uniform\slider-v.gif" />
     <Content Include="Content\kendo\2014.1.318\Uniform\sprite.png" />
     <Content Include="Content\kendo\2014.1.318\Uniform\sprite_2x.png" />
+    <Content Include="Images\cntt.png" />
+    <Content Include="Images\sprite.png" />
     <Content Include="Content\style.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
