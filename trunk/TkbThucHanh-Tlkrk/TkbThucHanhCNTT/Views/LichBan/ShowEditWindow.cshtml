@@ -1,0 +1,214 @@
+﻿@using System.Collections
+@{
+    Layout = null;
+}
+<input type="hidden" id="lichBanId" value="@ViewData["maLichBan"].ToString()"/>
+<table id="tblThongTin">
+    <tr>
+        <th>
+            Giảng viên
+        </th>
+        <td>
+            &nbsp;
+        </td>
+        <td>
+            @(Html.Kendo().ComboBox()
+                  .Name("chonGiangVien")
+                  .Filter("contains")
+                  .Placeholder("Chọn giảng viên")
+                  .DataTextField("HoVaTen")
+                  .DataValueField("MaGv")
+                  .BindTo((IEnumerable)ViewData["dsGiangVien"])
+                  .Suggest(true)
+                          .Value((string)ViewData["maGv"]))
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Tuần
+        </th>
+        <td>
+            &nbsp;
+        </td>
+        <td>
+            @(Html.Kendo().ComboBox()
+                  .Name("chonTuan")
+                  .Placeholder("Chọn tuần")
+                  .DataTextField("SttTuan")
+                  .DataValueField("SttTuan")
+                  .BindTo((IEnumerable)ViewData["dsTuanTuongLai"])
+                          .Value(ViewData["tuan"].ToString())
+                  )
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered table-hover" id="tblThoiGian">
+    <tr>
+        <th>
+            &nbsp;
+        </th>
+        <th class="colval">
+            Sáng (1-5)
+        </th>
+        <th class="colval">
+            Chiều (7-10)
+        </th>
+        <th class="colval">
+            Tối (11-13)
+        </th>
+    </tr>
+    <tr>
+        <td class="rowval">
+            Thứ hai
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col0" />
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col1" />
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col2" />
+        </td>
+    </tr>
+    <tr>
+        <td class="rowval">
+            Thứ ba
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col0" />
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col1" />
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col2" />
+        </td>
+    </tr>
+    <tr>
+        <td class="rowval">
+            Thứ tư
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col0" />
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col1" />
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col2" />
+        </td>
+    </tr>
+    <tr>
+        <td class="rowval">
+            Thứ năm
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col0" />
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col1" />
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col2" />
+        </td>
+    </tr>
+    <tr>
+        <td class="rowval">
+            Thứ sáu
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col0" />
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col1" />
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col2" />
+        </td>
+    </tr>
+    <tr>
+        <td class="rowval">
+            Thứ bảy
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col0" />
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col1" />
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col2" />
+        </td>
+    </tr>
+    <tr>
+        <td class="rowval">
+            Chủ nhật
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col0" />
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col1" />
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox cbBan col2" />
+        </td>
+    </tr>
+</table>
+<div id="buttonContainer">
+    <a class="k-button k-button-icontext " href="#" onclick=" return AjaxEdit() "><span
+        class="k-icon k-update"></span>Cập nhật</a> <a class="k-button k-button-icontext"
+            href="#" onclick=" return closeDialog() "><span class="k-icon k-cancel"></span>Hủy
+            bỏ</a>
+</div>
+<style>
+    #tblThongTin
+    {
+        margin: 10px;
+    }
+    
+    #tblThoiGian
+    {
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    #tblThoiGian tr td input[type='checkbox']
+    {
+        height: 100%;
+        margin: 0;
+        width: 100%;
+    }
+    
+    #buttonContainer
+    {
+        padding: 10px;
+        text-align: right;
+    }
+</style>
+<script language="javascript">
+    var colval = [true, true, true];
+    var rowval = [true, true, true, true, true, true, true];
+    $(".colval").click(function () {
+        var index = $(".colval").index(this);
+        $(".col" + index).prop('checked', colval[index]);
+        colval[index] = !colval[index];
+    });
+
+    $(".rowval").click(function () {
+        var index = $(".rowval").index(this);
+        $(this).parent().find(".cbBan").prop('checked', rowval[index]);
+        rowval[index] = !rowval[index];
+    });
+
+    function getValues() {
+        var value = "";
+        $(".cbBan").each(function (index) {
+            value += $(this).is(':checked') ? "1" : "0";
+        });
+        return value;
+    }
+</script>

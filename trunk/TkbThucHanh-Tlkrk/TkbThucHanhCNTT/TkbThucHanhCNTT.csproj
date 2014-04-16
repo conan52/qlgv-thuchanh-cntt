@@ -171,6 +171,7 @@
     <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\GiangVienController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LichBanControler.cs" />
     <Compile Include="Controllers\LichCongTacController.cs" />
     <Compile Include="Controllers\LichThucHanhController.cs" />
     <Compile Include="Controllers\LopController.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Models\Enums\TrangThaiHuongDanTh.cs" />
     <Compile Include="Models\Enums\TrinhDo.cs" />
     <Compile Include="Models\GiangVien.cs" />
+    <Compile Include="Models\LichBan.cs" />
     <Compile Include="Models\LichCongTac.cs" />
     <Compile Include="Models\LichThucHanh.cs" />
     <Compile Include="Models\Lop.cs" />
@@ -210,6 +212,7 @@
     <Compile Include="Models\Viewer\ChamCongGrouped.cs" />
     <Compile Include="Models\Viewer\ChamCongViewModel.cs" />
     <Compile Include="Models\Viewer\GiangVienViewModel.cs" />
+    <Compile Include="Models\Viewer\LichBanModelViewer.cs" />
     <Compile Include="Models\Viewer\TietHoc.cs" />
     <Compile Include="Models\Viewer\TkbGiangVienViewModel.cs" />
     <Compile Include="Models\Viewer\TuanHocViewModel.cs" />
@@ -1171,6 +1174,8 @@
     <Content Include="Views\Shared\EditorTemplates\MaGvHdTest.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\MaGvHd3.cshtml" />
     <Content Include="Views\ChamCong\Index.cshtml" />
+    <Content Include="Views\LichBan\Index.cshtml" />
+    <Content Include="Views\LichBan\ShowEditWindow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">

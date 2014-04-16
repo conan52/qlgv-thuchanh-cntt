@@ -1,0 +1,163 @@
+﻿@using TkbThucHanhCNTT.Models.Viewer
+@{
+    ViewBag.Title = "Lịch bận của giảng viên";
+}
+@(Html.Kendo().Grid<LichBanModelViewer>()
+      .Name("GridView")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.SttTuan);
+          columns.Bound(c => c.TenGv);
+          columns.Bound(c => c.SoBuoiBan);
+          columns.Bound(c => c.SoBuoiRanh);
+
+          columns.Command(command =>
+          {
+              command.Custom("DiemDanh").Text("Sửa").Click("suaLichBan").HtmlAttributes(new { @class = "k-icon k-edit" });
+
+              command.Destroy().Text("Xóa");
+          });
+      })
+      .Editable(e =>
+      {
+          e.Mode(GridEditMode.PopUp);
+          e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
+      })
+      .Groupable(x => x.Messages(t => t.Empty("Kéo thả để gom nhóm dữ liệu")))
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .PageSize(25)
+          .Events(events => events.Error("error_handler"))
+          .Read(read => read.Action("AjaxReadData", "LichBan"))
+          .Destroy(update => update.Action("AjaxDelete", "LichBan"))
+          .Model(model => { model.Id(l => l.LichBanId); }))
+      .ToolBar(toolBar =>
+      {
+          toolBar.Template(@<text> <a id='btnThem' class='k-button k-button-icontext k' href='#'>
+              <span class='k-icon k-add'></span>Thêm mới </a>
+<div class="toolbar">
+    <label class="category-label" for="category">
+        Xem theo tuần:</label>
+    @(Html.Kendo().DropDownList()
+                                          .Name("DanhSachTuan")
+                                          .OptionLabel("Tất cả")
+                                          .AutoBind(false)
+                                          .Events(e => e.Change("onSelectedWeekChange"))
+                                          .DataSource(ds => ds.Read("LayDsTuan", "LichBan"))
+                                          )
+</div>
+</text>);
+      })
+                            .Sortable().Pageable(pageable =>
+                            {
+                                pageable.Refresh(true);
+                                pageable.PageSizes(true);
+                            })
+      )
+@(Html.Kendo().Window()
+      .Name("window")
+      .Title("Đánh dấu nhanh")
+      .Content("Đang load dữ liệu!")
+      .Draggable()
+      .Visible(false)
+      .Actions(actions => actions.Close())
+      .AutoFocus(true)
+      .Modal(true)
+      .Width(400)
+      .Height(470)
+      )
+<style>
+    .category-label
+    {
+        padding-right: .5em;
+        vertical-align: middle;
+    }
+    
+    #category
+    {
+        vertical-align: middle;
+    }
+    
+    .toolbar
+    {
+        float: right;
+    }
+</style>
+<script type="text/javascript">
+    function refreshData() {
+        $('#GridView').data('kendoGrid').dataSource.read();
+        $('#GridView').data('kendoGrid').refresh();
+    }
+
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Lỗi:\n";
+            $.each(e.errors, function(key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function() {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+
+    function onSelectedWeekChange() {
+        var value = this.value(),
+            grid = $("#GridView").data("kendoGrid");
+        if (value && !isNaN(parseInt(value))) {
+            grid.dataSource.filter({ field: "SttTuan", operator: "eq", value: parseInt(value) });
+        } else {
+            grid.dataSource.filter({});
+        }
+    }
+
+    $("#btnThem").bind("click", function() {
+        var wnd = $("#window").data("kendoWindow");
+        wnd.refresh({
+            url: "@Url.Action("ShowEditWindow", "LichBan")",
+            data: { LichBanId: 0 }
+        });
+        wnd.center().open();
+    });
+
+    function closeDialog() {
+        $("#window").data("kendoWindow").close();
+
+    }
+
+    function suaLichBan(e) {
+         var id = this.dataItem($(e.currentTarget).closest("tr")).LichBanId;
+       var wnd = $("#window").data("kendoWindow");
+        wnd.refresh({
+            url: "@Url.Action("ShowEditWindow", "LichBan")",
+            data: { maLichBan: id }
+        });
+        wnd.center().open();
+    }
+
+    function AjaxEdit() {
+        var v = getValues();
+
+        var chonGiangVien = $("#chonGiangVien").data('kendoComboBox').value();
+        var chonTuan = $("#chonTuan").data('kendoComboBox').value();
+        var lichBanId = $("#lichBanId").val();
+         $('#window').data('kendoWindow').close();
+        showLoadingDialog();
+        $.post("@Url.Action("AjaxEdit", "LichBan")", {
+                 maGv: chonGiangVien, SttTuan: chonTuan, value :v, lichBanId :lichBanId
+            })
+            .done(function(data) {
+                hideLoadingDialog();
+
+                if (data.Result == "OK") {
+                    ShowNotification("Thành công!", "info");
+                    refreshData();
+                } else
+                    ShowNotification(data.Message, "error");
+            });
+    }
+
+
+</script>
