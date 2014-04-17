@@ -26,7 +26,8 @@
           columns.Command(command =>
           {
               command.Destroy().Text(" ");
-              command.Custom("DiemDanh").Text("Điểm danh").Click("hienThiBangDiemDanh").HtmlAttributes(new { @class = "k-icon k-add" });
+//              command.Custom("DiemDanh").Text(" ").HtmlAttributes(new {@class = "asd"});
+              command.Custom("DiemDanh").Text("<span class=\"k-icon k-si-plus\"></span>").Click("hienThiBangDiemDanh").HtmlAttributes(new { @class = "k-icon k-delete" });
           });
       })
       .Editable(e => e.Mode(GridEditMode.InCell))
