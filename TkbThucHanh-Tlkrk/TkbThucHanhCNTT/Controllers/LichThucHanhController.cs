@@ -76,7 +76,7 @@ namespace TkbThucHanhCNTT.Controllers
                 TenGv1 = l.Gvhd1 != null ? l.GiangVien1.HoVaTen : null,
                 TenGv2 = l.Gvhd2 != null ? l.GiangVien2.HoVaTen : null,
                 TenGv3 = l.Gvhd3 != null ? l.GiangVien3.HoVaTen : null,
-                ChuyenNganh = l.MonHoc.ChuyenNganh
+ 
             }));
         }
 
