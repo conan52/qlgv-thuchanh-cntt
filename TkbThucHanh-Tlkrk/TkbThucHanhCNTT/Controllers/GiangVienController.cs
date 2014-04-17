@@ -5,11 +5,13 @@ using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.Ajax.Utilities;
+using TkbThucHanhCNTT.Filters;
 using TkbThucHanhCNTT.Models;
 using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Provider;
 using TkbThucHanhCNTT.Models.Ultils;
 using TkbThucHanhCNTT.Models.Viewer;
+using WebMatrix.WebData;
 
 namespace TkbThucHanhCNTT.Controllers
 {
@@ -63,7 +65,7 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            var result = DataProvider<GiangVien>.GetAll();
+            var result = DataProvider<GiangVien>.GetAll(x=>x.UserProfile);
             return Json(result.ToDataSourceResult(request, gv => new GiangVienViewModel()
             {
                 ChuyenNganh = gv.ChuyenNganh,
@@ -76,26 +78,41 @@ namespace TkbThucHanhCNTT.Controllers
 
 
         [AcceptVerbs(HttpVerbs.Post)]
+        [InitializeSimpleMembership]
         public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, GiangVienViewModel gv)
         {
             if (gv != null && ModelState.IsValid)
             {
-                var g = new GiangVien()
+                var up = new UserProfile()
                 {
-                    ChuyenNganh = gv.ChuyenNganh,
-                    CoThePhanCong = gv.CoThePhanCong,
                     MaGv = gv.MaGv,
-                    HoVaTen = gv.HoVaTen
+                    Role = "Teacher",
+                    UserName = StaticUltils.GetUsername(gv.HoVaTen)
                 };
-                DataProvider<GiangVien>.Add(g);
-                AccountController.TaoTaiKhoan(new RegisterModel()
+                if (DataProvider<UserProfile>.GetAll().Any(x => x.UserName == up.UserName))
                 {
-                    UserName = StaticUltils.GetUsername(g.HoVaTen),
-                    MaGv = g.MaGv,
-                    Password = "123456"
-                });
+                    ModelState.AddModelError("", "Tên đăng nhập đã tồn tại");
+                    return Json(new[] { gv }.ToDataSourceResult(request, ModelState));
+                }
+                if (AccountController.TaoTaiKhoan(new RegisterModel()
+                    {
+                        UserName = up.UserName,
+                        Password = "123456",
+                        Roles = "Teacher",
+                        MaGv = gv.MaGv
+                    }))
+                {
+                    var g = new GiangVien()
+                    {
+                        ChuyenNganh = gv.ChuyenNganh,
+                        CoThePhanCong = gv.CoThePhanCong,
+                        MaGv = gv.MaGv,
+                        HoVaTen = gv.HoVaTen,
+                        UserProfile = up
+                    };
+                    DataProvider<GiangVien>.Add(g);
+                }
             }
-
             return Json(new[] { gv }.ToDataSourceResult(request, ModelState));
         }
     }

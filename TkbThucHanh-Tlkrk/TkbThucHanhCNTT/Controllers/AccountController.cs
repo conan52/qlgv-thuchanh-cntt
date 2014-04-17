@@ -39,15 +39,36 @@ namespace TkbThucHanhCNTT.Controllers
             {
                 var uf = new UserProfile()
                 {
-                    Email = up.Email,
+                //    Email = up.Email,
                     MaGv = up.MaGv,
-                    Role = up.Role.ToString(),
+                    Role = up.QuyenHan,
                     UserId = up.UserId,
-                    UserName = up.UserName
+                    UserName = up.TenDangNhap
                 };
-                DataProvider<UserProfile>.Update();
+                SetRole(uf.UserName,uf.Role);
+                DataProvider<UserProfile>.Update(uf);
             }
             return Json(ModelState.ToDataSourceResult());
+        }
+
+        private static void SetRole(string userName, string value)
+        {
+            foreach (EnumInfo info in EnumUltils.GetDescriptions_QuyenHan())
+            {
+                if (!Roles.RoleExists(info.Name))
+                    Roles.CreateRole(info.Name);
+            }
+            foreach (string role in Roles.GetAllRoles())
+            {
+                try
+                {
+                    Roles.RemoveUserFromRole(userName, role);
+                }
+                catch (Exception)
+                {
+                }
+            }
+            Roles.AddUserToRole(userName, value);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -55,16 +76,14 @@ namespace TkbThucHanhCNTT.Controllers
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
             IList<UserProfile> result = DataProvider<UserProfile>.GetAll();
-            return Json(result.ToDataSourceResult(request, gv => new UserProfileViewModel
+            return Json(result.ToDataSourceResult(request, up => new UserProfileViewModel
             {
-                Email = gv.Email,
-                MaGv = gv.MaGv,
-                UserId = gv.UserId,
-                UserName = gv.UserName,
-                Role = (QuyenHan) Enum.Parse(typeof (QuyenHan), gv.Role)
+                MaGv = up.MaGv,
+                QuyenHan = up.Role,
+                UserId = up.UserId,
+                TenDangNhap = up.UserName
             }));
         }
-
 
         //
         // GET: /Account/Login
@@ -89,8 +108,7 @@ namespace TkbThucHanhCNTT.Controllers
                 return RedirectToLocal(returnUrl);
             }
 
-            // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không chính xác");
             return View(model);
         }
 
@@ -106,7 +124,9 @@ namespace TkbThucHanhCNTT.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
+
+        #region default
+        /*//
         // GET: /Account/Register
 
         [AllowAnonymous]
@@ -114,10 +134,7 @@ namespace TkbThucHanhCNTT.Controllers
         {
             return View();
         }
-
-        //
-        // POST: /Account/Register
-
+     
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -128,7 +145,9 @@ namespace TkbThucHanhCNTT.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    TaoTaiKhoan(model);
+
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new {MaGv="23123"});
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }
@@ -140,9 +159,9 @@ namespace TkbThucHanhCNTT.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
-        }
+        }*/
 
-        //
+        /*//
         // POST: /Account/Disassociate
 
         [HttpPost]
@@ -169,9 +188,9 @@ namespace TkbThucHanhCNTT.Controllers
             }
 
             return RedirectToAction("Manage", new {Message = message});
-        }
+        }*/
 
-        //
+        /*//
         // GET: /Account/Manage
 
         public ActionResult Manage(ManageMessageId? message)
@@ -184,9 +203,9 @@ namespace TkbThucHanhCNTT.Controllers
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Manage");
             return View();
-        }
+        }*/
 
-        //
+        /*//
         // POST: /Account/Manage
 
         [HttpPost]
@@ -328,9 +347,9 @@ namespace TkbThucHanhCNTT.Controllers
             ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
-        }
+        }*/
 
-        //
+       /* //
         // GET: /Account/ExternalLoginFailure
 
         [AllowAnonymous]
@@ -345,37 +364,93 @@ namespace TkbThucHanhCNTT.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
             return PartialView("_ExternalLoginsListPartial", OAuthWebSecurity.RegisteredClientData);
-        }
-
-        [ChildActionOnly]
-        public ActionResult RemoveExternalLogins()
-        {
-            ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
-            var externalLogins = new List<ExternalLogin>();
-            foreach (OAuthAccount account in accounts)
-            {
-                AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
-
-                externalLogins.Add(new ExternalLogin
+        }*/
+        /*
+                [ChildActionOnly]
+                public ActionResult RemoveExternalLogins()
                 {
-                    Provider = account.Provider,
-                    ProviderDisplayName = clientData.DisplayName,
-                    ProviderUserId = account.ProviderUserId,
-                });
-            }
+                    ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
+                    var externalLogins = new List<ExternalLogin>();
+                    foreach (OAuthAccount account in accounts)
+                    {
+                        AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
 
-            ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            return PartialView("_RemoveExternalLoginsPartial", externalLogins);
-        }
+                        externalLogins.Add(new ExternalLogin
+                        {
+                            Provider = account.Provider,
+                            ProviderDisplayName = clientData.DisplayName,
+                            ProviderUserId = account.ProviderUserId,
+                        });
+                    }
+
+                    ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+                    return PartialView("_RemoveExternalLoginsPartial", externalLogins);
+                }
+                private static string ErrorCodeToString(MembershipCreateStatus createStatus)
+                {
+                    // See http://go.microsoft.com/fwlink/?LinkID=177550 for
+                    // a full list of status codes.
+                    switch (createStatus)
+                    {
+                        case MembershipCreateStatus.DuplicateUserName:
+                            return "User name already exists. Please enter a different user name.";
+
+                        case MembershipCreateStatus.DuplicateEmail:
+                            return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
+
+                        case MembershipCreateStatus.InvalidPassword:
+                            return "The password provided is invalid. Please enter a valid password value.";
+
+                        case MembershipCreateStatus.InvalidEmail:
+                            return "The e-mail address provided is invalid. Please check the value and try again.";
+
+                        case MembershipCreateStatus.InvalidAnswer:
+                            return "The password retrieval answer provided is invalid. Please check the value and try again.";
+
+                        case MembershipCreateStatus.InvalidQuestion:
+                            return "The password retrieval question provided is invalid. Please check the value and try again.";
+
+                        case MembershipCreateStatus.InvalidUserName:
+                            return "The user name provided is invalid. Please check the value and try again.";
+
+                        case MembershipCreateStatus.ProviderError:
+                            return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+
+                        case MembershipCreateStatus.UserRejected:
+                            return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+
+                        default:
+                            return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+                    }
+                }
+
+                internal class ExternalLoginResult : ActionResult
+                {
+                    public ExternalLoginResult(string provider, string returnUrl)
+                    {
+                        Provider = provider;
+                        ReturnUrl = returnUrl;
+                    }
+
+                    public string Provider { get; private set; }
+                    public string ReturnUrl { get; private set; }
+
+                    public override void ExecuteResult(ControllerContext context)
+                    {
+                        OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
+                    }
+                }
+ 
+         */
+
+        #endregion
 
         [AllowAnonymous]
         public ActionResult DoiMatKhau(ManageMessageId? message)
         {
-            ViewBag.email = DataProvider<UserProfile>.GetSingle(x => x.UserId == WebSecurity.CurrentUserId).Email;
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Đổi mật khẩu thành công."
                     : message == ManageMessageId.SetPasswordSuccess ? "Mật khẩu này đang được đặt."
-                        : message == ManageMessageId.SetEmailSuccess ? "Đổi email và mật khẩu thành công!"
                             : message == ManageMessageId.ErrorPassword ? "Mật khẩu cũ không đúng!"
                                 : "";
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
@@ -388,8 +463,6 @@ namespace TkbThucHanhCNTT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DoiMatKhau(LocalPasswordModel model)
         {
-            UserProfile profile = DataProvider<UserProfile>.GetSingle(x => x.UserId == WebSecurity.CurrentUserId);
-            ViewBag.email = profile.Email;
             if (ModelState.IsValid)
             {
                 if (!WebSecurity.Login(User.Identity.Name, model.OldPassword))
@@ -408,12 +481,6 @@ namespace TkbThucHanhCNTT.Controllers
 
                 if (changePasswordSucceeded)
                 {
-                    if (profile.Email != model.Email && !string.IsNullOrEmpty(model.Email.Trim()))
-                    {
-                        profile.Email = model.Email.Trim();
-                        DataProvider<UserProfile>.Update(profile);
-                        return RedirectToAction("DoiMatKhau", new {Message = ManageMessageId.SetEmailSuccess});
-                    }
                     return RedirectToAction("DoiMatKhau", new {Message = ManageMessageId.ChangePasswordSuccess});
                 }
                 ModelState.AddModelError("", "Mật khẩu hiện tại không đúng.");
@@ -430,7 +497,6 @@ namespace TkbThucHanhCNTT.Controllers
             ChangePasswordSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
-            SetEmailSuccess,
             ErrorPassword
         }
 
@@ -443,66 +509,14 @@ namespace TkbThucHanhCNTT.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private static string ErrorCodeToString(MembershipCreateStatus createStatus)
-        {
-            // See http://go.microsoft.com/fwlink/?LinkID=177550 for
-            // a full list of status codes.
-            switch (createStatus)
-            {
-                case MembershipCreateStatus.DuplicateUserName:
-                    return "User name already exists. Please enter a different user name.";
+        
 
-                case MembershipCreateStatus.DuplicateEmail:
-                    return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
-
-                case MembershipCreateStatus.InvalidPassword:
-                    return "The password provided is invalid. Please enter a valid password value.";
-
-                case MembershipCreateStatus.InvalidEmail:
-                    return "The e-mail address provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidAnswer:
-                    return "The password retrieval answer provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidQuestion:
-                    return "The password retrieval question provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidUserName:
-                    return "The user name provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.ProviderError:
-                    return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                case MembershipCreateStatus.UserRejected:
-                    return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                default:
-                    return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-            }
-        }
-
-        internal class ExternalLoginResult : ActionResult
-        {
-            public ExternalLoginResult(string provider, string returnUrl)
-            {
-                Provider = provider;
-                ReturnUrl = returnUrl;
-            }
-
-            public string Provider { get; private set; }
-            public string ReturnUrl { get; private set; }
-
-            public override void ExecuteResult(ControllerContext context)
-            {
-                OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
-            }
-        }
-
+        [InitializeSimpleMembership]
         public static bool TaoTaiKhoan(RegisterModel model)
         {
             try
             {
-                WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { MaGv = model.MaGv, Role = "Teacher" });
+                WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new{MaGv=model.MaGv});
                 return true;
             }
             catch

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Provider;
 
@@ -30,6 +31,7 @@ namespace TkbThucHanhCNTT.Models.Viewer
         public ChuyenNganh ChuyenNganh { get; set; }
 
 //        [Required(ErrorMessage = "Tài khoản đăng nhập")]
+        [HiddenInput(DisplayValue = false)]
         [Display(Name = "Tài khoản đăng nhập")]
         public string TaiKhoan { get; set; }
     }

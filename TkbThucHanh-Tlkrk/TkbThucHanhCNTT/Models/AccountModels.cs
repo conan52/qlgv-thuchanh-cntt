@@ -20,10 +20,6 @@ namespace TkbThucHanhCNTT.Models
         [Display(Name = "Tên đăng nhập")]
         public string UserName { get; set; }
 
-        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Địa chỉ email không hợp lệ")]
-
-        public string Email { get; set; }
-
         [Display(Name = "Quyền hạn")]
         public string Role { get; set; }
     }
@@ -89,6 +85,8 @@ namespace TkbThucHanhCNTT.Models
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
+
+        public string Roles { get; set; }
 
 
         public static ValidationResult ValidateDuplicate(string username)
