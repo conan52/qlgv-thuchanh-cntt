@@ -46,6 +46,7 @@ namespace TkbThucHanhCNTT.Models
 
         public virtual List<LichThucHanh> LichThucHanhs { get; set; }
         public virtual List<TkbGiangVien> TkbGiangViens { get; set; }
+        public virtual List<LichBan> LichBans { get; set; }
 
 
         public GiangVien()
