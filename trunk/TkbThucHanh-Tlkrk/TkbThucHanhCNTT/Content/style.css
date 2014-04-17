@@ -54,7 +54,7 @@ h1, .h1, h2, .h2, h3, .h3 { margin: 0; }
     color: #000;
     display: block;
     font-family: 'Righteous', cursive;
-    font-size: 18px;
+
     line-height: 36px;
     padding-left: 72px;
     transition: 0.5s;
@@ -2431,6 +2431,7 @@ td.beauty-hover { background-color: rgba(219, 219, 219, 0.3) !important; }
 
 @media (min-width: 992px) 
 {
+    #logo a { font-size: 18px;}
     .banner {
     background: url(../Images/cntt.png) no-repeat;
     background-size: 800px 72px;}
@@ -2465,6 +2466,7 @@ td.beauty-hover { background-color: rgba(219, 219, 219, 0.3) !important; }
 
 @media (max-width: 767px) 
 {
+    #logo a { font-size: 16px;}
     .banner {
     background: url(../Images/cntt.png) no-repeat;
     background-size: 500px 72px;}
@@ -2499,7 +2501,9 @@ td.beauty-hover { background-color: rgba(219, 219, 219, 0.3) !important; }
     .user-mini { display: none; }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 400px) 
+{
+    #logo a { font-size: 12px;}
     .panel-menu a.account { padding: 5px 0px 5px 0; }
 
     .avatar { margin: 0; }

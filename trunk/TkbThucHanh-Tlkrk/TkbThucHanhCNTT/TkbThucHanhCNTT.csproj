@@ -1178,6 +1178,7 @@
     <Content Include="Views\ChamCong\Index.cshtml" />
     <Content Include="Views\LichBan\Index.cshtml" />
     <Content Include="Views\LichBan\ShowEditWindow.cshtml" />
+    <Content Include="Views\Account\_Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">

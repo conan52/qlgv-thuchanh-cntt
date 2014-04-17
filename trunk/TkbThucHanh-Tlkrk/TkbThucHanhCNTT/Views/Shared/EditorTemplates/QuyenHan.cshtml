@@ -1,9 +1,9 @@
 ﻿@using TkbThucHanhCNTT.Models.Enums
-@model QuyenHan
+@model string
 
 @(Html.Kendo().DropDownListFor(m => m)
-      .Name("QuyenHang")
+      .Name("QuyenHan")
       .DataTextField("Description")
-      .DataValueField("Value")
+      .DataValueField("Name")
       .BindTo(EnumUltils.GetDescriptions_QuyenHan())
 )
