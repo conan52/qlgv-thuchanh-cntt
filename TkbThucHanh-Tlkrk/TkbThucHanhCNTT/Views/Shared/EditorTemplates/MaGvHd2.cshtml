@@ -1,18 +1,16 @@
-﻿@model int?
-
+﻿@model string
 @(Html.Kendo().ComboBoxFor(m => m)
-        .AutoBind(false)
-        .Placeholder("Chọn giảng viên")
-        .DataTextField("HoVaTen")
-        .DataValueField("MaGv")
-        .DataSource(dataSource =>
-        {
-            dataSource.Read(read => read.Action("LayDsGvRanh", "Filter").Data("locMaGv2"));
-            // .ServerFiltering(true);
-        })
-             .Filter("contains")
-        .Suggest(true)
-        .CascadeFrom("MonHocId")
-)
-@Html.ValidationMessageFor(m => m)
+      .AutoBind(true)
+      .Placeholder("Chọn giảng viên")
+      .DataTextField("HoVaTen")
+      .DataValueField("MaGv")
+      .ValuePrimitive(true)
 
+      .DataSource(dataSource =>
+      {
+          dataSource.Read(read => read.Action("LayDsGvRanh", "Filter").Data("locMaGv2"))
+              .ServerFiltering(true);
+      })
+      .Filter(FilterType.Contains)
+      .Suggest(true)
+      .CascadeFrom("MonHocId"))
