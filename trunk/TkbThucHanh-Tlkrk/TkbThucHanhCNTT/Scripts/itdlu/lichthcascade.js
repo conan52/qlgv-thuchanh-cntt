@@ -33,8 +33,8 @@ function onChange(e) {
         }
         if (e.field == "Gvhd3") {
             //  model.set("Gvhd1", 0);
-            //   model.set("Gvhd2", 0);
-            //    model.set("Gvhd3", 0);
+            //  model.set("Gvhd2", 0);
+            //   model.set("Gvhd3", 0);
         }
     }
 }

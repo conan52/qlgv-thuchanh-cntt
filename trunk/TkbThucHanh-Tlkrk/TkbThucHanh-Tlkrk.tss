@@ -2,19 +2,31 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\Shared\EditorTemplates\MaGvHd2.cshtml</string>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\Shared\EditorTemplates\MaGvHd3.cshtml</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\LichThucHanh\Index.cshtml</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Scripts\itdlu\lichthcascade.js</string>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Web.config</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\LichThucHanhController.cs</string>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Models\LichThucHanh.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\Shared\EditorTemplates\MaGvHd1.cshtml</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\FilterController.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Scripts\itdlu\lichthcascade.js</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\Shared\EditorTemplates\MaGvHd2.cshtml</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Le Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\LichThucHanhController.cs</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>
