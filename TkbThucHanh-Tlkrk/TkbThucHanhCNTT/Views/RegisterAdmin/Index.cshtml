@@ -1,0 +1,33 @@
+﻿@model TkbThucHanhCNTT.Models.Viewer.RegisterAdminModelView
+@{
+    ViewBag.Title = "Register";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Create a new account.</h2>
+</hgroup>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.MaGv)
+                @Html.TextBoxFor(m => m.MaGv)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.HoVaTen)
+                @Html.TextBoxFor(m => m.HoVaTen)
+            </li>
+        </ol>
+        <input type="submit" value="Register" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

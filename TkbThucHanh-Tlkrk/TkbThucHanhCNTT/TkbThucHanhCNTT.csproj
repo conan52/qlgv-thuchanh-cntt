@@ -177,6 +177,7 @@
     <Compile Include="Controllers\LopController.cs" />
     <Compile Include="Controllers\MonHocController.cs" />
     <Compile Include="Controllers\PhanCongGiangDayController.cs" />
+    <Compile Include="Controllers\RegisterAdminController.cs" />
     <Compile Include="Controllers\TkbGiangVienController.cs" />
     <Compile Include="Controllers\PhongThucHanhController.cs" />
     <Compile Include="Controllers\TuanHocController.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Models\Viewer\ChamCongViewModel.cs" />
     <Compile Include="Models\Viewer\GiangVienViewModel.cs" />
     <Compile Include="Models\Viewer\LichBanModelViewer.cs" />
+    <Compile Include="Models\Viewer\RegisterAdminModelView.cs" />
     <Compile Include="Models\Viewer\TietHoc.cs" />
     <Compile Include="Models\Viewer\TkbGiangVienViewModel.cs" />
     <Compile Include="Models\Viewer\TuanHocViewModel.cs" />
@@ -1178,7 +1180,7 @@
     <Content Include="Views\ChamCong\Index.cshtml" />
     <Content Include="Views\LichBan\Index.cshtml" />
     <Content Include="Views\LichBan\ShowEditWindow.cshtml" />
-    <Content Include="Views\Account\_Index.cshtml" />
+    <Content Include="Views\RegisterAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">
