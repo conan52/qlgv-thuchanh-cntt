@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<JustCodeSettings Version="0.0" Timestamp="88bcf848-8647-42a2-b3a8-be8cb757980c">
+  <IgnoredErrorsAndWarningsSettings xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <IgnoredErrorsAndWarnings Version="2">
+      <FilePath>
+        <FileRelativePath>TkbThucHanhCNTT/Models/Enums/QuyenHan.cs</FileRelativePath>
+        <ProjectRelativePath>TkbThucHanhCNTT/TkbThucHanhCNTT.csproj</ProjectRelativePath>
+        <IgnoredElement>
+          <TextualIdentifier>946548251353929702</TextualIdentifier>
+        </IgnoredElement>
+      </FilePath>
+    </IgnoredErrorsAndWarnings>
+  </IgnoredErrorsAndWarningsSettings>
+</JustCodeSettings>
