@@ -1,7 +1,13 @@
 ﻿@model object
            
 @(
- Html.Kendo().DropDownListFor(m => m)    
-          
-        .BindTo((SelectList)ViewData[ViewData.TemplateInfo.GetFullHtmlFieldName("") + "_Data"])
+this.Html.Kendo().ComboBoxFor(m => m)    
+    .Animation(true)
+    .SelectedIndex(0)
+    .Suggest(true)
+    .Placeholder("Xin chọn")    
+    .Filter(FilterType.Contains)         
+    .BindTo((SelectList)this.ViewData[string.Format("{0}_Data", this.ViewData.TemplateInfo.GetFullHtmlFieldName(""))])
+
 )
+

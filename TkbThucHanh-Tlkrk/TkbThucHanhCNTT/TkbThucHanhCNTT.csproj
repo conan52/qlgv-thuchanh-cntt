@@ -171,7 +171,7 @@
     <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\GiangVienController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LichBanControler.cs" />
+    <Compile Include="Controllers\LichBanController.cs" />
     <Compile Include="Controllers\LichCongTacController.cs" />
     <Compile Include="Controllers\LichThucHanhController.cs" />
     <Compile Include="Controllers\LopController.cs" />
@@ -1181,6 +1181,7 @@
     <Content Include="Views\LichBan\Index.cshtml" />
     <Content Include="Views\LichBan\ShowEditWindow.cshtml" />
     <Content Include="Views\RegisterAdmin\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\_GridForeignKey.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">

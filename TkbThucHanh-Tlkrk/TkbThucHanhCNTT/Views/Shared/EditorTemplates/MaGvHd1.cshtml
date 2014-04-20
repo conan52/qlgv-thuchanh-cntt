@@ -1,16 +1,20 @@
 ﻿@model string
-@(Html.Kendo().ComboBoxFor(m => m)
+@(this.Html.Kendo().ComboBoxFor(m => m)
       .AutoBind(false)
       .Placeholder("Chọn giảng viên")
       .DataTextField("HoVaTen")
       .DataValueField("MaGv")
-                .ValuePrimitive(true)
+      .ValuePrimitive(true)
+      
       .DataSource(dataSource =>
       {
           dataSource.Read(read => read.Action("LayGvPhanCong", "Filter").Data("layGvPhanCong"))
-              .ServerFiltering(true);
+                    .ServerFiltering(false);
       })
       .CascadeFrom("MonHocId")
-      )
+           .Filter(FilterType.Contains)
+          .Suggest(true)
+)
 .Filter(FilterType.Contains) .Suggest(true)
-@Html.ValidationMessageFor(m => m)
+@this.Html.ValidationMessageFor(m => m)
+
