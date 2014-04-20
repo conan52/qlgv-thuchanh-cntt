@@ -2,6 +2,24 @@ body {
     color: #525252;
 }
 
+
+/* dropdown list */
+.k-list-container
+{
+    white-space: nowrap !important;
+    width: auto!important;
+    overflow-x: hidden !important;
+    
+}
+
+.k-list
+{
+    overflow-x: hidden !important;
+    /*overflow-style: marquee;*/
+    overflow-y: auto !important;
+    width: auto !important;
+}
+
 .body-expanded, .modal-open {
     margin-right: 15px;
     overflow-y: hidden;
