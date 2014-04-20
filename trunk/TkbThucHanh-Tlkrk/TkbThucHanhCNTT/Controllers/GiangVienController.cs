@@ -15,10 +15,9 @@ using WebMatrix.WebData;
 
 namespace TkbThucHanhCNTT.Controllers
 {
+    [Authorize]
     public class GiangVienController : Controller
     {
-
-
         public ActionResult Index()
         {
             ViewData["ChuyenNganhs"] = EnumUltils.GetDescriptions_ChuyenNganh();
@@ -29,7 +28,7 @@ namespace TkbThucHanhCNTT.Controllers
         public JsonResult GetGv()
         {
             var result = DataProvider<GiangVien>.GetAll();
-            return this.Json(result,JsonRequestBehavior.AllowGet);
+            return this.Json(result, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -65,7 +64,7 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            var result = DataProvider<GiangVien>.GetAll(x=>x.UserProfile);
+            var result = DataProvider<GiangVien>.GetAll(x => x.UserProfile);
             return Json(result.ToDataSourceResult(request, gv => new GiangVienViewModel()
             {
                 ChuyenNganh = gv.ChuyenNganh,
@@ -83,20 +82,15 @@ namespace TkbThucHanhCNTT.Controllers
         {
             if (gv != null && ModelState.IsValid)
             {
-                var up = new UserProfile()
-                {
-                    MaGv = gv.MaGv,
-                    Role = "Teacher",
-                    UserName = StaticUltils.GetUsername(gv.HoVaTen)
-                };
-                if (DataProvider<UserProfile>.GetAll().Any(x => x.UserName == up.UserName))
+                string userName = StaticUltils.GetUsername(gv.HoVaTen);
+                if (DataProvider<UserProfile>.GetAll().Any(x => x.UserName == userName))
                 {
                     ModelState.AddModelError("", "Tên đăng nhập đã tồn tại");
                     return Json(new[] { gv }.ToDataSourceResult(request, ModelState));
                 }
                 if (AccountController.TaoTaiKhoan(new RegisterModel()
                     {
-                        UserName = up.UserName,
+                        UserName = userName,
                         Password = "123456",
                         Roles = "Teacher",
                         MaGv = gv.MaGv
@@ -106,11 +100,14 @@ namespace TkbThucHanhCNTT.Controllers
                     {
                         ChuyenNganh = gv.ChuyenNganh,
                         CoThePhanCong = gv.CoThePhanCong,
-                        MaGv = gv.MaGv,
+                        MaGv = gv.MaGv.ToUpper(),
                         HoVaTen = gv.HoVaTen,
-                        UserProfile = up
                     };
                     DataProvider<GiangVien>.Add(g);
+                    var up = DataProvider<UserProfile>.GetSingle(x => x.MaGv == gv.MaGv);
+                    g.UserProfile = up;
+                    g.UserProfileId = up.UserId;
+                    DataProvider<GiangVien>.Update(g);
                 }
             }
             return Json(new[] { gv }.ToDataSourceResult(request, ModelState));
