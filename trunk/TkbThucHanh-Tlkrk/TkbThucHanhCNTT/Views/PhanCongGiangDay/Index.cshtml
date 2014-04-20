@@ -11,7 +11,7 @@
           {
               columns.Bound(c => c.NamHoc);
               columns.Bound(c => c.HocKy);
-              columns.ForeignKey(c => c.MonHocId, (IEnumerable) ViewData["MonHocs"], dataFieldText: "TenMonHoc", dataFieldValue: "MonHocId");
+              columns.ForeignKey(c => c.MonHocId, (IEnumerable) ViewData["MonHocs"], dataFieldText: "MaMonHoc", dataFieldValue: "MonHocId");
               columns.ForeignKey(c => c.MaGv, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv");
               columns.ForeignKey(c => c.TenLop, (IEnumerable) ViewData["Lops"], dataFieldText: "TenLop", dataFieldValue: "TenLop");
               columns.Command(command =>
