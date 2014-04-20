@@ -9,8 +9,10 @@
       .DataSource(dataSource =>
       {
           dataSource.Read(read => read.Action("LayDsGvRanh", "Filter").Data("locMaGv2"))
-              .ServerFiltering(true);
+              .ServerFiltering(false);
       })
       .Filter(FilterType.Contains)
       .Suggest(true)
-      .CascadeFrom("MonHocId"))
+      .CascadeFrom("MonHocId")
+          .HtmlAttributes(new { @style = "word-wrap: break-word;" })
+      )
