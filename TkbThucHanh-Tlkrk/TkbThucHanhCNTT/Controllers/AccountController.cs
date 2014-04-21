@@ -105,11 +105,11 @@ namespace TkbThucHanhCNTT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            var k = DataProvider<GiangVien>.GetAll()
+            var k = DataProvider<GiangVien>.GetAll(x=>x.UserProfile)
                 .FirstOrDefault(t => StaticUltils.GetUsername(t.HoVaTen) == model.UserName);
             if (k!=null)
             {
-                if (k.CoThePhanCong)
+                if (k.CoThePhanCong && k.UserProfile.Role != "Blocked")
                 {
                     if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, model.RememberMe))
                     {
