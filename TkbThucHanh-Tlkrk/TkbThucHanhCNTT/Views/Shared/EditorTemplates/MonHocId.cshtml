@@ -1,8 +1,8 @@
 ﻿@model int
 
-@(Html.Kendo().ComboBoxFor(m => m)
+@(Html.Kendo().DropDownListFor(m => m)
         .AutoBind(false)
-        //.OptionLabel("Chọn môn học...")
+        .OptionLabel("Chọn môn học...")
             .DataTextField("TenThucHanh")
             .DataValueField("MonHocId")
         .DataSource(dataSource =>
@@ -13,4 +13,4 @@
         .CascadeFrom("TenLop")
 )
 @Html.ValidationMessageFor(m => m)
-
+ 

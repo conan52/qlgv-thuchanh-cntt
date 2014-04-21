@@ -16,7 +16,7 @@ function onChange(e) {
         }
 
         if (e.field == "MonHocId") {
-            alert(model.MonHocId);
+            //alert(model.MonHocId);
             model.set("Gvhd1", 0);
             model.set("Gvhd2", 0);
             model.set("Gvhd3", 0);
