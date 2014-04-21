@@ -28,8 +28,19 @@ body {
     overflow-y: hidden;
 }
 
+.bannercolor {
+    background: -webkit-linear-gradient(left, #8ab9de , #a6c9e6); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #8ab9de, #a6c9e6); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #8ab9de, #a6c9e6); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #8ab9de , #a6c9e6); /* Standard syntax (must be last) */
+}
+
 .line-height {
     line-height: 72px !important;
+}
+
+.line-heightlogin {
+    line-height: 36px !important;
 }
 
 .body-expanded .expanded-panel, .fancybox-margin .expanded-panel, .modal-open .expanded-panel { margin-right: 15px; }
@@ -135,7 +146,7 @@ a.show-sidebar:hover { color: #000; }
     -moz-transition: 0.2s;
     -o-transition: 0.2s;
     -webkit-transition: 0.2s;
-    background: #6AA6D6 0 0 repeat;
+    background: #6AA6D6 url(../img/devoops_pattern_b10.png) 0 0 repeat;
     margin-bottom: -3000px !important;
     padding-bottom: 3000px !important;
     position: relative;
@@ -203,7 +214,7 @@ a.show-sidebar:hover { color: #000; }
 .main-menu .dropdown-menu {
     -moz-border-radius: 0 4px 4px 0;
     -webkit-border-radius: 0 4px 4px 0;
-    background: #6AA6D6 0 0 repeat;
+    background: #6AA6D6 url(../img/devoops_pattern_b10.png) 0 0 repeat;
     border: 0;
     border-radius: 0 4px 4px 0;
     box-shadow: none;
@@ -241,7 +252,6 @@ a.show-sidebar:hover { color: #000; }
 #top-panel {
     background: #ebebeb;
     height: 72px;
-    line-height: 72px;
 }
 
 #main {
@@ -358,6 +368,7 @@ a.show-sidebar:hover { color: #000; }
 
 .user-mini > span {
     color: #363636;
+    display: block;
     font-size: 12px;
     margin-bottom: -4px;
 }
@@ -698,7 +709,7 @@ ul.DTTT_dropdown.dropdown-menu > li:hover > a {
 
 #breadcrumb {
     background: #525252;
-    background: #5a8db6 0 0 repeat;
+    background: #5a8db6 url(../img/devoops_pattern_b10.png) 0 0 repeat;
     line-height: 40px;
     margin-bottom: 20px;
     padding: 0;
@@ -1809,7 +1820,7 @@ td.beauty-hover { background-color: rgba(219, 219, 219, 0.3) !important; }
 #dashboard_links .nav {
     -moz-border-radius: 0 4px 4px 0;
     -webkit-border-radius: 0 4px 4px 0;
-    background: #3575A0  0 0 repeat;
+    background: #3575A0 url(../img/devoops_pattern_b10.png) 0 0 repeat;
     border-radius: 0 4px 4px 0;
     overflow: hidden;
 }
@@ -2452,7 +2463,6 @@ td.beauty-hover { background-color: rgba(219, 219, 219, 0.3) !important; }
 @media (min-width: 992px) 
 {
     #logo a { font-size: 18px;}
-    #top-panel{line-height: 36px;}
     .nav.main-menu > li > a, .nav.msg-menu > li > a { text-align: left; }
 
     .nav.main-menu > li > a > i, .nav.msg-menu > li > a > i {
@@ -2484,12 +2494,7 @@ td.beauty-hover { background-color: rgba(219, 219, 219, 0.3) !important; }
 
 @media (max-width: 767px) 
 {
-    #top-panel{line-height: 36px;}
-    body {
-        background: #000000;
-    }
     #logo a { font-size: 16px;}
-    
     #main { margin-top: 100px; }
 
     #messages-menu { top: 140px; }
