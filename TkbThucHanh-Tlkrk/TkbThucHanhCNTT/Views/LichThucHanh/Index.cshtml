@@ -1,6 +1,7 @@
 ﻿@using System.Collections
 @using TkbThucHanhCNTT.Models
 @using TkbThucHanhCNTT.Models.Enums
+@using TkbThucHanhCNTT.Models.Ultils
 
 @{
     this.ViewBag.Title = "Lịch thực hành";
@@ -48,7 +49,7 @@
       .DataSource(dataSource => dataSource
                                           .Ajax()
                                           .Batch(true)
-                                          .PageSize(40)
+                                          .PageSize(StaticValue.PageNumber)
                                           .Events(events =>
                                           {
                                               events.Error("error_handler");
