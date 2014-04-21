@@ -163,7 +163,7 @@ a.show-sidebar:hover { color: #000; }
     -moz-transition: 0.2s;
     -o-transition: 0.2s;
     -webkit-transition: 0.2s;
-    background: #6AA6D6 url(../img/devoops_pattern_b10.png) 0 0 repeat;
+    background: #6AA6D6  0 0 repeat;
     margin-bottom: -3000px !important;
     padding-bottom: 3000px !important;
     position: relative;
@@ -231,7 +231,7 @@ a.show-sidebar:hover { color: #000; }
 .main-menu .dropdown-menu {
     -moz-border-radius: 0 4px 4px 0;
     -webkit-border-radius: 0 4px 4px 0;
-    background: #6AA6D6 url(../img/devoops_pattern_b10.png) 0 0 repeat;
+    background: #6AA6D6  0 0 repeat;
     border: 0;
     border-radius: 0 4px 4px 0;
     box-shadow: none;
@@ -726,7 +726,7 @@ ul.DTTT_dropdown.dropdown-menu > li:hover > a {
 
 #breadcrumb {
     background: #525252;
-    background: #5a8db6 url(../img/devoops_pattern_b10.png) 0 0 repeat;
+    background: #5a8db6  0 0 repeat;
     line-height: 40px;
     margin-bottom: 20px;
     padding: 0;
@@ -1837,7 +1837,7 @@ td.beauty-hover { background-color: rgba(219, 219, 219, 0.3) !important; }
 #dashboard_links .nav {
     -moz-border-radius: 0 4px 4px 0;
     -webkit-border-radius: 0 4px 4px 0;
-    background: #3575A0 url(../img/devoops_pattern_b10.png) 0 0 repeat;
+    background: #3575A0  0 0 repeat;
     border-radius: 0 4px 4px 0;
     overflow: hidden;
 }
