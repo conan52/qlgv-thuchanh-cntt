@@ -146,7 +146,7 @@ INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]
 
 INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 40, N'CT13', N'CTK34B')
 INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 41, N'CT46', N'CTK34B')
-INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 42, N'TN01', N'CTK34B')
+INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 42, N'TH01', N'CTK34B')
 INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 43, N'CT13', N'CTK34B')
 INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 4, N'TN15', N'CTK34B')
 
@@ -161,7 +161,7 @@ INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]
 
 
 INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 27, N'CT65', N'CTK35CD')
-INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 29, N'TN01', N'CTK35CD')
+INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 29, N'TH01', N'CTK35CD')
 INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 30, N'CT60', N'CTK35CD')
 
 
