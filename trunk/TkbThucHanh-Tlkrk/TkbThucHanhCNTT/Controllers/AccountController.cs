@@ -207,6 +207,7 @@ namespace TkbThucHanhCNTT.Controllers
             try
             {
                 WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { MaGv = model.MaGv, Role = model.Roles});
+                SetRole(model.UserName, model.Roles);
                 return true;
             }
             catch
@@ -266,6 +267,38 @@ namespace TkbThucHanhCNTT.Controllers
                 DataProvider<TuanHoc>.RemoveAll();
                 DataProvider<LichCongTac>.RemoveAll();
                 return Json(new { Result = "OK", Message = "Đã làm mới toàn bộ dữ liệu" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "Fail", ex.Message });
+            }
+        }
+
+        public ActionResult ThemTaiKhoanTuDong()
+        {
+            try
+            {
+                int count = 0;
+                List<GiangVien> giangViens = DataProvider<GiangVien>.GetAll(x=>x.UserProfile).Where(x=>x.UserProfile==null).ToList();
+                foreach (GiangVien giangVien in giangViens)
+                {
+                    string userName = StaticUltils.GetUsername(giangVien.HoVaTen);
+                    if (TaoTaiKhoan(new RegisterModel()
+                    {
+                        UserName = userName,
+                        Password = "123456",
+                        Roles = "Teacher",
+                        MaGv = giangVien.MaGv
+                    }))
+                    {
+                        var up = DataProvider<UserProfile>.GetSingle(x => x.MaGv == giangVien.MaGv);
+                        giangVien.UserProfile = up;
+                        giangVien.UserProfileId = up.UserId;
+                        DataProvider<GiangVien>.Update(giangVien);
+                        count++;
+                    }
+                }
+                return Json(new { Result = "OK", Message = string.Format("Đã thêm {0} tài khoản",count) });
             }
             catch (Exception ex)
             {
