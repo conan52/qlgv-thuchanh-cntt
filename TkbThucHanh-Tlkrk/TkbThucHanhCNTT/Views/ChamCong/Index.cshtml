@@ -1,23 +1,23 @@
 ﻿@using TkbThucHanhCNTT.Models.Viewer
-@(Html.Kendo().Grid<ChamCongGrouped>()
+
+@(this.Html.Kendo().Grid<ChamCongGrouped>()
       .Name("Grid")
       .Columns(columns =>
       {
-          columns.Bound(m => m.Nhom).Visible(false);
+          columns.Bound(m => m.Nhom)
+               //  .Visible(false)
+                 .ClientGroupHeaderTemplate("Môn học: #= value # ");
           columns.Bound(m => m.TenGv);
           columns.Bound(m => m.TongSoTiet);
       })
       .Pageable()    
       .Sortable()        
       .DataSource(dataSource => dataSource
-          .Ajax()
-          .Aggregates(aggregates =>
-          {
-          })
-          .Group(groups => groups.Add(p => p.Nhom))
-          .Model(m =>
-          {
-              
-          })
-          .Read(read => read.Action("Read", "ChamCong"))
-      ))
+                                          .Ajax()
+                                          .Aggregates(aggregates =>
+                                          {
+                                              aggregates.Add(p => p.Nhom);
+                                          })
+                                          .Group(groups => groups.Add(p => p.Nhom))
+
+                                          .Read(read => read.Action("Read", "ChamCong"))))

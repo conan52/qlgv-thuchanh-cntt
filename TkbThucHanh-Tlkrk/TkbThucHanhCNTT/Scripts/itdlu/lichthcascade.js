@@ -4,8 +4,7 @@ function getCurrentEditedModel() {
     var grid = $("#GridView").data("kendoGrid");
     var editRow = grid.tbody.find("tr:has(.k-edit-cell)");
     return grid.dataItem(editRow);
-}
-
+};
 
 function onChange(e) {
     if (e.action == "itemchange") {
@@ -38,15 +37,14 @@ function onChange(e) {
             //   model.set("Gvhd3", 0);
         }
     }
-}
+};
 
 function locTheoLop() {
     var model = getCurrentEditedModel();
     return {
         TenLop: model.TenLop
     };
-
-}
+};
 
 function locMaGv2() {
     var model = getCurrentEditedModel();
@@ -59,9 +57,7 @@ function locMaGv2() {
         GvB: model.Gvhd3,
         ChuyenNganh : model.ChuyenNganh
     };
-
-}
-
+};
 
 function locMaGv3() {
     var model = getCurrentEditedModel();
@@ -74,9 +70,7 @@ function locMaGv3() {
         GvB: model.Gvhd2,
         ChuyenNganh : model.ChuyenNganh
     };
-
-}
-
+};
 
 function layGvPhanCong() {
     var model = getCurrentEditedModel();
@@ -84,5 +78,4 @@ function layGvPhanCong() {
         TenLop: model.TenLop,
         MonHocId: model.MonHocId
     };
-
-}
+};

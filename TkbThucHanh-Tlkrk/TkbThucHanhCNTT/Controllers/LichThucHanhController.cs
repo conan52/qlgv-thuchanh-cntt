@@ -238,8 +238,9 @@ namespace TkbThucHanhCNTT.Controllers
                         Gv2CoMat = true,
                         Gv3CoMat = true,
                         Gvhd1 = lth.Gvhd1,
-                        Gvhd2 = lth.Gvhd2 ?? "",
-                        Gvhd3 = lth.Gvhd3 ?? "",
+
+                       // Gvhd2 = lth.Gvhd2 ?? null,
+                       // Gvhd3 = lth.Gvhd3 ?? null,
                         MonHocId = lth.MonHocId,
                         NgayTrongTuan = lth.NgayTrongTuan,
                         SttTuan = denTuan,
@@ -248,6 +249,10 @@ namespace TkbThucHanhCNTT.Controllers
                         TietBatDau = lth.TietBatDau,
                         TietKetThuc = lth.TietKetThuc
                     };
+
+                    l.Gvhd2 = lth.Gvhd2 != null && FilterController.GvRanh(lth.Gvhd2, denTuan, lth.NgayTrongTuan, lth.TietBatDau, lth.TietKetThuc) ? lth.Gvhd2 : null;
+                    l.Gvhd3 = lth.Gvhd3 != null && FilterController.GvRanh(lth.Gvhd3, denTuan, lth.NgayTrongTuan, lth.TietBatDau, lth.TietKetThuc) ? lth.Gvhd3 : null;
+
                     result.Add(l);
                 }
                 DataProvider<LichThucHanh>.Add(result);
@@ -268,23 +273,29 @@ namespace TkbThucHanhCNTT.Controllers
                 var dsLichCanChep = all.Where(l => l.SttTuan == chonTuan).ToList();
                 foreach (var lth in dsLichCanChep)
                 {
+                    var dsGvRanh = FilterController.LayDsGvRanh(lth.SttTuan, lth.NgayTrongTuan, lth.TietBatDau, lth.TietKetThuc);
                     if (lth.Gvhd1 == null)
                     {
-                        var lt = all.FirstOrDefault(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd1 != null);
-                        if (lt != null)
-                            lth.Gvhd1 = lt.Gvhd1;
+                        var lt = all.Where(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd1 != null)
+                            .Select(l=>l.Gvhd1).Intersect(dsGvRanh);
+                        if (lt.Any())
+                            lth.Gvhd1 = lt.First();
+                        else
+                            continue;
                     }
                     if (lth.Gvhd2 == null)
                     {
-                        var lt = all.FirstOrDefault(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd2 != null);
-                        if (lt != null)
-                            lth.Gvhd2 = lt.Gvhd2;
+                        var lt = all.Where(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd2 != null)
+                            .Select(l => l.Gvhd1).Intersect(dsGvRanh);
+                        if (lt.Any())
+                            lth.Gvhd2 = lt.First();
                     }
                     if (lth.Gvhd3 == null)
                     {
-                        var lt = all.FirstOrDefault(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd3 != null);
+                        var lt = all.Where(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd3 != null)
+                        .Select(l => l.Gvhd1).Intersect(dsGvRanh);
                         if (lt != null)
-                            lth.Gvhd3 = lt.Gvhd3;
+                            lth.Gvhd3 = lt.First();
                     }
                 }
                 DataProvider<LichThucHanh>.Update(dsLichCanChep);
@@ -318,8 +329,8 @@ namespace TkbThucHanhCNTT.Controllers
             blackBorder.LeftBorderColor = HSSFColor.Black.Index;
             blackBorder.RightBorderColor = HSSFColor.Black.Index;
             blackBorder.TopBorderColor = HSSFColor.Black.Index;
-    
-            blackBorder.FillPattern = FillPattern.SolidForeground ;
+
+            blackBorder.FillPattern = FillPattern.SolidForeground;
             blackBorder.FillForegroundColor = NPOI.HSSF.Util.HSSFColor.Grey40Percent.Index;
             blackBorder.FillBackgroundColor = NPOI.HSSF.Util.HSSFColor.Grey40Percent.Index;
 
@@ -354,9 +365,9 @@ namespace TkbThucHanhCNTT.Controllers
                 font.FontName = "Calibri";
                 font.Boldweight = (short)NPOI.SS.UserModel.FontBoldWeight.Bold;
                 cell.CellStyle = blackBorder;
-                cell.CellStyle.SetFont(font);              
+                cell.CellStyle.SetFont(font);
 
-    
+
             }
             sheet.SetColumnWidth(0, 10 * 256);
             sheet.SetColumnWidth(1, 10 * 256);
@@ -388,7 +399,7 @@ namespace TkbThucHanhCNTT.Controllers
                 NPOI.SS.UserModel.IRow row = sheet.CreateRow(numRow);
 
                 if (i > 0 && lth[i].NgayTrongTuan == lth[i - 1].NgayTrongTuan)
-                {                    
+                {
                     SetValue(row, lth[i], cellBorder, true);
                     sheet.AddMergedRegion(new CellRangeAddress(numRow - 1, numRow, 0, 0));
                 }
@@ -435,8 +446,8 @@ namespace TkbThucHanhCNTT.Controllers
             if (merge)
                 AddBlank(row);
             else
-                AddCell(row, l.NgayTrongTuan.GetDescriptionAttribute(),style);
-            AddCell(row, string.Format("{0} - {1}", l.TietBatDau, l.TietKetThuc),style);
+                AddCell(row, l.NgayTrongTuan.GetDescriptionAttribute(), style);
+            AddCell(row, string.Format("{0} - {1}", l.TietBatDau, l.TietKetThuc), style);
             AddCell(row, l.MonHoc.TenThucHanh, style);
             AddCell(row, l.TenLop, style);
             AddCell(row, l.TenPhong, style);
@@ -450,9 +461,9 @@ namespace TkbThucHanhCNTT.Controllers
         void AddBlank(NPOI.SS.UserModel.IRow row)
         {
             var cell = row.CreateCell(row.Cells.Count);
-       
+
         }
-        void AddCell(NPOI.SS.UserModel.IRow row, string value,ICellStyle style)
+        void AddCell(NPOI.SS.UserModel.IRow row, string value, ICellStyle style)
         {
             var cell = row.CreateCell(row.Cells.Count);
             cell.SetCellValue(value);
