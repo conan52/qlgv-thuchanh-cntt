@@ -136,7 +136,7 @@ INSERT [dbo].[MonHoc] ( [MaMonHoc], [TenMonHoc], [SoTinChi], [BatBuoc], [ChuyenN
 
 -- insert phan cong giang day
 INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 32, N'CT46', N'CTK34A')
-INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 33, N'CT54', N'CTK34A')
+INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 33, N'CT65', N'CTK34A')
 INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 34, N'CT02', N'CTK34A')
 INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 35, N'TN12', N'CTK34A')
 INSERT [dbo].[PhanCongGiangDay] ([NamHoc], [HocKy], [MonHocId], [MaGv], [TenLop]) VALUES (2014, 2, 36, N'CT07', N'CTK34A')
