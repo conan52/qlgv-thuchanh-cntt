@@ -21,23 +21,6 @@ namespace TkbThucHanhCNTT.Controllers
             if(DataProvider<UserProfile>.GetAll().Count==0)
                 return View();
             return RedirectToAction("Login", "Account");
-            /*if (DataProvider<UserProfile>.GetAll().Count == 0)
-            {
-                var up = new UserProfile()
-                {
-                    MaGv = " ",
-                    Role = "Giảng viên + Admin",
-                    UserName = "Administrator"
-                };
-                AccountController.TaoTaiKhoan(new RegisterModel()
-                {
-                    UserName = up.UserName,
-                    Password = "123456",
-                    Roles = "Giảng viên + Admin",
-                    MaGv = " "
-                });
-            }
-            return RedirectToAction("Login", "Account");*/
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -51,7 +34,7 @@ namespace TkbThucHanhCNTT.Controllers
                 {
                     UserName = userName,
                     Password = "123456",
-                    Roles = "Giảng viên + Admin",
+                    Roles = "AdminTeacher",
                     MaGv = register.MaGv
                 }))
                 {
@@ -67,6 +50,7 @@ namespace TkbThucHanhCNTT.Controllers
                     g.UserProfile = up;
                     g.UserProfileId = up.UserId;
                     DataProvider<GiangVien>.Update(g);
+                    AccountController.SetRole(g.UserProfile.UserName, "AdminTeacher");
                     return RedirectToAction("Login", "Account");
                 }
             }

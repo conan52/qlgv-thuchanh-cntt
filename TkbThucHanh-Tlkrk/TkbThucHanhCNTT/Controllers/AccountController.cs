@@ -50,7 +50,7 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(ModelState.ToDataSourceResult());
         }
 
-        private static void SetRole(string userName, string value)
+        public static void SetRole(string userName, string value)
         {
             foreach (EnumInfo info in EnumUltils.GetDescriptions_QuyenHan())
             {
@@ -116,8 +116,11 @@ namespace TkbThucHanhCNTT.Controllers
                         return RedirectToLocal(returnUrl);
                     }
                 }
-                ModelState.AddModelError("", "Tài khoản này đang bị khóa");
-                return View(model);
+                else
+                {
+                    ModelState.AddModelError("", "Tài khoản này đang bị khóa");
+                    return View(model);
+                }
             }
             
             ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không chính xác");
@@ -132,6 +135,7 @@ namespace TkbThucHanhCNTT.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [AllowAnonymous]
         public ActionResult DoiMatKhau(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -214,6 +218,25 @@ namespace TkbThucHanhCNTT.Controllers
 
 
 
+
+
         #endregion
+
+
+
+        public JsonResult ResetMatKhau(int userid)
+        {
+            UserProfile userProfile = DataProvider<UserProfile>.GetSingle(x => x.UserId == userid);
+            try
+            {
+                var token = WebSecurity.GeneratePasswordResetToken(userProfile.UserName);
+                WebSecurity.ResetPassword(token, "123456");
+                return Json(new { Result = "OK", Message="Đổi mật khẩu thành công" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "Fail", ex.Message });
+            }
+        }
     }
 }

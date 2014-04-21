@@ -11,6 +11,7 @@ using TkbThucHanhCNTT.Models.Ultils;
 
 namespace TkbThucHanhCNTT.Controllers
 {
+//    [Authorize]
     public class LichThucHanhController : Controller
     {
         //
@@ -80,6 +81,7 @@ namespace TkbThucHanhCNTT.Controllers
             }));
         }
 
+//        [Authorize(Roles = "Teacher")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxUpdate([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IEnumerable<LichThucHanh> ls)
         {
