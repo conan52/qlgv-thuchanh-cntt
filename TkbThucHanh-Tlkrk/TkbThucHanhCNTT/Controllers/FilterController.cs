@@ -40,36 +40,36 @@ namespace TkbThucHanhCNTT.Controllers
         {
             var dsgv = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(g => g.MaGv);
             var kq = from gv in dsgv
-                     where this.GiangVienKhongCoTkbThucHanh(gv, sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc) &&
-                           this.GiangVienKhongCoTkbTruong(gv, sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc) &&
-                           this.GiangVienKhongCongTac(gv, sttTuan, ngayTrongTuan) &&
-                           this.GiangVienKhongBanViecKhac(gv, sttTuan, ngayTrongTuan, tietKetThuc)
+                     where GiangVienKhongCoTkbThucHanh(gv, sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc) &&
+                           GiangVienKhongCoTkbTruong(gv, sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc) &&
+                           GiangVienKhongCongTac(gv, sttTuan, ngayTrongTuan) &&
+                           GiangVienKhongBanViecKhac(gv, sttTuan, ngayTrongTuan, tietKetThuc)
                      select gv;
 
             return kq.ToList();
         }
 
-        private bool GiangVienKhongCongTac(string maGv, int tuan, NgayTrongTuan ngay)
+        private static bool GiangVienKhongCongTac(string maGv, int tuan, NgayTrongTuan ngay)
         {
             var ngayHoc = TuanHocProvider.LayNgayHoc(tuan, ngay);
             return !DataProvider<LichCongTac>.GetList(ct => ct.ThoiGianBd <= ngayHoc && ct.ThoiGianKt >= ngayHoc && ct.MaGv == maGv).Any();
         }
 
-        private bool GiangVienKhongCoTkbTruong(string maGv, int tuan, NgayTrongTuan ngay, int tietBatDau, int tietKetThuc)
+        private static bool GiangVienKhongCoTkbTruong(string maGv, int tuan, NgayTrongTuan ngay, int tietBatDau, int tietKetThuc)
         {
             var thoigianxet = Enumerable.Range(tietBatDau, tietKetThuc - tietBatDau + 1);
             return !DataProvider<TkbGiangVien>.GetList(t => t.SttTuan == tuan && t.NgayTrongTuan == ngay && t.MaGv == maGv)
                                               .Any(t => Enumerable.Range(t.TietBatDau, t.TietKetThuc - t.TietBatDau + 1).Intersect(thoigianxet).Any());
         }
 
-        private bool GiangVienKhongCoTkbThucHanh(string maGv, int tuan, NgayTrongTuan ngay, int tietBatDau, int tietKetThuc)
+        private static bool GiangVienKhongCoTkbThucHanh(string maGv, int tuan, NgayTrongTuan ngay, int tietBatDau, int tietKetThuc)
         {
             var thoigianxet = Enumerable.Range(tietBatDau, tietKetThuc - tietBatDau + 1);
             return !DataProvider<LichThucHanh>.GetList(t => t.SttTuan == tuan && t.NgayTrongTuan == ngay && (t.Gvhd1 == maGv || t.Gvhd2 == maGv || t.Gvhd3 == maGv))
                                               .Any(t => Enumerable.Range(t.TietBatDau, t.TietKetThuc - t.TietBatDau + 1).Intersect(thoigianxet).Any());
         }
 
-        private bool GiangVienKhongBanViecKhac(string maGv, int tuan, NgayTrongTuan ngay, int tietKetThuc)
+        private static bool GiangVienKhongBanViecKhac(string maGv, int tuan, NgayTrongTuan ngay, int tietKetThuc)
         {
             int buoi = tietKetThuc / 6;
             return !DataProvider<LichBan>.GetList(b => b.SttTuan == tuan && b.MaGv == maGv && b.TrangThaiBan[(int)ngay * 3 + buoi] == '1').Any();
