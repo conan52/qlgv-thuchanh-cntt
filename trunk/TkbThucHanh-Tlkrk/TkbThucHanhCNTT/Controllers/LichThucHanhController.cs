@@ -309,6 +309,22 @@ namespace TkbThucHanhCNTT.Controllers
             var workbook = new HSSFWorkbook();
             var sheet = workbook.CreateSheet("Tuan" + tuanXuat);
             int numRow = 0;
+            ICellStyle blackBorder = workbook.CreateCellStyle();
+            blackBorder.BorderBottom = BorderStyle.Thin;
+            blackBorder.BorderLeft = BorderStyle.Thin;
+            blackBorder.BorderRight = BorderStyle.Thin;
+            blackBorder.BorderTop = BorderStyle.Thin;
+            blackBorder.BottomBorderColor = HSSFColor.Black.Index;
+            blackBorder.LeftBorderColor = HSSFColor.Black.Index;
+            blackBorder.RightBorderColor = HSSFColor.Black.Index;
+            blackBorder.TopBorderColor = HSSFColor.Black.Index;
+    
+            blackBorder.FillPattern = FillPattern.SolidForeground ;
+            blackBorder.FillForegroundColor = NPOI.HSSF.Util.HSSFColor.Grey40Percent.Index;
+            blackBorder.FillBackgroundColor = NPOI.HSSF.Util.HSSFColor.Grey40Percent.Index;
+
+
+
 
 
 
@@ -330,6 +346,17 @@ namespace TkbThucHanhCNTT.Controllers
                 var cell = headerRow.CreateCell(i);
                 cell.SetCellValue(columns[i]);
                 //  cell.CellStyle=
+
+
+                var font = workbook.CreateFont();
+
+                font.FontHeightInPoints = 11;
+                font.FontName = "Calibri";
+                font.Boldweight = (short)NPOI.SS.UserModel.FontBoldWeight.Bold;
+                cell.CellStyle = blackBorder;
+                cell.CellStyle.SetFont(font);              
+
+    
             }
             sheet.SetColumnWidth(0, 10 * 256);
             sheet.SetColumnWidth(1, 10 * 256);
@@ -345,18 +372,29 @@ namespace TkbThucHanhCNTT.Controllers
 
             // fill content 
 
+            ICellStyle cellBorder = workbook.CreateCellStyle();
+            cellBorder.BorderBottom = BorderStyle.Thin;
+            cellBorder.BorderLeft = BorderStyle.Thin;
+            cellBorder.BorderRight = BorderStyle.Thin;
+            cellBorder.BorderTop = BorderStyle.Thin;
+            cellBorder.BottomBorderColor = HSSFColor.Black.Index;
+            cellBorder.LeftBorderColor = HSSFColor.Black.Index;
+            cellBorder.RightBorderColor = HSSFColor.Black.Index;
+            cellBorder.TopBorderColor = HSSFColor.Black.Index;
+
+
             for (int i = 0; i < lth.Count; i++)
             {
                 NPOI.SS.UserModel.IRow row = sheet.CreateRow(numRow);
 
                 if (i > 0 && lth[i].NgayTrongTuan == lth[i - 1].NgayTrongTuan)
-                {
+                {                    
+                    SetValue(row, lth[i], cellBorder, true);
                     sheet.AddMergedRegion(new CellRangeAddress(numRow - 1, numRow, 0, 0));
-                    SetValue(row, lth[i], true);
                 }
                 else
                 {
-                    SetValue(row, lth[i]);
+                    SetValue(row, lth[i], cellBorder);
                 }
                 numRow++;
 
@@ -392,21 +430,21 @@ namespace TkbThucHanhCNTT.Controllers
 
         }
 
-        void SetValue(NPOI.SS.UserModel.IRow row, LichThucHanh l, bool merge = false)
+        void SetValue(NPOI.SS.UserModel.IRow row, LichThucHanh l, ICellStyle style, bool merge = false)
         {
             if (merge)
                 AddBlank(row);
             else
-                AddCell(row, l.NgayTrongTuan.GetDescriptionAttribute());
-            AddCell(row, string.Format("{0} - {1}", l.TietBatDau, l.TietKetThuc));
-            AddCell(row, l.MonHoc.TenThucHanh);
-            AddCell(row, l.TenLop);
-            AddCell(row, l.TenPhong);
-            AddCell(row, l.GiangVien1 != null ? l.GiangVien1.TenNganGon : "");
-            AddCell(row, l.GiangVien2 != null ? l.GiangVien2.TenNganGon : "");
-            AddCell(row, l.GiangVien3 != null ? l.GiangVien3.TenNganGon : "");
-            AddCell(row, l.GhiChu);
-            AddCell(row, l.Vang);
+                AddCell(row, l.NgayTrongTuan.GetDescriptionAttribute(),style);
+            AddCell(row, string.Format("{0} - {1}", l.TietBatDau, l.TietKetThuc),style);
+            AddCell(row, l.MonHoc.TenThucHanh, style);
+            AddCell(row, l.TenLop, style);
+            AddCell(row, l.TenPhong, style);
+            AddCell(row, l.GiangVien1 != null ? l.GiangVien1.TenNganGon : "", style);
+            AddCell(row, l.GiangVien2 != null ? l.GiangVien2.TenNganGon : "", style);
+            AddCell(row, l.GiangVien3 != null ? l.GiangVien3.TenNganGon : "", style);
+            AddCell(row, l.GhiChu, style);
+            AddCell(row, l.Vang, style);
         }
 
         void AddBlank(NPOI.SS.UserModel.IRow row)
@@ -414,10 +452,12 @@ namespace TkbThucHanhCNTT.Controllers
             var cell = row.CreateCell(row.Cells.Count);
        
         }
-        void AddCell(NPOI.SS.UserModel.IRow row, string value)
+        void AddCell(NPOI.SS.UserModel.IRow row, string value,ICellStyle style)
         {
             var cell = row.CreateCell(row.Cells.Count);
             cell.SetCellValue(value);
+
+            cell.CellStyle = style;
         }
     }
 }
