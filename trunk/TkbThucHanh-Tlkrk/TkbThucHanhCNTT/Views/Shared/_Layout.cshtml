@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - Chương trình quản lý thực hành của khoa công nghệ thông tin</title>
+        <title>@this.ViewBag.Title - Chương trình quản lý thực hành của khoa công nghệ thông tin</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @* @Styles.Render("~/Content/css")*@
@@ -10,23 +10,23 @@
         <!--This bundle was moved by the Kendo UI VS Extensions for compatibility reasons-->
         @Scripts.Render("~/bundles/jquery")
         <!--This CSS entry was added by the Kendo UI VS Extensions for compatibility reasons-->
-        <link href="@Url.Content("~/Content/kendo.compatibility.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.common.min.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
-        <script src="@Url.Content("~/Scripts/kendo/2014.1.318/jquery.min.js")"></script>
-        <script src="@Url.Content("~/Scripts/kendo/2014.1.318/kendo.all.min.js")"></script>
-        <script src="@Url.Content("~/Scripts/kendo/2014.1.318/kendo.aspnetmvc.min.js")"></script>
-        <script src="@Url.Content("~/Scripts/kendo/2014.1.318/cultures/kendo.culture.vi-VN.min.js")"></script>
-        <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
-        <script src="@Url.Content("~/Scripts/menuhover.js")"></script>
+        <link href="@this.Url.Content("~/Content/kendo.compatibility.css")" rel="stylesheet" type="text/css" />
+        <link href="@this.Url.Content("~/Content/kendo/2014.1.318/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+        <link href="@this.Url.Content("~/Content/kendo/2014.1.318/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+        <link href="@this.Url.Content("~/Content/kendo/2014.1.318/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+        <link href="@this.Url.Content("~/Content/kendo/2014.1.318/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+        <script src="@this.Url.Content("~/Scripts/kendo/2014.1.318/jquery.min.js")"></script>
+        <script src="@this.Url.Content("~/Scripts/kendo/2014.1.318/kendo.all.min.js")"></script>
+        <script src="@this.Url.Content("~/Scripts/kendo/2014.1.318/kendo.aspnetmvc.min.js")"></script>
+        <script src="@this.Url.Content("~/Scripts/kendo/2014.1.318/cultures/kendo.culture.vi-VN.min.js")"></script>
+        <script src="@this.Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+        <script src="@this.Url.Content("~/Scripts/menuhover.js")"></script>
         <script>
             $(document).ready(function () {
                 kendo.culture("vi-VN");
             });
         </script>
-@*        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">*@
+        @*        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">*@
         <link href="~/Content/style.css" rel="stylesheet">
         <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     </head>
@@ -45,11 +45,11 @@
                                 </a>
                             </div>
                             <div class="dropdown col-xs-2 top-panel-right">
-                                        @Html.Partial("_LoginPartial")
-                                    </div>
-@*                            <div class="col-xs-4 col-sm-8 top-panel-right">*@
-@*                                *@
-@*                            </div>*@
+                                @this.Html.Partial("_LoginPartial")
+                            </div>
+                            @*                            <div class="col-xs-4 col-sm-8 top-panel-right">*@
+                            @*                                *@
+                            @*                            </div>*@
                         </div>
                     </div>
                 </div>
@@ -61,31 +61,32 @@
         <div id="main" class="container-fluid">
             <div class="row">
                 <div id="sidebar-left" class="col-xs-2 col-sm-2">
-@*                    thêm menu *@
+                    @*                    thêm menu *@
                     <ul class="nav main-menu" id="@HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString()">
-                        <li>@Html.ActionLink("Tài khoản", "Index", "Account", null, new { @id = "Account"})</li>
-                        <li>@Html.ActionLink("Giảng viên", "Index", "GiangVien", null, new { @id = "GiangVien" })</li>
-                        <li>@Html.ActionLink("Lịch công tác", "Index", "LichCongTac", null, new { @id = "LichCongTac" })</li>
-                        <li>@Html.ActionLink("Lớp", "Index", "Lop", null, new { @id = "Lop" })</li>
-                        <li>@Html.ActionLink("Môn học", "Index", "MonHoc", null, new { @id = "MonHoc" })</li>
-                        <li>@Html.ActionLink("Phòng thực hành", "Index", "PhongThucHanh", null, new { @id = "PhongThucHanh" })</li>
-                        <li>@Html.ActionLink("Thời khóa biểu GV", "Index", "TkbGiangVien", null, new { @id = "TkbGiangVien" })</li>
-                        <li>@Html.ActionLink("Lịch thực hành", "Index", "LichThucHanh", null, new { @id = "LichThucHanh" })</li>
-                        <li>@Html.ActionLink("Tuần học ", "Index", "TuanHoc", null, new { @id = "TuanHoc" })</li>
-                        <li>@Html.ActionLink("Phân công giảng dạy", "Index", "PhanCongGiangDay", null, new { @id = "PhanCongGiangDay" })</li>
-                        <li>@Html.ActionLink("Lịch bận giáo viên", "Index", "LichBan", null, new { @id = "LichBan" })</li>
+                        <li>@this.Html.ActionLink("Tài khoản", "Index", "Account", null, new { @id = "Account" })</li>
+                        <li>@this.Html.ActionLink("Giảng viên", "Index", "GiangVien", null, new { @id = "GiangVien" })</li>
+                        <li>@this.Html.ActionLink("Lịch công tác", "Index", "LichCongTac", null, new { @id = "LichCongTac" })</li>
+                        <li>@this.Html.ActionLink("Lớp", "Index", "Lop", null, new { @id = "Lop" })</li>
+                        <li>@this.Html.ActionLink("Môn học", "Index", "MonHoc", null, new { @id = "MonHoc" })</li>
+                        <li>@this.Html.ActionLink("Phòng thực hành", "Index", "PhongThucHanh", null, new { @id = "PhongThucHanh" })</li>
+                        <li>@this.Html.ActionLink("Thời khóa biểu GV", "Index", "TkbGiangVien", null, new { @id = "TkbGiangVien" })</li>
+                        <li>@this.Html.ActionLink("Lịch thực hành", "Index", "LichThucHanh", null, new { @id = "LichThucHanh" })</li>
+                        <li>@this.Html.ActionLink("Tuần học ", "Index", "TuanHoc", null, new { @id = "TuanHoc" })</li>
+                        <li>@this.Html.ActionLink("Phân công giảng dạy", "Index", "PhanCongGiangDay", null, new { @id = "PhanCongGiangDay" })</li>
+                        <li>@this.Html.ActionLink("Lịch bận giáo viên", "Index", "LichBan", null, new { @id = "LichBan" })</li>
+                        <li>@this.Html.ActionLink("Chấm công", "Index", "ChamCong")</li>
                     </ul>
                 </div>
                 <!--Start Content-->
                 <div id="content" class="col-xs-12 col-sm-10">
-                    @RenderBody()
+                    @this.RenderBody()
                 </div>
                 <!--End Content-->
             </div>
         </div>
-        @RenderSection("scripts", false)
-        @Html.Partial("_LoadingDialog")
-        @Html.Partial("_Notifications")
+        @this.RenderSection("scripts", false)
+        @this.Html.Partial("_LoadingDialog")
+        @this.Html.Partial("_Notifications")
         <script src="~/Scripts/bootstrap.min.js"></script>
         <script src="~/Scripts/devoops.js"></script>
     </body>

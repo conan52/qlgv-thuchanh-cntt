@@ -8,7 +8,7 @@ namespace TkbThucHanhCNTT.Models.Viewer
 {
     public class ChamCongGrouped
     {
-        [Display(Name = "Môn học")]
+        [Display(Name = "Nhóm")]
         public string Nhom { get; set; }
         [Display(Name = "Giảng viên")]
         public string TenGv { get; set; }

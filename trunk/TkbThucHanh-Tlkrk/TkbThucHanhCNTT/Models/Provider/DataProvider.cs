@@ -9,7 +9,6 @@ namespace TkbThucHanhCNTT.Models.Provider
 {
     public class DataProvider<T> where T : class
     {
-
         public static int RemoveById(object id)
         {
             using (var context = new TkbThucHanhContext())
@@ -22,14 +21,20 @@ namespace TkbThucHanhCNTT.Models.Provider
 
         public static IList<T> GetAll(params Expression<Func<T, object>>[] navigationProperties)
         {
-            List<T> list;
+            List<T> list = new List<T>();
             using (var context = new TkbThucHanhContext())
             {
-                IQueryable<T> dbQuery = context.Set<T>();
-                dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
-                list = dbQuery
-                    .AsNoTracking()
-                    .ToList();
+                try
+                {
+                    IQueryable<T> dbQuery = context.Set<T>();
+                    dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
+                    list = dbQuery
+                                  .AsNoTracking()
+                                  .ToList();
+                }
+                catch (Exception)
+                {
+                }
             }
             return list;
         }
@@ -44,9 +49,9 @@ namespace TkbThucHanhCNTT.Models.Provider
                 dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
 
                 list = dbQuery
-                    .AsNoTracking()
-                    .Where(where)
-                    .ToList();
+                              .AsNoTracking()
+                              .Where(where)
+                              .ToList();
             }
             return list;
         }
@@ -61,15 +66,15 @@ namespace TkbThucHanhCNTT.Models.Provider
                 dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
 
                 item = dbQuery
-                    .AsNoTracking()
-                    .FirstOrDefault(where);
+                              .AsNoTracking()
+                              .FirstOrDefault(where);
             }
             return item;
         }
 
         public static int Add(params T[] items)
         {
-           return Add(items.ToList());
+            return Add(items.ToList());
         }
 
         public static int Add(IEnumerable<T> items)
@@ -82,9 +87,8 @@ namespace TkbThucHanhCNTT.Models.Provider
                     {
                         context.Entry(item).State = EntityState.Added;
                     }
-                 return   context.SaveChanges();
+                    return context.SaveChanges();
                 }
-
             }
             catch (DbEntityValidationException e)
             {
@@ -127,7 +131,7 @@ namespace TkbThucHanhCNTT.Models.Provider
                 {
                     context.Entry(item).State = EntityState.Deleted;
                 }
-             return   context.SaveChanges();
+                return context.SaveChanges();
             }
         }
 

@@ -27,7 +27,7 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult LayDsGvRanh(int sttTuan, NgayTrongTuan ngayTrongTuan, int tietBatDau, int tietKetThuc, string gvA, string gvB)
         {
-            var dsgv = this.LayDsGvRanh(sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc);
+            var dsgv = LayDsGvRanh(sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc);
             var result = from gv in DataProvider<GiangVien>.GetAll()
                          join ds in dsgv on gv.MaGv equals ds
                          where gv.MaGv != gvA && gv.MaGv != gvB
@@ -36,7 +36,7 @@ namespace TkbThucHanhCNTT.Controllers
             return this.Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        private IEnumerable<string> LayDsGvRanh(int sttTuan, NgayTrongTuan ngayTrongTuan, int tietBatDau, int tietKetThuc)
+        public static IEnumerable<string> LayDsGvRanh(int sttTuan, NgayTrongTuan ngayTrongTuan, int tietBatDau, int tietKetThuc)
         {
             var dsgv = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(g => g.MaGv);
             var kq = from gv in dsgv
@@ -47,6 +47,14 @@ namespace TkbThucHanhCNTT.Controllers
                      select gv;
 
             return kq.ToList();
+        }
+
+        public static bool GvRanh(string maGv, int sttTuan, NgayTrongTuan ngayTrongTuan, int tietBatDau, int tietKetThuc)
+        {
+            return GiangVienKhongCoTkbThucHanh(maGv, sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc) &&
+                   GiangVienKhongCoTkbTruong(maGv, sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc) &&
+                   GiangVienKhongCongTac(maGv, sttTuan, ngayTrongTuan) &&
+                   GiangVienKhongBanViecKhac(maGv, sttTuan, ngayTrongTuan, tietKetThuc);
         }
 
         private static bool GiangVienKhongCongTac(string maGv, int tuan, NgayTrongTuan ngay)
