@@ -4,20 +4,22 @@
 @{
     ViewBag.Title = "Tài khoản";
 }
+
+
 <div id="myGridView">
     @(Html.Kendo().Grid<UserProfileViewModel>()
           .Name("GridView")
           .Columns(columns =>
           {
-              columns.ForeignKey(c => c.MaGv, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv");              
+              columns.ForeignKey(c => c.MaGv, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv");
               columns.Bound(c => c.TenDangNhap);
-              columns.ForeignKey(c => c.QuyenHan, (IEnumerable)ViewData["Roles"], "Name", "Description");
-            
-              
+              columns.ForeignKey(c => c.QuyenHan, (IEnumerable) ViewData["Roles"], "Name", "Description");
+
+
 //              columns.Command(command => command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa")).Width(172);}
               columns.Command(command =>
               {
-                  command.Custom("resetmk").Text("Reset mật khẩu").Click("resetMatKhau").HtmlAttributes(new { @class = "k-icon k-edit" ,@id="resetmk"});
+                  command.Custom("resetmk").Text("Reset mật khẩu").Click("resetMatKhau").HtmlAttributes(new {@class = "k-icon k-edit", @id = "resetmk"});
 
                   command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
               });
@@ -38,16 +40,26 @@
               .Read(read => read.Action("AjaxReadData", "Account"))
               .Update(update => update.Action("AjaxUpdate", "Account"))
               .Model(model => model.Id(l => l.UserId))
+          ).ToolBar(toolBar =>
+          {
+              toolBar.Template(@<text>
+                                    @item.CreateButton("Thêm mới")
+                                    <a id='btnAddTd' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'>
+                                                                                                   </span>Thêm tự động tài khoản</a>
+                                </text>);
+          })
           )
-          )
+
+
 </div>
+
 <script type="text/javascript">
     function error_handler(e) {
         if (e.errors) {
             var message = "Lỗi:\n";
-            $.each(e.errors, function (key, value) {
+            $.each(e.errors, function(key, value) {
                 if ('errors' in value) {
-                    $.each(value.errors, function () {
+                    $.each(value.errors, function() {
                         message += this + "\n";
                     });
                 }
@@ -59,16 +71,16 @@
     $("#resetmk").bind("click", function() {
         var wnd = $("#window").data("kendoWindow");
         wnd.refresh({
-                        url: "@this.Url.Action("ResetMatKhau", "Account")",
-                        data: { UserId: 0 }
-                    });
+            url: "@Url.Action("ResetMatKhau", "Account")",
+            data: { UserId: 0 }
+        });
         wnd.center().open();
     });
 
-    function resetMatKhau (e) {
+    function resetMatKhau(e) {
         showLoadingDialog();
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-        $.post("@this.Url.Action("ResetMatKhau", "Account")", { userid: dataItem.UserId})
+        $.post("@Url.Action("ResetMatKhau", "Account")", { userid: dataItem.UserId })
             .done(function(data) {
                 hideLoadingDialog();
                 if (data.Result == "OK") {
@@ -78,6 +90,20 @@
                     ShowNotification(data.Message, "error");
                 }
             });
-    };
+    }
 
+    $("#btnAddTd").bind("click", function() {
+        showLoadingDialog();
+        $.post("@Url.Action("ThemTaiKhoanTuDong", "Account")")
+            .done(function(data) {
+                hideLoadingDialog();
+                if (data.Result == "OK") {
+                    ShowNotification(data.Message, "info");
+                    refreshData();
+
+                } else
+                    ShowNotification(data.Message, "error");
+
+            });
+    });
 </script>
