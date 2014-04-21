@@ -1,4 +1,5 @@
-﻿@using TkbThucHanhCNTT.Models.Viewer
+﻿@using TkbThucHanhCNTT.Models.Ultils
+@using TkbThucHanhCNTT.Models.Viewer
 @{
     this.ViewBag.Title = "Lịch bận của giảng viên";
 }
@@ -26,7 +27,7 @@
       .Groupable(x => x.Messages(t => t.Empty("Kéo thả để gom nhóm dữ liệu")))
       .DataSource(dataSource => dataSource
                                           .Ajax()
-                                          .PageSize(25)
+                                              .PageSize(StaticValue.PageNumber)
                                           .Events(events => events.Error("error_handler"))
                                           .Read(read => read.Action("AjaxReadData", "LichBan"))
                                           .Destroy(update => update.Action("AjaxDelete", "LichBan"))

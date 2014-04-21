@@ -1,5 +1,6 @@
 ﻿@using System.Collections
 @using TkbThucHanhCNTT.Models
+@using TkbThucHanhCNTT.Models.Ultils
 @{
     ViewBag.Title = "Lịch công tác";
 }
@@ -8,9 +9,9 @@
           .Name("GridView")
           .Columns(columns =>
           {
-              columns.ForeignKey(c => c.MaGv, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv");              
-              columns.Bound(c => c.ThoiGianBd).Format("{0:dd/MM/yyyy}");
-              columns.Bound(c => c.ThoiGianKt).Format("{0:dd/MM/yyyy}");
+              columns.ForeignKey(c => c.MaGv, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Width(220);              
+              columns.Bound(c => c.ThoiGianBd).Format("{0:dd/MM/yyyy}").Width(17);
+              columns.Bound(c => c.ThoiGianKt).Format("{0:dd/MM/yyyy}").Width(17);
               columns.Bound(c => c.LyDo);
               columns.Command(command =>
               {
@@ -34,7 +35,7 @@
           //  .Scrollable()
           .DataSource(dataSource => dataSource
               .Ajax()
-              .PageSize(20)
+                      .PageSize(StaticValue.PageNumber)
               .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "LichCongTac"))
               .Create(update => update.Action("AjaxCreate", "LichCongTac"))

@@ -1,4 +1,5 @@
 ﻿@using System.Collections
+@using TkbThucHanhCNTT.Models.Ultils
 @using TkbThucHanhCNTT.Models.Viewer
 @{
     ViewBag.Title = "Tài khoản";
@@ -32,7 +33,7 @@
           //  .Scrollable()
           .DataSource(dataSource => dataSource
               .Ajax()
-              .PageSize(20)
+              .PageSize(StaticValue.PageNumber)
               .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "Account"))
               .Update(update => update.Action("AjaxUpdate", "Account"))

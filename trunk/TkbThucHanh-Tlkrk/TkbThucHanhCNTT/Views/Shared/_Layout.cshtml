@@ -20,6 +20,7 @@
         <script src="@Url.Content("~/Scripts/kendo/2014.1.318/kendo.aspnetmvc.min.js")"></script>
         <script src="@Url.Content("~/Scripts/kendo/2014.1.318/cultures/kendo.culture.vi-VN.min.js")"></script>
         <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+        <script src="@Url.Content("~/Scripts/menuhover.js")"></script>
 @*        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">*@
         <link href="~/Content/style.css" rel="stylesheet">
         <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
@@ -56,18 +57,18 @@
             <div class="row">
                 <div id="sidebar-left" class="col-xs-2 col-sm-2">
 @*                    thêm menu *@
-                    <ul class="nav main-menu">
-                        <li>@Html.ActionLink("Tài khoản", "Index", "Account")</li>
-                        <li>@Html.ActionLink("Giảng viên", "Index", "GiangVien",null,new{@class = "active"})</li>
-                        <li>@Html.ActionLink("Lịch công tác", "Index", "LichCongTac")</li>
-                        <li>@Html.ActionLink("Lớp", "Index", "Lop")</li>
-                        <li>@Html.ActionLink("Môn học", "Index", "MonHoc")</li>
-                        <li>@Html.ActionLink("Phòng thực hành", "Index", "PhongThucHanh")</li>
-                        <li>@Html.ActionLink("Thời khóa biểu GV", "Index", "TkbGiangVien")</li>
-                        <li>@Html.ActionLink("Lịch thực hành", "Index", "LichThucHanh")</li>
-                        <li>@Html.ActionLink("Tuần học ", "Index", "TuanHoc")</li>
-                        <li>@Html.ActionLink("Phân công giảng dạy", "Index", "PhanCongGiangDay")</li>
-                        <li>@Html.ActionLink("Lịch bận giáo viên", "Index", "LichBan")</li>
+                    <ul class="nav main-menu" id="@HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString()">
+                        <li>@Html.ActionLink("Tài khoản", "Index", "Account", null, new { @id = "Account"})</li>
+                        <li>@Html.ActionLink("Giảng viên", "Index", "GiangVien", null, new { @id = "GiangVien" })</li>
+                        <li>@Html.ActionLink("Lịch công tác", "Index", "LichCongTac", null, new { @id = "LichCongTac" })</li>
+                        <li>@Html.ActionLink("Lớp", "Index", "Lop", null, new { @id = "Lop" })</li>
+                        <li>@Html.ActionLink("Môn học", "Index", "MonHoc", null, new { @id = "MonHoc" })</li>
+                        <li>@Html.ActionLink("Phòng thực hành", "Index", "PhongThucHanh", null, new { @id = "PhongThucHanh" })</li>
+                        <li>@Html.ActionLink("Thời khóa biểu GV", "Index", "TkbGiangVien", null, new { @id = "TkbGiangVien" })</li>
+                        <li>@Html.ActionLink("Lịch thực hành", "Index", "LichThucHanh", null, new { @id = "LichThucHanh" })</li>
+                        <li>@Html.ActionLink("Tuần học ", "Index", "TuanHoc", null, new { @id = "TuanHoc" })</li>
+                        <li>@Html.ActionLink("Phân công giảng dạy", "Index", "PhanCongGiangDay", null, new { @id = "PhanCongGiangDay" })</li>
+                        <li>@Html.ActionLink("Lịch bận giáo viên", "Index", "LichBan", null, new { @id = "LichBan" })</li>
                     </ul>
                 </div>
                 <!--Start Content-->

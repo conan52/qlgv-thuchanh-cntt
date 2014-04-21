@@ -11,6 +11,15 @@
         </div>
     </a>
     <ul class="dropdown-menu">
+        @if (User.IsInRole("AdminTeacher"))
+        {
+            <li>
+            <a href="@Url.Action("CauHinhTrangWeb", "Account")">
+                <i class="fa"></i>
+                <span class="hidden-sm">Cấu hình</span>
+            </a>
+            </li>
+        }
         <li>
             <a href="@Url.Action("DoiMatKhau", "Account")">
                 <i class="fa"></i>
