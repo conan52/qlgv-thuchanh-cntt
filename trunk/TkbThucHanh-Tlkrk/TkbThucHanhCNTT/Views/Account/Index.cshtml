@@ -13,7 +13,13 @@
               columns.ForeignKey(c => c.QuyenHan, (IEnumerable)ViewData["Roles"], "Name", "Description");
             
               
-              columns.Command(command => command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa")).Width(172);
+//              columns.Command(command => command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa")).Width(172);}
+              columns.Command(command =>
+              {
+                  command.Custom("resetmk").Text("Reset mật khẩu").Click("resetMatKhau").HtmlAttributes(new { @class = "k-icon k-edit" ,@id="resetmk"});
+
+                  command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
+              });
           })
           .Editable(e => e.Mode(GridEditMode.PopUp))
           .Sortable()
@@ -48,4 +54,29 @@
             alert(message);
         }
     }
+
+    $("#resetmk").bind("click", function() {
+        var wnd = $("#window").data("kendoWindow");
+        wnd.refresh({
+                        url: "@this.Url.Action("ResetMatKhau", "Account")",
+                        data: { UserId: 0 }
+                    });
+        wnd.center().open();
+    });
+
+    function resetMatKhau (e) {
+        showLoadingDialog();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        $.post("@this.Url.Action("ResetMatKhau", "Account")", { userid: dataItem.UserId})
+            .done(function(data) {
+                hideLoadingDialog();
+                if (data.Result == "OK") {
+                    ShowNotification(data.Message, "info");
+                    refreshData();
+                } else {
+                    ShowNotification(data.Message, "error");
+                }
+            });
+    };
+
 </script>

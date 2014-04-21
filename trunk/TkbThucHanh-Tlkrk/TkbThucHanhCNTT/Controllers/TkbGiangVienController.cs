@@ -14,6 +14,7 @@ using TkbThucHanhCNTT.Models.Viewer;
 
 namespace TkbThucHanhCNTT.Controllers
 {
+//    [Authorize(Roles = "AdminTeacher")]
     public class TkbGiangVienController : Controller
     {
         //

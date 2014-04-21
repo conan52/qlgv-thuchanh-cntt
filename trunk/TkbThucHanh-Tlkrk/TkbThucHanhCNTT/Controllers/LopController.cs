@@ -12,6 +12,7 @@ using TkbThucHanhCNTT.Models.Viewer;
 
 namespace TkbThucHanhCNTT.Controllers
 {
+//    [Authorize(Roles = "AdminTeacher")]
     public class LopController : Controller
     {
         //

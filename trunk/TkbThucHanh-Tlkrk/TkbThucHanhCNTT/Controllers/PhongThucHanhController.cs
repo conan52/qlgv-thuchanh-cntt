@@ -7,6 +7,7 @@ using TkbThucHanhCNTT.Models.Provider;
 
 namespace TkbThucHanhCNTT.Controllers
 {
+//    [Authorize(Roles = "AdminTeacher")]
     public class PhongThucHanhController : Controller
     {
         //
