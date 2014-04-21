@@ -69,6 +69,23 @@ h1, .h1, h2, .h2, h3, .h3 { margin: 0; }
     line-height: 1;
 }
 
+/*active hien thi cua thang nav*/
+#Index #Index,
+#Account #Account,
+#GiangVien #GiangVien,
+#LichCongTac #LichCongTac,
+#Lop #Lop,
+#MonHoc #MonHoc,
+#PhongThucHanh #PhongThucHanh,
+#TkbGiangVien #TkbGiangVien,
+#LichThucHanh #LichThucHanh,
+#TuanHoc #TuanHoc,
+#PhanCongGiangDay #PhanCongGiangDay
+#LichBan #LichBan {
+    background: rgba(0, 0, 0, 0.1);
+    color: #f0f0f0;
+}
+
 .banner 
 {
     background: url(../Images/cntt.png) no-repeat;

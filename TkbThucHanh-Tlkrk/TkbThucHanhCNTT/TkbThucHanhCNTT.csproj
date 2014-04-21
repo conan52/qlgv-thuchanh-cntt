@@ -225,6 +225,7 @@
     <Compile Include="Models\TkbThucHanhContext.cs" />
     <Compile Include="Models\TuanHoc.cs" />
     <Compile Include="Models\Ultils\StaticUltils.cs" />
+    <Compile Include="Models\Ultils\StaticValue.cs" />
     <Compile Include="Models\Viewer\ChamCongGrouped.cs" />
     <Compile Include="Models\Viewer\ChamCongViewModel.cs" />
     <Compile Include="Models\Viewer\GiangVienViewModel.cs" />
@@ -239,7 +240,6 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Copy of style.css" />
     <Content Include="Content\kendo.compatibility.css" />
     <Content Include="Content\kendo\2014.1.318\Black\editor.png" />
     <Content Include="Content\kendo\2014.1.318\Black\imagebrowser.png" />
@@ -525,6 +525,7 @@
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\logo.png" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\menuhover.js" />
     <Content Include="Scripts\devoops.js" />
     <Content Include="Scripts\itdlu\lichthcascade.js" />
     <Content Include="Scripts\jquery-2.1.0-vsdoc.js" />
@@ -1198,6 +1199,7 @@
     <Content Include="Views\LichBan\ShowEditWindow.cshtml" />
     <Content Include="Views\RegisterAdmin\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_GridForeignKey.cshtml" />
+    <Content Include="Views\Account\CauHinhTrangWeb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">

@@ -1,5 +1,6 @@
 ﻿@using System.Collections
 @using TkbThucHanhCNTT.Models
+@using TkbThucHanhCNTT.Models.Ultils
 @using TkbThucHanhCNTT.Models.Viewer
 @{
     ViewBag.Title = "Phòng thực hành";
@@ -31,7 +32,7 @@
           .Selectable()
           .DataSource(dataSource => dataSource
               .Ajax()
-              .PageSize(20)
+                      .PageSize(StaticValue.PageNumber)
               .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "PhongThucHanh"))
               .Create(update => update.Action("AjaxCreate", "PhongThucHanh"))

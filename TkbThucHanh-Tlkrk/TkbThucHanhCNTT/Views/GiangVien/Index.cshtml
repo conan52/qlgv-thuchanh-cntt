@@ -1,4 +1,5 @@
-﻿@using TkbThucHanhCNTT.Models.Viewer
+﻿@using TkbThucHanhCNTT.Models.Ultils
+@using TkbThucHanhCNTT.Models.Viewer
 @{
     ViewBag.Title = "Giảng viên";
 }
@@ -9,10 +10,9 @@
           {
               columns.Bound(c => c.MaGv).Width(15);
               columns.Bound(c => c.HoVaTen);
-            //  columns.Bound(c => c.ChuyenNganh).Width(30);
-              columns.ForeignKey(p => p.ChuyenNganh, (System.Collections.IEnumerable)ViewData["ChuyenNganhs"], "Value", "Description");
-              columns.Bound(c => c.TaiKhoan).Width(50);
-              columns.Bound(c => c.CoThePhanCong).ClientTemplate("<input type='checkbox' id='CoThePhanCong' name='CoThePhanCong' disabled #if(CoThePhanCong){#checked#}# value='#=CoThePhanCong#' />");
+              columns.ForeignKey(p => p.ChuyenNganh, (System.Collections.IEnumerable)ViewData["ChuyenNganhs"], "Value", "Description").Width(12);
+              columns.Bound(c => c.TaiKhoan).Width(20);
+              columns.Bound(c => c.CoThePhanCong).ClientTemplate("<input type='checkbox' id='CoThePhanCong' name='CoThePhanCong' disabled #if(CoThePhanCong){#checked#}# value='#=CoThePhanCong#' />").Width(7);
               columns.Command(command =>
               {
                   command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
@@ -35,7 +35,7 @@
             //  .Scrollable()
           .DataSource(dataSource => dataSource
               .Ajax()
-              .PageSize(20)
+              .PageSize(StaticValue.PageNumber)
               .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "GiangVien"))
               .Create(update => update.Action("AjaxCreate", "GiangVien"))

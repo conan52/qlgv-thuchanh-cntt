@@ -1,5 +1,6 @@
 ﻿@using System.Collections
 @using TkbThucHanhCNTT.Models
+@using TkbThucHanhCNTT.Models.Ultils
 @{
     ViewBag.Title = "Môn học";
 }
@@ -11,7 +12,7 @@
               columns.Bound(c => c.MaMonHoc).Width(12);
               columns.Bound(c => c.TenMonHoc);
               columns.Bound(c => c.SoTinChi).Width(12);
-              columns.ForeignKey(c => c.TrinhDo, (IEnumerable) ViewData["TrinhDos"], "Value", "Description").Width(160);
+              columns.ForeignKey(c => c.TrinhDo, (IEnumerable) ViewData["TrinhDos"], "Value", "Description").Width(125);
               columns.ForeignKey(c => c.ChuyenNganh, (IEnumerable)ViewData["ChuyenNganhs"], "Value", "Description").Width(12);
               
               columns.Bound(c => c.BatBuoc).Width(9).ClientTemplate(@"<input type='checkbox' id='bacbuoc' name='BacBuoc' disabled #if(BatBuoc){#checked#}# value='#=BatBuoc#' />");
@@ -37,7 +38,7 @@
           //  .Scrollable()
           .DataSource(dataSource => dataSource
               .Ajax()
-              .PageSize(20)
+                      .PageSize(StaticValue.PageNumber)
               .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "MonHoc"))
               .Create(update => update.Action("AjaxCreate", "MonHoc"))

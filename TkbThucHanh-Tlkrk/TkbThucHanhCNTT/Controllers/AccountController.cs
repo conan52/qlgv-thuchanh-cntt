@@ -238,5 +238,39 @@ namespace TkbThucHanhCNTT.Controllers
                 return Json(new { Result = "Fail", ex.Message });
             }
         }
+
+        [HttpPost]
+        public JsonResult LuuThongSoTrang(string page)
+        {
+            try
+            {
+                StaticValue.PageNumber = int.Parse(page);
+                return Json(new { Result = "OK", Message = "Đổi số trang hiển thị thành công" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "Fail", ex.Message });
+            }
+        }
+
+        public ViewResult CauHinhTrangWeb()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult ResetCauHinh()
+        {
+            try
+            {
+                DataProvider<TuanHoc>.RemoveAll();
+                DataProvider<LichCongTac>.RemoveAll();
+                return Json(new { Result = "OK", Message = "Đã làm mới toàn bộ dữ liệu" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "Fail", ex.Message });
+            }
+        }
     }
 }

@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Cấu hình trang web";
+    ViewBag.header = "Cấu hình trang web";
+}
+<legend>@ViewBag.header</legend>
+<div class="form-group">
+    @Html.Label("Số trang hiển thị", new { @class = "col-sm-2 control-label" })
+    @Html.Kendo().IntegerTextBox().Name("SotrangHIenThi").Min(10).Max(40).Value(10).HtmlAttributes(new { @id = "sotranghienthi" })
+    @Html.Kendo().Button().Name("LuuSoTrangHienThai").Content("Lưu").Events(e => e.Click("clickluusotrang"))
+</div>
+
+<div class="form-group">
+    @Html.Kendo().Button().Name("lamoidulieu").Content("Làm mới toàn bộ dữ liệu").Events(e => e.Click("lammoidulieu"))
+</div>
+
+<script type="text/javascript">
+    function clickluusotrang() {
+        var sotrang = $("#sotranghienthi").val();
+        $.post('@Url.Action("LuuThongSoTrang", "Account")', { page: sotrang })
+            .done(function(data) {
+                hideLoadingDialog();
+                if (data.Result == "OK") {
+                    ShowNotification(data.Message, "info");
+                    refreshData();
+                } else {
+                    ShowNotification(data.Message, "error");
+                }
+            });
+    }
+
+    function lammoidulieu() {
+        if (confirm("Do you really want to delete selected job/s?")) {
+            $.post('@Url.Action("ResetCauHinh", "Account")')
+            .done(function (data) {
+                hideLoadingDialog();
+                if (data.Result == "OK") {
+                    ShowNotification(data.Message, "info");
+                    refreshData();
+                } else {
+                    ShowNotification(data.Message, "error");
+                }
+            });
+            }
+        else {
+            return false;
+        }
+    }
+</script>
+        
