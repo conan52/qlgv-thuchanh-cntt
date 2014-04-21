@@ -70,13 +70,11 @@
                                               toolBar.Template(@<text>
                                                   @item.CreateButton("Thêm")
                                                   @item.SaveButton("Lưu", "Hủy")
-                                                  <a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-scheduler'>
-                                                  </span>Đồng bộ từ lịch giảng viên</a> <a id='btnCopy' class='k-button k-button-increase'
-                                                  href='#'><span class='k-icon k-add'></span>Sao chép tuần</a> <a id='btnAuto' class='k-button k-button-increase'
-                                                  href='#'><span class='k-icon k-add'></span>Tự phân công</a>
-                                                  <div class="toolbar">
-                                                  <label class="category-label" for="category">
-                                                  Tuần:</label>
+                                                  <a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-scheduler'>  </span>Đồng bộ từ lịch giảng viên</a> 
+                                                  <a id='btnCopy' class='k-button k-button-increase' href='#'><span class='k-icon k-add'></span>Sao chép tuần</a> 
+                                                  <a id='btnAuto' class='k-button k-button-increase' href='#'><span class='k-icon k-add'></span>Tự phân công</a> 
+                                                   <a id='btnPrint' class='k-button k-button-increase' href='#'><span class='k-icon k-i-calendar'></span>Xuất excel</a>
+                                                  <div class="toolbar"><label class="category-label" for="category">Tuần:</label>
                                                   @(this.Html.Kendo().DropDownList()
                                                         .Name("DanhSachTuan")
                                                         .OptionLabel("Tất cả")
@@ -135,6 +133,38 @@
     <a class="k-button k-button-icontext " onclick=" return SaoChepLichThucHanh(); "><span
     class="k-icon k-update"></span>Sao chép</a> <a class="k-button k-button-icontext"
     onclick=" $('#SaoChepTuan').data('kendoWindow').close(); "><span class="k-icon k-cancel">
+    </span>Hủy bỏ</a>
+    </td>
+    </tr>
+    </table>
+    </text>)
+)
+@(this.Html.Kendo().Window().Name("XuatExcel")
+      .Title("Xuất Excel")
+      .Visible(false)
+      .Modal(true)
+      .Draggable(true)
+      .Width(300)
+      .Content(@<text>
+    <table class="table table-hover">
+    <tr>
+    <td>
+    Chọn tuần cần xuất
+    </td>
+    <td>
+    @(this.Html.Kendo().DropDownList()
+          .Name("tuanXuat")
+          .BindTo((IEnumerable)this.ViewData["TuanCoTkb"]));
+    </td>
+    </tr>
+    <tr>
+    <td>
+    &nbsp;
+    </td>
+    <td style="text-align: center">
+    <a class="k-button k-button-icontext " onclick=" return XuatExcel(); "><span
+    class="k-icon k-update"></span>Bắt đầu</a> <a class="k-button k-button-icontext"
+    onclick=" $('#XuatExcel').data('kendoWindow').close(); "><span class="k-icon k-cancel">
     </span>Hủy bỏ</a>
     </td>
     </tr>
@@ -246,6 +276,13 @@
             });
     };
     
+    function XuatExcel() {
+       var tuanXuat = $("#tuanXuat").data('kendoDropDownList').value();
+
+       window.open("@this.Url.Action("XuatExcel", "LichThucHanh")"+"/?tuanXuat="+tuanXuat, '_blank');
+       $('#XuatExcel').data('kendoWindow').close();
+    };
+    
     function TuPhanCong() {
         var chonTuan = $("#chonTuan").data('kendoDropDownList').value();
         showLoadingDialog();
@@ -320,6 +357,12 @@
     $("#btnCopy").bind("click", function() {
         $("#SaoChepTuan").data("kendoWindow").center().open();
     });
+
+    $("#btnPrint").bind("click", function() {
+        $("#XuatExcel").data("kendoWindow").center().open();
+    });
+
+
     $("#btnAuto").bind("click", function() {
         $("#TuPhanCong").data("kendoWindow").center().open();
     });

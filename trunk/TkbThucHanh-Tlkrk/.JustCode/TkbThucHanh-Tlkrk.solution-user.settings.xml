@@ -9,6 +9,19 @@
           <TextualIdentifier>946548251353929702</TextualIdentifier>
         </IgnoredElement>
       </FilePath>
+      <FilePath>
+        <FileRelativePath>TkbThucHanhCNTT/Controllers/LichThucHanhController.cs</FileRelativePath>
+        <ProjectRelativePath>TkbThucHanhCNTT/TkbThucHanhCNTT.csproj</ProjectRelativePath>
+        <IgnoredElement>
+          <TextualIdentifier>11353990921112765544</TextualIdentifier>
+        </IgnoredElement>
+        <IgnoredElement>
+          <TextualIdentifier>16743388666177830143</TextualIdentifier>
+        </IgnoredElement>
+        <IgnoredElement>
+          <TextualIdentifier>5234683703405080018</TextualIdentifier>
+        </IgnoredElement>
+      </FilePath>
     </IgnoredErrorsAndWarnings>
   </IgnoredErrorsAndWarningsSettings>
 </JustCodeSettings>
