@@ -105,25 +105,29 @@ namespace TkbThucHanhCNTT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            var k = DataProvider<GiangVien>.GetAll(x=>x.UserProfile)
-                .FirstOrDefault(t => StaticUltils.GetUsername(t.HoVaTen) == model.UserName);
-            if (k!=null)
+            if (ModelState.IsValid)
             {
-                if (k.CoThePhanCong && k.UserProfile.Role != "Blocked")
+                var k = DataProvider<GiangVien>.GetAll(x => x.UserProfile)
+                    .FirstOrDefault(t => StaticUltils.GetUsername(t.HoVaTen) == model.UserName);
+                if (k != null)
                 {
-                    if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, model.RememberMe))
+                    if (k.CoThePhanCong && k.UserProfile.Role != "Blocked")
                     {
-                        return RedirectToLocal(returnUrl);
+                        if (WebSecurity.Login(model.UserName, model.Password, model.RememberMe))
+                        {
+                            StaticValue.MaGv = DataProvider<UserProfile>.GetSingle(x => x.UserName == model.UserName).MaGv;
+                            return RedirectToLocal(returnUrl);
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Tài khoản này đang bị khóa");
+                        return View(model);
                     }
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Tài khoản này đang bị khóa");
-                    return View(model);
-                }
+
+                ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không chính xác");
             }
-            
-            ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không chính xác");
             return View(model);
         }
 

@@ -19,5 +19,7 @@ namespace TkbThucHanhCNTT.Models.Ultils
             }
             set { _pageNumber = value; }
         }
+
+        public static string MaGv { get; set; }
     }
 }
