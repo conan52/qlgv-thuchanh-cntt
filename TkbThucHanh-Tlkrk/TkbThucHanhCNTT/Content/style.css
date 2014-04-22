@@ -30,10 +30,9 @@ body
 
 .bannercolor
 {
-    background: -webkit-linear-gradient(left, #8ab9de, #a6c9e6); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, #8ab9de, #a6c9e6); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right, #8ab9de, #a6c9e6); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right, #8ab9de, #a6c9e6); /* Standard syntax (must be last) */
+    background: url(../Images/banner.png) no-repeat;
+    background-size: 100% 100%;
+    
 }
 
 .line-height
@@ -65,7 +64,7 @@ h1, .h1, h2, .h2, h3, .h3
 {
     background: #6AA6D6 url(../Images/logo.png) no-repeat;
     background-position: 0% 0%;
-    background-size: 72px 72px;
+    background-size: 100% 100%;
     height: 72px;
     position: relative;
 }
@@ -103,10 +102,9 @@ h1, .h1, h2, .h2, h3, .h3
     color: #f0f0f0;
 }
 
-.banner 
+.profile span
 {
-    background: url(../Images/cntt.png) no-repeat;
-    background-size: 100% 100%;
+    color: #ffffff !important;
 }
 
 .fa-bars:before
