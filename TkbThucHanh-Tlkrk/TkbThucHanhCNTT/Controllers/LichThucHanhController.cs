@@ -238,7 +238,12 @@ namespace TkbThucHanhCNTT.Controllers
                             Gv2CoMat = true,
                             Gv3CoMat = true
                         };
+                        if (tkb.TenMonHoc.Contains("2"))
+                        {
+
+                        }
                         var pc = phancong.SingleOrDefault(p => p.MonHoc.TenThucHanh.StartsWith(tkb.TenMonHoc, StringComparison.OrdinalIgnoreCase) && p.TenLop == tkb.LopHoc);
+                     
                         if (pc != null)
                         {
                             lichTh.MonHocId = pc.MonHocId;
