@@ -89,6 +89,7 @@ namespace TkbThucHanhCNTT.Models
                 if (Gvhd1 != null && !Gv1CoMat)
                     dsGvVang.Add(GiangVien1.HoVaTen.LayTen());
                 if (Gvhd2 != null && !Gv2CoMat)
+                    ///
                     dsGvVang.Add(GiangVien2.HoVaTen.LayTen());
                 if (Gvhd3 != null && !Gv3CoMat)
                     dsGvVang.Add(GiangVien3.HoVaTen.LayTen());

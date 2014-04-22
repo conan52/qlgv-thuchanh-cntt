@@ -43,25 +43,44 @@ namespace TkbThucHanhCNTT.Controllers
 
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, LichCongTac lct)
+        public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, int LichCongTacId, string MaGv, string LyDo, string ThoiGianBd, string ThoiGianKt)
         {
-            if (lct != null && ModelState.IsValid)
+            var lct = new LichCongTac()
             {
+                LyDo=LyDo,
+                MaGv=MaGv    ,
+                ThoiGianBd=getDateTime(ThoiGianBd),
+                ThoiGianKt = getDateTime(ThoiGianKt)
+            };
+
                 DataProvider<LichCongTac>.Add(lct);
-            }
 
             return Json(new[] { lct }.ToDataSourceResult(request, ModelState));
+         
+        }
+
+        DateTime getDateTime(string d)
+        {
+            string s = d.Substring(0, 10);
+            return DateTime.ParseExact(s, "dd/MM/yyyy", null);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, LichCongTac lct)
+        public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, int LichCongTacId, string MaGv, string LyDo, string ThoiGianBd, string ThoiGianKt)
         {
-            // Test if gv object and modelstate is valid.
-            if (lct != null && ModelState.IsValid)
+
+            var lct = new LichCongTac()
             {
-                DataProvider<LichCongTac>.Update(lct);
-            }
-            return Json(ModelState.ToDataSourceResult());
+                LichCongTacId=LichCongTacId,
+                LyDo = LyDo,
+                MaGv = MaGv,
+                ThoiGianBd = getDateTime(ThoiGianBd),
+                ThoiGianKt = getDateTime(ThoiGianKt)
+            };
+
+            DataProvider<LichCongTac>.Update(lct);
+
+            return Json(new[] { lct }.ToDataSourceResult(request, ModelState));
         }
 
     }
