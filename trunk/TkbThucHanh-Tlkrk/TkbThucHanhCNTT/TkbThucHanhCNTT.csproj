@@ -455,6 +455,8 @@
     <Content Include="Content\kendo\2014.1.318\Uniform\slider-v.gif" />
     <Content Include="Content\kendo\2014.1.318\Uniform\sprite.png" />
     <Content Include="Content\kendo\2014.1.318\Uniform\sprite_2x.png" />
+    <Content Include="Images\banner.png" />
+    <Content Include="Images\logo.png" />
     <Content Include="Images\cntt.png" />
     <Content Include="Images\sprite.png" />
     <Content Include="Content\style.css" />
@@ -523,7 +525,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\ajax-loader.gif" />
-    <Content Include="Images\logo.png" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\menuhover.js" />
     <Content Include="Scripts\devoops.js" />
