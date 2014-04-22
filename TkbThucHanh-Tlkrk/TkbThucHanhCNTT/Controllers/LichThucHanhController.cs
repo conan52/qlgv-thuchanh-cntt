@@ -60,7 +60,7 @@ namespace TkbThucHanhCNTT.Controllers
             return this.View();
         }
 
-            [Authorize(Roles = "AdminTeacher")]
+            [Authorize(Roles = "AdminTeacher, Teacher")]
         public ActionResult LayDsTuan([DataSourceRequest]
                                       DataSourceRequest request)
         {
@@ -71,6 +71,7 @@ namespace TkbThucHanhCNTT.Controllers
             return this.Json(dsTuan, JsonRequestBehavior.AllowGet);
         }
 
+         [Authorize(Roles = "AdminTeacher, Teacher")]
         public JsonResult AjaxReadData_Limit([DataSourceRequest]
                                        DataSourceRequest request)
         {
