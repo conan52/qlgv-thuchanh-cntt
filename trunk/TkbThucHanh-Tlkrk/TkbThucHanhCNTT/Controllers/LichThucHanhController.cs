@@ -15,11 +15,12 @@ using NPOI.HSSF.Util;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-    //    [Authorize]
+    [Authorize]
     public class LichThucHanhController : Controller
     {
         //
         // GET: /LichThucHanh/
+            [Authorize(Roles = "AdminTeacher")]
         public ActionResult Index()
         {
             this.ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
@@ -39,7 +40,7 @@ namespace TkbThucHanhCNTT.Controllers
             return this.View();
         }
 
-
+        [Authorize]
         public ActionResult LichThucHanhGV()
         {
             this.ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
@@ -59,6 +60,7 @@ namespace TkbThucHanhCNTT.Controllers
             return this.View();
         }
 
+            [Authorize(Roles = "AdminTeacher")]
         public ActionResult LayDsTuan([DataSourceRequest]
                                       DataSourceRequest request)
         {
@@ -107,7 +109,7 @@ namespace TkbThucHanhCNTT.Controllers
             }), JsonRequestBehavior.AllowGet);
         }
 
-
+            [Authorize(Roles = "AdminTeacher")]
         public JsonResult AjaxReadData([DataSourceRequest]
                                        DataSourceRequest request)
         {
@@ -143,7 +145,7 @@ namespace TkbThucHanhCNTT.Controllers
             }));
         }
 
-        //        [Authorize(Roles = "Teacher")]
+            [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxUpdate([DataSourceRequest]
                                        DataSourceRequest request, [Bind(Prefix = "models")]
@@ -169,6 +171,7 @@ namespace TkbThucHanhCNTT.Controllers
             return this.Json(results.ToDataSourceResult(request, ModelState));
         }
 
+            [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxCreate([DataSourceRequest]
                                        DataSourceRequest request, [Bind(Prefix = "models")]
@@ -195,6 +198,7 @@ namespace TkbThucHanhCNTT.Controllers
             return this.Json(results.ToDataSourceResult(request, ModelState));
         }
 
+            [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxDelete([DataSourceRequest]
                                        DataSourceRequest request, [Bind(Prefix = "models")]
@@ -205,6 +209,7 @@ namespace TkbThucHanhCNTT.Controllers
             return this.Json(results.ToDataSourceResult(request, ModelState));
         }
 
+            [Authorize(Roles = "AdminTeacher")]
         public JsonResult DongBoLichThucHanh()
         {
             try
@@ -282,6 +287,7 @@ namespace TkbThucHanhCNTT.Controllers
             }
         }
 
+            [Authorize(Roles = "AdminTeacher")]
         public JsonResult SaoChepLich(int tuTuan, int denTuan)
         {
             try
@@ -324,6 +330,7 @@ namespace TkbThucHanhCNTT.Controllers
             }
         }
 
+            [Authorize(Roles = "AdminTeacher")]
         public JsonResult TuPhanCong(int chonTuan)
         {
             try
@@ -367,6 +374,7 @@ namespace TkbThucHanhCNTT.Controllers
             }
         }
 
+            [Authorize(Roles = "AdminTeacher")]
         public ActionResult XuatExcel(int tuanXuat)
         {
 
@@ -476,6 +484,7 @@ namespace TkbThucHanhCNTT.Controllers
 
             return File(stream.ToArray(), "application/vnd.ms-excel", "LichThucHanhTuan" + tuanXuat);
         }
+
 
 
         void AddRow(ref int numRow, string context, ISheet sheet, int colSpan = 1, short size = 13)

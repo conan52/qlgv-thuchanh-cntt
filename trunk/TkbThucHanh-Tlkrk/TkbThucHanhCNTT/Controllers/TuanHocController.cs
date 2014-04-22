@@ -14,7 +14,7 @@ using TkbThucHanhCNTT.Models.Viewer;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-//    [Authorize(Roles = "AdminTeacher")]
+    [Authorize]
     public class TuanHocController : Controller
     {
         //
@@ -29,7 +29,7 @@ namespace TkbThucHanhCNTT.Controllers
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
             var result = DataProvider<TuanHoc>.GetAll()
-                .Select(t=>new TuanHocViewModel()
+                .Select(t => new TuanHocViewModel()
                 {
                     DaLayThongTin = t.DaLayThongTin,
                     SttTuan = t.SttTuan,
@@ -41,7 +41,7 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(result.ToDataSourceResult(request));
         }
 
-        
+        [Authorize(Roles = "AdminTeacher")]
         public JsonResult AjaxInitWeek(int week, string dateOfWeek)
         {
             try
@@ -72,14 +72,14 @@ namespace TkbThucHanhCNTT.Controllers
             }
         }
 
-        
+        [Authorize(Roles = "AdminTeacher")]
         public JsonResult AjaxSyncWeek()
         {
             try
             {
                 DluWebRequest request = new DluWebRequest();
                 var result = request.GetCurentTimeTable();
-                
+
 
                 var thls = new List<TuanHoc>();
                 var startDay = result.StartDate.AddDays((result.CurrentWeek - 1) * -7).Monday();
@@ -107,7 +107,7 @@ namespace TkbThucHanhCNTT.Controllers
             }
         }
 
-         
+        [Authorize(Roles = "AdminTeacher")]
         public JsonResult AjaxClearWeek()
         {
             try
@@ -121,7 +121,7 @@ namespace TkbThucHanhCNTT.Controllers
             }
         }
 
-       
+
 
     }
 }

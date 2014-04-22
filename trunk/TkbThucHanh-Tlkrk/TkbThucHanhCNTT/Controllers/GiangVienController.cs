@@ -15,7 +15,7 @@ using WebMatrix.WebData;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-//    [Authorize(Roles = "AdminTeacher")]
+    [Authorize]
     public class GiangVienController : Controller
     {
         public ActionResult Index()
@@ -25,13 +25,14 @@ namespace TkbThucHanhCNTT.Controllers
 
         }
 
+        [Authorize(Roles = "AdminTeacher")]
         public JsonResult GetGv()
         {
             var result = DataProvider<GiangVien>.GetAll();
             return this.Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
+        [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, string magv)
         {
@@ -42,6 +43,8 @@ namespace TkbThucHanhCNTT.Controllers
             }
             return Json(ModelState.ToDataSourceResult());
         }
+
+        [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, GiangVienViewModel gvmd)
         {
@@ -61,7 +64,6 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(ModelState.ToDataSourceResult());
         }
 
-
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
             var result = DataProvider<GiangVien>.GetAll(x => x.UserProfile);
@@ -75,7 +77,7 @@ namespace TkbThucHanhCNTT.Controllers
             }));
         }
 
-
+        [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
         [InitializeSimpleMembership]
         public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, GiangVienViewModel gv)
