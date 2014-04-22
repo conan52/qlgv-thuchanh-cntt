@@ -1202,6 +1202,8 @@
     <Content Include="Views\Shared\EditorTemplates\_GridForeignKey.cshtml" />
     <Content Include="Views\Account\CauHinhTrangWeb.cshtml" />
     <Content Include="Views\LichThucHanh\LichThucHanhGV.cshtml" />
+    <Content Include="Views\Shared\_LayoutLite.cshtml" />
+    <Content Include="Views\ChamCong\ChamCongTheoGv.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">
