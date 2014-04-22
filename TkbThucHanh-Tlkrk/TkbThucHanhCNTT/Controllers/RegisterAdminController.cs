@@ -26,7 +26,7 @@ namespace TkbThucHanhCNTT.Controllers
                     MaGv = " ",
                     Password = "123456",
                     Roles = "AdminTeacher",
-                    UserName = "Administrator"
+                    UserName = "Admin"
                 });
             }
             return RedirectToAction("Login", "Account");
