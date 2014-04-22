@@ -39,6 +39,26 @@ namespace TkbThucHanhCNTT.Controllers
             return this.View();
         }
 
+
+        public ActionResult LichThucHanhGV()
+        {
+            this.ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
+            this.ViewData["MonHocs"] = DataProvider<MonHoc>.GetAll().Select(t => new { t.TenMonHoc, t.MaMonHoc, t.TenThucHanh, t.MonHocId });
+            this.ViewData["Lops"] = DataProvider<Lop>.GetAll().Select(l => new { l.TenLop });
+            this.ViewData["Phongs"] = DataProvider<PhongThucHanh>.GetAll().Select(p => new { p.TenPhong });
+            this.ViewData["TuanCoTkb"] = DataProvider<TuanHoc>.GetList(t => t.LichThucHanhs.Any(), t => t.LichThucHanhs).Select(t => t.SttTuan);
+            this.ViewData["TuanChuaCoTkb"] = DataProvider<TuanHoc>.GetList(t => !t.LichThucHanhs.Any() && t.NgayKetThuc >= DateTime.Now, t => t.LichThucHanhs).Select(t => t.SttTuan);
+
+            var dsTuan = DataProvider<TuanHoc>.GetAll();
+            this.ViewData["Tuans"] = dsTuan.Select(t => new { t.SttTuan });
+            if (dsTuan.Any(t => t.NgayBatDau > DateTime.Now))
+                this.ViewData["TuanMoiNhat"] = dsTuan.First(t => t.NgayBatDau > DateTime.Now).SttTuan;
+            else
+                this.ViewData["TuanMoiNhat"] = 0;
+
+            return this.View();
+        }
+
         public ActionResult LayDsTuan([DataSourceRequest]
                                       DataSourceRequest request)
         {
@@ -48,6 +68,45 @@ namespace TkbThucHanhCNTT.Controllers
                                      .OrderByDescending(t => t);
             return this.Json(dsTuan, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult AjaxReadData_Limit([DataSourceRequest]
+                                       DataSourceRequest request)
+        {
+            var result = DataProvider<LichThucHanh>.GetAll(l => l.MonHoc, l => l.GiangVien1, l => l.GiangVien2, l => l.GiangVien3)
+                                                   .OrderByDescending(t => t.SttTuan)
+                                                   .ThenBy(t => t.NgayTrongTuan)
+                                                   .ThenBy(t => t.TietBatDau)
+                                                   .ThenBy(t => t.TietKetThuc);
+            string maGv = "CT46";
+            var r = result.Where(l =>  l.Gvhd1!=null&& l.Gvhd1.Equals(maGv, StringComparison.CurrentCultureIgnoreCase) ||
+                                     l.Gvhd2 != null && l.Gvhd2.Equals(maGv, StringComparison.CurrentCultureIgnoreCase) ||
+                                     l.Gvhd3 != null && l.Gvhd3.Equals(maGv, StringComparison.CurrentCultureIgnoreCase));
+            return this.Json(r.ToDataSourceResult(request, l => new 
+            {
+                l.MaLichTh,
+                l.TenLop,
+                l.TenPhong,
+                l.MonHocId,
+                l.NgayTrongTuan,
+                l.SttTuan,
+                l.TietBatDau,
+                l.TietKetThuc,
+                l.Gvhd1,
+                l.Gvhd2,
+                l.Gvhd3,
+                l.Gv1CoMat,
+                l.Gv2CoMat,
+                l.Gv3CoMat,
+                l.Vang,
+                l.GhiChu,
+                l.MonHoc.TenThucHanh,
+                TenGv1 = l.Gvhd1 != null ? l.GiangVien1.HoVaTen : null,
+                TenGv2 = l.Gvhd2 != null ? l.GiangVien2.HoVaTen : null,
+                TenGv3 = l.Gvhd3 != null ? l.GiangVien3.HoVaTen : null
+
+            }), JsonRequestBehavior.AllowGet);
+        }
+
 
         public JsonResult AjaxReadData([DataSourceRequest]
                                        DataSourceRequest request)
@@ -80,7 +139,7 @@ namespace TkbThucHanhCNTT.Controllers
                 TenGv1 = l.Gvhd1 != null ? l.GiangVien1.HoVaTen : null,
                 TenGv2 = l.Gvhd2 != null ? l.GiangVien2.HoVaTen : null,
                 TenGv3 = l.Gvhd3 != null ? l.GiangVien3.HoVaTen : null
-            ,
+            
             }));
         }
 
