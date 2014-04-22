@@ -84,18 +84,20 @@ h1, .h1, h2, .h2, h3, .h3
 }
 
 /*active hien thi cua thang nav*/
-#Index #Index,
-#Account #Account,
-#GiangVien #GiangVien,
-#LichCongTac #LichCongTac,
-#Lop #Lop,
-#MonHoc #MonHoc,
+.LichThucHanhGV #LichThucHanh #LichThucHanhGV,
+.Index #LichThucHanh #Index,
 #PhongThucHanh #PhongThucHanh,
 #TkbGiangVien #TkbGiangVien,
-#LichThucHanh #LichThucHanh,
+#LichBan #LichBan,
+#LichCongTac #LichCongTac,
 #TuanHoc #TuanHoc,
-#PhanCongGiangDay #PhanCongGiangDay
-#LichBan #LichBan
+#Lop #Lop,
+#MonHoc #MonHoc,
+#PhanCongGiangDay #PhanCongGiangDay,
+#ChamCong #ChamCong,
+#Index #Index,
+#Account #Account,
+#GiangVien #GiangVien
 {
     background: rgba(0, 0, 0, 0.1);
     color: #f0f0f0;
