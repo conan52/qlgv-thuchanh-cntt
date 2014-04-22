@@ -16,6 +16,10 @@ namespace TkbThucHanhCNTT.Controllers
         //
         // GET: /ChamCong/
 
+        public ActionResult ChamCongTheoGv()
+        {
+            return View();
+        }
         public ActionResult Index()
         {
             return View();
