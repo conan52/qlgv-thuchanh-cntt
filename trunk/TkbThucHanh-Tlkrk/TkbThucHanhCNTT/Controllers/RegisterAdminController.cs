@@ -18,7 +18,7 @@ namespace TkbThucHanhCNTT.Controllers
         // GET: /RegisterAdmin/
         public ActionResult Index()
         {
-            if(DataProvider<UserProfile>.GetAll().Count==0)
+            if(DataProvider<UserProfile>.GetAll().Count(x => x.Role=="AdminTeacher")==0)
                 return View();
             return RedirectToAction("Login", "Account");
         }

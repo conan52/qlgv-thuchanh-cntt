@@ -11,7 +11,7 @@ using TkbThucHanhCNTT.Models.Provider;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-    [Authorize]
+     [Authorize(Roles = "AdminTeacher")]
     public class MonHocController : Controller
     {
         //
@@ -24,7 +24,7 @@ namespace TkbThucHanhCNTT.Controllers
             return View();
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+       
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, MonHoc mamh)
         {
@@ -46,7 +46,7 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(result.ToDataSourceResult(request));
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+       
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, MonHoc mh)
         {
@@ -66,7 +66,7 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(new[] { mh }.ToDataSourceResult(request, ModelState));
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+       
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, MonHoc mh)
         {
