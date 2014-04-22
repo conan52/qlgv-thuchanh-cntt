@@ -14,7 +14,7 @@ using TkbThucHanhCNTT.Models.Viewer;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-    [Authorize]
+     [Authorize(Roles = "AdminTeacher")]
     public class TuanHocController : Controller
     {
         //
@@ -41,7 +41,7 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(result.ToDataSourceResult(request));
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+       
         public JsonResult AjaxInitWeek(int week, string dateOfWeek)
         {
             try
@@ -72,7 +72,7 @@ namespace TkbThucHanhCNTT.Controllers
             }
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+       
         public JsonResult AjaxSyncWeek()
         {
             try
@@ -107,7 +107,7 @@ namespace TkbThucHanhCNTT.Controllers
             }
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+       
         public JsonResult AjaxClearWeek()
         {
             try

@@ -12,7 +12,7 @@ using TkbThucHanhCNTT.Models.Viewer;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-    [Authorize]
+     [Authorize(Roles = "AdminTeacher")]
     public class LopController : Controller
     {
         //
@@ -24,7 +24,7 @@ namespace TkbThucHanhCNTT.Controllers
 
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+       
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, Lop maLop)
         {
@@ -44,7 +44,7 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(result.ToDataSourceResult(request));
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+       
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, Lop lop)
         {
@@ -64,7 +64,7 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(new[] { lop }.ToDataSourceResult(request, ModelState));
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+       
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, Lop lop)
         {
