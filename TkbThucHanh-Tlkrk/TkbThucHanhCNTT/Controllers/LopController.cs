@@ -12,17 +12,11 @@ using TkbThucHanhCNTT.Models.Viewer;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-//    [Authorize(Roles = "AdminTeacher")]
+    [Authorize]
     public class LopController : Controller
     {
         //
         // GET: /Lop/
-
-        //        public ActionResult Index()
-        //        {
-        //            return View();
-        //        }
-
         public ActionResult Index()
         {
             ViewData["TrinhDos"] = EnumUltils.GetDescriptions_TrinhDo();
@@ -30,6 +24,7 @@ namespace TkbThucHanhCNTT.Controllers
 
         }
 
+        [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, Lop maLop)
         {
@@ -44,13 +39,12 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            //            ViewData["TrinhDos"] = EnumUltils.GetDescriptions_TrinhDo();
             var result =
                 DataProvider<Lop>.GetAll(l => l.PhanCongGiang).Select(x => new {x.NamNhapHoc, x.TenLop, x.TrinhDo});
             return Json(result.ToDataSourceResult(request));
         }
 
-
+        [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, Lop lop)
         {
@@ -70,6 +64,7 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(new[] { lop }.ToDataSourceResult(request, ModelState));
         }
 
+        [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, Lop lop)
         {

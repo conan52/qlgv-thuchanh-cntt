@@ -10,7 +10,7 @@ using TkbThucHanhCNTT.Models.Viewer;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-//    [Authorize(Roles = "AdminTeacher")]
+    [Authorize(Roles = "AdminTeacher")]
     public class PhanCongGiangDayController : Controller
     {
         //
