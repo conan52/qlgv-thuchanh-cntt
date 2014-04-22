@@ -109,9 +109,9 @@ namespace TkbThucHanhCNTT.Controllers
             {
                 var k = DataProvider<GiangVien>.GetAll(x => x.UserProfile)
                     .FirstOrDefault(t => StaticUltils.GetUsername(t.HoVaTen) == model.UserName);
-                if (k != null || model.UserName == "Administrator")
+                if (k != null || model.UserName == "Admin")
                 {
-                    if ((k != null && (k.CoThePhanCong && k.UserProfile.Role != "Blocked"))|| model.UserName == "Administrator")
+                    if ((k != null && (k.CoThePhanCong && k.UserProfile.Role != "Blocked"))|| model.UserName == "Admin")
                     {
                         if (WebSecurity.Login(model.UserName, model.Password, model.RememberMe))
                         {
@@ -135,7 +135,6 @@ namespace TkbThucHanhCNTT.Controllers
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
-
             return RedirectToAction("Index", "Home");
         }
 
