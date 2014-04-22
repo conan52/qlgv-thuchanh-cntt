@@ -98,12 +98,17 @@
             .done(function(data) {
                 hideLoadingDialog();
                 if (data.Result == "OK") {
-                    ShowNotification(data.Message, "info");
                     refreshData();
+                    ShowNotification(data.Message, "info");
 
                 } else
                     ShowNotification(data.Message, "error");
 
             });
     });
+    
+    function refreshData() {
+        $('#GridView').data('kendoGrid').dataSource.read();
+        $('#GridView').data('kendoGrid').refresh();
+    };
 </script>
