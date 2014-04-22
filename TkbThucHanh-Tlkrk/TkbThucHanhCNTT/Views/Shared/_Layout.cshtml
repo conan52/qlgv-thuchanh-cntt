@@ -57,12 +57,11 @@
         <!--Start Container-->
         <div id="main" class="container-fluid">
             <div class="row">
-                <div id="sidebar-left" class="col-xs-2 col-sm-2">
+                <div id="sidebar-left" class="col-xs-2 col-sm-2 @HttpContext.Current.Request.RequestContext.RouteData.Values["Action"].ToString()" >
 
                     <ul class="nav main-menu" id="@HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString()">
-                        <li>@this.Html.ActionLink("Lịch tổng quan", "LichThucHanhGV", "LichThucHanh", null, new { @id = "LichThucHanh" })</li>
-
-                        <li>@this.Html.ActionLink("Lịch thực hành", "Index", "LichThucHanh", null, new { @id = "LichThucHanh" })</li>
+                        <li>@this.Html.ActionLink("Lịch tổng quan", "LichThucHanhGV", "LichThucHanh", null, new { @id = "LichThucHanhGV" })</li>
+                        <li>@this.Html.ActionLink("Lịch thực hành", "Index", "LichThucHanh", null, new { @id = "Index" })</li>
                         <li>@this.Html.ActionLink("Phòng thực hành", "Index", "PhongThucHanh", null, new { @id = "PhongThucHanh" })</li>
                         <li>@this.Html.ActionLink("Thời khóa biểu GV", "Index", "TkbGiangVien", null, new { @id = "TkbGiangVien" })</li>
                         <li>@this.Html.ActionLink("Lịch bận giáo viên", "Index", "LichBan", null, new { @id = "LichBan" })</li>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using NPOI.SS.Formula.Functions;
 using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Ultils;
 
@@ -42,7 +43,7 @@ namespace TkbThucHanhCNTT.Models
         [ForeignKey("SttTuan")]
         public TuanHoc TuanHoc { get; set; }
 
-        
+        [Display(Name = "Ngày trong tuần")]
         public NgayTrongTuan NgayTrongTuan { get; set; }
 
     }
