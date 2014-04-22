@@ -77,7 +77,7 @@ namespace TkbThucHanhCNTT.Controllers
                                                    .ThenBy(t => t.NgayTrongTuan)
                                                    .ThenBy(t => t.TietBatDau)
                                                    .ThenBy(t => t.TietKetThuc);
-            string maGv = "CT46";
+            string maGv = Models.Ultils.StaticValue.MaGv;
             var r = result.Where(l =>  l.Gvhd1!=null&& l.Gvhd1.Equals(maGv, StringComparison.CurrentCultureIgnoreCase) ||
                                      l.Gvhd2 != null && l.Gvhd2.Equals(maGv, StringComparison.CurrentCultureIgnoreCase) ||
                                      l.Gvhd3 != null && l.Gvhd3.Equals(maGv, StringComparison.CurrentCultureIgnoreCase));
