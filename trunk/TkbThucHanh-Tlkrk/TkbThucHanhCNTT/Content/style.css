@@ -30,7 +30,7 @@ body
 
 .bannercolor
 {
-    background: url(../Images/banner.png) no-repeat;
+    background:#51bbec url(../Images/banner.png) no-repeat;
     background-size: 100% 100%;
     
 }
@@ -62,7 +62,7 @@ h1, .h1, h2, .h2, h3, .h3
 
 #logo
 {
-    background: #6AA6D6 url(../Images/logo.png) no-repeat;
+    background:#51bbec url(../Images/logo.png) no-repeat;
     background-position: 0% 0%;
     background-size: 100% 100%;
     height: 72px;
@@ -196,10 +196,7 @@ a.show-sidebar:hover
     position: relative;
     transition: 0.2s;
     z-index: inherit;
-    background: -webkit-linear-gradient(left, #1a89cf , #5aa9dc ,#1a89cf); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, #1a89cf , #5aa9dc ,#1a89cf); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right, #1a89cf , #5aa9dc ,#1a89cf); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right, #1a89cf , #5aa9dc ,#1a89cf); /* Standard syntax */
+    background: #51bbec;
 }
 
 #content
