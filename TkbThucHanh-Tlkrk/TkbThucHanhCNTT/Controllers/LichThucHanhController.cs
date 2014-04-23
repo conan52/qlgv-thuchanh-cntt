@@ -12,6 +12,7 @@ using TkbThucHanhCNTT.Models.Provider;
 using TkbThucHanhCNTT.Models.Enums;
 using NPOI.SS.Util;
 using NPOI.HSSF.Util;
+using TkbThucHanhCNTT.Models.Ultils;
 
 namespace TkbThucHanhCNTT.Controllers
 {
@@ -238,11 +239,8 @@ namespace TkbThucHanhCNTT.Controllers
                             Gv2CoMat = true,
                             Gv3CoMat = true
                         };
-                        if (tkb.TenMonHoc.Contains("2"))
-                        {
 
-                        }
-                        var pc = phancong.SingleOrDefault(p => p.MonHoc.TenThucHanh.StartsWith(tkb.TenMonHoc, StringComparison.OrdinalIgnoreCase) && p.TenLop == tkb.LopHoc);
+                        var pc = phancong.SingleOrDefault(p => p.MonHoc.TenThucHanh.RemoveCase().StartsWith(tkb.TenMonHoc.RemoveCase()) && p.TenLop == tkb.LopHoc);
                      
                         if (pc != null)
                         {

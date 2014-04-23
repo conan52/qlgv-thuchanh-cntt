@@ -93,7 +93,9 @@ namespace TkbThucHanhCNTT.Controllers
         {
             try
             {
-                var dsTkbChuaCo = DataProvider<TuanHoc>.GetList(t => !t.DaLayThongTin && t.NgayKetThuc > DateTime.Now);
+                 var dsTkbChuaCo = DataProvider<TuanHoc>.GetList(t => !t.DaLayThongTin && t.NgayKetThuc > DateTime.Now);
+
+               // var dsTkbChuaCo = DataProvider<TuanHoc>.GetList(t => t.SttTuan==37);
                 var request = new DluWebRequest();
                 var table = request.GetCurentTimeTable();
                 var dsTuan = table.Weeks.Intersect(dsTkbChuaCo.Select(t => t.SttTuan)).ToList();

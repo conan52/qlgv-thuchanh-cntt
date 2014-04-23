@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using TkbThucHanhCNTT.Models.Enums;
+using System.Text.RegularExpressions;
 
 namespace TkbThucHanhCNTT.Models.Ultils
 {
@@ -97,6 +98,12 @@ namespace TkbThucHanhCNTT.Models.Ultils
             for (var i = 0; i < sp.Length - 1; i++)
                 uname += sp[i][0];
             return uname.ToLower();
+        }
+
+        public static string RemoveCase(this string s)
+        {
+            var noSign = RemoveVnChar(s);
+          return  Regex.Replace(s, @"(\W| )", "").ToLower();
         }
     }
 }
