@@ -18,7 +18,7 @@ using WebMatrix.WebData;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-    [Authorize(Roles = "AdminTeacher")]
+    [Authorize(Roles = "AdminTeacher,Admin")]
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
@@ -115,6 +115,8 @@ namespace TkbThucHanhCNTT.Controllers
                     {
                         if (WebSecurity.Login(model.UserName, model.Password, model.RememberMe))
                         {
+                            var httpCookie = Response.Cookies[0];
+                            if (httpCookie != null) httpCookie.Expires = DateTime.Now.AddDays(30);
                             StaticValue.MaGv = DataProvider<UserProfile>.GetSingle(x => x.UserName == model.UserName).MaGv;
                             return RedirectToLocal(returnUrl);
                         }

@@ -25,7 +25,7 @@ namespace TkbThucHanhCNTT.Controllers
                 {
                     MaGv = " ",
                     Password = "123456",
-                    Roles = "AdminTeacher",
+                    Roles = "Admin",
                     UserName = "Admin"
                 });
             }
