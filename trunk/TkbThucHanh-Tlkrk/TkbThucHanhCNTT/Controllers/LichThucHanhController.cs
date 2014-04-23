@@ -15,12 +15,12 @@ using NPOI.HSSF.Util;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "AdminTeacher,Teacher")]
     public class LichThucHanhController : Controller
     {
         //
         // GET: /LichThucHanh/
-            [Authorize(Roles = "AdminTeacher")]
+        [Authorize(Roles = "AdminTeacher")]
         public ActionResult Index()
         {
             this.ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
@@ -40,7 +40,7 @@ namespace TkbThucHanhCNTT.Controllers
             return this.View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "Teacher")]
         public ActionResult LichThucHanhGV()
         {
             this.ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });

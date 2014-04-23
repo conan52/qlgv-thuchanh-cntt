@@ -19,7 +19,7 @@ namespace TkbThucHanhCNTT.Controllers
 
         public ActionResult Index()
         {
-            if (DataProvider<UserProfile>.GetAll().Count(x => x.Role == "AdminTeacher") == 0)
+            if (DataProvider<UserProfile>.GetAll().Count(x => x.Role == "Admin" || x.Role == "AdminTeacher") == 0)
             {
                 AccountController.TaoTaiKhoan(new RegisterModel()
                 {

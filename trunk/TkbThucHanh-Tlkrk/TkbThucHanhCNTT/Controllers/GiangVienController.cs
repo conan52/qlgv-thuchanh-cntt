@@ -15,7 +15,7 @@ using WebMatrix.WebData;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-    [Authorize(Roles = "AdminTeacher")]
+    [Authorize(Roles = "AdminTeacher,Admin")]
     public class GiangVienController : Controller
     {
         public ActionResult Index()
