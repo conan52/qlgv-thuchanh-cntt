@@ -109,7 +109,7 @@ namespace TkbThucHanhCNTT.Controllers
             {
                 var k = DataProvider<GiangVien>.GetAll(x => x.UserProfile)
                     .FirstOrDefault(t => StaticUltils.GetUsername(t.HoVaTen) == model.UserName);
-                if (k != null || model.UserName == "Admin")
+                if ((k != null && k.UserProfile != null) || model.UserName == "Admin")
                 {
                     if ((k != null && (k.CoThePhanCong && k.UserProfile.Role != "Blocked"))|| model.UserName == "Admin")
                     {
