@@ -217,6 +217,9 @@ namespace TkbThucHanhCNTT.Controllers
             }
             catch
             {
+                var listuser = DataProvider<UserProfile>.GetAll().Where(x => x.UserName == model.UserName).ToList();
+                if (listuser.Count() > 1)
+                    DataProvider<UserProfile>.Remove(listuser.ElementAt(1));
                 return false;
             }
 
