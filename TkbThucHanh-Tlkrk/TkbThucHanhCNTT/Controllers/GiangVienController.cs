@@ -57,7 +57,7 @@ namespace TkbThucHanhCNTT.Controllers
                     ChuyenNganh = gvmd.ChuyenNganh,
                     CoThePhanCong = gvmd.CoThePhanCong,
                     HoVaTen = gvmd.HoVaTen,
-                    //chua co tai khoan
+                    UserProfileId = DataProvider<UserProfile>.GetSingle(x=>x.MaGv==gvmd.MaGv).UserId
                 };
                 DataProvider<GiangVien>.Update(gv);
             }
