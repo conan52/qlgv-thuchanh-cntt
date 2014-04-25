@@ -41,7 +41,7 @@ namespace TkbThucHanhCNTT.Controllers
             return this.View();
         }
 
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Teacher, AdminTeacher")]
         public ActionResult LichThucHanhGV()
         {
             this.ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
@@ -72,7 +72,7 @@ namespace TkbThucHanhCNTT.Controllers
             return this.Json(dsTuan, JsonRequestBehavior.AllowGet);
         }
 
-         [Authorize(Roles = "AdminTeacher, Teacher")]
+        [Authorize(Roles = "Teacher, AdminTeacher")]
         public JsonResult AjaxReadData_Limit([DataSourceRequest]
                                        DataSourceRequest request)
         {
