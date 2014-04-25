@@ -50,6 +50,11 @@ namespace TkbThucHanhCNTT.Controllers
         {
             if (lop != null && ModelState.IsValid)
             {
+                if (DataProvider<Lop>.GetAll().Any(x => x.TenLop.Equals(lop.TenLop,StringComparison.OrdinalIgnoreCase)))
+                {
+                    ModelState.AddModelError("", "Tên lớp đã tồn tại");
+                    return Json(new[] { lop }.ToDataSourceResult(request, ModelState));
+                }
                 try
                 {
                     DataProvider<Lop>.Add(lop);
