@@ -14,23 +14,23 @@
           columns.ForeignKey(c => c.NgayTrongTuan, EnumUltils.GetDescriptions<NgayTrongTuan>(), dataFieldText: "Description", dataFieldValue: "Value").Filterable(false).Width(85);
           columns.Bound(e => e.TietBatDau).HeaderHtmlAttributes(new { colspan = 2 }).Title("Tiết học").Width(15);
           columns.Bound(e => e.TietKetThuc).HeaderHtmlAttributes(new { style = "display:none;" }).Width(15);
-          columns.ForeignKey(c => c.TenLop, (IEnumerable)this.ViewData["Lops"], dataFieldText: "TenLop", dataFieldValue: "TenLop").Filterable(false);
-          columns.ForeignKey(c => c.TenPhong, (IEnumerable)this.ViewData["Phongs"], dataFieldText: "TenPhong", dataFieldValue: "TenPhong").Filterable(false);
+          columns.ForeignKey(c => c.TenLop, (IEnumerable)this.ViewData["Lops"], dataFieldText: "TenLop", dataFieldValue: "TenLop").Filterable(false).Width(1);
+          columns.ForeignKey(c => c.TenPhong, (IEnumerable)this.ViewData["Phongs"], dataFieldText: "TenPhong", dataFieldValue: "TenPhong").Filterable(false).Width(1);
 
-          columns.ForeignKey(c => c.MonHocId, (IEnumerable)this.ViewData["MonHocs"], dataFieldText: "TenThucHanh", dataFieldValue: "MonHocId").EditorTemplateName("MonHocId");
-          columns.ForeignKey(c => c.Gvhd1, (IEnumerable)this.ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd1");
-          columns.ForeignKey(c => c.Gvhd2, (IEnumerable)this.ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd2");
-          columns.ForeignKey(c => c.Gvhd3, (IEnumerable)this.ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd3");
+          columns.ForeignKey(c => c.MonHocId, (IEnumerable)this.ViewData["MonHocs"], dataFieldText: "TenThucHanh", dataFieldValue: "MonHocId").EditorTemplateName("MonHocId").Width(1);
+          columns.ForeignKey(c => c.Gvhd1, (IEnumerable)this.ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd1").Width(1);
+          columns.ForeignKey(c => c.Gvhd2, (IEnumerable)this.ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd2").Width(1);
+          columns.ForeignKey(c => c.Gvhd3, (IEnumerable)this.ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd3").Width(1);
           
-          columns.Bound(e => e.Vang);
-          columns.Bound(e => e.GhiChu);
+          columns.Bound(e => e.Vang).Width(1);
+          columns.Bound(e => e.GhiChu).Width(1);
           
           columns.Command(command =>
           {
               command.Destroy().Text(" ");
               //              command.Custom("DiemDanh").Text(" ").HtmlAttributes(new {@class = "asd"});
               command.Custom("DiemDanh").Text("<span class=\"k-icon k-si-plus\"></span>").Click("hienThiBangDiemDanh").HtmlAttributes(new { @class = "k-icon k-delete" });
-          });
+          }).Width(1);
       })
       .Editable(e => e.Mode(GridEditMode.InCell))
       .Sortable()
