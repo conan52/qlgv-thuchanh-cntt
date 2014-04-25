@@ -16,3 +16,5 @@
       .CascadeFrom("MonHocId")
           .HtmlAttributes(new { @style = "word-wrap: break-word;" })
       )
+.Filter().Suggest(true)
+@this.Html.ValidationMessageFor(m => m)

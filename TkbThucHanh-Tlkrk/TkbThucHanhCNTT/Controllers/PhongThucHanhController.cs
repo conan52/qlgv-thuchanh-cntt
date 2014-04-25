@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -43,6 +44,11 @@ namespace TkbThucHanhCNTT.Controllers
         {
             if (phongth != null && ModelState.IsValid)
             {
+                if (DataProvider<PhongThucHanh>.GetAll().Any(x => x.TenPhong.Equals(phongth.TenPhong, StringComparison.OrdinalIgnoreCase)))
+                {
+                    ModelState.AddModelError("", "Tên phòng đã tồn tại");
+                    return Json(new[] { phongth }.ToDataSourceResult(request, ModelState));
+                }
                 try
                 {
                     DataProvider<PhongThucHanh>.Add(phongth);

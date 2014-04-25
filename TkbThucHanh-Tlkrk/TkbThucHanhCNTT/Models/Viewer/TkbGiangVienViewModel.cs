@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using NPOI.SS.Formula.Functions;
 using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Ultils;
 
@@ -23,6 +24,7 @@ namespace TkbThucHanhCNTT.Models.Viewer
         public TuanHoc TuanHoc { get; set; }
 
         [UIHint("GridForeignKey")]
+        [Display(Name = "Thứ")]
         public NgayTrongTuan NgayTrongTuan { get; set; }
 
         [Display(Name = "Giảng viên")]

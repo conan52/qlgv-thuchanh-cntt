@@ -57,6 +57,11 @@
                 }
             });
             alert(message);
+            refreshData();
         }
     }
+    function refreshData() {
+        $('#GridView').data('kendoGrid').dataSource.read();
+        $('#GridView').data('kendoGrid').refresh();
+    };
 </script>

@@ -24,12 +24,12 @@ namespace TkbThucHanhCNTT.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, string mamh)
+        public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, LichCongTac lct)
         {
             // Test if gv object and modelstate is valid.
-            if (mamh != null && ModelState.IsValid)
+            if (lct != null)
             {
-                DataProvider<MonHoc>.RemoveById(mamh);
+                DataProvider<LichCongTac>.Remove(lct);
             }
             return Json(ModelState.ToDataSourceResult());
         }

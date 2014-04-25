@@ -6,7 +6,7 @@
 <legend>@ViewBag.header</legend>
 <div class="form-group">
     @Html.Label("Số trang hiển thị", new { @class = "col-sm-2 control-label" })
-    @Html.Kendo().IntegerTextBox().Name("SotrangHIenThi").Min(10).Max(40).Value(StaticValue.PageNumber).HtmlAttributes(new { @id = "sotranghienthi" })
+    @Html.Kendo().IntegerTextBox().Name("SotrangHIenThi").Min(10).Max(100).Value(StaticValue.PageNumber).HtmlAttributes(new { @id = "sotranghienthi" })
     @Html.Kendo().Button().Name("LuuSoTrangHienThai").Content("Lưu").Events(e => e.Click("clickluusotrang"))
 </div>
 
