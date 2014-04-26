@@ -18,6 +18,7 @@ namespace TkbThucHanhCNTT.Models
         [UIHint("TrinhDo")]
         public string TrinhDo { get; set; }
 
+        [UIHint("NamHoc")]
         [Display(Name = "Năm nhập học")]
         [Range(2000,2999,ErrorMessage = "Năm học không hợp lệ")]
         [Required(ErrorMessage = "Năm nhập học không được để trống!")]

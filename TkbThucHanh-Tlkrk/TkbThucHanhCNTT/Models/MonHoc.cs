@@ -27,6 +27,7 @@ namespace TkbThucHanhCNTT.Models
         [UIHint("Integer")]
         [Required(ErrorMessage = "Số tín chỉ không được để trống!")]
         [Display(Name = "Số tín chỉ")]
+        [Range(1, 10, ErrorMessage = "Số tín chỉ không hợp lệ")]
         public int SoTinChi { get; set; }
 
         [Display(Name = "Bắt buộc")]

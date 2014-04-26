@@ -27,6 +27,7 @@
       {
           e.Mode(GridEditMode.PopUp);
           e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
+          e.Window(x => x.Title("Thời khóa biểu giảng viên"));
       })
       .Sortable()
       .Filterable(filterable => filterable
