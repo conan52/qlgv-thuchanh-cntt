@@ -5,7 +5,6 @@
       .DataTextField("HoVaTen")
       .DataValueField("MaGv")
       .ValuePrimitive(true)
-
       .DataSource(dataSource =>
       {
           dataSource.Read(read => read.Action("LayDsGvRanh", "Filter").Data("locMaGv2"))
@@ -14,7 +13,7 @@
       .Filter(FilterType.Contains)
       .Suggest(true)
       .CascadeFrom("MonHocId")
-          .HtmlAttributes(new { @style = "word-wrap: break-word;" })
+      .HtmlAttributes(new {@style = "word-wrap: break-word;"})
       )
 .Filter().Suggest(true)
-@this.Html.ValidationMessageFor(m => m)
+@Html.ValidationMessageFor(m => m)

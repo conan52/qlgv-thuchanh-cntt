@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TkbThucHanhCNTT.Models.Enums;
@@ -44,7 +43,6 @@ namespace TkbThucHanhCNTT.Models
         public int TietBatDau { get; set; }
 
 
-
         [Range(1, 14)]
         [UIHint("TietHoc")]
         [Display(Name = "Tiết kết thúc")]
@@ -54,6 +52,7 @@ namespace TkbThucHanhCNTT.Models
         [UIHint("GridForeignKey")]
         [Display(Name = "Tuần")]
         public int SttTuan { get; set; }
+
         public TuanHoc TuanHoc { get; set; }
 
         [Display(Name = "Thứ")]
@@ -63,29 +62,33 @@ namespace TkbThucHanhCNTT.Models
         [Display(Name = "GVHD1")]
         [Required(ErrorMessage = "GVHD1 không được để trống")]
         public string Gvhd1 { get; set; }
+
         [ForeignKey("Gvhd1")]
         public GiangVien GiangVien1 { get; set; }
 
 
         [Display(Name = "GVHD2")]
         public string Gvhd2 { get; set; }
+
         [ForeignKey("Gvhd2")]
         public GiangVien GiangVien2 { get; set; }
 
         [Display(Name = "GVHD3")]
         public string Gvhd3 { get; set; }
+
         [ForeignKey("Gvhd3")]
         public GiangVien GiangVien3 { get; set; }
+
         [Display(Name = "Ghi chú")]
         public string GhiChu { get; set; }
-        [Display(Name = "Vắng")]
 
+        [Display(Name = "Vắng")]
         [NotMapped]
         public string Vang
         {
             get
             {
-                List<string> dsGvVang = new List<string>();
+                var dsGvVang = new List<string>();
                 if (Gvhd1 != null && !Gv1CoMat)
                     dsGvVang.Add(GiangVien1.HoVaTen.LayTen());
                 if (Gvhd2 != null && !Gv2CoMat)
@@ -102,6 +105,5 @@ namespace TkbThucHanhCNTT.Models
         public bool Gv1CoMat { get; set; }
         public bool Gv2CoMat { get; set; }
         public bool Gv3CoMat { get; set; }
-
     }
 }

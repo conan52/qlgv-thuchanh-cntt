@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Transactions;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using DotNetOpenAuth.AspNet;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.Web.WebPages.OAuth;
@@ -36,15 +35,15 @@ namespace TkbThucHanhCNTT.Controllers
             // Test if gv object and modelstate is valid.
             if (up != null && ModelState.IsValid)
             {
-                var uf = new UserProfile()
+                var uf = new UserProfile
                 {
-                //    Email = up.Email,
+                    //    Email = up.Email,
                     MaGv = up.MaGv,
                     Role = up.QuyenHan,
                     UserId = up.UserId,
                     UserName = up.TenDangNhap
                 };
-                SetRole(uf.UserName,uf.Role);
+                SetRole(uf.UserName, uf.Role);
                 DataProvider<UserProfile>.Update(uf);
             }
             return Json(ModelState.ToDataSourceResult());
@@ -107,15 +106,15 @@ namespace TkbThucHanhCNTT.Controllers
         {
             if (ModelState.IsValid)
             {
-                var k = DataProvider<GiangVien>.GetAll(x => x.UserProfile)
+                GiangVien k = DataProvider<GiangVien>.GetAll(x => x.UserProfile)
                     .FirstOrDefault(t => StaticUltils.GetUsername(t.HoVaTen) == model.UserName);
                 if ((k != null && k.UserProfile != null) || model.UserName == "Admin")
                 {
-                    if ((k != null && (k.CoThePhanCong && k.UserProfile.Role != "Blocked"))|| model.UserName == "Admin")
+                    if ((k != null && (k.CoThePhanCong && k.UserProfile.Role != "Blocked")) || model.UserName == "Admin")
                     {
                         if (WebSecurity.Login(model.UserName, model.Password, model.RememberMe))
                         {
-                            var httpCookie = Response.Cookies[0];
+                            HttpCookie httpCookie = Response.Cookies[0];
                             if (httpCookie != null) httpCookie.Expires = DateTime.Now.AddDays(30);
                             StaticValue.MaGv = DataProvider<UserProfile>.GetSingle(x => x.UserName == model.UserName).MaGv;
                             return RedirectToLocal(returnUrl);
@@ -146,8 +145,8 @@ namespace TkbThucHanhCNTT.Controllers
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Đổi mật khẩu thành công."
                     : message == ManageMessageId.SetPasswordSuccess ? "Mật khẩu này đang được đặt."
-                            : message == ManageMessageId.ErrorPassword ? "Mật khẩu cũ không đúng!"
-                                : "";
+                        : message == ManageMessageId.ErrorPassword ? "Mật khẩu cũ không đúng!"
+                            : "";
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             if (hasLocalAccount)
                 return PartialView("DoiMatKhau");
@@ -185,6 +184,87 @@ namespace TkbThucHanhCNTT.Controllers
             return View(model);
         }
 
+        public JsonResult ResetMatKhau(int userid)
+        {
+            UserProfile userProfile = DataProvider<UserProfile>.GetSingle(x => x.UserId == userid);
+            try
+            {
+                string token = WebSecurity.GeneratePasswordResetToken(userProfile.UserName);
+                WebSecurity.ResetPassword(token, "123456");
+                return Json(new {Result = "OK", Message = "Đổi mật khẩu thành công"});
+            }
+            catch (Exception ex)
+            {
+                return Json(new {Result = "Fail", ex.Message});
+            }
+        }
+
+        [HttpPost]
+        public JsonResult LuuThongSoTrang(string page)
+        {
+            try
+            {
+                StaticValue.PageNumber = int.Parse(page);
+                return Json(new {Result = "OK", Message = "Đổi số trang hiển thị thành công"});
+            }
+            catch (Exception ex)
+            {
+                return Json(new {Result = "Fail", ex.Message});
+            }
+        }
+
+        public ViewResult CauHinhTrangWeb()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult ResetCauHinh()
+        {
+            try
+            {
+                DataProvider<TuanHoc>.RemoveAll();
+                DataProvider<LichCongTac>.RemoveAll();
+                return Json(new {Result = "OK", Message = "Đã làm mới toàn bộ dữ liệu"});
+            }
+            catch (Exception ex)
+            {
+                return Json(new {Result = "Fail", ex.Message});
+            }
+        }
+
+        public ActionResult ThemTaiKhoanTuDong()
+        {
+            try
+            {
+                int count = 0;
+                List<GiangVien> giangViens = DataProvider<GiangVien>.GetAll(x => x.UserProfile).Where(x => x.UserProfile == null).ToList();
+                foreach (GiangVien giangVien in giangViens)
+                {
+                    string userName = StaticUltils.GetUsername(giangVien.HoVaTen);
+                    if (TaoTaiKhoan(new RegisterModel
+                    {
+                        UserName = userName,
+                        Password = "123456",
+                        Roles = "Teacher",
+                        MaGv = giangVien.MaGv
+                    }))
+                    {
+                        UserProfile up = DataProvider<UserProfile>.GetSingle(x => x.MaGv == giangVien.MaGv);
+                        giangVien.UserProfile = up;
+                        giangVien.UserProfileId = up.UserId;
+                        DataProvider<GiangVien>.Update(giangVien);
+                        count++;
+                    }
+                }
+                return Json(new {Result = "OK", Message = string.Format("Đã thêm {0} tài khoản", count)});
+            }
+            catch (Exception ex)
+            {
+                return Json(new {Result = "Fail", ex.Message});
+            }
+        }
+
         #region Helpers
 
         public enum ManageMessageId
@@ -204,114 +284,25 @@ namespace TkbThucHanhCNTT.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
 
         [InitializeSimpleMembership]
         public static bool TaoTaiKhoan(RegisterModel model)
         {
             try
             {
-                WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { MaGv = model.MaGv, Role = model.Roles});
+                WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new {model.MaGv, Role = model.Roles});
                 SetRole(model.UserName, model.Roles);
                 return true;
             }
             catch
             {
-                var listuser = DataProvider<UserProfile>.GetAll().Where(x => x.UserName == model.UserName).ToList();
+                List<UserProfile> listuser = DataProvider<UserProfile>.GetAll().Where(x => x.UserName == model.UserName).ToList();
                 if (listuser.Count() > 1)
                     DataProvider<UserProfile>.Remove(listuser.ElementAt(1));
                 return false;
             }
-
         }
-
-
-
-
 
         #endregion
-
-
-
-        public JsonResult ResetMatKhau(int userid)
-        {
-            UserProfile userProfile = DataProvider<UserProfile>.GetSingle(x => x.UserId == userid);
-            try
-            {
-                var token = WebSecurity.GeneratePasswordResetToken(userProfile.UserName);
-                WebSecurity.ResetPassword(token, "123456");
-                return Json(new { Result = "OK", Message="Đổi mật khẩu thành công" });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { Result = "Fail", ex.Message });
-            }
-        }
-
-        [HttpPost]
-        public JsonResult LuuThongSoTrang(string page)
-        {
-            try
-            {
-                StaticValue.PageNumber = int.Parse(page);
-                return Json(new { Result = "OK", Message = "Đổi số trang hiển thị thành công" });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { Result = "Fail", ex.Message });
-            }
-        }
-
-        public ViewResult CauHinhTrangWeb()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public JsonResult ResetCauHinh()
-        {
-            try
-            {
-                DataProvider<TuanHoc>.RemoveAll();
-                DataProvider<LichCongTac>.RemoveAll();
-                return Json(new { Result = "OK", Message = "Đã làm mới toàn bộ dữ liệu" });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { Result = "Fail", ex.Message });
-            }
-        }
-
-        public ActionResult ThemTaiKhoanTuDong()
-        {
-            try
-            {
-                int count = 0;
-                List<GiangVien> giangViens = DataProvider<GiangVien>.GetAll(x=>x.UserProfile).Where(x=>x.UserProfile==null).ToList();
-                foreach (GiangVien giangVien in giangViens)
-                {
-                    string userName = StaticUltils.GetUsername(giangVien.HoVaTen);
-                    if (TaoTaiKhoan(new RegisterModel()
-                    {
-                        UserName = userName,
-                        Password = "123456",
-                        Roles = "Teacher",
-                        MaGv = giangVien.MaGv
-                    }))
-                    {
-                        var up = DataProvider<UserProfile>.GetSingle(x => x.MaGv == giangVien.MaGv);
-                        giangVien.UserProfile = up;
-                        giangVien.UserProfileId = up.UserId;
-                        DataProvider<GiangVien>.Update(giangVien);
-                        count++;
-                    }
-                }
-                return Json(new { Result = "OK", Message = string.Format("Đã thêm {0} tài khoản",count) });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { Result = "Fail", ex.Message });
-            }
-        }
     }
 }

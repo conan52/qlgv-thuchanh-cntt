@@ -23,7 +23,6 @@ namespace TkbThucHanhCNTT.Models
 
         [Display(Name = "Môn học")]
         [UIHint("GridForeignKey")]
-        
         public int MonHocId { get; set; }
 
         [ForeignKey("MonHocId")]
@@ -34,7 +33,7 @@ namespace TkbThucHanhCNTT.Models
         [Required(ErrorMessage = "Giảng viên không được để trống!")]
         public string MaGv { get; set; }
 
-        
+
         [ForeignKey("MaGv")]
         public virtual GiangVien GiangVien { get; set; }
 

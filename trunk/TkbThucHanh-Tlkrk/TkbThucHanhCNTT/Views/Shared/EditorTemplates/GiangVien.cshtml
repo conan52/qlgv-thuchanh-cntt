@@ -1,9 +1,9 @@
 ﻿@using System.Collections
 @model TkbThucHanhCNTT.Models.GiangVien
 
-@(Html.Kendo().DropDownListFor(m=>m)
-.Name("dropdownlist")
-.DataTextField("HoVaTen")
-.DataValueField("MaGv")
-    .BindTo((IEnumerable)ViewData["GiangViens"])
-)
+@(Html.Kendo().DropDownListFor(m => m)
+      .Name("dropdownlist")
+      .DataTextField("HoVaTen")
+      .DataValueField("MaGv")
+      .BindTo((IEnumerable) ViewData["GiangViens"])
+      )

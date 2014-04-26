@@ -12,7 +12,7 @@ namespace TkbThucHanhCNTT.Models.Provider
 
         public static List<GiangVien> LayDsGiangVienCoTKB()
         {
-            var dsTkb = DataProvider<TkbGiangVien>.GetAll().Select(tk => tk.MaGv).Distinct();
+            IEnumerable<string> dsTkb = DataProvider<TkbGiangVien>.GetAll().Select(tk => tk.MaGv).Distinct();
 
             return DataProvider<GiangVien>.GetAll().ToList().Where(g => dsTkb.Contains(g.MaGv)).ToList();
         }
@@ -20,7 +20,7 @@ namespace TkbThucHanhCNTT.Models.Provider
         public static List<GiangVien> LayDsGiangVienCoTheXep()
         {
             return DataProvider<GiangVien>.GetAll().ToList();
-          //  return DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong != null && gv.CoThePhanCong.Value).ToList();
+            //  return DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong != null && gv.CoThePhanCong.Value).ToList();
         }
     }
 }

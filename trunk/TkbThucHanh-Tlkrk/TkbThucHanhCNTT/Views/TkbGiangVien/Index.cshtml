@@ -43,9 +43,8 @@
               t.Clear("Hủy");
               t.Info("Lọc kết quả theo!");
           }
-
-    )
-        ) 
+          )
+      ) 
 //      .Filterable(f=>f.Enabled(true))
       .Groupable(x => x.Messages(t => t.Empty("Kéo thả để gom nhóm dữ liệu")))
       .Selectable()
@@ -60,7 +59,7 @@
           .Model(model =>
           {
               model.Id(gv => gv.MaGv);
-              model.Field(f => f.SttTuan).DefaultValue(DataProvider<TuanHoc>.GetAll().FirstOrDefault(x => (x.NgayBatDau - DateTime.Now).Days < 7 && (x.NgayBatDau - DateTime.Now).Days > 0)!=null?DataProvider<TuanHoc>.GetAll().FirstOrDefault(x => (x.NgayBatDau - DateTime.Now).Days < 7 && (x.NgayBatDau - DateTime.Now).Days > 0).SttTuan:0);
+              model.Field(f => f.SttTuan).DefaultValue(DataProvider<TuanHoc>.GetAll().FirstOrDefault(x => (x.NgayBatDau - DateTime.Now).Days < 7 && (x.NgayBatDau - DateTime.Now).Days > 0) != null ? DataProvider<TuanHoc>.GetAll().FirstOrDefault(x => (x.NgayBatDau - DateTime.Now).Days < 7 && (x.NgayBatDau - DateTime.Now).Days > 0).SttTuan : 0);
               model.Field(x => x.MaGv).DefaultValue(DataProvider<GiangVien>.GetAll().FirstOrDefault() != null ? DataProvider<GiangVien>.GetAll().FirstOrDefault().MaGv : null);
               if (DateTime.Now.TimeOfDay.Hours < 12)
               {
