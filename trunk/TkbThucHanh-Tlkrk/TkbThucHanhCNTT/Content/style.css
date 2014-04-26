@@ -85,6 +85,8 @@ h1, .h1, h2, .h2, h3, .h3
 /*active hien thi cua thang nav*/
 .LichThucHanhGV #LichThucHanh #LichThucHanhGV,
 .Index #LichThucHanh #Index,
+.Index #ChamCong #ChamCong,
+.ChamCongTheoGv #ChamCong #ChamCongTheoGv,
 #PhongThucHanh #PhongThucHanh,
 #TkbGiangVien #TkbGiangVien,
 #LichBan #LichBan,
@@ -93,7 +95,6 @@ h1, .h1, h2, .h2, h3, .h3
 #Lop #Lop,
 #MonHoc #MonHoc,
 #PhanCongGiangDay #PhanCongGiangDay,
-#ChamCong #ChamCong,
 #Index #Index,
 #Account #Account,
 #GiangVien #GiangVien
