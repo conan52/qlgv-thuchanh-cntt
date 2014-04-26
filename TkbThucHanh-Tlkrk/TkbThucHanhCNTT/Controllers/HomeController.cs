@@ -8,7 +8,7 @@ namespace TkbThucHanhCNTT.Controllers
         {
             if (User.IsInRole("AdminTeacher"))
                 return RedirectToAction("Index", "LichThucHanh");
-            if (User.IsInRole("Admin"))
+            if(User.IsInRole("Admin"))
                 return RedirectToAction("Index", "Account");
             return RedirectToAction("LichThucHanhGV", "LichThucHanh");
         }

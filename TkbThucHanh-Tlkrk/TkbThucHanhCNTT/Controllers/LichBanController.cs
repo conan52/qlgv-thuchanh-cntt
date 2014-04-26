@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
@@ -17,25 +16,27 @@ namespace TkbThucHanhCNTT.Controllers
         // GET: /LichBanControler/
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
-        public ActionResult LayDsTuan([DataSourceRequest] DataSourceRequest request)
+        public ActionResult LayDsTuan([DataSourceRequest]
+                                      DataSourceRequest request)
         {
-            IOrderedEnumerable<int> dsTuan =
+            var dsTuan =
                 DataProvider<TuanHoc>.GetList(t => t.LichBans.Any())
-                    .Select(t => t.SttTuan)
-                    .OrderByDescending(t => t);
-            return Json(dsTuan, JsonRequestBehavior.AllowGet);
+                                     .Select(t => t.SttTuan)
+                                                  .OrderByDescending(t => t);
+            return this.Json(dsTuan, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
+        public JsonResult AjaxReadData([DataSourceRequest]
+                                       DataSourceRequest request)
         {
-            IOrderedEnumerable<LichBan> result = DataProvider<LichBan>.GetAll(l => l.GiangVien)
-                .OrderByDescending(t => t.SttTuan)
-                .ThenBy(t => t.MaGv);
+            var result = DataProvider<LichBan>.GetAll(l => l.GiangVien)
+                                              .OrderByDescending(t => t.SttTuan)
+                                              .ThenBy(t => t.MaGv);
 
-            return Json(result.ToDataSourceResult(request, l => new LichBanModelViewer
+            return this.Json(result.ToDataSourceResult(request, l => new LichBanModelViewer()
             {
                 LichBanId = l.LichBanId,
                 TenGv = l.GiangVien.HoVaTen,
@@ -50,49 +51,49 @@ namespace TkbThucHanhCNTT.Controllers
             try
             {
                 DataProvider<LichBan>.RemoveById(lichBanId);
-                return Json(new {Result = "OK"});
+                return this.Json(new { Result = "OK" });
             }
             catch (Exception ex)
             {
-                return Json(new {Result = "Fail", ex.Message});
+                return this.Json(new { Result = "Fail", ex.Message });
             }
         }
 
         public ActionResult ShowEditWindow(string maLichBan)
         {
-            LichBan lichBan = DataProvider<LichBan>.GetSingle(l => l.LichBanId.ToString() == maLichBan);
+            var lichBan = DataProvider<LichBan>.GetSingle(l => l.LichBanId.ToString() == maLichBan);
             if (maLichBan == null || lichBan == null)
             {
-                ViewData["maGv"] = null;
-                IList<TuanHoc> dsTuan = DataProvider<TuanHoc>.GetList(t => t.NgayKetThuc >= DateTime.Now);
+                this.ViewData["maGv"] = null;
+                var dsTuan = DataProvider<TuanHoc>.GetList(t => t.NgayKetThuc >= DateTime.Now);
                 if (dsTuan.Count > 0)
-                    ViewData["tuan"] = dsTuan.Min(l => l.SttTuan);
+                    this.ViewData["tuan"] = dsTuan.Min(l => l.SttTuan);
                 else
-                    ViewData["tuan"] = 0;
-                ViewData["trangThai"] = "00000000000000000000000";
-                ViewData["maLichBan"] = 0;
+                    this.ViewData["tuan"] = 0;
+                this.ViewData["trangThai"] = "00000000000000000000000";
+                this.ViewData["maLichBan"] = 0;
             }
             else
             {
-                ViewData["maGv"] = lichBan.MaGv;
-                ViewData["tuan"] = lichBan.SttTuan;
-                ViewData["trangThai"] = lichBan.TrangThaiBan;
-                ViewData["maLichBan"] = maLichBan;
+                this.ViewData["maGv"] = lichBan.MaGv;
+                this.ViewData["tuan"] = lichBan.SttTuan;
+                this.ViewData["trangThai"] = lichBan.TrangThaiBan;
+                this.ViewData["maLichBan"] = maLichBan;
             }
-            ViewData["dsGiangVien"] = DataProvider<GiangVien>.GetList(g => g.CoThePhanCong)
-                .Select(g => new {g.MaGv, g.HoVaTen});
-            ViewData["dsTuanTuongLai"] = DataProvider<TuanHoc>.GetList(t => t.NgayKetThuc >= DateTime.Now)
-                .Select(t => new {t.SttTuan});
-            return View();
+            this.ViewData["dsGiangVien"] = DataProvider<GiangVien>.GetList(g => g.CoThePhanCong)
+                                                                  .Select(g => new { g.MaGv, g.HoVaTen });
+            this.ViewData["dsTuanTuongLai"] = DataProvider<TuanHoc>.GetList(t => t.NgayKetThuc >= DateTime.Now)
+                                                                   .Select(t => new { t.SttTuan });
+            return this.View();
         }
 
         public JsonResult AjaxEdit(int lichBanId, string maGv, int SttTuan, string value)
         {
             try
             {
-                LichBan lb = DataProvider<LichBan>.GetSingle(l => l.MaGv == maGv && l.SttTuan == SttTuan || l.LichBanId == lichBanId);
+                var lb = DataProvider<LichBan>.GetSingle(l => l.MaGv == maGv && l.SttTuan == SttTuan || l.LichBanId == lichBanId);
                 if (lichBanId == 0 && lb == null)
-                    DataProvider<LichBan>.Add(new LichBan
+                    DataProvider<LichBan>.Add(new LichBan()
                     {
                         MaGv = maGv,
                         SttTuan = SttTuan,
@@ -103,11 +104,11 @@ namespace TkbThucHanhCNTT.Controllers
                     lb.TrangThaiBan = value;
                     DataProvider<LichBan>.Update(lb);
                 }
-                return Json(new {Result = "OK"});
+                return this.Json(new { Result = "OK" });
             }
             catch (Exception ex)
             {
-                return Json(new {Result = "Fail", ex.Message});
+                return this.Json(new { Result = "Fail", ex.Message });
             }
         }
     }

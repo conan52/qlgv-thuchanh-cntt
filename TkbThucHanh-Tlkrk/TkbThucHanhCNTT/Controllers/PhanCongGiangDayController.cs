@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using TkbThucHanhCNTT.Models;
 using TkbThucHanhCNTT.Models.Provider;
+using TkbThucHanhCNTT.Models.Viewer;
 
 namespace TkbThucHanhCNTT.Controllers
 {
@@ -17,9 +19,9 @@ namespace TkbThucHanhCNTT.Controllers
         public ActionResult Index()
         {
             ViewData["GiangViens"] =
-                DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new {gv.HoVaTen, gv.MaGv});
-            ViewData["MonHocs"] = DataProvider<MonHoc>.GetAll().Select(m => new {m.MonHocId, m.TenMonHoc, m.MaMonHoc});
-            ViewData["Lops"] = DataProvider<Lop>.GetAll().Select(m => new {m.TenLop});
+                DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
+            ViewData["MonHocs"] = DataProvider<MonHoc>.GetAll().Select(m => new { m.MonHocId, m.TenMonHoc,m.MaMonHoc });
+            ViewData["Lops"] = DataProvider<Lop>.GetAll().Select(m => new { m.TenLop });
             return View();
         }
 
@@ -45,10 +47,12 @@ namespace TkbThucHanhCNTT.Controllers
                 }
                 catch (Exception)
                 {
+
                 }
+
             }
 
-            return Json(new[] {pc}.ToDataSourceResult(request, ModelState));
+            return Json(new[] { pc }.ToDataSourceResult(request, ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

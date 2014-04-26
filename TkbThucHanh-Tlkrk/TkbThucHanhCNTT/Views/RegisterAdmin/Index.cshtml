@@ -3,7 +3,7 @@
     ViewBag.Title = "Tạo tài khoản quản trị";
 }
 
-@using (Html.BeginForm("Index", "RegisterAdmin", FormMethod.Post, new {@class = "form-horizontal"}))
+@using (Html.BeginForm("Index", "RegisterAdmin", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.ValidationSummary(null, new {@class = "text-danger"})
     @Html.AntiForgeryToken()
@@ -13,15 +13,15 @@
         <legend>Tạo tài khoản quản trị</legend>
         <p class="message-success info">@ViewBag.StatusMessage</p>
         <div class="form-group">
-            @Html.LabelFor(m => m.MaGv, new {@class = "col-sm-2 control-label"})
+            @Html.LabelFor(m => m.MaGv, new { @class = "col-sm-2 control-label" })
             <div class="col-sm-4">
-                @Html.TextBoxFor(m => m.MaGv, new {@class = "form-control", @placeholder = "Mã giảng viên"})
+                @Html.TextBoxFor(m => m.MaGv, new { @class = "form-control", @placeholder = "Mã giảng viên" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.HoVaTen, new {@class = "col-sm-2 control-label"})
+            @Html.LabelFor(m => m.HoVaTen, new { @class = "col-sm-2 control-label" })
             <div class="col-sm-4">
-                @Html.TextBoxFor(m => m.HoVaTen, new {@class = "form-control", @placeholder = "Họ và tên"})
+                @Html.TextBoxFor(m => m.HoVaTen, new { @class = "form-control", @placeholder = "Họ và tên" })
             </div>
         </div>
         <div class="form-group">

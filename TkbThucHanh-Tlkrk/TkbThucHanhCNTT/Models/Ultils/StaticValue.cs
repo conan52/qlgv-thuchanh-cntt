@@ -1,4 +1,9 @@
-﻿namespace TkbThucHanhCNTT.Models.Ultils
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace TkbThucHanhCNTT.Models.Ultils
 {
     public class StaticValue
     {

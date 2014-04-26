@@ -1,8 +1,9 @@
 ﻿@using System.Collections
+
 @{
-    Layout = null;
+    this.Layout = null;
 }
-<input type="hidden" id="lichBanId" value="@ViewData["maLichBan"].ToString()"/>
+<input type="hidden" id="lichBanId" value="@this.ViewData["maLichBan"].ToString()"/>
 <table id="tblThongTin">
     <tr>
         <th>
@@ -12,15 +13,15 @@
             &nbsp;
         </td>
         <td>
-            @(Html.Kendo().ComboBox()
+            @(this.Html.Kendo().ComboBox()
                   .Name("chonGiangVien")
                   .Filter("contains")
                   .Placeholder("Chọn giảng viên")
                   .DataTextField("HoVaTen")
                   .DataValueField("MaGv")
-                  .BindTo((IEnumerable) ViewData["dsGiangVien"])
+                  .BindTo((IEnumerable)this.ViewData["dsGiangVien"])
                   .Suggest(true)
-                  .Value((string) ViewData["maGv"]))
+                  .Value((string)this.ViewData["maGv"]))
         </td>
     </tr>
     <tr>
@@ -31,13 +32,14 @@
             &nbsp;
         </td>
         <td>
-            @(Html.Kendo().ComboBox()
+            @(this.Html.Kendo().ComboBox()
                   .Name("chonTuan")
                   .Placeholder("Chọn tuần")
                   .DataTextField("SttTuan")
                   .DataValueField("SttTuan")
-                  .BindTo((IEnumerable) ViewData["dsTuanTuongLai"])
-                  .Value(ViewData["tuan"].ToString()))
+                  .BindTo((IEnumerable)this.ViewData["dsTuanTuongLai"])
+                  .Value(this.ViewData["tuan"].ToString())
+            )
         </td>
     </tr>
 </table>
@@ -165,22 +167,28 @@
     </a>
 </div>
 <style>
-    #tblThongTin { margin: 10px; }
-
-    #tblThoiGian {
+    #tblThongTin
+    {
+        margin: 10px;
+    }
+    
+    #tblThoiGian
+    {
         -khtml-user-select: none;
         -moz-user-select: none;
         -webkit-user-select: none;
         user-select: none;
     }
-
-    #tblThoiGian tr td input[type='checkbox'] {
+    
+    #tblThoiGian tr td input[type='checkbox']
+    {
         height: 100%;
         margin: 0;
         width: 100%;
     }
-
-    #buttonContainer {
+    
+    #buttonContainer
+    {
         padding: 10px;
         text-align: right;
     }
@@ -188,30 +196,30 @@
 <script language="javascript">
     var colval = [true, true, true];
     var rowval = [true, true, true, true, true, true, true];
-
-    $(".colval").click(function() {
+    
+    $(".colval").click(function () {
         var index = $(".colval").index(this);
         $(".col" + index).prop('checked', colval[index]);
         colval[index] = !colval[index];
     });
-
-    $(".rowval").click(function() {
+    
+    $(".rowval").click(function () {
         var index = $(".rowval").index(this);
         $(this).parent().find(".cbBan").prop('checked', rowval[index]);
         rowval[index] = !rowval[index];
     });
-
+    
     function getValues() {
         var value = "";
-        $(".cbBan").each(function(index) {
+        $(".cbBan").each(function (index) {
             value += $(this).is(':checked') ? "1" : "0";
         });
         return value;
     };
 
     function setValues() {
-        var value = "@ViewData["trangThai"]";
-        $(".cbBan").each(function(index) {
+        var value = "@this.ViewData["trangThai"]";
+        $(".cbBan").each(function (index) {
             value += $(this).prop("checked", value[index] == '1');
         });
     };
@@ -220,3 +228,4 @@
         setValues();
     });
 </script>
+

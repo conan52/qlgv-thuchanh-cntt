@@ -1,7 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using TkbThucHanhCNTT.Filters;
 using TkbThucHanhCNTT.Models;
+using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Provider;
+using TkbThucHanhCNTT.Models.Ultils;
+using TkbThucHanhCNTT.Models.Viewer;
 
 namespace TkbThucHanhCNTT.Controllers
 {
@@ -9,12 +16,12 @@ namespace TkbThucHanhCNTT.Controllers
     {
         //
         // GET: /RegisterAdmin/
-        [ChildActionOnly]
+
         public ActionResult Index()
         {
             if (DataProvider<UserProfile>.GetAll().Count(x => x.Role == "Admin" || x.Role == "AdminTeacher") == 0)
             {
-                AccountController.TaoTaiKhoan(new RegisterModel
+                AccountController.TaoTaiKhoan(new RegisterModel()
                 {
                     MaGv = " ",
                     Password = "123456",
@@ -24,7 +31,6 @@ namespace TkbThucHanhCNTT.Controllers
             }
             return RedirectToAction("Login", "Account");
         }
-
 //        public ActionResult Index()
 //        {
 //            if(DataProvider<UserProfile>.GetAll().Count(x => x.Role=="AdminTeacher")==0)
@@ -65,5 +71,6 @@ namespace TkbThucHanhCNTT.Controllers
 //            }
 //            return View(register);
 //        }
+
     }
 }

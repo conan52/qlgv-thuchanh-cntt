@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using NPOI.HSSF.UserModel;
-using NPOI.HSSF.Util;
 using NPOI.SS.UserModel;
-using NPOI.SS.Util;
 using TkbThucHanhCNTT.Models;
-using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Provider;
+using TkbThucHanhCNTT.Models.Enums;
+using NPOI.SS.Util;
+using NPOI.HSSF.Util;
 using TkbThucHanhCNTT.Models.Ultils;
 
 namespace TkbThucHanhCNTT.Controllers
@@ -25,66 +24,68 @@ namespace TkbThucHanhCNTT.Controllers
         [Authorize(Roles = "AdminTeacher")]
         public ActionResult Index()
         {
-            ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new {gv.HoVaTen, gv.MaGv});
-            ViewData["MonHocs"] = DataProvider<MonHoc>.GetAll().Select(t => new {t.TenMonHoc, t.MaMonHoc, t.TenThucHanh, t.MonHocId});
-            ViewData["Lops"] = DataProvider<Lop>.GetAll().Select(l => new {l.TenLop});
-            ViewData["Phongs"] = DataProvider<PhongThucHanh>.GetAll().Select(p => new {p.TenPhong});
-            ViewData["TuanCoTkb"] = DataProvider<TuanHoc>.GetList(t => t.LichThucHanhs.Any(), t => t.LichThucHanhs).Select(t => t.SttTuan);
-            ViewData["TuanChuaCoTkb"] = DataProvider<TuanHoc>.GetList(t => !t.LichThucHanhs.Any() && t.NgayKetThuc >= DateTime.Now, t => t.LichThucHanhs).Select(t => t.SttTuan);
+            this.ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
+            this.ViewData["MonHocs"] = DataProvider<MonHoc>.GetAll().Select(t => new { t.TenMonHoc, t.MaMonHoc, t.TenThucHanh, t.MonHocId });
+            this.ViewData["Lops"] = DataProvider<Lop>.GetAll().Select(l => new { l.TenLop });
+            this.ViewData["Phongs"] = DataProvider<PhongThucHanh>.GetAll().Select(p => new { p.TenPhong });
+            this.ViewData["TuanCoTkb"] = DataProvider<TuanHoc>.GetList(t => t.LichThucHanhs.Any(), t => t.LichThucHanhs).Select(t => t.SttTuan);
+            this.ViewData["TuanChuaCoTkb"] = DataProvider<TuanHoc>.GetList(t => !t.LichThucHanhs.Any() && t.NgayKetThuc >= DateTime.Now, t => t.LichThucHanhs).Select(t => t.SttTuan);
 
-            IList<TuanHoc> dsTuan = DataProvider<TuanHoc>.GetAll();
-            ViewData["Tuans"] = dsTuan.Select(t => new {t.SttTuan});
+            var dsTuan = DataProvider<TuanHoc>.GetAll();
+            this.ViewData["Tuans"] = dsTuan.Select(t => new { t.SttTuan });
             if (dsTuan.Any(t => t.NgayBatDau > DateTime.Now))
-                ViewData["TuanMoiNhat"] = dsTuan.First(t => t.NgayBatDau > DateTime.Now).SttTuan;
+                this.ViewData["TuanMoiNhat"] = dsTuan.First(t => t.NgayBatDau > DateTime.Now).SttTuan;
             else
-                ViewData["TuanMoiNhat"] = 0;
+                this.ViewData["TuanMoiNhat"] = 0;
 
-            return View();
+            return this.View();
         }
 
         [Authorize(Roles = "Teacher, AdminTeacher")]
         public ActionResult LichThucHanhGV()
         {
-            ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new {gv.HoVaTen, gv.MaGv});
-            ViewData["MonHocs"] = DataProvider<MonHoc>.GetAll().Select(t => new {t.TenMonHoc, t.MaMonHoc, t.TenThucHanh, t.MonHocId});
-            ViewData["Lops"] = DataProvider<Lop>.GetAll().Select(l => new {l.TenLop});
-            ViewData["Phongs"] = DataProvider<PhongThucHanh>.GetAll().Select(p => new {p.TenPhong});
-            ViewData["TuanCoTkb"] = DataProvider<TuanHoc>.GetList(t => t.LichThucHanhs.Any(), t => t.LichThucHanhs).Select(t => t.SttTuan);
-            ViewData["TuanChuaCoTkb"] = DataProvider<TuanHoc>.GetList(t => !t.LichThucHanhs.Any() && t.NgayKetThuc >= DateTime.Now, t => t.LichThucHanhs).Select(t => t.SttTuan);
+            this.ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
+            this.ViewData["MonHocs"] = DataProvider<MonHoc>.GetAll().Select(t => new { t.TenMonHoc, t.MaMonHoc, t.TenThucHanh, t.MonHocId });
+            this.ViewData["Lops"] = DataProvider<Lop>.GetAll().Select(l => new { l.TenLop });
+            this.ViewData["Phongs"] = DataProvider<PhongThucHanh>.GetAll().Select(p => new { p.TenPhong });
+            this.ViewData["TuanCoTkb"] = DataProvider<TuanHoc>.GetList(t => t.LichThucHanhs.Any(), t => t.LichThucHanhs).Select(t => t.SttTuan);
+            this.ViewData["TuanChuaCoTkb"] = DataProvider<TuanHoc>.GetList(t => !t.LichThucHanhs.Any() && t.NgayKetThuc >= DateTime.Now, t => t.LichThucHanhs).Select(t => t.SttTuan);
 
-            IList<TuanHoc> dsTuan = DataProvider<TuanHoc>.GetAll();
-            ViewData["Tuans"] = dsTuan.Select(t => new {t.SttTuan});
+            var dsTuan = DataProvider<TuanHoc>.GetAll();
+            this.ViewData["Tuans"] = dsTuan.Select(t => new { t.SttTuan });
             if (dsTuan.Any(t => t.NgayBatDau > DateTime.Now))
-                ViewData["TuanMoiNhat"] = dsTuan.First(t => t.NgayBatDau > DateTime.Now).SttTuan;
+                this.ViewData["TuanMoiNhat"] = dsTuan.First(t => t.NgayBatDau > DateTime.Now).SttTuan;
             else
-                ViewData["TuanMoiNhat"] = 0;
+                this.ViewData["TuanMoiNhat"] = 0;
 
-            return View();
+            return this.View();
         }
 
-        [Authorize(Roles = "AdminTeacher, Teacher")]
-        public ActionResult LayDsTuan([DataSourceRequest] DataSourceRequest request)
+            [Authorize(Roles = "AdminTeacher, Teacher")]
+        public ActionResult LayDsTuan([DataSourceRequest]
+                                      DataSourceRequest request)
         {
-            IOrderedEnumerable<int> dsTuan =
+            var dsTuan =
                 DataProvider<TuanHoc>.GetList(t => t.LichThucHanhs != null && t.LichThucHanhs.Count > 0)
-                    .Select(t => t.SttTuan)
-                    .OrderByDescending(t => t);
-            return Json(dsTuan, JsonRequestBehavior.AllowGet);
+                                     .Select(t => t.SttTuan)
+                                     .OrderByDescending(t => t);
+            return this.Json(dsTuan, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "Teacher, AdminTeacher")]
-        public JsonResult AjaxReadData_Limit([DataSourceRequest] DataSourceRequest request)
+        public JsonResult AjaxReadData_Limit([DataSourceRequest]
+                                       DataSourceRequest request)
         {
-            IOrderedEnumerable<LichThucHanh> result = DataProvider<LichThucHanh>.GetAll(l => l.MonHoc, l => l.GiangVien1, l => l.GiangVien2, l => l.GiangVien3)
-                .OrderByDescending(t => t.SttTuan)
-                .ThenBy(t => t.NgayTrongTuan)
-                .ThenBy(t => t.TietBatDau)
-                .ThenBy(t => t.TietKetThuc);
-            string maGv = StaticValue.MaGv;
-            IEnumerable<LichThucHanh> r = result.Where(l => l.Gvhd1 != null && l.Gvhd1.Equals(maGv, StringComparison.CurrentCultureIgnoreCase) ||
-                                                            l.Gvhd2 != null && l.Gvhd2.Equals(maGv, StringComparison.CurrentCultureIgnoreCase) ||
-                                                            l.Gvhd3 != null && l.Gvhd3.Equals(maGv, StringComparison.CurrentCultureIgnoreCase));
-            return Json(r.ToDataSourceResult(request, l => new
+            var result = DataProvider<LichThucHanh>.GetAll(l => l.MonHoc, l => l.GiangVien1, l => l.GiangVien2, l => l.GiangVien3)
+                                                   .OrderByDescending(t => t.SttTuan)
+                                                   .ThenBy(t => t.NgayTrongTuan)
+                                                   .ThenBy(t => t.TietBatDau)
+                                                   .ThenBy(t => t.TietKetThuc);
+            string maGv = Models.Ultils.StaticValue.MaGv;
+            var r = result.Where(l =>  l.Gvhd1!=null&& l.Gvhd1.Equals(maGv, StringComparison.CurrentCultureIgnoreCase) ||
+                                     l.Gvhd2 != null && l.Gvhd2.Equals(maGv, StringComparison.CurrentCultureIgnoreCase) ||
+                                     l.Gvhd3 != null && l.Gvhd3.Equals(maGv, StringComparison.CurrentCultureIgnoreCase));
+            return this.Json(r.ToDataSourceResult(request, l => new 
             {
                 l.MaLichTh,
                 l.TenLop,
@@ -106,19 +107,21 @@ namespace TkbThucHanhCNTT.Controllers
                 TenGv1 = l.Gvhd1 != null ? l.GiangVien1.HoVaTen : null,
                 TenGv2 = l.Gvhd2 != null ? l.GiangVien2.HoVaTen : null,
                 TenGv3 = l.Gvhd3 != null ? l.GiangVien3.HoVaTen : null
+
             }), JsonRequestBehavior.AllowGet);
         }
 
-        [Authorize(Roles = "AdminTeacher")]
-        public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
+            [Authorize(Roles = "AdminTeacher")]
+        public JsonResult AjaxReadData([DataSourceRequest]
+                                       DataSourceRequest request)
         {
-            IOrderedEnumerable<LichThucHanh> result = DataProvider<LichThucHanh>.GetAll(l => l.MonHoc, l => l.GiangVien1, l => l.GiangVien2, l => l.GiangVien3)
-                .OrderByDescending(t => t.SttTuan)
-                .ThenBy(t => t.NgayTrongTuan)
-                .ThenBy(t => t.TietBatDau)
-                .ThenBy(t => t.TietKetThuc);
+            var result = DataProvider<LichThucHanh>.GetAll(l => l.MonHoc, l => l.GiangVien1, l => l.GiangVien2, l => l.GiangVien3)
+                                                   .OrderByDescending(t => t.SttTuan)
+                                                   .ThenBy(t => t.NgayTrongTuan)
+                                                   .ThenBy(t => t.TietBatDau)
+                                                   .ThenBy(t => t.TietKetThuc);
 
-            return Json(result.ToDataSourceResult(request, l => new
+            return this.Json(result.ToDataSourceResult(request, l => new
             {
                 l.MaLichTh,
                 l.TenLop,
@@ -140,20 +143,23 @@ namespace TkbThucHanhCNTT.Controllers
                 TenGv1 = l.Gvhd1 != null ? l.GiangVien1.HoVaTen : null,
                 TenGv2 = l.Gvhd2 != null ? l.GiangVien2.HoVaTen : null,
                 TenGv3 = l.Gvhd3 != null ? l.GiangVien3.HoVaTen : null
+            
             }));
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+            [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxUpdate([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IEnumerable<LichThucHanh> ls)
+        public ActionResult AjaxUpdate([DataSourceRequest]
+                                       DataSourceRequest request, [Bind(Prefix = "models")]
+                                       IEnumerable<LichThucHanh> ls)
         {
             var results = new List<LichThucHanh>();
 
-            if (ls != null && ModelState.IsValid)
+            if (ls != null && this.ModelState.IsValid)
             {
-                foreach (LichThucHanh l in ls)
+                foreach (var l in ls)
                 {
-                    if (l != null && ModelState.IsValid)
+                    if (l != null && this.ModelState.IsValid)
                     {
                         if (l.Gvhd2 != null && (l.Gvhd2.Length <= 2 || l.Gvhd2.Contains("]")))
                             l.Gvhd2 = null;
@@ -164,20 +170,22 @@ namespace TkbThucHanhCNTT.Controllers
                 }
             }
             DataProvider<LichThucHanh>.Update(results);
-            return Json(results.ToDataSourceResult(request, ModelState));
+            return this.Json(results.ToDataSourceResult(request, ModelState));
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+            [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IEnumerable<LichThucHanh> ls)
+        public ActionResult AjaxCreate([DataSourceRequest]
+                                       DataSourceRequest request, [Bind(Prefix = "models")]
+                                       IEnumerable<LichThucHanh> ls)
         {
             var results = new List<LichThucHanh>();
 
-            if (ls != null && ModelState.IsValid)
+            if (ls != null && this.ModelState.IsValid)
             {
-                foreach (LichThucHanh l in ls)
+                foreach (var l in ls)
                 {
-                    if (l != null && ModelState.IsValid)
+                    if (l != null && this.ModelState.IsValid)
                     {
                         l.Gv1CoMat = l.Gv2CoMat = l.Gv3CoMat = true;
                         if (l.Gvhd2 != null && l.Gvhd2.Length <= 2)
@@ -189,29 +197,31 @@ namespace TkbThucHanhCNTT.Controllers
                 }
             }
             DataProvider<LichThucHanh>.Add(results);
-            return Json(results.ToDataSourceResult(request, ModelState));
+            return this.Json(results.ToDataSourceResult(request, ModelState));
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+            [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IEnumerable<LichThucHanh> ls)
+        public ActionResult AjaxDelete([DataSourceRequest]
+                                       DataSourceRequest request, [Bind(Prefix = "models")]
+                                       IEnumerable<LichThucHanh> ls)
         {
-            List<LichThucHanh> results = ls.ToList();
+            var results = ls.ToList();
             DataProvider<LichThucHanh>.Remove(results);
-            return Json(results.ToDataSourceResult(request, ModelState));
+            return this.Json(results.ToDataSourceResult(request, ModelState));
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+            [Authorize(Roles = "AdminTeacher")]
         public JsonResult DongBoLichThucHanh()
         {
             try
             {
-                IList<PhanCongGiangDay> phancong = DataProvider<PhanCongGiangDay>.GetAll(p => p.MonHoc);
-                IList<PhongThucHanh> phongTh = DataProvider<PhongThucHanh>.GetAll();
-                IList<TkbGiangVien> tkbgv = DataProvider<TkbGiangVien>.GetList(t => !t.TuanHoc.DaXepLichThucHanh && phongTh.Any(p => p.TenPhong == t.Phong), t => t.TuanHoc);
+                var phancong = DataProvider<PhanCongGiangDay>.GetAll(p => p.MonHoc);
+                var phongTh = DataProvider<PhongThucHanh>.GetAll();
+                var tkbgv = DataProvider<TkbGiangVien>.GetList(t => !t.TuanHoc.DaXepLichThucHanh && phongTh.Any(p => p.TenPhong == t.Phong), t => t.TuanHoc);
 
                 int n = 0;
-                foreach (TkbGiangVien tkb in tkbgv)
+                foreach (var tkb in tkbgv)
                 {
                     try
                     {
@@ -230,8 +240,8 @@ namespace TkbThucHanhCNTT.Controllers
                             Gv3CoMat = true
                         };
 
-                        PhanCongGiangDay pc = phancong.SingleOrDefault(p => p.MonHoc.TenThucHanh.RemoveCase().StartsWith(tkb.TenMonHoc.RemoveCase()) && p.TenLop == tkb.LopHoc);
-
+                        var pc = phancong.SingleOrDefault(p => p.MonHoc.TenThucHanh.RemoveCase().StartsWith(tkb.TenMonHoc.RemoveCase()) && p.TenLop == tkb.LopHoc);
+                     
                         if (pc != null)
                         {
                             lichTh.MonHocId = pc.MonHocId;
@@ -242,7 +252,7 @@ namespace TkbThucHanhCNTT.Controllers
                         }
                         else
                         {
-                            Debug.WriteLine("{0}\t{1}\t{2}", tkb.TenMonHoc, tkb.MaGv, tkb.LopHoc);
+                            System.Diagnostics.Debug.WriteLine("{0}\t{1}\t{2}", tkb.TenMonHoc, tkb.MaGv, tkb.LopHoc);
                             throw new FormatException("Không nhận dạng được môn học hoặc không có trong phân công");
                         }
                     }
@@ -255,11 +265,11 @@ namespace TkbThucHanhCNTT.Controllers
                     }
                 }
 
-                return Json(new {Result = "OK", Message = n});
+                return this.Json(new { Result = "OK", Message = n });
             }
             catch (Exception ex)
             {
-                return Json(new {Result = "Fail", ex.Message});
+                return this.Json(new { Result = "Fail", ex.Message });
             }
         }
 
@@ -267,39 +277,39 @@ namespace TkbThucHanhCNTT.Controllers
         {
             try
             {
-                LichThucHanh lichTh = DataProvider<LichThucHanh>.GetSingle(l => l.MaLichTh == lichHocId);
+                var lichTh = DataProvider<LichThucHanh>.GetSingle(l => l.MaLichTh == lichHocId);
                 lichTh.Gv1CoMat = gv1;
                 lichTh.Gv2CoMat = gv2;
                 lichTh.Gv3CoMat = gv3;
 
                 DataProvider<LichThucHanh>.Update(lichTh);
-                return Json(new {Result = "OK"});
+                return this.Json(new { Result = "OK" });
             }
             catch (Exception ex)
             {
-                return Json(new {Result = "Fail", ex.Message});
+                return this.Json(new { Result = "Fail", ex.Message });
             }
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+            [Authorize(Roles = "AdminTeacher")]
         public JsonResult SaoChepLich(int tuTuan, int denTuan)
         {
             try
             {
-                IList<LichThucHanh> dsLichCanChep = DataProvider<LichThucHanh>.GetList(l => l.SttTuan == tuTuan);
+                var dsLichCanChep = DataProvider<LichThucHanh>.GetList(l => l.SttTuan == tuTuan);
                 var result = new List<LichThucHanh>();
 
-                foreach (LichThucHanh lth in dsLichCanChep)
+                foreach (var lth in dsLichCanChep)
                 {
-                    var l = new LichThucHanh
+                    LichThucHanh l = new LichThucHanh()
                     {
                         Gv1CoMat = true,
                         Gv2CoMat = true,
                         Gv3CoMat = true,
                         Gvhd1 = lth.Gvhd1,
 
-                        // Gvhd2 = lth.Gvhd2 ?? null,
-                        // Gvhd3 = lth.Gvhd3 ?? null,
+                       // Gvhd2 = lth.Gvhd2 ?? null,
+                       // Gvhd3 = lth.Gvhd3 ?? null,
                         MonHocId = lth.MonHocId,
                         NgayTrongTuan = lth.NgayTrongTuan,
                         SttTuan = denTuan,
@@ -316,28 +326,28 @@ namespace TkbThucHanhCNTT.Controllers
                 }
                 DataProvider<LichThucHanh>.Add(result);
 
-                return Json(new {Result = "OK", Message = result.Count});
+                return this.Json(new { Result = "OK", Message = result.Count });
             }
             catch (Exception ex)
             {
-                return Json(new {Result = "Fail", ex.Message});
+                return this.Json(new { Result = "Fail", ex.Message });
             }
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+            [Authorize(Roles = "AdminTeacher")]
         public JsonResult TuPhanCong(int chonTuan)
         {
             try
             {
-                IList<LichThucHanh> all = DataProvider<LichThucHanh>.GetAll();
-                List<LichThucHanh> dsLichCanChep = all.Where(l => l.SttTuan == chonTuan).ToList();
-                foreach (LichThucHanh lth in dsLichCanChep)
+                var all = DataProvider<LichThucHanh>.GetAll();
+                var dsLichCanChep = all.Where(l => l.SttTuan == chonTuan).ToList();
+                foreach (var lth in dsLichCanChep)
                 {
-                    IEnumerable<string> dsGvRanh = FilterController.LayDsGvRanh(lth.SttTuan, lth.NgayTrongTuan, lth.TietBatDau, lth.TietKetThuc);
+                    var dsGvRanh = FilterController.LayDsGvRanh(lth.SttTuan, lth.NgayTrongTuan, lth.TietBatDau, lth.TietKetThuc);
                     if (lth.Gvhd1 == null)
                     {
-                        IEnumerable<string> lt = all.Where(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd1 != null)
-                            .Select(l => l.Gvhd1).Intersect(dsGvRanh);
+                        var lt = all.Where(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd1 != null)
+                            .Select(l=>l.Gvhd1).Intersect(dsGvRanh);
                         if (lt.Any())
                             lth.Gvhd1 = lt.First();
                         else
@@ -345,40 +355,41 @@ namespace TkbThucHanhCNTT.Controllers
                     }
                     if (lth.Gvhd2 == null)
                     {
-                        IEnumerable<string> lt = all.Where(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd2 != null)
+                        var lt = all.Where(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd2 != null)
                             .Select(l => l.Gvhd1).Intersect(dsGvRanh);
                         if (lt.Any())
                             lth.Gvhd2 = lt.First();
                     }
                     if (lth.Gvhd3 == null)
                     {
-                        IEnumerable<string> lt = all.Where(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd3 != null)
-                            .Select(l => l.Gvhd1).Intersect(dsGvRanh);
+                        var lt = all.Where(l => l.MonHocId == lth.MonHocId && l.TenLop == lth.TenLop && l.Gvhd3 != null)
+                        .Select(l => l.Gvhd1).Intersect(dsGvRanh);
                         if (lt != null)
                             lth.Gvhd3 = lt.First();
                     }
                 }
                 DataProvider<LichThucHanh>.Update(dsLichCanChep);
 
-                return Json(new {Result = "OK", Message = dsLichCanChep.Count});
+                return this.Json(new { Result = "OK", Message = dsLichCanChep.Count });
             }
             catch (Exception ex)
             {
-                return Json(new {Result = "Fail", ex.Message});
+                return this.Json(new { Result = "Fail", ex.Message });
             }
         }
 
-        [Authorize(Roles = "AdminTeacher")]
+            [Authorize(Roles = "AdminTeacher")]
         public ActionResult XuatExcel(int tuanXuat)
         {
-            List<LichThucHanh> lth = DataProvider<LichThucHanh>.GetList(l => l.SttTuan == tuanXuat, l => l.MonHoc, l => l.GiangVien1, l => l.GiangVien2, l => l.GiangVien3, l => l.TuanHoc)
+
+            var lth = DataProvider<LichThucHanh>.GetList(l => l.SttTuan == tuanXuat, l => l.MonHoc, l => l.GiangVien1, l => l.GiangVien2, l => l.GiangVien3, l => l.TuanHoc)
                 .OrderBy(l => l.SttTuan)
-                .ThenBy(l => (int) l.NgayTrongTuan)
+                .ThenBy(l => (int)l.NgayTrongTuan)
                 .ToList();
 
 
             var workbook = new HSSFWorkbook();
-            ISheet sheet = workbook.CreateSheet("Tuan" + tuanXuat);
+            var sheet = workbook.CreateSheet("Tuan" + tuanXuat);
             int numRow = 0;
             ICellStyle blackBorder = workbook.CreateCellStyle();
             blackBorder.BorderBottom = BorderStyle.Thin;
@@ -391,8 +402,12 @@ namespace TkbThucHanhCNTT.Controllers
             blackBorder.TopBorderColor = HSSFColor.Black.Index;
 
             blackBorder.FillPattern = FillPattern.SolidForeground;
-            blackBorder.FillForegroundColor = HSSFColor.Grey40Percent.Index;
-            blackBorder.FillBackgroundColor = HSSFColor.Grey40Percent.Index;
+            blackBorder.FillForegroundColor = NPOI.HSSF.Util.HSSFColor.Grey40Percent.Index;
+            blackBorder.FillBackgroundColor = NPOI.HSSF.Util.HSSFColor.Grey40Percent.Index;
+
+
+
+
 
 
             AddRow(ref numRow, "TRƯỜNG ĐẠI HỌC ĐÀ LẠT", sheet, 3);
@@ -402,36 +417,39 @@ namespace TkbThucHanhCNTT.Controllers
 
             numRow++;
 
-            var columns = new[] {"Thứ", "Tiết", "Tên môn học", "Lớp", "Phòng", "GVHD 1", "GVHD 2", "GVHD 3", "Ghi chú", "GV vắng"};
-            IRow headerRow = sheet.CreateRow(numRow++);
+            var columns = new[] { "Thứ", "Tiết", "Tên môn học", "Lớp", "Phòng", "GVHD 1", "GVHD 2", "GVHD 3", "Ghi chú", "GV vắng" };
+            var headerRow = sheet.CreateRow(numRow++);
+
 
 
             //create header
             for (int i = 0; i < columns.Length; i++)
             {
-                ICell cell = headerRow.CreateCell(i);
+                var cell = headerRow.CreateCell(i);
                 cell.SetCellValue(columns[i]);
                 //  cell.CellStyle=
 
 
-                IFont font = workbook.CreateFont();
+                var font = workbook.CreateFont();
 
                 font.FontHeightInPoints = 11;
                 font.FontName = "Calibri";
-                font.Boldweight = (short) FontBoldWeight.Bold;
+                font.Boldweight = (short)NPOI.SS.UserModel.FontBoldWeight.Bold;
                 cell.CellStyle = blackBorder;
                 cell.CellStyle.SetFont(font);
+
+
             }
-            sheet.SetColumnWidth(0, 10*256);
-            sheet.SetColumnWidth(1, 10*256);
-            sheet.SetColumnWidth(2, 30*256);
-            sheet.SetColumnWidth(3, 10*256);
-            sheet.SetColumnWidth(4, 10*256);
-            sheet.SetColumnWidth(5, 15*256);
-            sheet.SetColumnWidth(6, 15*256);
-            sheet.SetColumnWidth(7, 15*256);
-            sheet.SetColumnWidth(8, 30*256);
-            sheet.SetColumnWidth(9, 30*256);
+            sheet.SetColumnWidth(0, 10 * 256);
+            sheet.SetColumnWidth(1, 10 * 256);
+            sheet.SetColumnWidth(2, 30 * 256);
+            sheet.SetColumnWidth(3, 10 * 256);
+            sheet.SetColumnWidth(4, 10 * 256);
+            sheet.SetColumnWidth(5, 15 * 256);
+            sheet.SetColumnWidth(6, 15 * 256);
+            sheet.SetColumnWidth(7, 15 * 256);
+            sheet.SetColumnWidth(8, 30 * 256);
+            sheet.SetColumnWidth(9, 30 * 256);
 
 
             // fill content 
@@ -449,7 +467,7 @@ namespace TkbThucHanhCNTT.Controllers
 
             for (int i = 0; i < lth.Count; i++)
             {
-                IRow row = sheet.CreateRow(numRow);
+                NPOI.SS.UserModel.IRow row = sheet.CreateRow(numRow);
 
                 if (i > 0 && lth[i].NgayTrongTuan == lth[i - 1].NgayTrongTuan)
                 {
@@ -461,6 +479,7 @@ namespace TkbThucHanhCNTT.Controllers
                     SetValue(row, lth[i], cellBorder);
                 }
                 numRow++;
+
             }
 
             var stream = new MemoryStream();
@@ -471,7 +490,8 @@ namespace TkbThucHanhCNTT.Controllers
         }
 
 
-        private void AddRow(ref int numRow, string context, ISheet sheet, int colSpan = 1, short size = 13)
+
+        void AddRow(ref int numRow, string context, ISheet sheet, int colSpan = 1, short size = 13)
         {
             IFont font = sheet.Workbook.CreateFont();
             font.Color = HSSFColor.Black.Index;
@@ -485,13 +505,15 @@ namespace TkbThucHanhCNTT.Controllers
             style.SetFont(font);
 
             sheet.AddMergedRegion(new CellRangeAddress(numRow, numRow, 0, colSpan - 1));
-            ICell cell = sheet.CreateRow(numRow++).CreateCell(0);
+            var cell = sheet.CreateRow(numRow++).CreateCell(0);
 
             cell.SetCellValue(context);
             cell.CellStyle = style;
+
+
         }
 
-        private void SetValue(IRow row, LichThucHanh l, ICellStyle style, bool merge = false)
+        void SetValue(NPOI.SS.UserModel.IRow row, LichThucHanh l, ICellStyle style, bool merge = false)
         {
             if (merge)
                 AddBlank(row);
@@ -508,14 +530,14 @@ namespace TkbThucHanhCNTT.Controllers
             AddCell(row, l.Vang, style);
         }
 
-        private void AddBlank(IRow row)
+        void AddBlank(NPOI.SS.UserModel.IRow row)
         {
-            ICell cell = row.CreateCell(row.Cells.Count);
-        }
+            var cell = row.CreateCell(row.Cells.Count);
 
-        private void AddCell(IRow row, string value, ICellStyle style)
+        }
+        void AddCell(NPOI.SS.UserModel.IRow row, string value, ICellStyle style)
         {
-            ICell cell = row.CreateCell(row.Cells.Count);
+            var cell = row.CreateCell(row.Cells.Count);
             cell.SetCellValue(value);
 
             cell.CellStyle = style;

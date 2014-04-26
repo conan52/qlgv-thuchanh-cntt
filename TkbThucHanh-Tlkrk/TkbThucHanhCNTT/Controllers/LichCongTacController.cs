@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using TkbThucHanhCNTT.Models;
+using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Provider;
 
 namespace TkbThucHanhCNTT.Controllers
@@ -16,7 +19,7 @@ namespace TkbThucHanhCNTT.Controllers
 
         public ActionResult Index()
         {
-            ViewData["GiangViens"] = DataProvider<GiangVien>.GetAll().Select(gv => new {gv.HoVaTen, gv.MaGv});
+            ViewData["GiangViens"] = DataProvider<GiangVien>.GetAll().Select(gv => new { gv.HoVaTen, gv.MaGv });
             return View();
         }
 
@@ -34,7 +37,7 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            var result = DataProvider<LichCongTac>.GetAll().Select(ct => new {ct.MaGv, ct.ThoiGianBd, ct.ThoiGianKt, ct.LyDo, ct.LichCongTacId});
+            var result = DataProvider<LichCongTac>.GetAll().Select(ct=>new {ct.MaGv,ct.ThoiGianBd, ct.ThoiGianKt, ct.LyDo, ct.LichCongTacId});
             return Json(result.ToDataSourceResult(request));
         }
 
@@ -42,20 +45,21 @@ namespace TkbThucHanhCNTT.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, int LichCongTacId, string MaGv, string LyDo, string ThoiGianBd, string ThoiGianKt)
         {
-            var lct = new LichCongTac
+            var lct = new LichCongTac()
             {
-                LyDo = LyDo,
-                MaGv = MaGv,
-                ThoiGianBd = getDateTime(ThoiGianBd),
+                LyDo=LyDo,
+                MaGv=MaGv    ,
+                ThoiGianBd=getDateTime(ThoiGianBd),
                 ThoiGianKt = getDateTime(ThoiGianKt)
             };
 
-            DataProvider<LichCongTac>.Add(lct);
+                DataProvider<LichCongTac>.Add(lct);
 
-            return Json(new[] {lct}.ToDataSourceResult(request, ModelState));
+            return Json(new[] { lct }.ToDataSourceResult(request, ModelState));
+         
         }
 
-        private DateTime getDateTime(string d)
+        DateTime getDateTime(string d)
         {
             string s = d.Substring(0, 10);
             return DateTime.ParseExact(s, "dd/MM/yyyy", null);
@@ -64,9 +68,10 @@ namespace TkbThucHanhCNTT.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, int LichCongTacId, string MaGv, string LyDo, string ThoiGianBd, string ThoiGianKt)
         {
-            var lct = new LichCongTac
+
+            var lct = new LichCongTac()
             {
-                LichCongTacId = LichCongTacId,
+                LichCongTacId=LichCongTacId,
                 LyDo = LyDo,
                 MaGv = MaGv,
                 ThoiGianBd = getDateTime(ThoiGianBd),
@@ -75,7 +80,8 @@ namespace TkbThucHanhCNTT.Controllers
 
             DataProvider<LichCongTac>.Update(lct);
 
-            return Json(new[] {lct}.ToDataSourceResult(request, ModelState));
+            return Json(new[] { lct }.ToDataSourceResult(request, ModelState));
         }
+
     }
 }
