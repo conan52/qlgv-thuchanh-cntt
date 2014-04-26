@@ -30,7 +30,7 @@
     }
 
     function lammoidulieu() {
-        if (confirm("Do you really want to delete selected job/s?")) {
+        if (confirm("Bạn có chắc chắn muốn làm mới dữ liệu?")) {
             $.post('@Url.Action("ResetCauHinh", "Account")')
                 .done(function(data) {
                     hideLoadingDialog();
