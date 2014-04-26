@@ -1,4 +1,5 @@
-﻿@using TkbThucHanhCNTT.Models.Ultils
+﻿@using System.Collections
+@using TkbThucHanhCNTT.Models.Ultils
 @using TkbThucHanhCNTT.Models.Viewer
 @{
     ViewBag.Title = "Giảng viên";
@@ -10,7 +11,7 @@
           {
               columns.Bound(c => c.MaGv).Width(15);
               columns.Bound(c => c.HoVaTen);
-              columns.ForeignKey(p => p.ChuyenNganh, (System.Collections.IEnumerable)ViewData["ChuyenNganhs"], "Value", "Description").Width(12);
+              columns.ForeignKey(p => p.ChuyenNganh, (IEnumerable) ViewData["ChuyenNganhs"], "Value", "Description").Width(12);
               columns.Bound(c => c.TaiKhoan).Width(20);
               columns.Bound(c => c.CoThePhanCong).ClientTemplate("<input type='checkbox' id='CoThePhanCong' name='CoThePhanCong' disabled #if(CoThePhanCong){#checked#}# value='#=CoThePhanCong#' />").Width(7);
               columns.Command(command =>
@@ -20,11 +21,11 @@
               }).Width(172);
           })
           .ToolBar(toolbar => toolbar.Create().Text("Thêm giảng viên"))
-                  .Editable(e =>
-                  {
-                      e.Mode(GridEditMode.PopUp);
-                      e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
-                  })
+          .Editable(e =>
+          {
+              e.Mode(GridEditMode.PopUp);
+              e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
+          })
           .Sortable()
           .Pageable(pageable =>
           {
@@ -32,7 +33,7 @@
               pageable.PageSizes(true);
           })
           .Selectable()
-            //  .Scrollable()
+          //  .Scrollable()
           .DataSource(dataSource => dataSource
               .Ajax()
               .PageSize(StaticValue.PageNumber)
@@ -49,9 +50,9 @@
     function error_handler(e) {
         if (e.errors) {
             var message = "Lỗi:\n";
-            $.each(e.errors, function (key, value) {
+            $.each(e.errors, function(key, value) {
                 if ('errors' in value) {
-                    $.each(value.errors, function () {
+                    $.each(value.errors, function() {
                         message += this + "\n";
                     });
                 }
@@ -60,6 +61,7 @@
             refreshData();
         }
     }
+
     function refreshData() {
         $('#GridView').data('kendoGrid').dataSource.read();
         $('#GridView').data('kendoGrid').refresh();

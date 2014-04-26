@@ -55,7 +55,7 @@ function locMaGv2() {
         TietKetThuc: model.TietKetThuc,
         GvA: model.Gvhd1,
         GvB: model.Gvhd3,
-        ChuyenNganh : model.ChuyenNganh
+        ChuyenNganh: model.ChuyenNganh
     };
 };
 
@@ -68,7 +68,7 @@ function locMaGv3() {
         TietKetThuc: model.TietKetThuc,
         GvA: model.Gvhd1,
         GvB: model.Gvhd2,
-        ChuyenNganh : model.ChuyenNganh
+        ChuyenNganh: model.ChuyenNganh
     };
 };
 

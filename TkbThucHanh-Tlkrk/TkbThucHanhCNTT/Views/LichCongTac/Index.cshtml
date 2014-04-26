@@ -9,7 +9,7 @@
           .Name("GridView")
           .Columns(columns =>
           {
-              columns.ForeignKey(c => c.MaGv, (IEnumerable)ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Width(220);              
+              columns.ForeignKey(c => c.MaGv, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").Width(220);
               columns.Bound(c => c.ThoiGianBd).Format("{0:dd/MM/yyyy}").Width(17);
               columns.Bound(c => c.ThoiGianKt).Format("{0:dd/MM/yyyy}").Width(17);
               columns.Bound(c => c.LyDo);
@@ -20,11 +20,11 @@
               }).Width(172);
           })
           .ToolBar(toolbar => toolbar.Create().Text("Thêm lịch công tác"))
-                  .Editable(e =>
-                  {
-                      e.Mode(GridEditMode.PopUp);
-                      e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
-                  })
+          .Editable(e =>
+          {
+              e.Mode(GridEditMode.PopUp);
+              e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
+          })
           .Sortable()
           .Pageable(pageable =>
           {
@@ -35,7 +35,7 @@
           //  .Scrollable()
           .DataSource(dataSource => dataSource
               .Ajax()
-                      .PageSize(StaticValue.PageNumber)
+              .PageSize(StaticValue.PageNumber)
 //              .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "LichCongTac"))
               .Create(update => update.Action("AjaxCreate", "LichCongTac"))

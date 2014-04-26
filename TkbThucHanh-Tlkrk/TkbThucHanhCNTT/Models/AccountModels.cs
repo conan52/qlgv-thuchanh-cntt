@@ -73,7 +73,7 @@ namespace TkbThucHanhCNTT.Models
     public class RegisterModel
     {
         [Required]
-        [CustomValidation(typeof(RegisterModel), "ValidateDuplicate")]
+        [CustomValidation(typeof (RegisterModel), "ValidateDuplicate")]
         [Display(Name = "Tên đăng nhập")]
         public string UserName { get; set; }
 

@@ -5,8 +5,8 @@
 }
 <legend>@ViewBag.header</legend>
 <div class="form-group">
-    @Html.Label("Số trang hiển thị", new { @class = "col-sm-2 control-label" })
-    @Html.Kendo().IntegerTextBox().Name("SotrangHIenThi").Min(10).Max(100).Value(StaticValue.PageNumber).HtmlAttributes(new { @id = "sotranghienthi" })
+    @Html.Label("Số trang hiển thị", new {@class = "col-sm-2 control-label"})
+    @Html.Kendo().IntegerTextBox().Name("SotrangHIenThi").Min(10).Max(100).Value(StaticValue.PageNumber).HtmlAttributes(new {@id = "sotranghienthi"})
     @Html.Kendo().Button().Name("LuuSoTrangHienThai").Content("Lưu").Events(e => e.Click("clickluusotrang"))
 </div>
 
@@ -32,19 +32,17 @@
     function lammoidulieu() {
         if (confirm("Do you really want to delete selected job/s?")) {
             $.post('@Url.Action("ResetCauHinh", "Account")')
-            .done(function (data) {
-                hideLoadingDialog();
-                if (data.Result == "OK") {
-                    ShowNotification(data.Message, "info");
-                    refreshData();
-                } else {
-                    ShowNotification(data.Message, "error");
-                }
-            });
-            }
-        else {
+                .done(function(data) {
+                    hideLoadingDialog();
+                    if (data.Result == "OK") {
+                        ShowNotification(data.Message, "info");
+                        refreshData();
+                    } else {
+                        ShowNotification(data.Message, "error");
+                    }
+                });
+        } else {
             return false;
         }
     }
 </script>
-        

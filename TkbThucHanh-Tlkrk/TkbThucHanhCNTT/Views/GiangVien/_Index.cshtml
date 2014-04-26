@@ -30,7 +30,7 @@
           //  .Scrollable()
           .DataSource(dataSource => dataSource
               .Ajax()
-                      .PageSize(StaticValue.PageNumber)
+              .PageSize(StaticValue.PageNumber)
               .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "GiangVien"))
               .Create(update => update.Action("AjaxCreate", "GiangVien"))
