@@ -58,8 +58,9 @@ namespace TkbThucHanhCNTT.Controllers
                     ChuyenNganh = gvmd.ChuyenNganh,
                     CoThePhanCong = gvmd.CoThePhanCong,
                     HoVaTen = gvmd.HoVaTen,
-                    UserProfileId = DataProvider<UserProfile>.GetSingle(x=>x.MaGv==gvmd.MaGv).UserId
                 };
+                if (gvmd.TaiKhoan != null)
+                    gv.UserProfileId = DataProvider<UserProfile>.GetSingle(x => x.MaGv == gvmd.MaGv).UserId;
                 DataProvider<GiangVien>.Update(gv);
             }
             return Json(ModelState.ToDataSourceResult());

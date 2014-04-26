@@ -89,6 +89,10 @@ namespace TkbThucHanhCNTT.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (DataProvider<UserProfile>.GetAll().Count(x => x.Role == "Admin" || x.Role == "AdminTeacher") == 0)
+            {
+                return RedirectToAction("Index", "RegisterAdmin");
+            }
             if (Request.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
@@ -105,7 +109,6 @@ namespace TkbThucHanhCNTT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            RedirectToAction("Index", "RegisterAdmin");
             if (ModelState.IsValid)
             {
                 var k = DataProvider<GiangVien>.GetAll(x => x.UserProfile)

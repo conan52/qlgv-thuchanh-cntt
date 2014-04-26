@@ -16,7 +16,6 @@ namespace TkbThucHanhCNTT.Controllers
     {
         //
         // GET: /RegisterAdmin/
-
         public ActionResult Index()
         {
             if (DataProvider<UserProfile>.GetAll().Count(x => x.Role == "Admin" || x.Role == "AdminTeacher") == 0)
