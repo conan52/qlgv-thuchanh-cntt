@@ -1,4 +1,4 @@
-﻿@using System.Collections
+﻿
 @using TkbThucHanhCNTT.Models
 @using TkbThucHanhCNTT.Models.Ultils
 @{
@@ -11,7 +11,7 @@
           {
               columns.Bound(c => c.TenLop);
               columns.Bound(c => c.NamNhapHoc);
-              columns.ForeignKey(c => c.TrinhDo, (IEnumerable) ViewData["TrinhDos"], "Name", "Description");
+              columns.ForeignKey(c => c.TrinhDo, (System.Collections.IEnumerable)ViewData["TrinhDos"], "Name", "Description");
               columns.Command(command =>
               {
                   command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
@@ -19,11 +19,11 @@
               }).Width(172);
           })
           .ToolBar(toolbar => toolbar.Create().Text("Thêm lớp học"))
-          .Editable(e =>
-          {
-              e.Mode(GridEditMode.PopUp);
-              e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
-          })
+                  .Editable(e =>
+                  {
+                      e.Mode(GridEditMode.PopUp);
+                      e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
+                  })
           .Sortable()
           .Pageable(pageable =>
           {
@@ -31,15 +31,15 @@
               pageable.PageSizes(true);
           })
           .Selectable()
-          //  .Scrollable()
+            //  .Scrollable()
           .DataSource(dataSource => dataSource
               .Ajax()
-              .PageSize(StaticValue.PageNumber)
+                      .PageSize(StaticValue.PageNumber)
               .Events(events => events.Error("error_handler"))
-              .Read(read => read.Action("AjaxReadData", "Lop"))
+                      .Read(read => read.Action("AjaxReadData", "Lop"))
               .Create(update => update.Action("AjaxCreate", "Lop"))
-              .Update(update => update.Action("Ajax_Update", "Lop"))
-              .Destroy(update => update.Action("AjaxDelete", "Lop"))
+                      .Update(update => update.Action("Ajax_Update", "Lop"))
+                      .Destroy(update => update.Action("AjaxDelete", "Lop"))
               .Model(model =>
               {
                   model.Id(l => l.TenLop);
@@ -54,9 +54,9 @@
     function error_handler(e) {
         if (e.errors) {
             var message = "Lỗi:\n";
-            $.each(e.errors, function(key, value) {
+            $.each(e.errors, function (key, value) {
                 if ('errors' in value) {
-                    $.each(value.errors, function() {
+                    $.each(value.errors, function () {
                         message += this + "\n";
                     });
                 }
@@ -65,7 +65,7 @@
             refreshData();
         }
     }
-
+    
     function refreshData() {
         $('#GridView').data('kendoGrid').dataSource.read();
         $('#GridView').data('kendoGrid').refresh();

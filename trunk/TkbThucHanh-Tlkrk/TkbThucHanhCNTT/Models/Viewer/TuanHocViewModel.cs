@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
 
 namespace TkbThucHanhCNTT.Models.Viewer
 {
     public class TuanHocViewModel
     {
-        [Key]
+        [KeyAttribute]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "STT Tuần")]
         [Required(ErrorMessage = "Tuần học không được để trống!")]

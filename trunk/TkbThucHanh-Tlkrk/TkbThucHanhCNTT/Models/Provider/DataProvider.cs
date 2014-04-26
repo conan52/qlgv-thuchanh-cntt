@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
-using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -22,7 +21,7 @@ namespace TkbThucHanhCNTT.Models.Provider
 
         public static IList<T> GetAll(params Expression<Func<T, object>>[] navigationProperties)
         {
-            var list = new List<T>();
+            List<T> list = new List<T>();
             using (var context = new TkbThucHanhContext())
             {
                 try
@@ -30,8 +29,8 @@ namespace TkbThucHanhCNTT.Models.Provider
                     IQueryable<T> dbQuery = context.Set<T>();
                     dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
                     list = dbQuery
-                        .AsNoTracking()
-                        .ToList();
+                                  .AsNoTracking()
+                                  .ToList();
                 }
                 catch (Exception)
                 {
@@ -50,9 +49,9 @@ namespace TkbThucHanhCNTT.Models.Provider
                 dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
 
                 list = dbQuery
-                    .AsNoTracking()
-                    .Where(where)
-                    .ToList();
+                              .AsNoTracking()
+                              .Where(where)
+                              .ToList();
             }
             return list;
         }
@@ -67,8 +66,8 @@ namespace TkbThucHanhCNTT.Models.Provider
                 dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
 
                 item = dbQuery
-                    .AsNoTracking()
-                    .FirstOrDefault(where);
+                              .AsNoTracking()
+                              .FirstOrDefault(where);
             }
             return item;
         }
@@ -84,7 +83,7 @@ namespace TkbThucHanhCNTT.Models.Provider
             {
                 using (var context = new TkbThucHanhContext())
                 {
-                    foreach (T item in items)
+                    foreach (var item in items)
                     {
                         context.Entry(item).State = EntityState.Added;
                     }
@@ -93,13 +92,13 @@ namespace TkbThucHanhCNTT.Models.Provider
             }
             catch (DbEntityValidationException e)
             {
-                foreach (DbEntityValidationResult eve in e.EntityValidationErrors)
+                foreach (var eve in e.EntityValidationErrors)
                 {
-                    Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                    System.Diagnostics.Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
                         eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (DbValidationError ve in eve.ValidationErrors)
+                    foreach (var ve in eve.ValidationErrors)
                     {
-                        Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                        System.Diagnostics.Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
                             ve.PropertyName, ve.ErrorMessage);
                     }
                 }
@@ -111,7 +110,7 @@ namespace TkbThucHanhCNTT.Models.Provider
         {
             using (var context = new TkbThucHanhContext())
             {
-                foreach (T item in items)
+                foreach (var item in items)
                 {
                     context.Entry(item).State = EntityState.Modified;
                 }
@@ -128,7 +127,7 @@ namespace TkbThucHanhCNTT.Models.Provider
         {
             using (var context = new TkbThucHanhContext())
             {
-                foreach (T item in items)
+                foreach (var item in items)
                 {
                     context.Entry(item).State = EntityState.Deleted;
                 }
@@ -145,8 +144,8 @@ namespace TkbThucHanhCNTT.Models.Provider
         {
             using (var context = new TkbThucHanhContext())
             {
-                IList<T> items = GetAll();
-                foreach (T item in items)
+                var items = GetAll();
+                foreach (var item in items)
                 {
                     context.Entry(item).State = EntityState.Deleted;
                 }

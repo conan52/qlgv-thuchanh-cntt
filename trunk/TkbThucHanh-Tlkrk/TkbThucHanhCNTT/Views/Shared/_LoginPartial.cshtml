@@ -1,9 +1,9 @@
 ﻿@if (Request.IsAuthenticated)
 {
     <a href="#" class="dropdown-toggle account" data-toggle="dropdown">
-        @*        <div class="avatar">*@
-        @*            <img src="img/avatar.jpg" class="img-rounded" alt="avatar" />*@
-        @*        </div>*@
+@*        <div class="avatar">*@
+@*            <img src="img/avatar.jpg" class="img-rounded" alt="avatar" />*@
+@*        </div>*@
         <i class="fa fa-angle-down"></i>
         <div class="user-mini pull-right profile">
             <span class="welcome">Xin chào,</span>
@@ -14,10 +14,10 @@
         @if (User.IsInRole("AdminTeacher"))
         {
             <li>
-                <a href="@Url.Action("CauHinhTrangWeb", "Account")">
-                    <i class="fa"></i>
-                    <span class="hidden-sm">Cấu hình</span>
-                </a>
+            <a href="@Url.Action("CauHinhTrangWeb", "Account")">
+                <i class="fa"></i>
+                <span class="hidden-sm">Cấu hình</span>
+            </a>
             </li>
         }
         <li>

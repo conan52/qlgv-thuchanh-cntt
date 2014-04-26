@@ -1,6 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
+using NPOI.SS.Formula.Functions;
 using TkbThucHanhCNTT.Models.Enums;
+using TkbThucHanhCNTT.Models.Ultils;
 
 namespace TkbThucHanhCNTT.Models.Viewer
 {
@@ -30,6 +36,8 @@ namespace TkbThucHanhCNTT.Models.Viewer
         public virtual GiangVien GiangVien { get; set; }
 
 
+
+        
         [Display(Name = "Tên môn học")]
         [Required(ErrorMessage = "Tên môn học không được để trống!")]
         public string TenMonHoc { get; set; }
@@ -50,5 +58,7 @@ namespace TkbThucHanhCNTT.Models.Viewer
         [UIHint("Integer")]
         [Required(ErrorMessage = "Tiết kết th không được để trống!")]
         public int TietKetThuc { get; set; }
+
+
     }
 }

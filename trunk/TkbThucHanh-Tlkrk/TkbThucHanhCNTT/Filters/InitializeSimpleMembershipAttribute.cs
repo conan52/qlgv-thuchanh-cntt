@@ -3,8 +3,8 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Web.Mvc;
-using TkbThucHanhCNTT.Models;
 using WebMatrix.WebData;
+using TkbThucHanhCNTT.Models;
 
 namespace TkbThucHanhCNTT.Filters
 {
@@ -34,11 +34,11 @@ namespace TkbThucHanhCNTT.Filters
                         if (!context.Database.Exists())
                         {
                             // Create the SimpleMembership database without Entity Framework migration schema
-                            ((IObjectContextAdapter) context).ObjectContext.CreateDatabase();
+                            ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("TkbCloud", "UserProfile", "UserId", "UserName", true);
+                    WebSecurity.InitializeDatabaseConnection("TkbCloud", "UserProfile", "UserId", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {

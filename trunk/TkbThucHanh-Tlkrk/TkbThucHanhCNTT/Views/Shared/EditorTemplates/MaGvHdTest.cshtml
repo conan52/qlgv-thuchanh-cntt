@@ -1,10 +1,11 @@
 ﻿@model int?
 
 @(Html.Kendo().DropDownListFor(m => m)
-      .AutoBind(false)
-      .OptionLabel("Chọn giảng viên")
-      .DataTextField("HoVaTen")
-      .DataValueField("MaGv")
-      .HtmlAttributes(new {@id = "MaGvHdTest"})
-      )
+        .AutoBind(false)
+        .OptionLabel("Chọn giảng viên")
+        .DataTextField("HoVaTen")
+        .DataValueField("MaGv")
+            .HtmlAttributes(new { @id = "MaGvHdTest" })
+)
 @Html.ValidationMessageFor(m => m)
+

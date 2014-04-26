@@ -9,9 +9,9 @@ namespace TkbThucHanhCNTT.Models.Provider
         {
             using (var db = new TkbThucHanhContext())
             {
-                TuanHoc tuanHoc = db.TuanHocs.Find(tuan);
+                var tuanHoc = db.TuanHocs.Find(tuan);
                 if (tuanHoc == null)
-                    db.TuanHocs.Add(new TuanHoc {DaLayThongTin = true, DaXepLichThucHanh = false, NgayBatDau = thuHai, SttTuan = tuan});
+                    db.TuanHocs.Add(new TuanHoc() { DaLayThongTin = true, DaXepLichThucHanh = false, NgayBatDau = thuHai,SttTuan = tuan});
                 else
                     tuanHoc.DaLayThongTin = true;
                 db.SaveChanges();
@@ -20,7 +20,7 @@ namespace TkbThucHanhCNTT.Models.Provider
 
         public static DateTime LayNgayHoc(int tuan, NgayTrongTuan ngay)
         {
-            DateTime t2 = DataProvider<TuanHoc>.GetSingle(t => t.SttTuan == tuan).NgayBatDau;
+            var t2 = DataProvider<TuanHoc>.GetSingle(t => t.SttTuan == tuan).NgayBatDau;
             return t2.AddDays((int) ngay);
         }
     }

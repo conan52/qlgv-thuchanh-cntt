@@ -1,19 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using TkbThucHanhCNTT.Models.Enums;
+using TkbThucHanhCNTT.Models.Provider;
 using TkbThucHanhCNTT.Models.Ultils;
 
 namespace TkbThucHanhCNTT.Models
 {
     public class GiangVien
     {
-        public GiangVien()
-        {
-            LichThucHanhs = new List<LichThucHanh>();
-            TkbGiangViens = new List<TkbGiangVien>();
-        }
-
         [Key]
         [Required(ErrorMessage = "Mã giảng viên không được để trống!")]
         [MaxLength(10)]
@@ -50,5 +47,13 @@ namespace TkbThucHanhCNTT.Models
         public virtual List<LichThucHanh> LichThucHanhs { get; set; }
         public virtual List<TkbGiangVien> TkbGiangViens { get; set; }
         public virtual List<LichBan> LichBans { get; set; }
+
+
+        public GiangVien()
+        {
+            LichThucHanhs = new List<LichThucHanh>();
+            TkbGiangViens = new List<TkbGiangVien>();
+        }
+        
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -9,7 +11,7 @@ using TkbThucHanhCNTT.Models.Provider;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-    [Authorize(Roles = "AdminTeacher")]
+     [Authorize(Roles = "AdminTeacher")]
     public class MonHocController : Controller
     {
         //
@@ -22,7 +24,7 @@ namespace TkbThucHanhCNTT.Controllers
             return View();
         }
 
-
+       
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, MonHoc mamh)
         {
@@ -40,20 +42,20 @@ namespace TkbThucHanhCNTT.Controllers
             var result =
                 DataProvider<MonHoc>.GetAll(l => l.PhanCongGiangDays)
                     .Select(
-                        x => new {x.MaMonHoc, x.MonHocId, x.TenMonHoc, x.SoTinChi, x.TrinhDo, x.ChuyenNganh, x.BatBuoc});
+                        x => new { x.MaMonHoc, x.MonHocId, x.TenMonHoc, x.SoTinChi, x.TrinhDo, x.ChuyenNganh, x.BatBuoc });
             return Json(result.ToDataSourceResult(request));
         }
 
-
+       
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, MonHoc mh)
         {
             if (mh != null && ModelState.IsValid)
             {
-                if (DataProvider<MonHoc>.GetAll().Any(x => x.MaMonHoc.Equals(mh.MaMonHoc, StringComparison.OrdinalIgnoreCase)))
+                if (DataProvider<MonHoc>.GetAll().Any(x => x.MaMonHoc.Equals(mh.MaMonHoc,StringComparison.OrdinalIgnoreCase)))
                 {
                     ModelState.AddModelError("", "Mã môn học đã tồn tại");
-                    return Json(new[] {mh}.ToDataSourceResult(request, ModelState));
+                    return Json(new[] { mh }.ToDataSourceResult(request, ModelState));
                 }
                 try
                 {
@@ -61,13 +63,15 @@ namespace TkbThucHanhCNTT.Controllers
                 }
                 catch (Exception)
                 {
+
                 }
+
             }
 
-            return Json(new[] {mh}.ToDataSourceResult(request, ModelState));
+            return Json(new[] { mh }.ToDataSourceResult(request, ModelState));
         }
 
-
+       
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, MonHoc mh)
         {
@@ -78,5 +82,6 @@ namespace TkbThucHanhCNTT.Controllers
             }
             return Json(ModelState.ToDataSourceResult());
         }
+
     }
 }
