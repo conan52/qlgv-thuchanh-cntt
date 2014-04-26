@@ -22,6 +22,7 @@
                   {
                       e.Mode(GridEditMode.PopUp);
                       e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
+                      e.Window(x => x.Title("Phòng thực hành"));
                   })
           .Sortable()
           .Pageable(pageable =>

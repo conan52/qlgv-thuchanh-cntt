@@ -24,7 +24,11 @@
                   command.Edit().CancelText("Hủy bỏ").UpdateText("Cập nhật").Text("Sửa");
               });
           })
-          .Editable(e => e.Mode(GridEditMode.PopUp))
+          .Editable(e =>
+          {
+              e.Mode(GridEditMode.PopUp);
+              e.Window(x => x.Title("Tài khoản"));
+          })
           .Sortable()
           .Pageable(pageable =>
           {
@@ -43,7 +47,6 @@
           ).ToolBar(toolBar =>
           {
               toolBar.Template(@<text>
-                                    @item.CreateButton("Thêm mới")
                                     <a id='btnAddTd' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'>
                                                                                                    </span>Thêm tự động tài khoản</a>
                                 </text>);
