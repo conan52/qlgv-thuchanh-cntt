@@ -88,6 +88,7 @@ namespace TkbThucHanhCNTT.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            RedirectToAction("Index", "RegisterAdmin");
             if (Request.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
@@ -225,6 +226,7 @@ namespace TkbThucHanhCNTT.Controllers
             {
                 DataProvider<TuanHoc>.RemoveAll();
                 DataProvider<LichCongTac>.RemoveAll();
+                DataProvider<PhanCongGiangDay>.RemoveAll();
                 return Json(new {Result = "OK", Message = "Đã làm mới toàn bộ dữ liệu"});
             }
             catch (Exception ex)
