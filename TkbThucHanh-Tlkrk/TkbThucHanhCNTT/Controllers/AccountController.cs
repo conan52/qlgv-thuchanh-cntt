@@ -117,7 +117,7 @@ namespace TkbThucHanhCNTT.Controllers
                 {
                     if ((k != null && (k.CoThePhanCong && k.UserProfile.Role != "Blocked"))|| model.UserName == "Admin")
                     {
-                        if (WebSecurity.Login(model.UserName, model.Password, model.RememberMe))
+                        if (WebSecurity.Login(model.UserName.ToLower(), model.Password, model.RememberMe))
                         {
                             var httpCookie = Response.Cookies[0];
                             if (httpCookie != null) httpCookie.Expires = DateTime.Now.AddDays(30);
@@ -215,7 +215,7 @@ namespace TkbThucHanhCNTT.Controllers
         {
             try
             {
-                WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { MaGv = model.MaGv, Role = model.Roles});
+                WebSecurity.CreateUserAndAccount(model.UserName.ToLower(), model.Password, new { MaGv = model.MaGv, Role = model.Roles});
                 SetRole(model.UserName, model.Roles);
                 return true;
             }
