@@ -1,0 +1,21 @@
+---
+Slide
+---
+
+
+
+Thêm sửa xóa vặt
+
+Lấy dữ liệu tuần 40
+Đồng bộ
+Sao chép dữ liệu tuần 39 - 41
+Phân công tự động tuần 40
+Đánh dấu vắng
+Xem phân công
+Xuất excel tuần 35
+
+Demo đăng nhập / phân quyền, lịch giảng viên cho từng tài khoản
+
+Xóa tuần
+Đồng bộ lại tuần
+Xóa dữ liệu
