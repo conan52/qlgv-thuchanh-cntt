@@ -1,7 +1,7 @@
 @model int?
 
 @(Html.Kendo().IntegerTextBoxFor(m => m)
-      .HtmlAttributes(new { style = "width: 200px" })
+      .HtmlAttributes(new { style = "width: 175px" })
       .Min(DateTime.Now.Year-5)
       .Max(DateTime.Now.Year + 5)
       .Format("D")
