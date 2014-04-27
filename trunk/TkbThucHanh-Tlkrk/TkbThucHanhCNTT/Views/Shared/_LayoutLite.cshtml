@@ -1,37 +1,37 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>@this.ViewBag.Title - Chương trình quản lý thực hành của khoa công nghệ thông
-        tin</title>
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width" />
-    @* @Styles.Render("~/Content/css")*@
-    @Scripts.Render("~/bundles/modernizr")
-    <!--This bundle was moved by the Kendo UI VS Extensions for compatibility reasons-->
-    @Scripts.Render("~/bundles/jquery")
-    <!--This CSS entry was added by the Kendo UI VS Extensions for compatibility reasons-->
-    <link href="@this.Url.Content("~/Content/kendo.compatibility.css")" rel="stylesheet" type="text/css" />
-    <link href="@this.Url.Content("~/Content/kendo/2014.1.318/kendo.common.min.css")" rel="stylesheet" type="text/css" />
-    <link href="@this.Url.Content("~/Content/kendo/2014.1.318/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
-    <link href="@this.Url.Content("~/Content/kendo/2014.1.318/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
-    <link href="@this.Url.Content("~/Content/kendo/2014.1.318/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
-    <script src="@this.Url.Content("~/Scripts/kendo/2014.1.318/jquery.min.js")"></script>
-    <script src="@this.Url.Content("~/Scripts/kendo/2014.1.318/kendo.all.min.js")"></script>
-    <script src="@this.Url.Content("~/Scripts/kendo/2014.1.318/kendo.aspnetmvc.min.js")"></script>
-    <script src="@this.Url.Content("~/Scripts/kendo/2014.1.318/cultures/kendo.culture.vi-VN.min.js")"></script>
-    <script src="@this.Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
-    <script src="@this.Url.Content("~/Scripts/menuhover.js")"></script>
-    <script>
-        $(document).ready(function () {
-            kendo.culture("vi-VN");
-        });
-    </script>
-    <link href="~/Content/style.css" rel="stylesheet">
-    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-    <header class="navbar">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Chương trình quản lý thực hành của khoa công nghệ thông
+            tin</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @* @Styles.Render("~/Content/css")*@
+        @Scripts.Render("~/bundles/modernizr")
+        <!--This bundle was moved by the Kendo UI VS Extensions for compatibility reasons-->
+        @Scripts.Render("~/bundles/jquery")
+        <!--This CSS entry was added by the Kendo UI VS Extensions for compatibility reasons-->
+        <link href="@Url.Content("~/Content/kendo.compatibility.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+        <script src="@Url.Content("~/Scripts/kendo/2014.1.318/jquery.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/kendo/2014.1.318/kendo.all.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/kendo/2014.1.318/kendo.aspnetmvc.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/kendo/2014.1.318/cultures/kendo.culture.vi-VN.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+        <script src="@Url.Content("~/Scripts/menuhover.js")"></script>
+        <script>
+            $(document).ready(function() {
+                kendo.culture("vi-VN");
+            });
+        </script>
+        <link href="~/Content/style.css" rel="stylesheet">
+        <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <header class="navbar">
             <div class="container-fluid expanded-panel">
                 <div class="row">
                     <div id="logo" class="col-xs-12 col-sm-2">
@@ -45,7 +45,7 @@
                                 </a>
                             </div>
                             <div class="dropdown col-xs-2 top-panel-right">
-                                @this.Html.Partial("_LoginPartial")
+                                @Html.Partial("_LoginPartial")
                             </div>
 
                         </div>
@@ -54,22 +54,22 @@
             </div>
 
         </header>
-    <!--End Header-->
-    <!--Start Container-->
-    <div id="main" class="container-fluid">
-        <div class="row">
+        <!--End Header-->
+        <!--Start Container-->
+        <div id="main" class="container-fluid">
+            <div class="row">
             
-            <!--Start Content-->
-            <div id="content" class="col-xs-12 col-sm-10">
-                @this.RenderBody()
+                <!--Start Content-->
+                <div id="content" class="col-xs-12 col-sm-10">
+                    @RenderBody()
+                </div>
+                <!--End Content-->
             </div>
-            <!--End Content-->
         </div>
-    </div>
-    @this.RenderSection("scripts", false)
-    @this.Html.Partial("_LoadingDialog")
-    @this.Html.Partial("_Notifications")
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/devoops.js"></script>
-</body>
+        @RenderSection("scripts", false)
+        @Html.Partial("_LoadingDialog")
+        @Html.Partial("_Notifications")
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/devoops.js"></script>
+    </body>
 </html>

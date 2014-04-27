@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using TkbThucHanhCNTT.Models.Enums;
 
 namespace TkbThucHanhCNTT.Models.Viewer
 {

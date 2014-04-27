@@ -13,8 +13,8 @@
               columns.Bound(c => c.TenMonHoc);
               columns.Bound(c => c.SoTinChi).Width(12);
               columns.ForeignKey(c => c.TrinhDo, (IEnumerable) ViewData["TrinhDos"], "Value", "Description").Width(125);
-              columns.ForeignKey(c => c.ChuyenNganh, (IEnumerable)ViewData["ChuyenNganhs"], "Value", "Description").Width(12);
-              
+              columns.ForeignKey(c => c.ChuyenNganh, (IEnumerable) ViewData["ChuyenNganhs"], "Value", "Description").Width(12);
+
               columns.Bound(c => c.BatBuoc).Width(9).ClientTemplate(@"<input type='checkbox' id='bacbuoc' name='BacBuoc' disabled #if(BatBuoc){#checked#}# value='#=BatBuoc#' />");
               columns.Command(command =>
               {
@@ -23,12 +23,12 @@
               }).Width(172);
           })
           .ToolBar(toolbar => toolbar.Create().Text("Thêm môn học"))
-                  .Editable(e =>
-                  {
-                      e.Mode(GridEditMode.PopUp);
-                      e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
-                      e.Window(x => x.Title("Môn học"));
-                  })
+          .Editable(e =>
+          {
+              e.Mode(GridEditMode.PopUp);
+              e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
+              e.Window(x => x.Title("Môn học"));
+          })
           .Sortable()
           .Pageable(pageable =>
           {
@@ -39,16 +39,13 @@
           //  .Scrollable()
           .DataSource(dataSource => dataSource
               .Ajax()
-                      .PageSize(StaticValue.PageNumber)
+              .PageSize(StaticValue.PageNumber)
               .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "MonHoc"))
               .Create(update => update.Action("AjaxCreate", "MonHoc"))
               .Update(update => update.Action("Ajax_Update", "MonHoc"))
               .Destroy(update => update.Action("AjaxDelete", "MonHoc"))
-              .Model(model =>
-              {
-                  model.Id(l => l.MonHocId);
-              })
+              .Model(model => { model.Id(l => l.MonHocId); })
           )
           )
 </div>

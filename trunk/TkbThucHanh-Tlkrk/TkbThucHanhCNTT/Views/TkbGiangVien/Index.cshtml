@@ -45,7 +45,6 @@
               t.Clear("Hủy");
               t.Info("Lọc kết quả theo!");
           }
-
           )
       ) 
 //      .Filterable(f=>f.Enabled(true))
@@ -62,7 +61,7 @@
           .Model(model =>
           {
               model.Id(gv => gv.MaGv);
-              model.Field(f => f.SttTuan).DefaultValue(DataProvider<TuanHoc>.GetAll().FirstOrDefault(x => (x.NgayBatDau - DateTime.Now).Days < 7 && (x.NgayBatDau - DateTime.Now).Days > 0)!=null?DataProvider<TuanHoc>.GetAll().FirstOrDefault(x => (x.NgayBatDau - DateTime.Now).Days < 7 && (x.NgayBatDau - DateTime.Now).Days > 0).SttTuan:0);
+              model.Field(f => f.SttTuan).DefaultValue(DataProvider<TuanHoc>.GetAll().FirstOrDefault(x => (x.NgayBatDau - DateTime.Now).Days < 7 && (x.NgayBatDau - DateTime.Now).Days > 0) != null ? DataProvider<TuanHoc>.GetAll().FirstOrDefault(x => (x.NgayBatDau - DateTime.Now).Days < 7 && (x.NgayBatDau - DateTime.Now).Days > 0).SttTuan : 0);
               model.Field(x => x.MaGv).DefaultValue(DataProvider<GiangVien>.GetAll().FirstOrDefault() != null ? DataProvider<GiangVien>.GetAll().FirstOrDefault().MaGv : null);
               if (DateTime.Now.TimeOfDay.Hours < 12)
               {
@@ -88,7 +87,7 @@
                                           .Name("DanhSachTuan")
                                           .Events(e => e.Change("onSelectedWeekChange"))
                                           .DataSource(ds => ds.Read("LayDsTuan", "TkbGiangVien"))
-                                                        .Value(this.ViewData["TuanGanNhat"].ToString()))
+                                          .Value(ViewData["TuanGanNhat"].ToString()))
                                 </div>
                             </text>);
       })
@@ -109,13 +108,13 @@
 </style>
 <script type="text/javascript">
     function SaveChanges(e) {
-    
+
         setTimeout(ReloadDropdownlist, 500);
     }
 
     function ReloadDropdownlist() {
         $("#DanhSachTuan").data("kendoDropDownList").dataSource.read();
-        
+
     }
 
 

@@ -20,7 +20,6 @@
                                     <a id='clearAllWeek' class='k-button k-button-icontext' href='#'><span class='k-icon k-delete'></span>Xóa hết các tuần</a>
                                 </text>);
           })
-         
           .Sortable()
           .Pageable(pageable =>
           {
@@ -90,7 +89,7 @@
                             <td colspan="2" style="text-align: center">
                                 <a class="k-button k-button-icontext " href="#" onclick=" return AjaxInit() ">
                                     <span class="k-icon k-update"></span>Cập nhật</a> 
-                                    <a class="k-button k-button-icontext" href="#" onclick=" return closeDialog() "><span class="k-icon k-cancel"></span>Hủy bỏ</a>
+                                <a class="k-button k-button-icontext" href="#" onclick=" return closeDialog() "><span class="k-icon k-cancel"></span>Hủy bỏ</a>
                             </td>
                         </tr>
                     </table>
@@ -144,31 +143,31 @@
         $("#btnCreate").fadeOut(300);
     });
     $('#btnSync').bind("click", function() {
-         var r = confirm("Việc đồng bộ có thể sẽ xóa hết các tuần hiện có, bạn có muốn tiếp tục");
-         if (r == true) {
-             showLoadingDialog();
-              $.post("@Url.Action("AjaxSyncWeek", "TuanHoc")")
+        var r = confirm("Việc đồng bộ có thể sẽ xóa hết các tuần hiện có, bạn có muốn tiếp tục");
+        if (r == true) {
+            showLoadingDialog();
+            $.post("@Url.Action("AjaxSyncWeek", "TuanHoc")")
                 .done(function(data) {
-                   hideLoadingDialog();
+                    hideLoadingDialog();
                     if (data.Result == "OK") {
                         ShowNotification("Đồng bộ thành công!", "info");
                         refreshData();
 
                     } else
                         ShowNotification(data.Message, "error");
-                
+
                 });
-         }
+        }
     });
 
 
     $('#clearAllWeek').bind("click", function() {
         var r = confirm("Bạn muốn xóa hết dữ liệu của các tuần học?");
         if (r == true) {
-                      showLoadingDialog();
+            showLoadingDialog();
             $.post("@Url.Action("AjaxClearWeek", "TuanHoc")")
                 .done(function(data) {
-                  hideLoadingDialog();
+                    hideLoadingDialog();
                     if (data.Result == "OK") {
                         //closeDialog();
                         ShowNotification("Xóa thành công", "info");

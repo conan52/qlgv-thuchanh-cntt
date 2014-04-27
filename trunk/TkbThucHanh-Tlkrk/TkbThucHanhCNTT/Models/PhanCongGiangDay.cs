@@ -34,7 +34,7 @@ namespace TkbThucHanhCNTT.Models
         [Required(ErrorMessage = "Giảng viên không được để trống!")]
         public string MaGv { get; set; }
 
-        
+
         [ForeignKey("MaGv")]
         public virtual GiangVien GiangVien { get; set; }
 

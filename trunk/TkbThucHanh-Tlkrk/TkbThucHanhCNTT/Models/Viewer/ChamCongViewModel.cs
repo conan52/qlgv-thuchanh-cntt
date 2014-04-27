@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace TkbThucHanhCNTT.Models.Viewer
+﻿namespace TkbThucHanhCNTT.Models.Viewer
 {
     public class ChamCongViewModel
     {

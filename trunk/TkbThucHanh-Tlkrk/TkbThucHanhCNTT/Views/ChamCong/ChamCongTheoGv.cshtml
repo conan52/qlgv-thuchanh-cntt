@@ -1,24 +1,20 @@
 ﻿@using TkbThucHanhCNTT.Models.Viewer
-
-@(this.Html.Kendo().Grid<ChamCongGrouped>()
+@(Html.Kendo().Grid<ChamCongGrouped>()
       .Name("Grid")
       .Columns(columns =>
       {
-    columns.Bound(m => m.Nhom);
-               //  .Visible(false)
-               
+          columns.Bound(m => m.Nhom);
+          //  .Visible(false)
+
           columns.Bound(m => m.TenGv)
-                .ClientGroupHeaderTemplate("Giảng viên: #= value # "); ;
+              .ClientGroupHeaderTemplate("Giảng viên: #= value # ");
+          ;
           columns.Bound(m => m.TongSoTiet);
       })
-      .Pageable()    
-      .Sortable()        
+      .Pageable()
+      .Sortable()
       .DataSource(dataSource => dataSource
-                                          .Ajax()
-                                          .Aggregates(aggregates =>
-                                          {
-                                              aggregates.Add(p => p.TenGv);
-                                          })
-                                          .Group(groups => groups.Add(p => p.TenGv))
-
-                                          .Read(read => read.Action("Read", "ChamCong"))))
+          .Ajax()
+          .Aggregates(aggregates => { aggregates.Add(p => p.TenGv); })
+          .Group(groups => groups.Add(p => p.TenGv))
+          .Read(read => read.Action("Read", "ChamCong"))))

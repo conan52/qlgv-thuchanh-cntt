@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 
 namespace TkbThucHanhCNTT.Models.Enums
 {
@@ -10,15 +10,15 @@ namespace TkbThucHanhCNTT.Models.Enums
     {
         public static List<EnumInfo> GetDescriptions<T>()
         {
-            var type = typeof (T);
+            Type type = typeof (T);
             var descs = new List<EnumInfo>();
-            var names = Enum.GetNames(type);
+            string[] names = Enum.GetNames(type);
 
-            for (var i = 0; i < names.Length; i++)
+            for (int i = 0; i < names.Length; i++)
             {
-                var name = names[i];
-                var field = type.GetField(name);
-                var fds = field.GetCustomAttributes(typeof (DescriptionAttribute), true);
+                string name = names[i];
+                FieldInfo field = type.GetField(name);
+                object[] fds = field.GetCustomAttributes(typeof (DescriptionAttribute), true);
                 descs.Add(new EnumInfo(fds.Cast<DescriptionAttribute>().Select(fd => fd.Description).First(),
                     (int) Enum.Parse(type, name), name));
             }
@@ -27,9 +27,9 @@ namespace TkbThucHanhCNTT.Models.Enums
 
         public static string GetDescriptionAttribute(this Enum enu)
         {
-            var type = enu.GetType();
-            var field = type.GetField(enu.ToString());
-            var fds = field.GetCustomAttributes(typeof (DescriptionAttribute), true);
+            Type type = enu.GetType();
+            FieldInfo field = type.GetField(enu.ToString());
+            object[] fds = field.GetCustomAttributes(typeof (DescriptionAttribute), true);
             return fds.Cast<DescriptionAttribute>().Select(fd => fd.Description).First();
         }
 
@@ -47,7 +47,6 @@ namespace TkbThucHanhCNTT.Models.Enums
         {
             return GetDescriptions<QuyenHan>();
         }
-
     }
 
     public class EnumInfo

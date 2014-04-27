@@ -11,7 +11,7 @@
           {
               columns.Bound(c => c.NamHoc);
               columns.Bound(c => c.HocKy);
-              columns.ForeignKey(c => c.MonHocId, (IEnumerable)ViewData["MonHocs"], dataFieldText: "TenMonHoc", dataFieldValue: "MonHocId");
+              columns.ForeignKey(c => c.MonHocId, (IEnumerable) ViewData["MonHocs"], dataFieldText: "TenMonHoc", dataFieldValue: "MonHocId");
               columns.ForeignKey(c => c.MaGv, (IEnumerable) ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv");
               columns.ForeignKey(c => c.TenLop, (IEnumerable) ViewData["Lops"], dataFieldText: "TenLop", dataFieldValue: "TenLop");
               columns.Command(command =>
@@ -38,7 +38,7 @@
           .DataSource(dataSource => dataSource
               .Ajax()
               .PageSize(200)
-            //  .Batch(true)
+              //  .Batch(true)
               .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "PhanCongGiangDay"))
               .Create(update => update.Action("AjaxCreate", "PhanCongGiangDay"))
@@ -49,9 +49,9 @@
                   model.Id(x => x.IdPhanCong);
                   model.Field(x => x.NamHoc).DefaultValue(DateTime.Now.Year);
                   model.Field(x => x.HocKy).DefaultValue(1);
-                  model.Field(x => x.MaGv).DefaultValue(DataProvider<GiangVien>.GetAll().FirstOrDefault()!=null?DataProvider<GiangVien>.GetAll().FirstOrDefault().MaGv:null);
-                  model.Field(x => x.MonHocId).DefaultValue(DataProvider<MonHoc>.GetAll().FirstOrDefault()!=null?DataProvider<MonHoc>.GetAll().FirstOrDefault().MonHocId:0);
-                  model.Field(x => x.TenLop).DefaultValue(DataProvider<Lop>.GetAll().FirstOrDefault()!=null?DataProvider<Lop>.GetAll().FirstOrDefault().TenLop:null);
+                  model.Field(x => x.MaGv).DefaultValue(DataProvider<GiangVien>.GetAll().FirstOrDefault() != null ? DataProvider<GiangVien>.GetAll().FirstOrDefault().MaGv : null);
+                  model.Field(x => x.MonHocId).DefaultValue(DataProvider<MonHoc>.GetAll().FirstOrDefault() != null ? DataProvider<MonHoc>.GetAll().FirstOrDefault().MonHocId : 0);
+                  model.Field(x => x.TenLop).DefaultValue(DataProvider<Lop>.GetAll().FirstOrDefault() != null ? DataProvider<Lop>.GetAll().FirstOrDefault().TenLop : null);
               })
           )
           )

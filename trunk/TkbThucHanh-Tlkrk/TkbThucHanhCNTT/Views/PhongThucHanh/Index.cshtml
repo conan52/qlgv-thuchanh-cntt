@@ -1,7 +1,5 @@
-﻿@using System.Collections
-@using TkbThucHanhCNTT.Models
+﻿@using TkbThucHanhCNTT.Models
 @using TkbThucHanhCNTT.Models.Ultils
-@using TkbThucHanhCNTT.Models.Viewer
 @{
     ViewBag.Title = "Phòng thực hành";
 }
@@ -18,12 +16,12 @@
               }).Width(172);
           })
           .ToolBar(toolbar => toolbar.Create().Text("Thêm phòng thực hành"))
-                  .Editable(e =>
-                  {
-                      e.Mode(GridEditMode.PopUp);
-                      e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
-                      e.Window(x => x.Title("Phòng thực hành"));
-                  })
+          .Editable(e =>
+          {
+              e.Mode(GridEditMode.PopUp);
+              e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
+              e.Window(x => x.Title("Phòng thực hành"));
+          })
           .Sortable()
           .Pageable(pageable =>
           {
@@ -33,7 +31,7 @@
           .Selectable()
           .DataSource(dataSource => dataSource
               .Ajax()
-                      .PageSize(StaticValue.PageNumber)
+              .PageSize(StaticValue.PageNumber)
               .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "PhongThucHanh"))
               .Create(update => update.Action("AjaxCreate", "PhongThucHanh"))
