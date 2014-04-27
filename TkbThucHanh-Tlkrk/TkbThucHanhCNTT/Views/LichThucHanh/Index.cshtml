@@ -2,7 +2,6 @@
 @using TkbThucHanhCNTT.Models
 @using TkbThucHanhCNTT.Models.Enums
 @using TkbThucHanhCNTT.Models.Ultils
-
 @{
     this.ViewBag.Title = "Lịch thực hành";
 }
@@ -21,10 +20,10 @@
           columns.ForeignKey(c => c.Gvhd1, (IEnumerable)this.ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd1").Width(1);
           columns.ForeignKey(c => c.Gvhd2, (IEnumerable)this.ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd2").Width(1);
           columns.ForeignKey(c => c.Gvhd3, (IEnumerable)this.ViewData["GiangViens"], dataFieldText: "HoVaTen", dataFieldValue: "MaGv").EditorTemplateName("MaGvHd3").Width(1);
-          
+
           columns.Bound(e => e.Vang).Width(1);
           columns.Bound(e => e.GhiChu).Width(1);
-          
+
           columns.Command(command =>
           {
               command.Destroy().Text(" ");
@@ -45,46 +44,54 @@
           builder.Filterable(false);
           builder.Sortable(false);
       })
-//  .Scrollable()
+      .Events(builder =>
+      {
+          builder.SaveChanges("SaveChanges");
+
+      })
       .DataSource(dataSource => dataSource
-                                          .Ajax()
-                                          .Batch(true)
-                                          .PageSize(StaticValue.PageNumber)
-                                          .Events(events =>
-                                          {
-                                              events.Error("error_handler");
-                                              events.Change("onChange");
-                                          })
-                                          .Read(read => read.Action("AjaxReadData", "LichThucHanh"))
-                                          .Create(update => update.Action("AjaxCreate", "LichThucHanh"))
-                                          .Update(update => update.Action("AjaxUpdate", "LichThucHanh"))
-                                          .Destroy(update => update.Action("AjaxDelete", "LichThucHanh"))
-                                          .Model(model =>
-                                          {
-                                              model.Id(t => t.MaLichTh);
-                                              model.Field(t => t.SttTuan).DefaultValue((int)this.ViewData["TuanMoiNhat"]);
-                                              model.Field(t => t.TietBatDau).DefaultValue(1);
-                                             // model.Field(t => t.MonHocId).DefaultValue(1);
-                                              model.Field(t => t.TietKetThuc).DefaultValue(1);
-                                          })).ToolBar(toolBar =>
-                                          {
-                                              toolBar.Template(@<text>
-                                                  @item.CreateButton("Thêm")
-                                                  @item.SaveButton("Lưu", "Hủy")
-                                                  <a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-scheduler'>  </span>Đồng bộ từ lịch giảng viên</a> 
-                                                  <a id='btnCopy' class='k-button k-button-increase' href='#'><span class='k-icon k-add'></span>Sao chép tuần</a> 
-                                                  <a id='btnAuto' class='k-button k-button-increase' href='#'><span class='k-icon k-add'></span>Tự phân công</a> 
-                                                   <a id='btnPrint' class='k-button k-button-increase' href='#'><span class='k-icon k-i-calendar'></span>Xuất excel</a>
-                                                  <div class="toolbar"><label class="category-label" for="category">Tuần:</label>
-                                                  @(this.Html.Kendo().DropDownList()
-                                                        .Name("DanhSachTuan")
-                                                        .OptionLabel("Tất cả")
-                                                        .AutoBind(false)
-                                                        .Events(e => e.Change("onSelectedWeekChange"))
-                                                        .DataSource(ds => ds.Read("LayDsTuan", "LichThucHanh")))
-                                                  </div>
-                                                  </text>);
-                                          }))
+          .Ajax()
+          .Batch(true)
+          .PageSize(StaticValue.PageNumber)
+          .Events(events =>
+          {
+              events.Error("error_handler");
+              events.Change("onChange");
+          })
+          .Read(read => read.Action("AjaxReadData", "LichThucHanh"))
+          .Create(update => update.Action("AjaxCreate", "LichThucHanh"))
+          .Update(update => update.Action("AjaxUpdate", "LichThucHanh"))
+          .Destroy(update => update.Action("AjaxDelete", "LichThucHanh"))
+          .Model(model =>
+          {
+              model.Id(t => t.MaLichTh);
+              model.Field(t => t.SttTuan).DefaultValue((int)this.ViewData["TuanMoiNhat"]);
+              model.Field(t => t.TietBatDau).DefaultValue(1);
+              // model.Field(t => t.MonHocId).DefaultValue(1);
+              model.Field(t => t.TietKetThuc).DefaultValue(1);
+          })).ToolBar(toolBar =>
+          {
+              toolBar.Template(@<text>
+@item.CreateButton("Thêm")
+@item.SaveButton("Lưu", "Hủy")
+<a id='btnAutoGet' class='k-button k-button-icontext' href='#'><span class='k-icon k-scheduler'>
+</span>Đồng bộ từ lịch giảng viên</a> <a id='btnCopy' class='k-button k-button-increase'
+    href='#'><span class='k-icon k-add'></span>Sao chép tuần</a> <a id='btnAuto' class='k-button k-button-increase'
+        href='#'><span class='k-icon k-add'></span>Tự phân công</a> <a id='btnPrint' class='k-button k-button-increase'
+            href='#'><span class='k-icon k-i-calendar'></span>Xuất excel</a>
+<div class="toolbar">
+    <label class="category-label" for="category">
+        Tuần:</label>
+    @(this.Html.Kendo().DropDownList()
+                                              .Name("DanhSachTuan")
+                                              .OptionLabel("Tất cả")
+                                                      .AutoBind(false)
+
+                                              .Events(e => e.Change("onSelectedWeekChange"))
+                                              .DataSource(ds => ds.Read("LayDsTuan", "LichThucHanh")))
+</div>
+</text>);
+          }))
 <style>
     .toolbar
     {
@@ -105,40 +112,42 @@
       .Draggable(true)
       .Width(300)
       .Content(@<text>
-    <table class="table table-hover">
+<table class="table table-hover">
     <tr>
-    <td>
-    Sao chép từ tuần
-    </td>
-    <td>
-    @(this.Html.Kendo().DropDownList()
+        <td>
+            Sao chép từ tuần
+        </td>
+        <td>
+            @(this.Html.Kendo().DropDownList()
           .Name("tuTuan")
-          .BindTo((IEnumerable)this.ViewData["TuanCoTkb"]));
-    </td>
+                             .DataSource(ds => ds.Read("LayTuanCoTkb", "LichThucHanh")))
+      
+        </td>
     </tr>
     <tr>
-    <td>
-    Đến tuần
-    </td>
-    <td>
-    @(this.Html.Kendo().DropDownList()
+        <td>
+            Đến tuần
+        </td>
+        <td>
+            @(this.Html.Kendo().DropDownList()
           .Name("denTuan")
-          .BindTo((IEnumerable)this.ViewData["TuanChuaCoTkb"]));
-    </td>
+                           .DataSource(ds => ds.Read("LayTuanChuaCoTkb", "LichThucHanh")))
+      
+        </td>
     </tr>
     <tr>
-    <td>
-    &nbsp;
-    </td>
-    <td style="text-align: center">
-    <a class="k-button k-button-icontext " onclick=" return SaoChepLichThucHanh(); "><span
-    class="k-icon k-update"></span>Sao chép</a> <a class="k-button k-button-icontext"
-    onclick=" $('#SaoChepTuan').data('kendoWindow').close(); "><span class="k-icon k-cancel">
-    </span>Hủy bỏ</a>
-    </td>
+        <td>
+            &nbsp;
+        </td>
+        <td style="text-align: center">
+            <a class="k-button k-button-icontext " onclick=" return SaoChepLichThucHanh(); "><span
+                class="k-icon k-update"></span>Sao chép</a> <a class="k-button k-button-icontext"
+                    onclick=" $('#SaoChepTuan').data('kendoWindow').close(); "><span class="k-icon k-cancel">
+                    </span>Hủy bỏ</a>
+        </td>
     </tr>
-    </table>
-    </text>)
+</table>
+</text>)
 )
 @(this.Html.Kendo().Window().Name("XuatExcel")
       .Title("Xuất Excel")
@@ -147,30 +156,29 @@
       .Draggable(true)
       .Width(300)
       .Content(@<text>
-    <table class="table table-hover">
+<table class="table table-hover">
     <tr>
-    <td>
-    Chọn tuần cần xuất
-    </td>
-    <td>
-    @(this.Html.Kendo().DropDownList()
+        <td>
+            Chọn tuần cần xuất
+        </td>
+        <td>
+            @(this.Html.Kendo().DropDownList()
           .Name("tuanXuat")
-          .BindTo((IEnumerable)this.ViewData["TuanCoTkb"]));
-    </td>
+           .DataSource(ds => ds.Read("LayTuanCoTkb", "LichThucHanh")));
+        </td>
     </tr>
     <tr>
-    <td>
-    &nbsp;
-    </td>
-    <td style="text-align: center">
-    <a class="k-button k-button-icontext " onclick=" return XuatExcel(); "><span
-    class="k-icon k-update"></span>Bắt đầu</a> <a class="k-button k-button-icontext"
-    onclick=" $('#XuatExcel').data('kendoWindow').close(); "><span class="k-icon k-cancel">
-    </span>Hủy bỏ</a>
-    </td>
+        <td>
+            &nbsp;
+        </td>
+        <td style="text-align: center">
+            <a class="k-button k-button-icontext " onclick=" return XuatExcel(); "><span class="k-icon k-update">
+            </span>Bắt đầu</a> <a class="k-button k-button-icontext" onclick=" $('#XuatExcel').data('kendoWindow').close(); ">
+                <span class="k-icon k-cancel"></span>Hủy bỏ</a>
+        </td>
     </tr>
-    </table>
-    </text>)
+</table>
+</text>)
 )
 @(this.Html.Kendo().Window().Name("TuPhanCong")
       .Title("Tự phân công GVHD")
@@ -179,29 +187,29 @@
       .Draggable(true)
       .Width(300)
       .Content(@<text>
-    <table class="table">
+<table class="table">
     <tr>
-    <td>
-    Chọn tuần
-    </td>
-    <td>
-    @(this.Html.Kendo().DropDownList()
+        <td>
+            Chọn tuần
+        </td>
+        <td>
+            @(this.Html.Kendo().DropDownList()
           .Name("chonTuan")
-          .BindTo((IEnumerable)this.ViewData["TuanCoTkb"]));
-    </td>
+         .DataSource(ds => ds.Read("LayTuanCoTkb", "LichThucHanh")));
+        </td>
     </tr>
     <tr>
-    <td>
-    &nbsp;
-    </td>
-    <td style="text-align: center">
-    <a class="k-button k-button-icontext " onclick=" return TuPhanCong(); "><span class="k-icon k-update">
-    </span>Phân công</a> <a class="k-button k-button-icontext" onclick=" $('#TuPhanCong').data('kendoWindow').close(); ">
-    <span class="k-icon k-cancel"></span>Hủy bỏ</a>
-    </td>
+        <td>
+            &nbsp;
+        </td>
+        <td style="text-align: center">
+            <a class="k-button k-button-icontext " onclick=" return TuPhanCong(); "><span class="k-icon k-update">
+            </span>Phân công</a> <a class="k-button k-button-icontext" onclick=" $('#TuPhanCong').data('kendoWindow').close(); ">
+                <span class="k-icon k-cancel"></span>Hủy bỏ</a>
+        </td>
     </tr>
-    </table>
-    </text>)
+</table>
+</text>)
 )
 <script type="text/x-kendo-template" id="template">
     <input type="hidden" id="MaLichTh" value="#=MaLichTh#" />
@@ -260,6 +268,23 @@
 </script>
 <script src="@this.Url.Content("~/Scripts/itdlu/lichthcascade.js")"></script>
 <script type="text/javascript">
+
+    function SaveChanges(e) {
+      //  alert("onGridSaveChanges");
+      //  refreshData();
+        setTimeout(ReloadDropdownlist, 500);
+    }
+
+    function ReloadDropdownlist() {
+        $("#DanhSachTuan").data("kendoDropDownList").dataSource.read();
+        
+           $("#chonTuan").data("kendoDropDownList").dataSource.read();
+              $("#tuanXuat").data("kendoDropDownList").dataSource.read();
+                 $("#tuTuan").data('kendoDropDownList').dataSource.read();
+         $("#denTuan").data('kendoDropDownList').dataSource.read();
+    }
+
+
     function SaoChepLichThucHanh() {
         var tuTuan = $("#tuTuan").data('kendoDropDownList').value();
         var denTuan = $("#denTuan").data('kendoDropDownList').value();
@@ -278,10 +303,10 @@
     };
     
     function XuatExcel() {
-       var tuanXuat = $("#tuanXuat").data('kendoDropDownList').value();
+        var tuanXuat = $("#tuanXuat").data('kendoDropDownList').value();
 
-       window.open("@this.Url.Action("XuatExcel", "LichThucHanh")"+"/?tuanXuat="+tuanXuat, '_blank');
-       $('#XuatExcel').data('kendoWindow').close();
+        window.open("@this.Url.Action("XuatExcel", "LichThucHanh")"+"/?tuanXuat="+tuanXuat, '_blank');
+        $('#XuatExcel').data('kendoWindow').close();
     };
     
     function TuPhanCong() {
@@ -300,6 +325,9 @@
             });
     };
     
+
+
+
     function hienThiBangDiemDanh(e) {
         e.preventDefault();
         var detailsTemplate = kendo.template($("#template").html());

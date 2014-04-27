@@ -26,6 +26,12 @@
         $(document).ready(function () {
             kendo.culture("vi-VN");
         });
+
+        function refreshData() {
+            $('#GridView').data('kendoGrid').dataSource.read();
+            $('#GridView').data('kendoGrid').refresh();
+        }
+
     </script>
     <link href="~/Content/style.css" rel="stylesheet">
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
