@@ -41,6 +41,35 @@ namespace TkbThucHanhCNTT.Controllers
             return this.View();
         }
 
+
+
+        [Authorize(Roles = "AdminTeacher, Teacher")]
+        public ActionResult LayTuanChuaCoTkb([DataSourceRequest]
+                                      DataSourceRequest request)
+        {
+            var dsTuan =
+                DataProvider<TuanHoc>.GetList(t => !t.LichThucHanhs.Any() && t.NgayKetThuc >= DateTime.Now, t => t.LichThucHanhs).Select(t => t.SttTuan)
+                                     .OrderByDescending(t => t);
+            return this.Json(dsTuan, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+      [Authorize(Roles = "AdminTeacher, Teacher")]
+        public ActionResult LayTuanCoTkb([DataSourceRequest]
+                                      DataSourceRequest request)
+        {
+            var dsTuan =
+                DataProvider<TuanHoc>.GetList(t => t.LichThucHanhs.Any(), t => t.LichThucHanhs).Select(t => t.SttTuan)
+                                     .OrderByDescending(t => t);
+            return this.Json(dsTuan, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
         [Authorize(Roles = "Teacher, AdminTeacher")]
         public ActionResult LichThucHanhGV()
         {

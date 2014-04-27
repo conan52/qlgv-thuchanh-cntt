@@ -6,6 +6,7 @@
 @{
     ViewBag.Title = "Thời khóa biểu giảng viên";
 }
+
 @(Html.Kendo().Grid<TkbGiangVienViewModel>()
       .Name("GridView")
       .Columns(columns =>
@@ -45,8 +46,8 @@
               t.Info("Lọc kết quả theo!");
           }
 
-    )
-        ) 
+          )
+      ) 
 //      .Filterable(f=>f.Enabled(true))
       .Groupable(x => x.Messages(t => t.Empty("Kéo thả để gom nhóm dữ liệu")))
       .Selectable()
@@ -88,12 +89,15 @@
                                           .OptionLabel("Tất cả")
                                           .AutoBind(false)
                                           .Events(e => e.Change("onSelectedWeekChange"))
-                                          .DataSource(ds => ds.Read("LayDsTuan", "TkbGiangVien"))
-                                          )
+                                          .DataSource(ds => ds.Read("LayDsTuan", "TkbGiangVien")))
                                 </div>
                             </text>);
       })
-      )
+      .Events(builder =>
+      {
+          builder.SaveChanges("SaveChanges");
+          builder.Save("SaveChanges");
+      }))
 <style>
     .category-label {
         padding-right: .5em;
@@ -105,6 +109,17 @@
     .toolbar { float: right; }
 </style>
 <script type="text/javascript">
+    function SaveChanges(e) {
+    
+        setTimeout(ReloadDropdownlist, 500);
+    }
+
+    function ReloadDropdownlist() {
+        $("#DanhSachTuan").data("kendoDropDownList").dataSource.read();
+        
+    }
+
+
     function refreshData() {
         $('#GridView').data('kendoGrid').dataSource.read();
         $('#GridView').data('kendoGrid').refresh();
@@ -118,7 +133,7 @@
                 if (data.Result == "OK") {
                     ShowNotification("Đã thêm <b>" + data.Message + "</b> buổi học từ website trường!", "info");
                     refreshData();
-
+                    $("#DanhSachTuan").data("kendoDropDownList").dataSource.read();
                 } else
                     ShowNotification(data.Message, "error");
 
