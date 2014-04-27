@@ -85,7 +85,8 @@ namespace TkbThucHanhCNTT.Controllers
                 .OrderByDescending(t => t.SttTuan)
                 .ThenBy(t => t.NgayTrongTuan)
                 .ThenBy(t => t.TietBatDau)
-                .ThenBy(t => t.TietKetThuc);
+                .ThenBy(t => t.TietKetThuc)
+                .ThenBy(t => t.MaGv);
 
             return Json(result.ToDataSourceResult(request, tk => new TkbGiangVienViewModel
             {
