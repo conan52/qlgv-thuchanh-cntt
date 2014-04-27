@@ -14,7 +14,7 @@ namespace TkbThucHanhCNTT.Models.Ultils
             get
             {
                 if (_pageNumber == 0)
-                    return 10;
+                    return 30;
                 return _pageNumber;
             }
             set { _pageNumber = value; }

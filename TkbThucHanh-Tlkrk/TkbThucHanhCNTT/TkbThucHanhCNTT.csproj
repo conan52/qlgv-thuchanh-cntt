@@ -193,6 +193,7 @@
     <Compile Include="Controllers\MonHocController.cs" />
     <Compile Include="Controllers\PhanCongGiangDayController.cs" />
     <Compile Include="Controllers\RegisterAdminController.cs" />
+    <Compile Include="Controllers\ThongBaoController.cs" />
     <Compile Include="Controllers\TkbGiangVienController.cs" />
     <Compile Include="Controllers\PhongThucHanhController.cs" />
     <Compile Include="Controllers\TuanHocController.cs" />
@@ -455,6 +456,7 @@
     <Content Include="Content\kendo\2014.1.318\Uniform\slider-v.gif" />
     <Content Include="Content\kendo\2014.1.318\Uniform\sprite.png" />
     <Content Include="Content\kendo\2014.1.318\Uniform\sprite_2x.png" />
+    <Content Include="Images\404.jpg" />
     <Content Include="Images\banner.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\cntt.png" />
@@ -1007,7 +1009,9 @@
     <Content Include="Views\TuanHoc\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1203,6 +1207,7 @@
     <Content Include="Views\LichThucHanh\LichThucHanhGV.cshtml" />
     <Content Include="Views\Shared\_LayoutLite.cshtml" />
     <Content Include="Views\ChamCong\ChamCongTheoGv.cshtml" />
+    <Content Include="Views\ThongBao\Err404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">

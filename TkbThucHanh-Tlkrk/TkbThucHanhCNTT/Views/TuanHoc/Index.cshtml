@@ -18,7 +18,6 @@
                                     <a id='btnCreate' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'></span>Khởi tạo danh sách tuần</a>
                                     <a id='btnSync' class='k-button k-button-icontext' href='#'><span class='k-icon k-add'></span>Đồng bộ danh sách</a>
                                     <a id='clearAllWeek' class='k-button k-button-icontext' href='#'><span class='k-icon k-delete'></span>Xóa hết các tuần</a>
-                                    @item.SaveButton("Lưu lại", "Hủy bỏ")
                                 </text>);
           })
          
@@ -35,7 +34,6 @@
               .PageSize(60)
               .Events(events => events.Error("error_handler"))
               .Read(read => read.Action("AjaxReadData", "TuanHoc"))
-              .Update(update => update.Action("Ajax_Update", "TuanHoc"))
               .Model(model =>
               {
                   model.Id(gv => gv.SttTuan);
