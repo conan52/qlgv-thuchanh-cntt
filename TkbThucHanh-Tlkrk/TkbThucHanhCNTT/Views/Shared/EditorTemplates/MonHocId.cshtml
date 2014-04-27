@@ -1,16 +1,15 @@
 ﻿@model int
 
 @(Html.Kendo().DropDownListFor(m => m)
-        .AutoBind(false)
-        .OptionLabel("Chọn môn học...")
-            .DataTextField("TenThucHanh")
-            .DataValueField("MonHocId")
-        .DataSource(dataSource =>
-        {
-            dataSource.Read(read => read.Action("LayMonHocDuocPhanCong", "Filter").Data("locTheoLop"))
-                    .ServerFiltering(false);
-        })
-        .CascadeFrom("TenLop")
-)
+      .AutoBind(false)
+      .OptionLabel("Chọn môn học...")
+      .DataTextField("TenThucHanh")
+      .DataValueField("MonHocId")
+      .DataSource(dataSource =>
+      {
+          dataSource.Read(read => read.Action("LayMonHocDuocPhanCong", "Filter").Data("locTheoLop"))
+              .ServerFiltering(false);
+      })
+      .CascadeFrom("TenLop")
+      )
 @Html.ValidationMessageFor(m => m)
- 

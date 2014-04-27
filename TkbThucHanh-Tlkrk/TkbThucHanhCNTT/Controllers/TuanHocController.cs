@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using DluWebHelper;
 using Kendo.Mvc.Extensions;
@@ -28,8 +26,8 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            var result = DataProvider<TuanHoc>.GetAll()
-                .Select(t => new TuanHocViewModel()
+            IOrderedEnumerable<TuanHocViewModel> result = DataProvider<TuanHoc>.GetAll()
+                .Select(t => new TuanHocViewModel
                 {
                     DaLayThongTin = t.DaLayThongTin,
                     SttTuan = t.SttTuan,
@@ -41,15 +39,15 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(result.ToDataSourceResult(request));
         }
 
-       
+
         public JsonResult AjaxInitWeek(int week, string dateOfWeek)
         {
             try
             {
                 var thls = new List<TuanHoc>();
-                var startDay = DateTime.ParseExact(dateOfWeek, "dd/MM/yyyy", null).AddDays((week - 1) * -7).Monday();
+                DateTime startDay = DateTime.ParseExact(dateOfWeek, "dd/MM/yyyy", null).AddDays((week - 1)*-7).Monday();
 
-                for (var i = 1; i < 54; i++)
+                for (int i = 1; i < 54; i++)
                 {
                     var th = new TuanHoc
                     {
@@ -64,27 +62,27 @@ namespace TkbThucHanhCNTT.Controllers
                 DataProvider<TuanHoc>.RemoveAll();
                 DataProvider<TuanHoc>.Add(thls);
 
-                return Json(new { Result = "OK" });
+                return Json(new {Result = "OK"});
             }
             catch (Exception ex)
             {
-                return Json(new { Result = "Fail", ex.Message });
+                return Json(new {Result = "Fail", ex.Message});
             }
         }
 
-       
+
         public JsonResult AjaxSyncWeek()
         {
             try
             {
-                DluWebRequest request = new DluWebRequest();
-                var result = request.GetCurentTimeTable();
+                var request = new DluWebRequest();
+                TimeTableWebResult result = request.GetCurentTimeTable();
 
 
                 var thls = new List<TuanHoc>();
-                var startDay = result.StartDate.AddDays((result.CurrentWeek - 1) * -7).Monday();
+                DateTime startDay = result.StartDate.AddDays((result.CurrentWeek - 1)*-7).Monday();
 
-                for (var i = 1; i < 54; i++)
+                for (int i = 1; i < 54; i++)
                 {
                     var th = new TuanHoc
                     {
@@ -99,29 +97,26 @@ namespace TkbThucHanhCNTT.Controllers
                 DataProvider<TuanHoc>.RemoveAll();
                 DataProvider<TuanHoc>.Add(thls);
 
-                return Json(new { Result = "OK" });
+                return Json(new {Result = "OK"});
             }
             catch (Exception ex)
             {
-                return Json(new { Result = "Fail", ex.Message });
+                return Json(new {Result = "Fail", ex.Message});
             }
         }
 
-       
+
         public JsonResult AjaxClearWeek()
         {
             try
             {
                 DataProvider<TuanHoc>.RemoveAll();
-                return Json(new { Result = "OK" });
+                return Json(new {Result = "OK"});
             }
             catch (Exception ex)
             {
-                return Json(new { Result = "Fail", ex.Message });
+                return Json(new {Result = "Fail", ex.Message});
             }
         }
-
-
-
     }
 }

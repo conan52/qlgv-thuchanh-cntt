@@ -1,9 +1,10 @@
 ﻿@using TkbThucHanhCNTT.Models.Ultils
 @using TkbThucHanhCNTT.Models.Viewer
 @{
-    this.ViewBag.Title = "Lịch bận của giảng viên";
+    ViewBag.Title = "Lịch bận của giảng viên";
 }
-@(this.Html.Kendo().Grid<LichBanModelViewer>()
+
+@(Html.Kendo().Grid<LichBanModelViewer>()
       .Name("GridView")
       .Columns(columns =>
       {
@@ -14,7 +15,7 @@
 
           columns.Command(command =>
           {
-              command.Custom("DiemDanh").Text("Sửa").Click("suaLichBan").HtmlAttributes(new { @class = "k-icon k-edit" });
+              command.Custom("DiemDanh").Text("Sửa").Click("suaLichBan").HtmlAttributes(new {@class = "k-icon k-edit"});
 
               command.Destroy().Text("Xóa");
           });
@@ -26,36 +27,34 @@
       })
       .Groupable(x => x.Messages(t => t.Empty("Kéo thả để gom nhóm dữ liệu")))
       .DataSource(dataSource => dataSource
-                                          .Ajax()
-                                              .PageSize(StaticValue.PageNumber)
-                                          .Events(events => events.Error("error_handler"))
-                                          .Read(read => read.Action("AjaxReadData", "LichBan"))
-                                          .Destroy(update => update.Action("AjaxDelete", "LichBan"))
-                                          .Model(model => { model.Id(l => l.LichBanId); }))
+          .Ajax()
+          .PageSize(StaticValue.PageNumber)
+          .Events(events => events.Error("error_handler"))
+          .Read(read => read.Action("AjaxReadData", "LichBan"))
+          .Destroy(update => update.Action("AjaxDelete", "LichBan"))
+          .Model(model => { model.Id(l => l.LichBanId); }))
       .ToolBar(toolBar =>
       {
           toolBar.Template(@<text> <a id='btnThem' class='k-button k-button-icontext k' href='#'>
-              <span class='k-icon k-add'></span>Thêm mới </a>
-<div class="toolbar">
-    <label class="category-label" for="category">
-        Xem theo tuần:</label>
-    @(this.Html.Kendo().DropDownList()
-                    .Name("DanhSachTuan")
-                    .OptionLabel("Tất cả")
-                    .AutoBind(false)
-                    .Events(e => e.Change("onSelectedWeekChange"))
-                    .DataSource(ds => ds.Read("LayDsTuan", "LichBan"))
-              )
-</div>
-</text>);
+                                       <span class='k-icon k-add'></span>Thêm mới </a>
+                                <div class="toolbar">
+                                    <label class="category-label" for="category">
+                                        Xem theo tuần:</label>
+                                    @(Html.Kendo().DropDownList()
+                                          .Name("DanhSachTuan")
+                                          .OptionLabel("Tất cả")
+                                          .AutoBind(false)
+                                          .Events(e => e.Change("onSelectedWeekChange"))
+                                          .DataSource(ds => ds.Read("LayDsTuan", "LichBan")))
+                                </div>
+                            </text>);
       })
       .Sortable().Pageable(pageable =>
       {
           pageable.Refresh(true);
           pageable.PageSizes(true);
-      })
-)
-@(this.Html.Kendo().Window()
+      }))
+@(Html.Kendo().Window()
       .Name("window")
       .Title("Đánh dấu nhanh")
       .Content("Đang load dữ liệu!")
@@ -65,31 +64,23 @@
       .AutoFocus(true)
       .Modal(true)
       .Width(400)
-      .Height(470)
-)
+      .Height(470))
 <style>
-    .category-label
-    {
+    .category-label {
         padding-right: .5em;
         vertical-align: middle;
     }
-    
-    #category
-    {
-        vertical-align: middle;
-    }
-    
-    .toolbar
-    {
-        float: right;
-    }
+
+    #category { vertical-align: middle; }
+
+    .toolbar { float: right; }
 </style>
 <script type="text/javascript">
     function refreshData() {
         $('#GridView').data('kendoGrid').dataSource.read();
         $('#GridView').data('kendoGrid').refresh();
     };
-    
+
     function error_handler(e) {
         if (e.errors) {
             var message = "Lỗi:\n";
@@ -103,7 +94,7 @@
             alert(message);
         }
     };
-    
+
     function onSelectedWeekChange() {
         var value = this.value(),
             grid = $("#GridView").data("kendoGrid");
@@ -113,44 +104,47 @@
             grid.dataSource.filter({});
         }
     };
-    
+
     $("#btnThem").bind("click", function() {
         var wnd = $("#window").data("kendoWindow");
         wnd.refresh({
-                        url: "@this.Url.Action("ShowEditWindow", "LichBan")",
-                        data: { LichBanId: 0 }
-                    });
+            url: "@Url.Action("ShowEditWindow", "LichBan")",
+            data: { LichBanId: 0 }
+        });
         wnd.center().open();
     });
-    
+
     function closeDialog() {
         $("#window").data("kendoWindow").close();
     };
-    
+
     function suaLichBan(e) {
         var id = this.dataItem($(e.currentTarget).closest("tr")).LichBanId;
         var wnd = $("#window").data("kendoWindow");
         wnd.refresh({
-                        url: "@this.Url.Action("ShowEditWindow", "LichBan")",
-                        data: { maLichBan: id }
-                    });
+            url: "@Url.Action("ShowEditWindow", "LichBan")",
+            data: { maLichBan: id }
+        });
         wnd.center().open();
     };
-    
+
     function AjaxEdit() {
         var v = getValues();
-    
+
         var chonGiangVien = $("#chonGiangVien").data('kendoComboBox').value();
         var chonTuan = $("#chonTuan").data('kendoComboBox').value();
         var lichBanId = $("#lichBanId").val();
         $('#window').data('kendoWindow').close();
         showLoadingDialog();
-        $.post("@this.Url.Action("AjaxEdit", "LichBan")", {
-                   maGv: chonGiangVien, SttTuan: chonTuan, value :v, lichBanId :lichBanId
-               })
+        $.post("@Url.Action("AjaxEdit", "LichBan")", {
+                maGv: chonGiangVien,
+                SttTuan: chonTuan,
+                value: v,
+                lichBanId: lichBanId
+            })
             .done(function(data) {
                 hideLoadingDialog();
-    
+
                 if (data.Result == "OK") {
                     ShowNotification("Thành công!", "info");
                     refreshData();
@@ -158,6 +152,6 @@
                     ShowNotification(data.Message, "error");
                 }
             });
-    
+
     };
 </script>

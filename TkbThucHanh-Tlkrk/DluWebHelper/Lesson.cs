@@ -1,6 +1,6 @@
 ﻿namespace DluWebHelper
 {
-    public  class Lesson
+    public class Lesson
     {
         public int Group { get; set; }
         public int Start { get; set; }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using NPOI.SS.Formula.Functions;
 using TkbThucHanhCNTT.Models.Enums;
-using TkbThucHanhCNTT.Models.Ultils;
 
 namespace TkbThucHanhCNTT.Models
 {
@@ -45,6 +42,5 @@ namespace TkbThucHanhCNTT.Models
 
         [Display(Name = "Ngày trong tuần")]
         public NgayTrongTuan NgayTrongTuan { get; set; }
-
     }
 }

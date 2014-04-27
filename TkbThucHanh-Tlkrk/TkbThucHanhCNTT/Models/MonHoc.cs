@@ -1,17 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 using TkbThucHanhCNTT.Models.Enums;
 
 namespace TkbThucHanhCNTT.Models
 {
     public class MonHoc
     {
-        public MonHoc()
-        {
-
-        }
         [Key]
         [ScaffoldColumn(false)]
         public int MonHocId { get; set; }

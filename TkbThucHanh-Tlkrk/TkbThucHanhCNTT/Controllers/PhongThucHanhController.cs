@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
@@ -19,7 +20,7 @@ namespace TkbThucHanhCNTT.Controllers
             return View();
         }
 
-       
+
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, string tenphong)
         {
@@ -34,11 +35,11 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            var result = DataProvider<PhongThucHanh>.GetAll();
+            IList<PhongThucHanh> result = DataProvider<PhongThucHanh>.GetAll();
             return Json(result.ToDataSourceResult(request));
         }
 
-       
+
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, PhongThucHanh phongth)
         {
@@ -47,7 +48,7 @@ namespace TkbThucHanhCNTT.Controllers
                 if (DataProvider<PhongThucHanh>.GetAll().Any(x => x.TenPhong.Equals(phongth.TenPhong, StringComparison.OrdinalIgnoreCase)))
                 {
                     ModelState.AddModelError("", "Tên phòng đã tồn tại");
-                    return Json(new[] { phongth }.ToDataSourceResult(request, ModelState));
+                    return Json(new[] {phongth}.ToDataSourceResult(request, ModelState));
                 }
                 try
                 {
@@ -55,15 +56,13 @@ namespace TkbThucHanhCNTT.Controllers
                 }
                 catch (Exception)
                 {
-
                 }
-
             }
 
-            return Json(new[] { phongth }.ToDataSourceResult(request, ModelState));
+            return Json(new[] {phongth}.ToDataSourceResult(request, ModelState));
         }
 
-       
+
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, PhongThucHanh phongth)
         {
@@ -75,6 +74,5 @@ namespace TkbThucHanhCNTT.Controllers
             }
             return Json(ModelState.ToDataSourceResult());
         }
-
     }
 }

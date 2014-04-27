@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using DluWebHelper;
@@ -21,15 +22,16 @@ namespace TkbThucHanhCNTT.Controllers
         public ActionResult Index()
         {
             ViewData["GiangViens"] =
-                DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
-            ViewData["Tuans"] = DataProvider<TuanHoc>.GetAll().Select(t => new { t.SttTuan });
+                DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new {gv.HoVaTen, gv.MaGv});
+            ViewData["Tuans"] = DataProvider<TuanHoc>.GetAll().Select(t => new {t.SttTuan});
             ViewData["TuanGanNhat"] = LayTuanGanNhat();
             return View();
         }
-        int LayTuanGanNhat()
+
+        private int LayTuanGanNhat()
         {
-            var dsTuan = DataProvider<TuanHoc>.GetList(t => t.TkbGiangViens.Any()).OrderBy(t => Math.Abs((DateTime.Now - t.NgayBatDau).TotalHours));
-   
+            IOrderedEnumerable<TuanHoc> dsTuan = DataProvider<TuanHoc>.GetList(t => t.TkbGiangViens.Any()).OrderBy(t => Math.Abs((DateTime.Now - t.NgayBatDau).TotalHours));
+
             if (dsTuan.Any())
                 return dsTuan.First().SttTuan;
             return 0;
@@ -37,7 +39,7 @@ namespace TkbThucHanhCNTT.Controllers
 
         public ActionResult LayDsTuan([DataSourceRequest] DataSourceRequest request)
         {
-            var dsTuan =
+            IOrderedEnumerable<int> dsTuan =
                 DataProvider<TuanHoc>.GetList(t => t.TkbGiangViens.Count > 0)
                     .Select(t => t.SttTuan)
                     .OrderByDescending(t => t);
@@ -55,6 +57,7 @@ namespace TkbThucHanhCNTT.Controllers
             }
             return Json(ModelState.ToDataSourceResult());
         }
+
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, int maTkb)
         {
@@ -82,7 +85,7 @@ namespace TkbThucHanhCNTT.Controllers
             }
 
 
-            var result = DataProvider<TkbGiangVien>.GetAll()
+            IOrderedEnumerable<TkbGiangVien> result = DataProvider<TkbGiangVien>.GetAll()
                 .OrderByDescending(t => t.SttTuan)
                 .ThenBy(t => t.NgayTrongTuan)
                 .ThenBy(t => t.TietBatDau)
@@ -107,42 +110,42 @@ namespace TkbThucHanhCNTT.Controllers
         {
             try
             {
-                 var dsTkbChuaCo = DataProvider<TuanHoc>.GetList(t => !t.DaLayThongTin && t.NgayKetThuc > DateTime.Now);
+                IList<TuanHoc> dsTkbChuaCo = DataProvider<TuanHoc>.GetList(t => !t.DaLayThongTin && t.NgayKetThuc > DateTime.Now);
 
-               // var dsTkbChuaCo = DataProvider<TuanHoc>.GetList(t => t.SttTuan==37);
+                // var dsTkbChuaCo = DataProvider<TuanHoc>.GetList(t => t.SttTuan==37);
                 var request = new DluWebRequest();
-                var table = request.GetCurentTimeTable();
-                var dsTuan = table.Weeks.Intersect(dsTkbChuaCo.Select(t => t.SttTuan)).ToList();
-                var dsGv = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => gv.MaGv).ToList();
-                var dsLop = DataProvider<Lop>.GetAll().Select(l => l.TenLop).ToList();
+                TimeTableWebResult table = request.GetCurentTimeTable();
+                List<int> dsTuan = table.Weeks.Intersect(dsTkbChuaCo.Select(t => t.SttTuan)).ToList();
+                List<string> dsGv = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => gv.MaGv).ToList();
+                List<string> dsLop = DataProvider<Lop>.GetAll().Select(l => l.TenLop).ToList();
 
                 var tm = new TimeTableManager();
-                var result = tm.GetTimeFullTable(dsGv, dsLop, dsTuan);
+                List<Lesson> result = tm.GetTimeFullTable(dsGv, dsLop, dsTuan);
 
-                var tkbgv = result.Select(r => new TkbGiangVien()
+                IEnumerable<TkbGiangVien> tkbgv = result.Select(r => new TkbGiangVien
                 {
                     MaGv = r.TeacherCode,
                     LopHoc = r.ClassCode,
-                    NgayTrongTuan = (NgayTrongTuan)(r.DayOfWeek - 1),
+                    NgayTrongTuan = (NgayTrongTuan) (r.DayOfWeek - 1),
                     SttTuan = r.Week,
                     Phong = r.Room,
                     TenMonHoc = r.Subject,
                     TietBatDau = r.Start,
                     TietKetThuc = r.End
                 });
-                var rowsAffected = DataProvider<TkbGiangVien>.Add(tkbgv);
+                int rowsAffected = DataProvider<TkbGiangVien>.Add(tkbgv);
 
-                var dsTuanDaLay = dsTkbChuaCo.Where(t => tkbgv.Any(tgv => tgv.SttTuan == t.SttTuan));
+                IEnumerable<TuanHoc> dsTuanDaLay = dsTkbChuaCo.Where(t => tkbgv.Any(tgv => tgv.SttTuan == t.SttTuan));
 
-                foreach (var tuan in dsTuanDaLay)
+                foreach (TuanHoc tuan in dsTuanDaLay)
                     tuan.DaLayThongTin = true;
                 DataProvider<TuanHoc>.Update(dsTkbChuaCo);
 
-                return Json(new { Result = "OK", Message = rowsAffected });
+                return Json(new {Result = "OK", Message = rowsAffected});
             }
             catch (Exception ex)
             {
-                return Json(new { Result = "Fail", ex.Message });
+                return Json(new {Result = "Fail", ex.Message});
             }
         }
     }
