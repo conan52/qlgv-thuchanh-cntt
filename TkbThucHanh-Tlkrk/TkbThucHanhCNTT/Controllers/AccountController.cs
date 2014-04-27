@@ -25,7 +25,7 @@ namespace TkbThucHanhCNTT.Controllers
         public ActionResult Index()
         {
             ViewData["GiangViens"] =
-                DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new {gv.HoVaTen, gv.MaGv});
+                DataProvider<GiangVien>.GetAll().Select(gv => new {gv.HoVaTen, gv.MaGv});
             ViewData["Roles"] = EnumUltils.GetDescriptions_QuyenHan();
             return View();
         }
@@ -73,7 +73,12 @@ namespace TkbThucHanhCNTT.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            IList<UserProfile> result = DataProvider<UserProfile>.GetAll();
+            var giangvien = DataProvider<GiangVien>.GetAll().Where(x => !x.CoThePhanCong).Select(x => x.MaGv).ToList();
+            IList<UserProfile> result =DataProvider<UserProfile>.GetAll();
+            foreach (var userProfile in result.Where(x => giangvien.Contains(x.MaGv)))
+            {
+                userProfile.Role = "Blocked";
+            }
             return Json(result.ToDataSourceResult(request, up => new UserProfileViewModel
             {
                 MaGv = up.MaGv,
