@@ -22,8 +22,8 @@ namespace TkbThucHanhCNTT.Models
         public int HocKy { get; set; }
 
         [Display(Name = "Môn học")]
-        [UIHint("GridForeignKey")]
-        
+        [UIHint("GridForeignKeyInt")]
+        [Required(ErrorMessage = "Môn học không được để trống!")]
         public int MonHocId { get; set; }
 
         [ForeignKey("MonHocId")]
