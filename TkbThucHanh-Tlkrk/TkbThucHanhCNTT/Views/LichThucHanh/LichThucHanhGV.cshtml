@@ -65,12 +65,12 @@
                                           {
                                               toolBar.Template(@<text>
                                                  <div class="toolbar"><label class="category-label" for="category">Tuần:</label>
-                                                  @(this.Html.Kendo().DropDownList()
-                                                        .Name("DanhSachTuan")
-                                                        .OptionLabel("Tất cả")
-                                                        .AutoBind(false)
-                                                        .Events(e => e.Change("onSelectedWeekChange"))
-                                                        .DataSource(ds => ds.Read("LayDsTuan", "LichThucHanh")))
+    @(this.Html.Kendo().DropDownList()
+                                              .Name("DanhSachTuan")
+                                              .Events(e => e.Change("onSelectedWeekChange"))
+                                              .DataSource(ds => ds.Read("LayDsTuan", "LichThucHanh"))
+                                                              .Value(this.ViewData["TuanGanNhat"].ToString())
+                                              )
                                                   </div>
                                                   </text>);
                                           }))

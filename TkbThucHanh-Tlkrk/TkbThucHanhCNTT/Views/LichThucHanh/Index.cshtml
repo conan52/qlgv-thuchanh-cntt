@@ -9,7 +9,7 @@
       .Name("GridView")
       .Columns(columns =>
       {
-          columns.ForeignKey(c => c.SttTuan, (IEnumerable)this.ViewData["Tuans"], dataFieldText: "SttTuan", dataFieldValue: "SttTuan").Filterable(false).Width(25);
+        //  columns.ForeignKey(c => c.SttTuan, (IEnumerable)this.ViewData["Tuans"], dataFieldText: "SttTuan", dataFieldValue: "SttTuan").Filterable(false).Width(25);
           columns.ForeignKey(c => c.NgayTrongTuan, EnumUltils.GetDescriptions<NgayTrongTuan>(), dataFieldText: "Description", dataFieldValue: "Value").Filterable(false).Width(85);
           columns.Bound(e => e.TietBatDau).HeaderHtmlAttributes(new { colspan = 2 }).Title("Tiết học").Width(15);
           columns.Bound(e => e.TietKetThuc).HeaderHtmlAttributes(new { style = "display:none;" }).Width(15);
@@ -84,11 +84,10 @@
         Tuần:</label>
     @(this.Html.Kendo().DropDownList()
                                               .Name("DanhSachTuan")
-                                              .OptionLabel("Tất cả")
-                                                      .AutoBind(false)
-
                                               .Events(e => e.Change("onSelectedWeekChange"))
-                                              .DataSource(ds => ds.Read("LayDsTuan", "LichThucHanh")))
+                                              .DataSource(ds => ds.Read("LayDsTuan", "LichThucHanh"))
+                                                              .Value(this.ViewData["TuanGanNhat"].ToString())
+                                              )
 </div>
 </text>);
           }))
@@ -164,7 +163,7 @@
         <td>
             @(this.Html.Kendo().DropDownList()
           .Name("tuanXuat")
-           .DataSource(ds => ds.Read("LayTuanCoTkb", "LichThucHanh")));
+           .DataSource(ds => ds.Read("LayTuanCoTkb", "LichThucHanh")))
         </td>
     </tr>
     <tr>
@@ -296,6 +295,7 @@
                 if (data.Result == "OK") {
                     ShowNotification("Sao chép thành công " + data.Message + " buổi học!", "info");
                     refreshData();
+                       setTimeout(ReloadDropdownlist,200);
                 } else {
                     ShowNotification(data.Message, "error");
                 }

@@ -86,10 +86,9 @@
                                         Xem theo tuần:</label>
                                     @(Html.Kendo().DropDownList()
                                           .Name("DanhSachTuan")
-                                          .OptionLabel("Tất cả")
-                                          .AutoBind(false)
                                           .Events(e => e.Change("onSelectedWeekChange"))
-                                          .DataSource(ds => ds.Read("LayDsTuan", "TkbGiangVien")))
+                                          .DataSource(ds => ds.Read("LayDsTuan", "TkbGiangVien"))
+                                                        .Value(this.ViewData["TuanGanNhat"].ToString()))
                                 </div>
                             </text>);
       })

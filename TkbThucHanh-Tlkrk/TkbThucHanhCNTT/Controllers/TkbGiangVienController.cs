@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI.WebControls.Expressions;
 using DluWebHelper;
+using Kendo.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using TkbThucHanhCNTT.Models;
 using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Provider;
-using TkbThucHanhCNTT.Models.Ultils;
 using TkbThucHanhCNTT.Models.Viewer;
 
 namespace TkbThucHanhCNTT.Controllers
@@ -25,7 +23,15 @@ namespace TkbThucHanhCNTT.Controllers
             ViewData["GiangViens"] =
                 DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
             ViewData["Tuans"] = DataProvider<TuanHoc>.GetAll().Select(t => new { t.SttTuan });
+            ViewData["TuanGanNhat"] = LayTuanGanNhat();
             return View();
+        }
+        int LayTuanGanNhat()
+        {
+            var dsTuan = DataProvider<TuanHoc>.GetList(t => t.TkbGiangViens.Any()).OrderBy(t => DateTime.Now - t.NgayBatDau);
+            if (dsTuan.Any())
+                return dsTuan.First().SttTuan;
+            return 0;
         }
 
         public ActionResult LayDsTuan([DataSourceRequest] DataSourceRequest request)
@@ -69,6 +75,12 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
+            if (!request.Filters.Any())
+            {
+                request.Filters.Add(new FilterDescriptor("SttTuan", FilterOperator.IsEqualTo, LayTuanGanNhat()));
+            }
+
+
             var result = DataProvider<TkbGiangVien>.GetAll()
                 .OrderByDescending(t => t.SttTuan)
                 .ThenBy(t => t.NgayTrongTuan)
