@@ -70,7 +70,7 @@
                     {
                         <li>@this.Html.ActionLink("Lịch tổng quan", "LichThucHanhGV", "LichThucHanh", null, new { @id = "LichThucHanhGV" })</li>
                     }
-                    @if (User.IsInRole("AdminTeacher"))
+                    @if (User.IsInRole("AdminTeacher") || User.IsInRole("Admin"))
                     {
                         <li>@this.Html.ActionLink("Lịch thực hành", "Index", "LichThucHanh", null, new { @id = "Index" })</li>
                         <li>@this.Html.ActionLink("Phòng thực hành", "Index", "PhongThucHanh", null, new { @id = "PhongThucHanh" })</li>
@@ -83,11 +83,6 @@
                         <li>@this.Html.ActionLink("Phân công giảng dạy", "Index", "PhanCongGiangDay", null, new { @id = "PhanCongGiangDay" })</li>
                         <li>@this.Html.ActionLink("Chấm công theo môn học", "Index", "ChamCong", null, new { @id = "ChamCong" })</li>
                         <li>@this.Html.ActionLink("Chấm công theo giảng viên", "ChamCongTheoGv", "ChamCong", null, new { @id = "ChamCongTheoGv" })</li>
-                        <li>@this.Html.ActionLink("Giảng viên", "Index", "GiangVien", null, new { @id = "GiangVien" })</li>
-                        <li>@this.Html.ActionLink("Tài khoản", "Index", "Account", null, new { @id = "Account" })</li>
-                    }
-                    @if (User.IsInRole("Admin"))
-                    {
                         <li>@this.Html.ActionLink("Giảng viên", "Index", "GiangVien", null, new { @id = "GiangVien" })</li>
                         <li>@this.Html.ActionLink("Tài khoản", "Index", "Account", null, new { @id = "Account" })</li>
                     }
