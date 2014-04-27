@@ -130,7 +130,7 @@ namespace TkbThucHanhCNTT.Controllers
                             {
                                 StaticValue.MaGv = DataProvider<UserProfile>.GetSingle(x => x.UserName == model.UserName).MaGv;
                             }
-                            catch ()
+                            catch
                             {
                                 StaticValue.MaGv = null;
                             }
