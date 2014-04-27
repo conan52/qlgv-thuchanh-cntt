@@ -11,7 +11,7 @@
         </div>
     </a>
     <ul class="dropdown-menu">
-        @if (User.IsInRole("AdminTeacher"))
+        @if (User.IsInRole("AdminTeacher") || User.IsInRole("Admin"))
         {
             <li>
             <a href="@Url.Action("CauHinhTrangWeb", "Account")">

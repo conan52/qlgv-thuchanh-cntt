@@ -28,7 +28,8 @@ namespace TkbThucHanhCNTT.Controllers
         }
         int LayTuanGanNhat()
         {
-            var dsTuan = DataProvider<TuanHoc>.GetList(t => t.TkbGiangViens.Any()).OrderBy(t => DateTime.Now - t.NgayBatDau);
+            var dsTuan = DataProvider<TuanHoc>.GetList(t => t.TkbGiangViens.Any()).OrderBy(t => Math.Abs((DateTime.Now - t.NgayBatDau).TotalHours));
+   
             if (dsTuan.Any())
                 return dsTuan.First().SttTuan;
             return 0;
@@ -131,7 +132,9 @@ namespace TkbThucHanhCNTT.Controllers
                 });
                 var rowsAffected = DataProvider<TkbGiangVien>.Add(tkbgv);
 
-                foreach (var tuan in dsTkbChuaCo)
+                var dsTuanDaLay = dsTkbChuaCo.Where(t => tkbgv.Any(tgv => tgv.SttTuan == t.SttTuan));
+
+                foreach (var tuan in dsTuanDaLay)
                     tuan.DaLayThongTin = true;
                 DataProvider<TuanHoc>.Update(dsTkbChuaCo);
 
