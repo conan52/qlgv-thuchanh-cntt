@@ -126,7 +126,15 @@ namespace TkbThucHanhCNTT.Controllers
                         {
                             var httpCookie = Response.Cookies[0];
                             if (httpCookie != null) httpCookie.Expires = DateTime.Now.AddDays(30);
-                            StaticValue.MaGv = DataProvider<UserProfile>.GetSingle(x => x.UserName == model.UserName).MaGv;
+                            try
+                            {
+                                StaticValue.MaGv = DataProvider<UserProfile>.GetSingle(x => x.UserName == model.UserName).MaGv;
+                            }
+                            catch ()
+                            {
+                                StaticValue.MaGv = null;
+                            }
+                            
                             return RedirectToLocal(returnUrl);
                         }
                     }
