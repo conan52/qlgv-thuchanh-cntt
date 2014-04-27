@@ -118,9 +118,9 @@ namespace TkbThucHanhCNTT.Controllers
             {
                 var k = DataProvider<GiangVien>.GetAll(x => x.UserProfile)
                     .FirstOrDefault(t => StaticUltils.GetUsername(t.HoVaTen) == model.UserName);
-                if ((k != null && k.UserProfile != null) || model.UserName == "Admin")
+                if ((k != null && k.UserProfile != null) || model.UserName.ToLower() == "admin")
                 {
-                    if ((k != null && (k.CoThePhanCong && k.UserProfile.Role != "Blocked"))|| model.UserName == "Admin")
+                    if ((k != null && (k.CoThePhanCong && k.UserProfile.Role != "Blocked"))|| model.UserName.ToLower() == "admin")
                     {
                         if (WebSecurity.Login(model.UserName.ToLower(), model.Password, model.RememberMe))
                         {

@@ -11,7 +11,7 @@ using TkbThucHanhCNTT.Models.Provider;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-    [Authorize(Roles = "AdminTeacher")]
+    [Authorize(Roles = "AdminTeacher,Admin")]
     public class LichCongTacController : Controller
     {
         //
