@@ -18,12 +18,12 @@ using TkbThucHanhCNTT.Models.Ultils;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-    //xxx  [Authorize(Roles = "AdminTeacher,Teacher")]
+  [Authorize(Roles = "AdminTeacher,Teacher")]
     public class LichThucHanhController : Controller
     {
         //
         // GET: /LichThucHanh/
-        //xxx   [Authorize(Roles = "AdminTeacher")]
+       [Authorize(Roles = "AdminTeacher")]
         public ActionResult Index()
         {
             ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
@@ -45,7 +45,7 @@ namespace TkbThucHanhCNTT.Controllers
         }
 
 
-        //xxx   [Authorize(Roles = "AdminTeacher, Teacher")]
+       [Authorize(Roles = "AdminTeacher, Teacher")]
         public ActionResult LayTuanChuaCoTkb([DataSourceRequest] DataSourceRequest request)
         {
             IOrderedEnumerable<int> dsTuan =
@@ -55,7 +55,7 @@ namespace TkbThucHanhCNTT.Controllers
         }
 
 
-        //xxx   [Authorize(Roles = "AdminTeacher, Teacher")]
+       [Authorize(Roles = "AdminTeacher, Teacher")]
         public ActionResult LayTuanCoTkb([DataSourceRequest] DataSourceRequest request)
         {
             IOrderedEnumerable<int> dsTuan =
@@ -65,7 +65,7 @@ namespace TkbThucHanhCNTT.Controllers
         }
 
 
-        //xxx    [Authorize(Roles = "Teacher, AdminTeacher")]
+        [Authorize(Roles = "Teacher, AdminTeacher")]
         public ActionResult LichThucHanhGV()
         {
             ViewData["GiangViens"] = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
@@ -86,7 +86,7 @@ namespace TkbThucHanhCNTT.Controllers
             return View();
         }
 
-        //xxx    [Authorize(Roles = "AdminTeacher, Teacher")]
+        [Authorize(Roles = "AdminTeacher, Teacher")]
         public ActionResult LayDsTuan([DataSourceRequest] DataSourceRequest request)
         {
             IOrderedEnumerable<int> dsTuan =
@@ -96,7 +96,7 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(dsTuan, JsonRequestBehavior.AllowGet);
         }
 
-        //xxx    [Authorize(Roles = "Teacher, AdminTeacher")]
+        [Authorize(Roles = "Teacher, AdminTeacher")]
         public JsonResult AjaxReadData_Limit([DataSourceRequest] DataSourceRequest request)
         {
             if (!request.Filters.Any())
@@ -108,7 +108,8 @@ namespace TkbThucHanhCNTT.Controllers
                 .OrderByDescending(t => t.SttTuan)
                 .ThenBy(t => t.NgayTrongTuan)
                 .ThenBy(t => t.TietBatDau)
-                .ThenBy(t => t.TietKetThuc);
+                .ThenBy(t => t.TietKetThuc)
+                .ThenBy(t=>t.MonHocId);
             string maGv = StaticValue.MaGv;
             IEnumerable<LichThucHanh> r = result.Where(l => l.Gvhd1 != null && l.Gvhd1.Equals(maGv, StringComparison.CurrentCultureIgnoreCase) ||
                                                             l.Gvhd2 != null && l.Gvhd2.Equals(maGv, StringComparison.CurrentCultureIgnoreCase) ||
@@ -138,7 +139,7 @@ namespace TkbThucHanhCNTT.Controllers
             }), JsonRequestBehavior.AllowGet);
         }
 
-        //xxx      [Authorize(Roles = "AdminTeacher")]
+          [Authorize(Roles = "AdminTeacher")]
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
             if (!request.Filters.Any())
@@ -151,8 +152,8 @@ namespace TkbThucHanhCNTT.Controllers
                 .OrderByDescending(t => t.SttTuan)
                 .ThenBy(t => t.NgayTrongTuan)
                 .ThenBy(t => t.TietBatDau)
-                .ThenBy(t => t.TietKetThuc);
-
+                .ThenBy(t => t.TietKetThuc)
+                 .ThenBy(t=>t.MonHocId);
             return Json(result.ToDataSourceResult(request, l => new
             {
                 l.MaLichTh,
@@ -178,7 +179,7 @@ namespace TkbThucHanhCNTT.Controllers
             }));
         }
 
-        //xxx       [Authorize(Roles = "AdminTeacher")]
+           [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxUpdate([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IEnumerable<LichThucHanh> ls)
         {
@@ -202,7 +203,7 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(results.ToDataSourceResult(request, ModelState));
         }
 
-        //xxx        [Authorize(Roles = "AdminTeacher")]
+            [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IEnumerable<LichThucHanh> ls)
         {
@@ -227,7 +228,7 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(results.ToDataSourceResult(request, ModelState));
         }
 
-        //xxx        [Authorize(Roles = "AdminTeacher")]
+            [Authorize(Roles = "AdminTeacher")]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxDelete([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IEnumerable<LichThucHanh> ls)
         {
@@ -236,7 +237,7 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(results.ToDataSourceResult(request, ModelState));
         }
 
-        //xxx       [Authorize(Roles = "AdminTeacher")]
+           [Authorize(Roles = "AdminTeacher")]
         public JsonResult DongBoLichThucHanh()
         {
             try
@@ -316,7 +317,7 @@ namespace TkbThucHanhCNTT.Controllers
             }
         }
 
-        //xxx         [Authorize(Roles = "AdminTeacher")]
+             [Authorize(Roles = "AdminTeacher")]
         public JsonResult SaoChepLich(int tuTuan, int denTuan)
         {
             try
@@ -359,7 +360,7 @@ namespace TkbThucHanhCNTT.Controllers
             }
         }
 
-        //xxx         [Authorize(Roles = "AdminTeacher")]
+             [Authorize(Roles = "AdminTeacher")]
         public JsonResult TuPhanCong(int chonTuan)
         {
             try
