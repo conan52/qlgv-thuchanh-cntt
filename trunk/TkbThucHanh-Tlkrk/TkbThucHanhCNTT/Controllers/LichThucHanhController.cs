@@ -61,7 +61,7 @@ namespace TkbThucHanhCNTT.Controllers
             return this.View();
         }
 
-            [Authorize(Roles = "AdminTeacher, Teacher")]
+         [Authorize(Roles = "AdminTeacher, Teacher")]
         public ActionResult LayDsTuan([DataSourceRequest]
                                       DataSourceRequest request)
         {
