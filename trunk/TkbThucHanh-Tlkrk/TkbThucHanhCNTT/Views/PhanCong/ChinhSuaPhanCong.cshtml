@@ -1,0 +1,165 @@
+﻿<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Chương trình quản lý thực hành khoa công nghệ thông tin</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @* @Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+    <!--This bundle was moved by the Kendo UI VS Extensions for compatibility reasons-->
+    @Scripts.Render("~/bundles/jquery")
+    <!--This CSS entry was added by the Kendo UI VS Extensions for compatibility reasons-->
+    <link href="@Url.Content("~/Content/kendo.compatibility.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2014.1.318/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2014.1.318/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2014.1.318/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2014.1.318/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2014.1.318/cultures/kendo.culture.vi-VN.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+    <script src="@Url.Content("~/Scripts/menuhover.js")"></script>
+    <script>
+        $(document).ready(function () {
+            kendo.culture("vi-VN");
+        });
+
+        function refreshData() {
+            $('#GridView').data('kendoGrid').dataSource.read();
+            $('#GridView').data('kendoGrid').refresh();
+        }
+
+    </script>
+    <link href="~/Content/style.css" rel="stylesheet">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+</head>
+
+
+
+@{
+    Layout = null;
+}
+
+
+
+
+@*<input type="hidden" id="lichBanId" value="@ViewData["IdPhanCong"].ToString()" />*@
+<table class="table">
+    <tr>
+        <td>
+            Lớp
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+            Học kỳ
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+            Năm học
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
+            Môn học
+        </td>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    
+    <tr>
+        <td colspan="2">
+            &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <th colspan="2" class="text-center">
+            Danh sách giảng viên được phân công
+        </th>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <ol id="tblList">
+                <li>
+                    Nguyễn Văn A
+                </li>
+                <li>
+                    Nguyễn Văn E
+                </li>
+                <li>
+                    Nguyễn Văn D
+                </li>
+                <li>
+                    Nguyễn Văn C
+                </li>
+                <li>
+                    Nguyễn Văn B
+                </li>
+            </ol>
+            
+            <button id="btnThem" onclick="chonGiangVien();">Phân công thêm</button>
+            <input id="cmbChonGv" placeholder="Chọn giảng viên..." />
+            <button id="add" onclick="HideControl();" >Thêm</button>
+            <button id="cancel" onclick="HideControl();" >Hủy</button>
+        </td>
+    </tr>
+
+</table>
+
+@(Html.Kendo().Sortable()
+    .For("#tblList")
+    .Cursor("move")
+    .Placeholder("<div class='placeholder'>...</div>")
+      )
+
+<style>
+    #tblList li:first-child {
+        color: red;
+    }
+
+</style>
+
+<script>
+    var json = @Html.Raw(Json.Encode(@ViewData["GiangViens"]));
+    var dsGv = jQuery.parseJSON(json);
+    $(document).ready(function () {
+        $("#cmbChonGv").kendoComboBox({
+            dataTextField: "HoVaTen",
+            dataValueField: "MaGv",
+            dataSource: dsGv,
+            filter: "contains",
+            suggest: true,
+        });
+        $("#cmbChonGv").closest(".k-widget").hide();
+        $("#add").hide();
+        $("#cancel").hide();
+    });
+
+    function chonGiangVien() {
+        $("#cmbChonGv").closest(".k-widget").fadeIn();
+        $("#btnThem").fadeOut();
+        $("#add").show();
+        $("#cancel").show();
+    }
+
+    function HideControl() {
+        $("#cmbChonGv").closest(".k-widget").hide();
+        $("#btnThem").fadeIn();
+        $("#add").hide();
+        $("#cancel").hide();
+    }
+</script>

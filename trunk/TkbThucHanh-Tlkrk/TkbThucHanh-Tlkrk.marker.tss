@@ -6,4 +6,34 @@
     </extensions>
     <highlightIndex>1</highlightIndex>
   </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>tkbthuchanhcntt\models\phancong.cs</string>
+    </extensions>
+    <highlightIndex>1</highlightIndex>
+  </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>tkbthuchanhcntt\models\chitietphancong.cs</string>
+    </extensions>
+    <highlightIndex>4</highlightIndex>
+  </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>tkbthuchanhcntt\controllers\phancongcontroller.cs</string>
+    </extensions>
+    <highlightIndex>1</highlightIndex>
+  </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>tkbthuchanhcntt\views\phancong\index.cshtml</string>
+    </extensions>
+    <highlightIndex>2</highlightIndex>
+  </TabHighlightState>
+  <TabHighlightState>
+    <extensions>
+      <string>TkbThucHanhCNTT\Views\PhanCong\ChinhSuaPhanCong.cshtml</string>
+    </extensions>
+    <highlightIndex>1</highlightIndex>
+  </TabHighlightState>
 </ArrayOfTabHighlightState>
