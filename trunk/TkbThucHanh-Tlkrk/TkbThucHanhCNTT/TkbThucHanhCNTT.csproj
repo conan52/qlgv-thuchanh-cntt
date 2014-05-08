@@ -195,6 +195,7 @@
     <Compile Include="Controllers\LichThucHanhController.cs" />
     <Compile Include="Controllers\LopController.cs" />
     <Compile Include="Controllers\MonHocController.cs" />
+    <Compile Include="Controllers\PhanCongController.cs" />
     <Compile Include="Controllers\PhanCongGiangDayController.cs" />
     <Compile Include="Controllers\RegisterAdminController.cs" />
     <Compile Include="Controllers\ThongBaoController.cs" />
@@ -206,6 +207,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ChiTietPhanCong.cs" />
     <Compile Include="Models\Enums\ChuyenNganh.cs" />
     <Compile Include="Models\Enums\EnumUltils.cs" />
     <Compile Include="Models\Enums\NgayTrongTuan.cs" />
@@ -1213,6 +1215,8 @@
     <Content Include="Views\Shared\_LayoutLite.cshtml" />
     <Content Include="Views\ChamCong\ChamCongTheoGv.cshtml" />
     <Content Include="Views\ThongBao\Err404.cshtml" />
+    <Content Include="Views\PhanCong\Index.cshtml" />
+    <Content Include="Views\PhanCong\_ChinhSuaPhanCong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">
