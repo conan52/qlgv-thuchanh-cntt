@@ -27,7 +27,8 @@ namespace TkbThucHanhCNTT.Controllers
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
             List<ChamCongViewModel> models = ChamCongProvider.GetAll();
-            IEnumerable<ChamCongGrouped> result = models.GroupBy(m => new {m.MonHocId, m.TenMonHoc, m.TenLop, m.MaGv, m.TenGv})
+            IEnumerable<ChamCongGrouped> result = models.GroupBy(
+                m => new {m.MonHocId, m.TenMonHoc, m.TenLop, m.MaGv, m.TenGv})
                 .Select(g => new ChamCongGrouped
                 {
                     Nhom = string.Format("{0} - {1}", g.Key.TenMonHoc, g.Key.TenLop),

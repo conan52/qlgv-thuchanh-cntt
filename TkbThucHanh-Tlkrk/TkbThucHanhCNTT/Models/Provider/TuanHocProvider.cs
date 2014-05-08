@@ -11,7 +11,13 @@ namespace TkbThucHanhCNTT.Models.Provider
             {
                 TuanHoc tuanHoc = db.TuanHocs.Find(tuan);
                 if (tuanHoc == null)
-                    db.TuanHocs.Add(new TuanHoc {DaLayThongTin = true, DaXepLichThucHanh = false, NgayBatDau = thuHai, SttTuan = tuan});
+                    db.TuanHocs.Add(new TuanHoc
+                    {
+                        DaLayThongTin = true,
+                        DaXepLichThucHanh = false,
+                        NgayBatDau = thuHai,
+                        SttTuan = tuan
+                    });
                 else
                     tuanHoc.DaLayThongTin = true;
                 db.SaveChanges();

@@ -90,7 +90,9 @@ namespace TkbThucHanhCNTT.Controllers
         {
             try
             {
-                LichBan lb = DataProvider<LichBan>.GetSingle(l => l.MaGv == maGv && l.SttTuan == SttTuan || l.LichBanId == lichBanId);
+                LichBan lb =
+                    DataProvider<LichBan>.GetSingle(
+                        l => l.MaGv == maGv && l.SttTuan == SttTuan || l.LichBanId == lichBanId);
                 if (lichBanId == 0 && lb == null)
                     DataProvider<LichBan>.Add(new LichBan
                     {

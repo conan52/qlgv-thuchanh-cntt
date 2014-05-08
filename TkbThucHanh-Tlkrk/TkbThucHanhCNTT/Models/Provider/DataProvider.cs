@@ -28,7 +28,8 @@ namespace TkbThucHanhCNTT.Models.Provider
                 try
                 {
                     IQueryable<T> dbQuery = context.Set<T>();
-                    dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
+                    dbQuery = navigationProperties.Aggregate(dbQuery,
+                        (current, navigationProperty) => current.Include(navigationProperty));
                     list = dbQuery
                         .AsNoTracking()
                         .ToList();
@@ -47,7 +48,8 @@ namespace TkbThucHanhCNTT.Models.Provider
             {
                 IQueryable<T> dbQuery = context.Set<T>();
 
-                dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
+                dbQuery = navigationProperties.Aggregate(dbQuery,
+                    (current, navigationProperty) => current.Include(navigationProperty));
 
                 list = dbQuery
                     .AsNoTracking()
@@ -64,7 +66,8 @@ namespace TkbThucHanhCNTT.Models.Provider
             {
                 IQueryable<T> dbQuery = context.Set<T>();
 
-                dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
+                dbQuery = navigationProperties.Aggregate(dbQuery,
+                    (current, navigationProperty) => current.Include(navigationProperty));
 
                 item = dbQuery
                     .AsNoTracking()

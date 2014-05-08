@@ -30,7 +30,9 @@ namespace TkbThucHanhCNTT.Controllers
 
         private int LayTuanGanNhat()
         {
-            IOrderedEnumerable<TuanHoc> dsTuan = DataProvider<TuanHoc>.GetList(t => t.TkbGiangViens.Any()).OrderBy(t => Math.Abs((DateTime.Now - t.NgayBatDau).TotalHours));
+            IOrderedEnumerable<TuanHoc> dsTuan =
+                DataProvider<TuanHoc>.GetList(t => t.TkbGiangViens.Any())
+                    .OrderBy(t => Math.Abs((DateTime.Now - t.NgayBatDau).TotalHours));
 
             if (dsTuan.Any())
                 return dsTuan.First().SttTuan;
@@ -110,13 +112,15 @@ namespace TkbThucHanhCNTT.Controllers
         {
             try
             {
-                IList<TuanHoc> dsTkbChuaCo = DataProvider<TuanHoc>.GetList(t => !t.DaLayThongTin && t.NgayKetThuc > DateTime.Now);
+                IList<TuanHoc> dsTkbChuaCo =
+                    DataProvider<TuanHoc>.GetList(t => !t.DaLayThongTin && t.NgayKetThuc > DateTime.Now);
 
                 // var dsTkbChuaCo = DataProvider<TuanHoc>.GetList(t => t.SttTuan==37);
                 var request = new DluWebRequest();
                 TimeTableWebResult table = request.GetCurentTimeTable();
                 List<int> dsTuan = table.Weeks.Intersect(dsTkbChuaCo.Select(t => t.SttTuan)).ToList();
-                List<string> dsGv = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => gv.MaGv).ToList();
+                List<string> dsGv =
+                    DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => gv.MaGv).ToList();
                 List<string> dsLop = DataProvider<Lop>.GetAll().Select(l => l.TenLop).ToList();
 
                 var tm = new TimeTableManager();

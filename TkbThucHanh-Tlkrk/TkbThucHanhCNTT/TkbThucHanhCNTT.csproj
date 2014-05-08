@@ -16,6 +16,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -214,6 +218,7 @@
     <Compile Include="Models\LichThucHanh.cs" />
     <Compile Include="Models\Lop.cs" />
     <Compile Include="Models\MonHoc.cs" />
+    <Compile Include="Models\PhanCong.cs" />
     <Compile Include="Models\PhanCongGiangDay.cs" />
     <Compile Include="Models\PhongThucHanh.cs" />
     <Compile Include="Models\Provider\ChamCongProvider.cs" />

@@ -34,13 +34,16 @@ namespace TkbThucHanhCNTT.Controllers
 
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            var result = DataProvider<LichCongTac>.GetAll().Select(ct => new {ct.MaGv, ct.ThoiGianBd, ct.ThoiGianKt, ct.LyDo, ct.LichCongTacId});
+            var result =
+                DataProvider<LichCongTac>.GetAll()
+                    .Select(ct => new {ct.MaGv, ct.ThoiGianBd, ct.ThoiGianKt, ct.LyDo, ct.LichCongTacId});
             return Json(result.ToDataSourceResult(request));
         }
 
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, int LichCongTacId, string MaGv, string LyDo, string ThoiGianBd, string ThoiGianKt)
+        public ActionResult AjaxCreate([DataSourceRequest] DataSourceRequest request, int LichCongTacId, string MaGv,
+            string LyDo, string ThoiGianBd, string ThoiGianKt)
         {
             var lct = new LichCongTac
             {
@@ -62,7 +65,8 @@ namespace TkbThucHanhCNTT.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, int LichCongTacId, string MaGv, string LyDo, string ThoiGianBd, string ThoiGianKt)
+        public ActionResult Ajax_Update([DataSourceRequest] DataSourceRequest request, int LichCongTacId, string MaGv,
+            string LyDo, string ThoiGianBd, string ThoiGianKt)
         {
             var lct = new LichCongTac
             {
