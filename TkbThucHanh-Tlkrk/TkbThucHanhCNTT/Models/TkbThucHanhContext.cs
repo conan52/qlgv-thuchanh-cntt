@@ -26,6 +26,7 @@ namespace TkbThucHanhCNTT.Models
         public DbSet<TuanHoc> TuanHocs { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<LichThucHanh> LichThucHanhs { get; set; }
+        public DbSet<PhanCong> PhanCongs { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

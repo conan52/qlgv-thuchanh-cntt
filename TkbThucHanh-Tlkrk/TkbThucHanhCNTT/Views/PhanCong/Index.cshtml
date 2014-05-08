@@ -1,0 +1,155 @@
+﻿@using System.Collections
+@using TkbThucHanhCNTT.Models
+@using TkbThucHanhCNTT.Models.Provider
+@{
+    ViewBag.Title = "Phân công giảng dạy";
+}
+<div id="myGridView">
+    @(Html.Kendo().Grid<PhanCong>()
+          .Name("GridView")
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.NamHoc);
+              columns.Bound(c => c.HocKy);
+              columns.ForeignKey(c => c.MonHocId, (IEnumerable)ViewData["MonHocs"], dataFieldText: "TenMonHoc", dataFieldValue: "MonHocId");
+              columns.Bound(c => c.SoLuongGiangVien);
+              columns.ForeignKey(c => c.TenLop, (IEnumerable)ViewData["Lops"], dataFieldText: "TenLop", dataFieldValue: "TenLop");
+              columns.Command(command =>
+              {
+                  command.Custom("DiemDanh").Text("Sửa").Click("suaLichBan").HtmlAttributes(new { @class = "k-icon k-edit" });
+                  command.Destroy().Text("Xóa");
+              }).Width(172);
+          })
+          .ToolBar(toolBar =>
+      {
+          toolBar.Template(@<text> <a id='btnThem' class='k-button k-button-icontext k' href='#'>
+                <span class='k-icon k-add'></span>Thêm phân công mới
+            </a>
+        </text>);
+      })
+                  .Editable(e =>
+                  {
+                      e.Mode(GridEditMode.PopUp);
+                      e.DisplayDeleteConfirmation("Bạn có chắc chắn xóa dòng này!");
+                      e.Window(x => x.Title("Phân công giảng dạy"));
+                  })
+                  .Sortable()
+                  .Pageable(pageable =>
+                  {
+                      pageable.Refresh(true);
+                      pageable.PageSizes(true);
+                  })
+                  .Selectable()
+            //  .Scrollable()
+                  .DataSource(dataSource => dataSource
+                      .Ajax()
+                      .PageSize(200)
+                      //  .Batch(true)
+                      .Events(events => events.Error("error_handler"))
+                      .Read(read => read.Action("AjaxReadData", "PhanCong"))
+                      .Create(update => update.Action("AjaxCreate", "PhanCong"))
+                      .Update(update => update.Action("AjaxUpdate", "PhanCong"))
+                      .Destroy(update => update.Action("AjaxDelete", "PhanCong"))
+                      .Model(model =>
+                      {
+                          model.Id(x => x.IdPhanCong);
+                          model.Field(x => x.NamHoc).DefaultValue(DateTime.Now.Year);
+                          model.Field(x => x.HocKy).DefaultValue(1);
+                          model.Field(x => x.SoLuongGiangVien).DefaultValue(0);
+                          model.Field(x => x.MonHocId).DefaultValue(DataProvider<MonHoc>.GetAll().FirstOrDefault() != null ? DataProvider<MonHoc>.GetAll().FirstOrDefault().MonHocId : 0);
+                          model.Field(x => x.TenLop).DefaultValue(DataProvider<Lop>.GetAll().FirstOrDefault() != null ? DataProvider<Lop>.GetAll().FirstOrDefault().TenLop : null);
+                      })
+                  )
+          )
+    
+@(Html.Kendo().Window()
+      .Name("window")
+      .Title("Phân công giảng dạy")
+      .Content("Đang load dữ liệu!")
+      .Draggable()
+      .Visible(false)
+      .Actions(actions => actions.Close())
+      .AutoFocus(true)
+      .Modal(true)
+    //  .Width(400)
+    //  .Height(470)
+    )
+    
+
+</div>
+<script type="text/javascript">
+    function refreshData() {
+        $('#GridView').data('kendoGrid').dataSource.read();
+        $('#GridView').data('kendoGrid').refresh();
+    };
+
+
+
+    $("#btnThem").bind("click", function() {
+        var wnd = $("#window").data("kendoWindow");
+        wnd.refresh({
+            url: "@Url.Action("_ChinhSuaPhanCong", "PhanCong")",
+            data: { LichBanId: 0 }
+        });
+        wnd.center().open();
+    });
+
+    function closeDialog() {
+        $("#window").data("kendoWindow").close();
+    };
+
+    function suaLichBan(e) {
+        var id = this.dataItem($(e.currentTarget).closest("tr")).LichBanId;
+        var wnd = $("#window").data("kendoWindow");
+        wnd.refresh({
+            url: "@Url.Action("ShowEditWindow", "LichBan")",
+            data: { maLichBan: id }
+    });
+    wnd.center().open();
+    };
+
+    function AjaxEdit() {
+        var v = getValues();
+
+        var chonGiangVien = $("#chonGiangVien").data('kendoComboBox').value();
+        var chonTuan = $("#chonTuan").data('kendoComboBox').value();
+        var lichBanId = $("#lichBanId").val();
+        $('#window').data('kendoWindow').close();
+        showLoadingDialog();
+        $.post("@Url.Action("AjaxEdit", "LichBan")", {
+        maGv: chonGiangVien,
+        SttTuan: chonTuan,
+        value: v,
+        lichBanId: lichBanId
+    })
+    .done(function(data) {
+        hideLoadingDialog();
+
+        if (data.Result == "OK") {
+            ShowNotification("Thành công!", "info");
+            refreshData();
+        } else {
+            ShowNotification(data.Message, "error");
+        }
+    });
+
+    };
+
+
+
+
+
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Lỗi:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>
