@@ -2,10 +2,31 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\hoa\Desktop\NCKH3\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\AccountController.cs</string>
+      <string>C:\Users\Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Controllers\LichBanController.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\hoa\Desktop\NCKH3\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\Account\CauHinhTrangWeb.cshtml</string>
+      <string>c:\users\ngoc linh\desktop\rs\tkbthuchanh-tlkrk\tkbthuchanhcntt\views\lichban\index.cshtml</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\ngoc linh\desktop\rs\tkbthuchanh-tlkrk\tkbthuchanhcntt\controllers\phancongcontroller.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\ngoc linh\desktop\rs\tkbthuchanh-tlkrk\tkbthuchanhcntt\models\phancong.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\ngoc linh\desktop\rs\tkbthuchanh-tlkrk\tkbthuchanhcntt\views\phancong\index.cshtml</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>c:\users\ngoc linh\desktop\rs\tkbthuchanh-tlkrk\tkbthuchanhcntt\models\chitietphancong.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\PhanCong\ChinhSuaPhanCong.cshtml</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\Shared\_Layout.cshtml</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\Ngoc Linh\Desktop\RS\TkbThucHanh-Tlkrk\TkbThucHanhCNTT\Views\TuanHoc\Index.cshtml</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

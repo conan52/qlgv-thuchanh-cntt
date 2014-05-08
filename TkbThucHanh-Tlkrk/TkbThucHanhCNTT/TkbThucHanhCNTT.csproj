@@ -1216,7 +1216,7 @@
     <Content Include="Views\ChamCong\ChamCongTheoGv.cshtml" />
     <Content Include="Views\ThongBao\Err404.cshtml" />
     <Content Include="Views\PhanCong\Index.cshtml" />
-    <Content Include="Views\PhanCong\_ChinhSuaPhanCong.cshtml" />
+    <Content Include="Views\PhanCong\ChinhSuaPhanCong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DluWebHelper\DluWebHelper.csproj">

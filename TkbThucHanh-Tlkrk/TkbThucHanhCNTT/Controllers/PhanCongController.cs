@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using TkbThucHanhCNTT.Models;
@@ -8,7 +9,7 @@ using TkbThucHanhCNTT.Models.Provider;
 
 namespace TkbThucHanhCNTT.Controllers
 {
-    [Authorize(Roles = "AdminTeacher,Admin")]
+    //  [Authorize(Roles = "AdminTeacher,Admin")]
     public class PhanCongController : Controller
     {
         //
@@ -70,9 +71,16 @@ namespace TkbThucHanhCNTT.Controllers
             return Json(result.ToDataSourceResult(request));
         }
 
-        public ActionResult _ChinhSuaPhanCong()
+        public ActionResult ChinhSuaPhanCong(string idPhanCong)
         {
-            
+            ViewData["IdPhanCong"] = idPhanCong;
+            var dsGv = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(gv => new { gv.HoVaTen, gv.MaGv });
+
+            var jsonSerialiser = new JavaScriptSerializer();
+            ViewData["GiangViens"] = jsonSerialiser.Serialize(dsGv);
+
+            return View();
+
         }
     }
 }

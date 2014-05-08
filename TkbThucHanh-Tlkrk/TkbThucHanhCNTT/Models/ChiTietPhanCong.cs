@@ -8,13 +8,13 @@ namespace TkbThucHanhCNTT.Models
 {
     public class ChiTietPhanCong
     {
-        public int PhanCongId { get; set; }
+        public int IdPhanCong { get; set; }
         public int ChiTietPhanCongId { get; set; }
         public string MaGiangVien { get; set; }
         public int ThuTuUuTien { get; set; }
         public bool PhuTrachGiangDay { get; set; }
 
-        [ForeignKey("PhanCongId")]
+        [ForeignKey("IdPhanCong")]
         public PhanCong PhanCong { get; set; }
 
         [ForeignKey("MaGiangVien")]
