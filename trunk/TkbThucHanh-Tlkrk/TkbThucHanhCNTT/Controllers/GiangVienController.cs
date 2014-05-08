@@ -83,7 +83,9 @@ namespace TkbThucHanhCNTT.Controllers
             if (gv != null && ModelState.IsValid)
             {
                 string userName = StaticUltils.GetUsername(gv.HoVaTen);
-                if (DataProvider<UserProfile>.GetAll().Any(x => x.UserName.Equals(userName, StringComparison.OrdinalIgnoreCase)))
+                if (
+                    DataProvider<UserProfile>.GetAll()
+                        .Any(x => x.UserName.Equals(userName, StringComparison.OrdinalIgnoreCase)))
                 {
                     ModelState.AddModelError("", "Tên đăng nhập đã tồn tại");
                     return Json(new[] {gv}.ToDataSourceResult(request, ModelState));

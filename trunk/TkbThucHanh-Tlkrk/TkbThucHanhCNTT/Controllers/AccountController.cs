@@ -72,7 +72,8 @@ namespace TkbThucHanhCNTT.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public JsonResult AjaxReadData([DataSourceRequest] DataSourceRequest request)
         {
-            List<string> giangvien = DataProvider<GiangVien>.GetAll().Where(x => !x.CoThePhanCong).Select(x => x.MaGv).ToList();
+            List<string> giangvien =
+                DataProvider<GiangVien>.GetAll().Where(x => !x.CoThePhanCong).Select(x => x.MaGv).ToList();
             IList<UserProfile> result = DataProvider<UserProfile>.GetAll();
             foreach (UserProfile userProfile in result.Where(x => giangvien.Contains(x.MaGv)))
             {
@@ -119,7 +120,8 @@ namespace TkbThucHanhCNTT.Controllers
                     .FirstOrDefault(t => StaticUltils.GetUsername(t.HoVaTen) == model.UserName);
                 if ((k != null && k.UserProfile != null) || model.UserName.ToLower() == "admin")
                 {
-                    if ((k != null && (k.CoThePhanCong && k.UserProfile.Role != "Blocked")) || model.UserName.ToLower() == "admin")
+                    if ((k != null && (k.CoThePhanCong && k.UserProfile.Role != "Blocked")) ||
+                        model.UserName.ToLower() == "admin")
                     {
                         if (WebSecurity.Login(model.UserName.ToLower(), model.Password, model.RememberMe))
                         {
@@ -127,7 +129,8 @@ namespace TkbThucHanhCNTT.Controllers
                             if (httpCookie != null) httpCookie.Expires = DateTime.Now.AddDays(30);
                             try
                             {
-                                StaticValue.MaGv = DataProvider<UserProfile>.GetSingle(x => x.UserName == model.UserName).MaGv;
+                                StaticValue.MaGv =
+                                    DataProvider<UserProfile>.GetSingle(x => x.UserName == model.UserName).MaGv;
                             }
                             catch
                             {
@@ -160,9 +163,12 @@ namespace TkbThucHanhCNTT.Controllers
         public ActionResult DoiMatKhau(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Đổi mật khẩu thành công."
-                    : message == ManageMessageId.SetPasswordSuccess ? "Mật khẩu này đang được đặt."
-                        : message == ManageMessageId.ErrorPassword ? "Mật khẩu cũ không đúng!"
+                message == ManageMessageId.ChangePasswordSuccess
+                    ? "Đổi mật khẩu thành công."
+                    : message == ManageMessageId.SetPasswordSuccess
+                        ? "Mật khẩu này đang được đặt."
+                        : message == ManageMessageId.ErrorPassword
+                            ? "Mật khẩu cũ không đúng!"
                             : "";
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             if (hasLocalAccount)
@@ -183,7 +189,8 @@ namespace TkbThucHanhCNTT.Controllers
                 bool changePasswordSucceeded;
                 try
                 {
-                    changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+                    changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword,
+                        model.NewPassword);
                 }
                 catch (Exception)
                 {
@@ -256,7 +263,8 @@ namespace TkbThucHanhCNTT.Controllers
             try
             {
                 int count = 0;
-                List<GiangVien> giangViens = DataProvider<GiangVien>.GetAll(x => x.UserProfile).Where(x => x.UserProfile == null).ToList();
+                List<GiangVien> giangViens =
+                    DataProvider<GiangVien>.GetAll(x => x.UserProfile).Where(x => x.UserProfile == null).ToList();
                 foreach (GiangVien giangVien in giangViens)
                 {
                     string userName = StaticUltils.GetUsername(giangVien.HoVaTen);
@@ -308,13 +316,15 @@ namespace TkbThucHanhCNTT.Controllers
         {
             try
             {
-                WebSecurity.CreateUserAndAccount(model.UserName.ToLower(), model.Password, new {model.MaGv, Role = model.Roles});
+                WebSecurity.CreateUserAndAccount(model.UserName.ToLower(), model.Password,
+                    new {model.MaGv, Role = model.Roles});
                 SetRole(model.UserName, model.Roles);
                 return true;
             }
             catch
             {
-                List<UserProfile> listuser = DataProvider<UserProfile>.GetAll().Where(x => x.UserName == model.UserName).ToList();
+                List<UserProfile> listuser =
+                    DataProvider<UserProfile>.GetAll().Where(x => x.UserName == model.UserName).ToList();
                 if (listuser.Count() > 1)
                     DataProvider<UserProfile>.Remove(listuser.ElementAt(1));
                 return false;

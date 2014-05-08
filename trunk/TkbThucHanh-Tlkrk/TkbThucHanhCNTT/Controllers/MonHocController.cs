@@ -50,7 +50,9 @@ namespace TkbThucHanhCNTT.Controllers
         {
             if (mh != null && ModelState.IsValid)
             {
-                if (DataProvider<MonHoc>.GetAll().Any(x => x.MaMonHoc.Equals(mh.MaMonHoc, StringComparison.OrdinalIgnoreCase)))
+                if (
+                    DataProvider<MonHoc>.GetAll()
+                        .Any(x => x.MaMonHoc.Equals(mh.MaMonHoc, StringComparison.OrdinalIgnoreCase)))
                 {
                     ModelState.AddModelError("", "Mã môn học đã tồn tại");
                     return Json(new[] {mh}.ToDataSourceResult(request, ModelState));
