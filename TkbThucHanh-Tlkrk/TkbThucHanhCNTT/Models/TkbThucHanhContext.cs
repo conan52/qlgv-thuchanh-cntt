@@ -7,8 +7,8 @@ namespace TkbThucHanhCNTT.Models
     {
         static TkbThucHanhContext()
         {
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<TkbThucHanhContext, Configuration>());
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TkbThucHanhContext>());
+           //Database.SetInitializer(new MigrateDatabaseToLatestVersion<TkbThucHanhContext, Configuration>());
+           Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TkbThucHanhContext>());
         }
 
         public TkbThucHanhContext()
@@ -26,7 +26,7 @@ namespace TkbThucHanhCNTT.Models
         public DbSet<TuanHoc> TuanHocs { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<LichThucHanh> LichThucHanhs { get; set; }
-        public DbSet<PhanCong> PhanCongs { get; set; }
+    //    public DbSet<PhanCong> PhanCongs { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
