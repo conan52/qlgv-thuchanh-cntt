@@ -57,7 +57,10 @@ namespace DluWebHelper
                 t.AddRange(i.Class.Select(c => new Thread(() =>
                 {
                     var rq = new DluWebRequest();
+
                     List<Lesson> ls = rq.GetClassTimeTable(c, i.CurrentWeek);
+
+
                     lock (syncLesson)
                     {
                         Lessons.AddRange(ls);

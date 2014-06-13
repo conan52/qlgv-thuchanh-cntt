@@ -13,7 +13,7 @@ namespace TkbThucHanhCNTT.Controllers
         public JsonResult LayMonHocDuocPhanCong(string tenLop)
         {
             var result = DataProvider<PhanCongGiangDay>.GetList(p => p.TenLop == tenLop, p => p.MonHoc)
-                .Select(t => new {t.MonHoc.TenMonHoc, t.MonHoc.MaMonHoc, t.MonHoc.TenThucHanh, t.MonHoc.MonHocId});
+                .Select(t => new { t.MonHoc.TenMonHoc, t.MonHoc.MaMonHoc, t.MonHoc.TenThucHanh, t.MonHoc.MonHocId });
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -21,7 +21,7 @@ namespace TkbThucHanhCNTT.Controllers
         {
             var gv = DataProvider<PhanCongGiangDay>.GetList(p => p.TenLop == tenLop && p.MonHocId == monHocId,
                 p => p.GiangVien)
-                .Select(g => new {g.GiangVien.HoVaTen, g.GiangVien.MaGv});
+                .Select(g => new { g.GiangVien.HoVaTen, g.GiangVien.MaGv });
 
             return Json(gv, JsonRequestBehavior.AllowGet);
         }
@@ -31,9 +31,9 @@ namespace TkbThucHanhCNTT.Controllers
         {
             IEnumerable<string> dsgv = LayDsGvRanh(sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc);
             var result = from gv in DataProvider<GiangVien>.GetAll()
-                join ds in dsgv on gv.MaGv equals ds
-                where gv.MaGv != gvA && gv.MaGv != gvB
-                select new {gv.MaGv, gv.HoVaTen, gv.TenNganGon};
+                         join ds in dsgv on gv.MaGv equals ds
+                         where gv.MaGv != gvA && gv.MaGv != gvB
+                         select new { gv.MaGv, gv.HoVaTen, gv.TenNganGon };
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -43,11 +43,26 @@ namespace TkbThucHanhCNTT.Controllers
         {
             IEnumerable<string> dsgv = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).Select(g => g.MaGv);
             IEnumerable<string> kq = from gv in dsgv
-                where GiangVienKhongCoTkbThucHanh(gv, sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc) &&
-                      GiangVienKhongCoTkbTruong(gv, sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc) &&
-                      GiangVienKhongCongTac(gv, sttTuan, ngayTrongTuan) &&
-                      GiangVienKhongBanViecKhac(gv, sttTuan, ngayTrongTuan, tietKetThuc)
-                select gv;
+                                     where GiangVienKhongCoTkbThucHanh(gv, sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc) &&
+                                           GiangVienKhongCoTkbTruong(gv, sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc) &&
+                                           GiangVienKhongCongTac(gv, sttTuan, ngayTrongTuan) &&
+                                           GiangVienKhongBanViecKhac(gv, sttTuan, ngayTrongTuan, tietKetThuc)
+                                     select gv;
+
+            return kq.ToList();
+        }
+
+        public static IEnumerable<GiangVien> LayDsGiangVienRanh(int sttTuan, NgayTrongTuan ngayTrongTuan, int tietBatDau,
+         int tietKetThuc)
+        {
+            var dsgv = DataProvider<GiangVien>.GetList(gv => gv.CoThePhanCong).ToList();
+            var kq = from gv in dsgv
+                     where GiangVienKhongCoTkbThucHanh(gv.MaGv, sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc) &&
+                                            GiangVienKhongCoTkbTruong(gv.MaGv, sttTuan, ngayTrongTuan, tietBatDau, tietKetThuc) &&
+                                            GiangVienKhongCongTac(gv.MaGv, sttTuan, ngayTrongTuan) &&
+                                            GiangVienKhongBanViecKhac(gv.MaGv, sttTuan, ngayTrongTuan, tietKetThuc) &&
+                                            gv.CoThePhanCong
+                     select gv;
 
             return kq.ToList();
         }
@@ -99,10 +114,10 @@ namespace TkbThucHanhCNTT.Controllers
 
         private static bool GiangVienKhongBanViecKhac(string maGv, int tuan, NgayTrongTuan ngay, int tietKetThuc)
         {
-            int buoi = tietKetThuc/6;
+            int buoi = tietKetThuc / 6;
             return
                 !DataProvider<LichBan>.GetList(
-                    b => b.SttTuan == tuan && b.MaGv == maGv && b.TrangThaiBan[(int) ngay*3 + buoi] == '1').Any();
+                    b => b.SttTuan == tuan && b.MaGv == maGv && b.TrangThaiBan[(int)ngay * 3 + buoi] == '1').Any();
         }
     }
 }
