@@ -8,6 +8,13 @@ namespace TkbThucHanhCNTT.Models.Ultils
 {
     public static class StaticUltils
     {
+        public static DateTime GetNow
+        {
+            get
+            {
+                return new DateTime(2014, 04, 21);
+            }
+        }
         public static NgayTrongTuan LayThu(this DayOfWeek dayOfWeek)
         {
             return (NgayTrongTuan) dayOfWeek;

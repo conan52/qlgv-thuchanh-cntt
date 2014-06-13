@@ -9,6 +9,7 @@ using Kendo.Mvc.UI;
 using TkbThucHanhCNTT.Models;
 using TkbThucHanhCNTT.Models.Enums;
 using TkbThucHanhCNTT.Models.Provider;
+using TkbThucHanhCNTT.Models.Ultils;
 using TkbThucHanhCNTT.Models.Viewer;
 
 namespace TkbThucHanhCNTT.Controllers
@@ -32,7 +33,7 @@ namespace TkbThucHanhCNTT.Controllers
         {
             IOrderedEnumerable<TuanHoc> dsTuan =
                 DataProvider<TuanHoc>.GetList(t => t.TkbGiangViens.Any())
-                    .OrderBy(t => Math.Abs((DateTime.Now - t.NgayBatDau).TotalHours));
+                    .OrderBy(t => Math.Abs((StaticUltils.GetNow - t.NgayBatDau).TotalHours));
 
             if (dsTuan.Any())
                 return dsTuan.First().SttTuan;
@@ -113,7 +114,7 @@ namespace TkbThucHanhCNTT.Controllers
             try
             {
                 IList<TuanHoc> dsTkbChuaCo =
-                    DataProvider<TuanHoc>.GetList(t => !t.DaLayThongTin && t.NgayKetThuc > DateTime.Now);
+                    DataProvider<TuanHoc>.GetList(t => !t.DaLayThongTin && t.NgayKetThuc > StaticUltils.GetNow);
 
                 // var dsTkbChuaCo = DataProvider<TuanHoc>.GetList(t => t.SttTuan==37);
                 var request = new DluWebRequest();

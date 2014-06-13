@@ -531,7 +531,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="Views\favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1068,6 +1068,7 @@
     <None Include="Content\bootstrap.css.map" />
     <None Include="Content\kendo\2014.1.318\images\kendoui.ttf" />
     <None Include="Content\kendo\2014.1.318\images\kendoui.woff" />
+    <None Include="Properties\PublishProfiles\localhost.pubxml" />
     <None Include="Scripts\jquery-2.1.0.min.map" />
     <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />

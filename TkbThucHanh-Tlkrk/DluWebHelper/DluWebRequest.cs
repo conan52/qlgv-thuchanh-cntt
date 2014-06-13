@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -17,13 +18,14 @@ namespace DluWebHelper
 
         public TimeTableWebResult GetCurentTimeTable(int week = -1)
         {
-            var result = new TimeTableWebResult();
-            var wc = new WebClient {Encoding = Encoding.UTF8};
+
             string url = "http://203.113.164.162/timetable.aspx?week=" + (week > 0 ? week.ToString() : "");
-            string s = wc.DownloadString(url);
+
+            string s = Get(url);
+
             var doc = new HtmlDocument();
             doc.LoadHtml(s);
-
+            var result = new TimeTableWebResult();
             HtmlNodeCollection weeks = doc.DocumentNode.SelectNodes("//select[@name='cboWeek']/option");
             if (weeks != null)
                 result.Weeks.AddRange(
@@ -75,10 +77,38 @@ namespace DluWebHelper
             return c;
         }
 
+        string GetText(string s)
+        {
+            var cArr = s.ToCharArray().Where(c => Char.IsDigit(c) || Char.IsLetter(c));
+            var b = new StringBuilder();
+            b.Append(cArr.ToArray());
+            return b.ToString();
+        }
+
+        string Get(string url)
+        {
+            string urlText = string.Format("cache.{0}.txt", GetText(url));
+
+            string s;
+            if (File.Exists(urlText))
+            {
+                s = File.ReadAllText(urlText);
+            }
+            else
+            {
+                var wc = new WebClient { Encoding = Encoding.UTF8 };
+                s = wc.DownloadString(url);
+                File.WriteAllText(urlText, s);
+            }
+            return s;
+        }
+
+
         private List<Lesson> GetLessonResult(string url)
         {
-            var wc = new WebClient {Encoding = Encoding.UTF8};
-            string s = wc.DownloadString(url);
+            string s = Get(url);
+
+
             Match m = Regex.Match(s, @"(\d{1,2}/\d{1,2}/\d{4})\s*->\s*(\d{1,2}/\d{1,2}/\d{4})");
             if (!m.Success)
                 return null;
